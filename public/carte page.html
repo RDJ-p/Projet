@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="carte page.css">
+    <title>Cart</title>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="#" class="logo">
+            <img src="img/logo.png" alt="Logo">
+        </a>
+        <ul>
+            <li><a href="main.html">Home</a></li>
+            <li><a href="#">Pages</a></li>
+            <li><a href="#">Events</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Shop</a></li>
+        </ul>
+        <div class="nav-icons">
+            <a href="cart.html">
+                <img src="img/cart-icon.png" alt="Cart">
+            </a>
+            <a href="#"><img src="img/search.png" alt="Search"></a>
+            <a href="#"><img src="img/more.png" alt="Menu"></a>
+        </div>
+    </nav>
+    <div class="about-section">Cart</div>
+    <div class="container1">
+        <p class="message">Your basket is currently empty.</p>
+        <div class="cart-items"></div>
+        <button class="return-button" onclick="window.location.href='product.html'">RETURN TO SHOP</button>
+    </div>
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="footer-col">
+                    <h4>Publishers</h4>
+                    <ul>
+                        <li><a href="#">Bestsellers</a></li>
+                        <li><a href="#">Interviews</a></li>
+                        <li><a href="#">Authors story</a></li>
+                        <li><a href="#">Book Fairs</a></li>
+                        <li><a href="#">Help (FAQ)</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Get help</h4>
+                    <ul>
+                        <li><a href="#">Shipping</a></li>
+                        <li><a href="#">Returns</a></li>
+                        <li><a href="#">Order Status</a></li>
+                        <li><a href="#">Payment Options</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Online Shop</h4>
+                    <ul>
+                        <li><a href="#">Books</a></li>
+                        <li><a href="#">Ebooks</a></li>
+                        <li><a href="#">Magazines</a></li>
+                        <li><a href="#">Newspapers</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Follow Us</h4>
+                    <div class="social-links">
+                        <a href="#"><img src="img/icons8-facebook-48.png" alt="Facebook"></a>
+                        <a href="#"><img src="img/icons8-twitter-50.png" alt="Twitter"></a>
+                        <a href="#"><img src="img/icons8-instagram-48.png" alt="Instagram"></a>
+                        <a href="#"><img src="img/icons8-linkedin-50.png" alt="LinkedIn"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <p>© 2025 BOOKSHELF, ALL RIGHTS RESERVED</p>
+    </footer>
+    <script>
+        function loadCart() {
+            fetch('/api/cart', { credentials: 'include' }) 
+                .then(response => response.json())
+                .then(data => {
+                    const cartContainer = document.querySelector('.cart-items');
+                    const messageElement = document.querySelector('.message');
+                    const cartCount = document.getElementById('cart-count');
+    
+                    if (!data.items || data.items.length === 0) {
+                        messageElement.textContent = 'Your basket is currently empty.';
+                        cartContainer.innerHTML = '';
+                        if (cartCount) cartCount.textContent = '0';
+                        return;
+                    }
+    
+                    cartCount.textContent = data.items.length;
+                    messageElement.textContent = `Your cart has ${data.items.length} item(s).`;
+                    cartContainer.innerHTML = '';
+    
+                    data.items.forEach(item => {
+                        const cartItemElement = document.createElement('div');
+                        cartItemElement.classList.add('cart-item');
+                        cartItemElement.innerHTML = `
+                            <span>${item.productName}</span>
+                            <span>$${item.price}</span>
+                            <span>Quantity: 
+                                <input type="number" 
+                                       id="quantity-${item.productId}" 
+                                       value="${item.quantity}" 
+                                       min="1" 
+                                       onchange="updateQuantity(${item.productId})">
+                            </span>
+                            <button onclick="removeFromCart(${item.productId})">Remove</button>
+                        `;
+                        cartContainer.appendChild(cartItemElement);
+                    });
+                })
+                .catch(error => console.error('Error loading cart:', error));
+        }
+    
+        function addToCart(productId, quantity) {
+            fetch('/api/cart', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ productId, quantity }),
+                credentials: 'include' // Added credentials
+            })
+            .then(response => {
+                if (!response.ok) throw new Error('Network response was not ok');
+                return response.json();
+            })
+            .then(data => {
+                alert(data.message);
+                loadCart();
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Failed to add item to cart');
+            });
+        }
+    
+        function removeFromCart(productId) { // Changed parameter name to productId
+            fetch(`/api/cart/${productId}`, { // Changed endpoint to productId
+                method: 'DELETE',
+                credentials: 'include' // Added credentials
+            })
+            .then(response => {
+                if (!response.ok) throw new Error('Network response was not ok');
+                return response.json();
+            })
+            .then(data => {
+                alert(data.message);
+                loadCart();
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Failed to remove item from cart');
+            });
+        }
+    
+        function updateQuantity(productId) { // Changed parameter name to productId
+            const newQuantity = document.getElementById(`quantity-${productId}`).value;
+            
+            if (newQuantity < 1) {
+                alert("Quantity must be at least 1.");
+                document.getElementById(`quantity-${productId}`).value = 1;
+                return;
+            }
+    
+            fetch(`/api/cart/${productId}`, { // Changed endpoint to productId
+                method: 'PATCH',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ quantity: newQuantity }),
+                credentials: 'include' // Added credentials
+            })
+            .then(response => {
+                if (!response.ok) throw new Error('Network response was not ok');
+                return response.json();
+            })
+            .then(data => {
+                alert(data.message);
+                loadCart();
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Failed to update quantity');
+            });
+        }
+    
+        window.onload = loadCart;
+    </script>
+</body>
+</html>

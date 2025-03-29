@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daniel Goleman Interview</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="interview.css">
+</head>
+<style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Cormorant', serif; line-height: 1.8; font-weight: 700;} 
+    
+.interview-hero {
+    height: 70vh;
+    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
+                url('img/interviewbackground.avif') center/cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    padding: 20px;
+}
+    
+.hero-content h1 {
+    font-size: 4rem; 
+    margin-bottom: 1.5rem;
+    animation: fadeIn 1s ease-out;
+}
+    
+.hero-content p {
+    font-size: 1.6rem; 
+    opacity: 0.9;
+}
+    
+.interview-container {
+    max-width: 800px;
+    margin: 4rem auto;
+    padding: 0 20px;
+}
+    
+.qa-card {
+    background: #f8f8f8;
+    border-left: 4px solid #4a696f;
+    padding: 2rem;
+    margin: 2rem 0;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+    
+.qa-card:hover {
+    transform: translateY(-5px);
+}
+    
+.qa-card h2 {
+    color: #2b4145;
+    font-size: 2rem; 
+    margin-bottom: 1.2rem;
+}
+    
+.qa-card p {
+    font-size: 1.3rem; 
+    color: #555;
+}
+    
+.interview-footer {
+    text-align: center;
+    padding: 2rem;
+    background: #2b4145;
+    color: white;
+}
+    
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+    
+@media (max-width: 768px) {
+    .hero-content h1 { font-size: 3rem; } 
+    .hero-content p { font-size: 1.4rem; } 
+    .qa-card { padding: 1.8rem; }
+    .qa-card h2 { font-size: 1.8rem; } 
+}
+    
+@media (max-width: 480px) {
+    .hero-content h1 { font-size: 2.5rem; } 
+    .qa-card { margin: 1.5rem 0; }
+}
+    
+.quote-box {
+    background: #2b414510;
+    border-left: 3px solid #4a696f;
+    padding: 1.8rem; 
+    margin: 1.8rem 0; 
+    font-style: italic;
+    font-size: 1.3rem; 
+}
+
+.eq-list {
+    margin: 1.2rem 0; 
+    padding-left: 2rem;
+}
+
+.eq-list li {
+    margin: 1rem 0;
+    color: #444;
+}
+
+.leadership-list {
+    margin: 1.8rem 0; 
+    counter-reset: section;
+}
+
+.leadership-list li {
+    margin: 1.2rem 0; 
+    padding-left: 2.5rem;
+    position: relative;
+}
+
+.leadership-list li:before {
+    counter-increment: section;
+    content: counter(section);
+    position: absolute;
+    left: 0;
+    top: -0.2rem;
+    background: #4a696f;
+    color: white;
+    width: 2rem; 
+    height: 2rem; 
+    border-radius: 50%;
+    text-align: center;
+    line-height: 2rem; 
+}
+
+.parenting-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 2rem; 
+    margin: 2.5rem 0; 
+}
+
+.tip {
+    background: white;
+    padding: 1.8rem; 
+    border-radius: 8px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+}
+
+.tip h4 {
+    color: #2b4145;
+    margin-bottom: 0.6rem; 
+}
+
+.research-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 2.5rem 0; 
+}
+
+.research-table th,
+.research-table td {
+    padding: 1.5rem;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+}
+
+.research-table th {
+    background: #4a696f;
+    color: white;
+}
+
+.research-table tr:hover {
+    background: #f8f8f8;
+}
+
+@media (max-width: 768px) {
+    .parenting-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .research-table {
+        display: block;
+        overflow-x: auto;
+    }
+}
+
+</style>
+<body>
+    <section class="interview-hero">
+        <div class="hero-content">
+            <h1>Exclusive Interview</h1>
+            <p>Daniel Goleman on Emotional Intelligence Today</p>
+        </div>
+    </section>
+
+    <div class="interview-container">
+        <div class="qa-card">
+            <h2>Q: How relevant is EQ in the AI era?</h2>
+            <p>"Paradoxically, as AI handles technical tasks, human skills like empathy and self-awareness become <em>more</em> valuable. Machines can't replicate emotional connection."</p>
+        </div>
+
+        <div class="qa-card">
+            <h2>Q: Can EQ be measured like IQ?</h2>
+            <p>"We use 360-degree assessments tracking five competencies: self-awareness, self-regulation, motivation, empathy, and social skills. It's more nuanced than numerical scores."</p>
+        </div>
+
+        <div class="qa-card">
+            <h2>Q: Your advice to young professionals?</h2>
+            <p>"Develop cognitive empathy - understand others' perspectives without absorbing their emotions. It's crucial for leadership in our interconnected world."</p>
+        </div>
+    </div>
+    <div class="qa-card">
+        <h2>Q: How has the digital age impacted emotional intelligence?</h2>
+        <p>"We're seeing a paradoxical effect. While technology connects us globally, it's eroding face-to-face empathy. A 2022 Harvard study showed teenagers' ability to read facial expressions dropped 40% compared to pre-digital era cohorts."</p>
+        <div class="quote-box">
+            "Digital communication is empathy-light - we lose the neural synchrony that happens in real-life interactions."
+        </div>
+    </div>
+
+    <div class="qa-card">
+        <h2>Q: Can organizations truly become emotionally intelligent?</h2>
+        <p>"Absolutely. I've worked with Fortune 500 companies implementing EQ programs. Key elements include:</p>
+        <ul class="eq-list">
+            <li>Psychological safety training for managers</li>
+            <li>Mindfulness spaces in workplaces</li>
+            <li>360-degree emotional competence assessments</li>
+        </ul>
+        <p>The results? Google reported 37% higher team effectiveness scores after implementing our EQ framework."</p>
+    </div>
+    <div class="qa-card">
+        <h2>Q: What's the relationship between EQ and leadership during crises?</h2>
+        <p>"Crisis leadership demands emotional triage. During the pandemic, we observed three critical EQ components in effective leaders:</p>
+        <ol class="leadership-list">
+            <li><strong>Affective Presence:</strong> Projecting calm assurance</li>
+            <li><strong>Empathic Accuracy:</strong> Reading unspoken anxieties</li>
+            <li><strong>Emotional Containment:</strong> Preventing collective panic</li>
+        </ol>
+        <p>Leaders who scored high in these areas maintained 68% higher employee retention during turbulent times."</p>
+    </div>
+
+    <div class="qa-card">
+        <h2>Q: How can parents cultivate EQ in children?</h2>
+        <p>"The family is the first EQ laboratory. Essential practices include:</p>
+        <div class="parenting-grid">
+            <div class="tip">
+                <h4>Emotion Labeling</h4>
+                <p>"I see you're feeling frustrated" instead of "Stop crying"</p>
+            </div>
+            <div class="tip">
+                <h4>Mindful Moments</h4>
+                <p>Daily 5-minute breathing exercises together</p>
+            </div>
+            <div class="tip">
+                <h4>Conflict Resolution</h4>
+                <p>Modeling apology and repair processes</p>
+            </div>
+        </div>
+        <p>Schools using our SEL curriculum report 35% reduction in bullying incidents."</p>
+    </div>
+
+    <div class="qa-card">
+        <h2>Q: What emerging EQ research excites you most?</h2>
+        <p>"Three frontiers are particularly promising:</p>
+        <table class="research-table">
+            <tr>
+                <th>Area</th>
+                <th>Breakthrough</th>
+                <th>Impact</th>
+            </tr>
+            <tr>
+                <td>Neuroplasticity</td>
+                <td>EQ training shown to thicken prefrontal cortex</td>
+                <td>Alzheimer's prevention strategies</td>
+            </tr>
+            <tr>
+                <td>Digital EQ</td>
+                <td>AI that coaches emotional awareness</td>
+                <td>Next-gen mental health apps</td>
+            </tr>
+            <tr>
+                <td>Cultural EQ</td>
+                <td>Global empathy mapping</td>
+                <td>Reducing international conflicts</td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+    <footer class="interview-footer">
+        <p>Interview conducted by Mind Matters Journal • March 2024</p>
+    </footer>
+</body>
+</html>

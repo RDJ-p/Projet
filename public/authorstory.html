@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daniel Goleman's Journey</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="author-story.css">
+</head>
+<style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Cormorant', serif; line-height: 1.6; font-weight: 700;}
+    
+    .author-hero {
+        height: 70vh;
+        background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
+                    url('img/golemanbackground.jpg') center/cover;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        color: white;
+        padding: 20px;
+    }
+    
+    .hero-content h1 {
+        font-size: 4rem;
+        margin-bottom: 1rem;
+        animation: fadeIn 1s ease-out;
+    }
+    
+    .hero-content p {
+        font-size: 1.6rem;
+        opacity: 0.9;
+    }
+    
+    .origin-story {
+        max-width: 1200px;
+        margin: 4rem auto;
+        padding: 0 20px;
+    }
+    
+    .origin-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 3rem;
+        align-items: center;
+    }
+    
+    .influence-list {
+        margin: 2rem 0;
+        list-style: none;
+    }
+    
+    .influence-list li {
+        padding: 1rem;
+        margin: 0.8rem 0;
+        background: #f8f8f8;
+        border-left: 3px solid #4a696f;
+    }
+    
+    .career-milestones {
+        background: #2b4145;
+        color: white;
+        padding: 4rem 20px;
+    }
+    
+    .milestone-timeline {
+        max-width: 1000px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+    }
+    
+    .milestone {
+        padding: 2rem;
+        background: rgba(255,255,255,0.1);
+        border-radius: 8px;
+    }
+    
+    .milestone.highlight {
+        background: #4a696f;
+        transform: scale(1.05);
+    }
+    
+    .philosophy-card {
+        max-width: 1200px;
+        margin: 4rem auto;
+        padding: 0 20px;
+    }
+    
+    .belief-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+        margin-top: 3rem;
+    }
+    
+    .belief {
+        text-align: center;
+        padding: 2rem;
+        background: white;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    
+    .belief-icon {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+    }
+    
+    .author-footer {
+        text-align: center;
+        padding: 3rem;
+        background: #f8f8f8;
+    }
+    
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    
+    @media (max-width: 768px) {
+        .origin-grid { grid-template-columns: 1fr; }
+        .hero-content h1 { font-size: 2.5rem; }
+        .milestone.highlight { transform: none; }
+    }
+    
+    @media (max-width: 480px) {
+        .hero-content h1 { font-size: 2rem; }
+        .hero-content p { font-size: 1.2rem; }
+        .belief { padding: 1.5rem; }
+    }</style>
+<body>
+    <section class="author-hero">
+        <div class="hero-content">
+            <h1>The Mind Behind EQ</h1>
+            <p>Daniel Goleman's Intellectual Odyssey</p>
+        </div>
+    </section>
+
+    <section class="origin-story">
+        <div class="story-card">
+            <h2>Early Influences</h2>
+            <div class="origin-grid">
+                <div class="origin-text">
+                    <p>"Growing up in 1950s Stockton, California, I was fascinated by human behavior. My father's work as a college professor exposed me to academic thinking, while my mother's social work taught me emotional awareness."</p>
+                    <ul class="influence-list">
+                        <li>1958: First psychology book purchased at 12</li>
+                        <li>1962: High school debate champion</li>
+                        <li>1964: Began studies at Amherst College</li>
+                    </ul>
+                </div>
+                <img src="img/young-goleman.jpg" alt="Young Daniel Goleman in college">
+            </div>
+        </div>
+    </section>
+
+    <section class="career-milestones">
+        <div class="milestone-timeline">
+            <div class="milestone">
+                <h3>1970-1980</h3>
+                <h4>The Harvard Years</h4>
+                <p>PhD in psychology under David McClelland<br>
+                Researched meditation's psychological effects<br>
+                Began writing for Psychology Today</p>
+            </div>
+            <div class="milestone highlight">
+                <h3>1995</h3>
+                <h4>EQ Revolution</h4>
+                <p>"Emotional Intelligence" published<br>
+                5 million copies sold in first 3 years<br>
+                Translated to 40 languages</p>
+            </div>
+            <div class="milestone">
+                <h3>2000s+</h3>
+                <h4>Global Impact</h4>
+                <p>Founded CASEL (Collaborative for Academic, Social, and Emotional Learning)<br>
+                Advised world leaders and Fortune 500 CEOs<br>
+                Pioneered ecological intelligence research</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="philosophy-section">
+        <div class="philosophy-card">
+            <h2>Core Beliefs</h2>
+            <div class="belief-grid">
+                <div class="belief">
+                    <div class="belief-icon">🧠</div>
+                    <h5>Brain Plasticity</h5>
+                    <p>"We can rewire our emotional responses through conscious practice at any age"</p>
+                </div>
+                <div class="belief">
+                    <div class="belief-icon">🤝</div>
+                    <h5>Social Responsibility</h5>
+                    <p>"True intelligence includes understanding our impact on others and the planet"</p>
+                </div>
+                <div class="belief">
+                    <div class="belief-icon">🌱</div>
+                    <h5>Lifelong Growth</h5>
+                    <p>"Personal development isn't a destination - it's a continuous journey"</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="author-footer">
+        <p>Explore more works at <a href="#">golemanlibrary.com</a></p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Psychology Book Fair</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="bookfair.css">
+</head>
+<style>
+    * { box-sizing: border-box; margin: 0; padding: 0;font-weight: 700; }
+    body { font-family: 'Cormorant', serif; }
+    
+    .fair-header {
+        background: #4a696f;
+        color: white;
+        text-align: center;
+        padding: 4rem 2rem;
+    }
+    
+    .fair-header h1 {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+    }
+    
+    .fair-header p {
+        font-size: 1.4rem;
+        opacity: 0.9;
+    }
+    
+    .fair-highlights {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+        max-width: 1200px;
+        margin: 3rem auto;
+        padding: 0 20px;
+    }
+    
+    .highlight-card {
+        background: #f8f8f8;
+        padding: 2rem;
+        text-align: center;
+        border-radius: 8px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    
+    .highlight-card h3 {
+        color: #2b4145;
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+    }
+    
+    button {
+        background: #2b4145;
+        color: white;
+        border: none;
+        padding: 0.8rem 2rem;
+        margin-top: 1rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+    
+    button:hover {
+        background: #1a2a2f;
+        transform: translateY(-2px);
+    }
+    
+    .book-display {
+        max-width: 800px;
+        margin: 3rem auto;
+        padding: 0 20px;
+    }
+    
+    .book-item {
+        display: flex;
+        gap: 2rem;
+        align-items: center;
+        background: white;
+        padding: 2rem;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    
+    .book-item img {
+        width: 200px;
+        height: auto;
+    }
+    
+    @media (max-width: 768px) {
+        .fair-header h1 { font-size: 2.5rem; }
+        .book-item { flex-direction: column; text-align: center; }
+    }
+    
+    @media (max-width: 480px) {
+        .fair-header h1 { font-size: 2rem; }
+        .fair-header p { font-size: 1.1rem; }
+        .highlight-card { padding: 1.5rem; }
+    }</style>
+<body>
+    <header class="fair-header">
+        <h1>Global Psychology Book Fair 2024</h1>
+        <p>October 15-17 • New York City</p>
+    </header>
+
+    <section class="fair-highlights">
+        <div class="highlight-card">
+            <h3>Featured Author</h3>
+            <p>Daniel Goleman<br>Live Q&A Session</p>
+        </div>
+        
+        <div class="highlight-card">
+            <h3>Special Exhibits</h3>
+            <p>Historical Psychology Texts<br>Neuroscience Art Installation</p>
+        </div>
+
+        <div class="highlight-card">
+            <h3>Tickets</h3>
+            <p>Early Bird: $99<br><button>Buy Now</button></p>
+        </div>
+    </section>
+
+    <section class="book-display">
+        <div class="book-item">
+            <img src="img/EQ.jpg" alt="Emotional Intelligence Book">
+            <div class="book-details">
+                <h4>25th Anniversary Edition</h4>
+                <p>Includes new commentary on digital age challenges</p>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

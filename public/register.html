@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register | Bookshelf</title>
+    <link rel="stylesheet" href="register.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <a href="#" class="logo">
+            <img src="img/logo.png" alt="Logo">
+        </a>
+        <ul>
+            <li><a href="main.html">Home</a></li>
+            <li><a href="#">Pages</a></li>
+            <li><a href="#">Events</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="product.html">Shop</a></li>
+            <a href="/register">Register</a>
+        </ul>
+    </nav>
+    <section class="login-section">
+        <div class="login-container">
+            <h2>Sign Up</h2>
+            <form action="/auth/register" method="POST" id="registerForm" onsubmit="return validateRegisterForm(event)">
+                <div class="input-group">
+                    <label for="firstName">First Name</label>
+                    <input type="text" id="firstName" name="firstName" placeholder="Enter your first name" required>
+                </div>
+                <div class="input-group">
+                    <label for="lastName">Last Name</label>
+                    <input type="text" id="lastName" name="lastName" placeholder="Enter your last name" required>
+                </div>
+                <div class="input-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                </div>
+                <div class="input-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                </div>
+                <div class="form-action">
+                    <button type="submit" class="btn-submit">Sign Up</button>
+                </div>
+                <div class="signup-link">
+                    <p>Have an account? <a href="Login page.html">Login</a></p>
+                </div>
+            </form>
+        </div>
+    </section>
+    <script>
+        function validateRegisterForm(event) {
+            event.preventDefault();
+            
+            const firstName = document.getElementById("firstName").value;
+            const lastName = document.getElementById("lastName").value;
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+    
+            if (!firstName || !lastName || !email || !password) {
+                alert("All fields are required.");
+                return false;
+            }
+    
+            if (firstName.length < 2 || lastName.length < 2) {
+                alert("Names should be at least 2 characters long.");
+                return false;
+            }
+    
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                alert("Please enter a valid email address.");
+                return false;
+            }
+    
+            if (password.length < 8) {
+                alert("Password should be at least 8 characters long.");
+                return false;
+            }
+    
+            document.getElementById("registerForm").submit();
+        }
+    </script>
+</body>
+</html>
