@@ -28,7 +28,7 @@ body {
     width: 100%;
 }
 .logo img {
-    height: 50px;
+    height: 80px;
 }
 .navbar ul {
     display: flex;
@@ -208,4 +208,22 @@ body {
         height: 200px;
         font-size: 20px;
     }
+}
+.checkout-button {
+    background-color: #e63946;
+    color: white; 
+    border: none; 
+    padding: 12px 24px; 
+    text-align: center; 
+    text-decoration: none; 
+    display: inline-block; 
+    font-size: 16px; 
+    border-radius: 4px; 
+    cursor: pointer;
+    transition: background-color 0.3s ease; 
+    margin-top: 20px; 
+}
+
+.checkout-button:hover {
+    background-color: lightcoral; 
 }

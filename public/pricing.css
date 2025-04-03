@@ -20,7 +20,7 @@
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
 }
 .logo img {
-    height: 50px;
+    height: 150px;
     width: auto;
 }
 .navbar ul {
@@ -164,6 +164,7 @@ h2 .title {
     border-radius: 5px;
     text-transform: uppercase;
     font-weight: bold;
+    transition: 150ms;
 }
 .return-button:hover {
     background-color: #d62839;

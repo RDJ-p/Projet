@@ -50,12 +50,11 @@ const authController = {
                 process.env.JWT_SECRET,
                 { expiresIn: '1h' }
             );
-
-            res.cookie('token', token, {
-                httpOnly: true,
-                secure: process.env.NODE_ENV === 'production',
-                sameSite: 'strict'
-            }).redirect('/main.html');
+  res.cookie('token', token, {
+    secure: process.env.NODE_ENV === 'production',
+    sameSite: 'strict',
+    path: '/' 
+}).redirect('/main.html');
 
         } catch (error) {
             console.error('Login error:', error);
@@ -116,7 +115,6 @@ const authController = {
             );
 
             res.cookie('token', token, {
-                httpOnly: true,
                 secure: process.env.NODE_ENV === 'production',
                 sameSite: 'strict'
             }).redirect('/main.html');
@@ -132,11 +130,10 @@ const authController = {
     },
 
     logout: (req, res) => {
-        res.clearCookie('token');
-        res.json({ 
-            success: true, 
-            message: 'Logged out successfully' 
-        });
+        res.clearCookie('token', {
+            path: '/',
+            secure: process.env.NODE_ENV === 'production'
+        }).redirect('/main.html');
     }
 };
 

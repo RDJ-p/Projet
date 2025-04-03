@@ -4,6 +4,7 @@ const cartController = {
     getCart: (req, res) => {
         const cart = req.session.cart || [];
         res.json({ success: true, count: cart.length, items: cart });
+        console.log("Session Data:", req.session);
     },
 
     addToCart: async (req, res) => {

@@ -28,15 +28,14 @@
             <li><a href="exchange.html">Exchange</a></li>
         </ul>
         <div class="nav-icons">
-            <a href="carte page.html"><img src="img/cart-icon.png" alt=""></a>
+            <a href="carte page.html"><img src="img/cart-icon.png" alt="Cart"></a>
             <div class="search-container">
                 <input type="text" class="search-box" placeholder="Search books..." id="search-box">
                 <a href="#" id="search-icon"><img src="img/search.png" alt="Search"></a>
             </div>
-            <a href="Login page.html">
-                <button class="button">Sign up</button>
-              </a>
-                      </div>
+            <div id="auth-buttons">
+            </div>
+        </div>
     </nav>
     <div class="slider-container">
         <div class="slider">
@@ -445,6 +444,74 @@ window.onscroll = function() {
         button.style.display = 'none';
     }
 };
+function isLoggedIn() {
+    return document.cookie
+        .split('; ')
+        .some(cookie => cookie.startsWith('token='));
+}
+
+    function updateAuthButtons() {
+        const authDiv = document.getElementById('auth-buttons');
+        if (!authDiv) return;
+
+        if (isLoggedIn()) {
+            authDiv.innerHTML = `
+<a href="/auth/logout"><button class="button" id="logout-btn">Logout</button></a>
+            `;
+        } else {
+            authDiv.innerHTML = `
+                <a href="Login page.html"><button class="button">Login</button></a>
+            `;
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', updateAuthButtons);
+    function getUsernameFromToken() {
+    const cookie = document.cookie.split('; ').find(row => row.startsWith('token='));
+    if (!cookie) return null;
+    
+    const token = cookie.split('=')[1];
+    try {
+        const base64Url = token.split('.')[1];
+        const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+        const padded = base64.padEnd(base64.length + (4 - base64.length % 4) % 4, '=');
+        const payload = JSON.parse(atob(padded));
+        return payload.name || 'User';
+    } catch (e) {
+        return 'User';
+    }
+}
+
+function updateAuthButtons() {
+    const authDiv = document.getElementById('auth-buttons');
+    if (!authDiv) return;
+
+    if (isLoggedIn()) {
+        const username = getUsernameFromToken();
+        authDiv.innerHTML = `
+            <div class="user-menu">
+                <div class="username-display">${username}</div>
+                <div class="dropdown-content">
+                    <a href="carte page.html">🛒 My Cart</a>
+                    <a href="dashbord.html">📊 Dashboard</a>
+                    <a href="/auth/logout">🚪 Logout</a>
+                </div>
+            </div>
+        `;
+    } else {
+        authDiv.innerHTML = `
+            <a href="Login page.html"><button class="button">Login</button></a>
+        `;
+    }
+}
+
+document.addEventListener('click', (e) => {
+    if (e.target.closest('.dropdown-content a[href="/auth/logout"]')) {
+        e.preventDefault();
+        fetch('/auth/logout')
+            .then(() => window.location.reload());
+    }
+});
 
         </script>
 </html>

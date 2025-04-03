@@ -32,8 +32,8 @@
     <div class="container1">
         <div class="sidebar">
             <h3>Filter by Price</h3>
-            <input type="range" id="priceFilter" min="0" max="100" step="5">
-            <span id="priceValue">$0 - $100</span>
+            <input type="range" id="priceFilter" min="0" step="5">
+                   <span id="priceValue">$0 - $100</span>
             
             <h3>Sort by</h3>
             <select id="sortPrice">
@@ -68,7 +68,6 @@
                 <option value="ebook">ebook</option>
             </select>       
         </div>
-        
         <div class="content">
             <h1 class="title">Book Collection</h1>
             <div class="listProduct" id="booksContainer"></div>
@@ -119,169 +118,159 @@
         </div>
         <p>© 2025 BOOKSHELF, ALL RIGHTS RESERVED</p>
     </footer>
-    
 </body>
 <script>
     let allProducts = null;
-    let filteredProducts = null;
-    let currentPage = 1;
-    const booksPerPage = 12;
-    const visiblePages = 3; 
+let filteredProducts = null;
+let currentPage = 1;
+const booksPerPage = 12;
+let maxPrice = 10000;
 
-    // Fetch products with credentials
-    fetch('/api/products', { credentials: 'include' })
+function fetchProducts() {
+    let category = document.getElementById("categorySelect").value;
+    let priceLimit = document.getElementById("priceFilter").value;
+    let sortOption = document.getElementById("sortPrice").value;
+    let searchQuery = document.getElementById("search-box").value.toLowerCase();
+
+    const queryParams = new URLSearchParams({
+        page: currentPage,
+        limit: booksPerPage,
+        minPrice: 0,
+        maxPrice: priceLimit,
+        category: category !== "all" ? category : "",
+        search: searchQuery,
+        sort: sortOption
+    }).toString();
+
+    fetch(`/api/products?${queryParams}`, { credentials: 'include' })
+        .then(response => response.json())
+        .then(data => {
+            filteredProducts = data.products;
+            maxPrice = data.maxPrice;
+
+            let priceSlider = document.getElementById("priceFilter");
+            priceSlider.max = maxPrice;
+            priceSlider.value = priceLimit;
+
+            document.getElementById("priceValue").textContent = `$0 - $${priceSlider.value}`;
+
+            addDataToHTML();
+            setupPagination(data.totalPages);
+        })
+        .catch(error => console.error('Error fetching products:', error));
+}
+
+document.getElementById("priceFilter").addEventListener("input", function () {
+    document.getElementById("priceValue").textContent = `$0 - $${this.value}`;
+    fetchProducts();
+});
+
+document.getElementById("categorySelect").addEventListener("change", fetchProducts);
+document.getElementById("sortPrice").addEventListener("change", fetchProducts);
+document.getElementById("search-box").addEventListener("input", fetchProducts);
+
+function addDataToHTML() {
+    let booksContainer = document.getElementById("booksContainer");
+    booksContainer.innerHTML = "";
+
+    filteredProducts.forEach(book => {
+        const newBook = document.createElement("div");
+        newBook.classList.add("book-card");
+        newBook.innerHTML = `
+            <div class="book-front">
+                <img src="${book.image}" alt="${book.title}">
+                <h2>${book.title}</h2>
+                <p>${book.author}</p>
+                <div class="price">$${book.price}</div>
+            </div>
+            <div class="book-back">
+                <button class="add-to-cart" data-id="${book.id}">Add to Cart</button>
+                <button class="read-more" data-id="${book.id}">Read More</button>
+            </div>
+        `;
+        booksContainer.appendChild(newBook);
+    });
+
+    document.querySelectorAll(".add-to-cart").forEach(button => {
+        button.addEventListener("click", (event) => {
+            const productId = event.target.getAttribute("data-id");
+            addToCart(productId, 1);
+        });
+    });
+
+    document.querySelectorAll(".read-more").forEach(button => {
+        button.addEventListener("click", (event) => {
+            const productId = event.target.getAttribute("data-id");
+            readMore(productId);
+        });
+    });
+}
+
+function setupPagination(totalPages) {
+    const paginationContainer = document.getElementById("pagination");
+    paginationContainer.innerHTML = "";
+
+    if (totalPages <= 1) return;
+
+    const prevButton = document.createElement("button");
+    prevButton.textContent = "Previous";
+    prevButton.disabled = currentPage === 1;
+    prevButton.addEventListener("click", () => {
+        if (currentPage > 1) {
+            currentPage--;
+            fetchProducts();
+        }
+    });
+    paginationContainer.appendChild(prevButton);
+
+    const nextButton = document.createElement("button");
+    nextButton.textContent = "Next";
+    nextButton.disabled = currentPage === totalPages;
+    nextButton.addEventListener("click", () => {
+        if (currentPage < totalPages) {
+            currentPage++;
+            fetchProducts();
+        }
+    });
+    paginationContainer.appendChild(nextButton);
+}
+
+function addToCart(productId, quantity) {
+    console.log(`Adding product ${productId} to cart...`);
+    
+    fetch('/api/cart', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ productId, quantity }),
+        credentials: 'include'
+    })
     .then(response => response.json())
     .then(data => {
-        allProducts = data;
-        filteredProducts = [...data];
-        filterProducts();
-    })
-    .catch(error => console.error('Error fetching products:', error));
-
-    // Event listeners
-    document.getElementById("priceFilter").addEventListener("input", filterProducts);
-    document.getElementById("categorySelect").addEventListener("change", filterProducts);
-    document.getElementById("sortPrice").addEventListener("change", filterProducts);
-
-    function filterProducts() {
-        let priceLimit = document.getElementById("priceFilter").value;
-        let category = document.getElementById("categorySelect").value;
-        let sortOption = document.getElementById("sortPrice").value;
-        let searchQuery = document.getElementById("search-box").value.toLowerCase();
-
-        document.getElementById("priceValue").textContent = `$0 - $${priceLimit}`;
-
-        filteredProducts = allProducts.filter(product => {
-            let withinPrice = product.price <= priceLimit;
-            let withinCategory = category === "all" || (product.category && product.category.toLowerCase() === category.toLowerCase());
-            let matchesSearch = product.title.toLowerCase().includes(searchQuery) || 
-                             (product.author && product.author.toLowerCase().includes(searchQuery));
-            return withinPrice && withinCategory && matchesSearch;
-        });
-
-        filteredProducts.sort((a, b) => sortOption === "asc" ? a.price - b.price : b.price - a.price);
-        currentPage = 1;
-        addDataToHTML();
-        setupPagination();
-    }
-
-    function addDataToHTML() {
-        let booksContainer = document.getElementById("booksContainer");
-        booksContainer.innerHTML = "";
-
-        const paginatedBooks = filteredProducts.slice(
-            (currentPage - 1) * booksPerPage,
-            currentPage * booksPerPage
-        );
-
-        paginatedBooks.forEach(book => {
-            const newBook = document.createElement("div");
-            newBook.classList.add("book-card");
-            newBook.innerHTML = `
-                <div class="book-front">
-                    <img src="${book.image}" alt="${book.title}">
-                    <h2>${book.title}</h2>
-                    <p>${book.author}</p>
-                    <div class="price">$${book.price}</div>
-                </div>
-                <div class="book-back">
-                    <button class="add-to-cart" onclick="addToCart(${book.id}, 1)">Add to Cart</button>
-                        <button class="read-more" onclick="readMore('${book.id}')">Read More</button>
-                </div>
-            `;
-            booksContainer.appendChild(newBook);
-        });
-    }
-
-    function addToCart(productId, quantity) {
-        fetch('/api/cart', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ productId, quantity }),
-            credentials: 'include'
-        })
-        .then(response => response.json())
-        .then(data => {
-            alert(data.message);
-            loadCart();
-        })
-        .catch(error => console.error('Error:', error));
-    }
-
-    function loadCart() {
-        fetch('/api/cart', { credentials: 'include' })
-        .then(response => response.json())
-        .then(data => {
-            const container = document.querySelector('.cart-items');
-            const message = document.querySelector('.message');
-            const countElement = document.getElementById('cart-count');
-
-            if (data.items?.length > 0) {
-                message.textContent = `Your cart has ${data.items.length} item(s)`;
-                container.innerHTML = data.items.map(item => `
-                    <div class="cart-item">
-                        <span>${item.productName}</span>
-                        <span>$${item.price}</span>
-                        <span>Quantity: 
-                            <input type="number" 
-                                   id="quantity-${item.productId}" 
-                                   value="${item.quantity}" 
-                                   min="1" 
-                                   onchange="updateQuantity(${item.productId})">
-                        </span>
-                        <button onclick="removeFromCart(${item.productId})">Remove</button>
-                    </div>
-                `).join('');
-                if (countElement) countElement.textContent = data.items.length;
-            } else {
-                message.textContent = 'Your basket is currently empty.';
-                if (countElement) countElement.textContent = '0';
-            }
-        })
-        .catch(error => console.error('Error loading cart:', error));
-    }
-
-    function removeFromCart(productId) {
-        fetch(`/api/cart/${productId}`, {
-            method: 'DELETE',
-            credentials: 'include'
-        })
-        .then(response => response.json())
-        .then(data => {
-            alert(data.message);
-            loadCart();
-        })
-        .catch(error => console.error('Error:', error));
-    }
-
-    function updateQuantity(productId) {
-        const newQuantity = document.getElementById(`quantity-${productId}`).value;
-        if (newQuantity < 1) return alert("Quantity must be at least 1");
-
-        fetch(`/api/cart/${productId}`, {
-            method: 'PATCH',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ quantity: newQuantity }),
-            credentials: 'include'
-        })
-        .then(response => response.json())
-        .then(data => {
-            alert(data.message);
-            loadCart();
-        })
-        .catch(error => console.error('Error:', error));
-    }
-
-    window.onload = () => {
+        if (!data.success) {
+            throw new Error(data.message || "Failed to add item.");
+        }
+        alert(data.message);
         loadCart();
-        document.getElementById("search-icon").addEventListener("click", toggleSearch);
-        document.getElementById("search-box").addEventListener("input", filterProducts);
-    };
+    })
+    .catch(error => console.error('Error:', error));
+}
 
-    function toggleSearch() {
-        const searchBox = document.getElementById("search-box");
-        searchBox.style.display = searchBox.style.display === "none" ? "block" : "none";
-        searchBox.focus();
-    }
+function readMore(productId) {
+    console.log(`Reading more about product ${productId}`);
+    window.location.href = `book1.html?id=${productId}`;
+}
+window.onload = () => {
+    fetchProducts();
+    document.getElementById("search-icon").addEventListener("click", toggleSearch);
+};
+
+function toggleSearch() {
+    const searchBox = document.getElementById("search-box");
+    searchBox.style.display = searchBox.style.display === "none" ? "block" : "none";
+    searchBox.focus();
+}
+
+
 </script>
+    
 </html>

@@ -12,7 +12,7 @@
          </header>
     <nav class="navbar">
         <a href="#" class="logo">
-            <img src="img/logo.png" alt="Logo">
+            <img src="img/614c301a-37ba-44e4-9288-731f535ffd34 (1).png" alt="Logo">
         </a>
         <ul>
             <li><a href="#">Home</a></li>
@@ -21,7 +21,6 @@
             <li><a href="#">Blog</a></li>
             <li><a href="#">Shop</a></li>
         </ul>
-        <a href="/auth/logout">Logout</a>
     </nav>
     <section class="login-section">
         <div class="login-container">
@@ -45,30 +44,31 @@
         </div>
     </section>
     <script>
-        function validateLoginForm(event) {
-            event.preventDefault();
-            
-            var email = document.getElementById("email").value;
-            var password = document.getElementById("password").value;
-    
-            if (email === "" || password === "") {
-                alert("Both fields are required.");
-                return false; 
-            }
-    
-            if (email.length < 3) {
-                alert("Email should be at least 3 characters long.");
-                return false;
-            }
-    
-            if (password.length < 6) {
-                alert("Password should be at least 6 characters long.");
-                return false;
-            }
-    
-            localStorage.setItem('isLoggedIn', 'true');
-            window.location.href = "main.html"; // Redirect to home
+ function validateLoginForm(event) {
+        event.preventDefault(); // Keep this to handle validation first
+        
+        var email = document.getElementById("email").value;
+        var password = document.getElementById("password").value;
+
+        // Client-side validation
+        if (email === "" || password === "") {
+            alert("Both fields are required.");
+            return false; 
         }
+
+        if (email.length < 3) {
+            alert("Email should be at least 3 characters long.");
+            return false;
+        }
+
+        if (password.length < 6) {
+            alert("Password should be at least 6 characters long.");
+            return false;
+        }
+
+        // If validation passes, submit the form programmatically
+        document.getElementById("loginForm").submit();
+    }
     </script>
 </body>
 </html>
