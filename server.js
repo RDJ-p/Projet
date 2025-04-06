@@ -5,6 +5,8 @@ const cors = require('cors');
 const rateLimit = require('express-rate-limit');
 const bodyParser = require('body-parser');
 const session = require('express-session'); 
+const fs = require('fs');
+const multer = require('multer');
 require('dotenv').config();
 
 const app = express();
@@ -68,7 +70,6 @@ app.use((err, req, res, next) => {
         error: 'Internal server error'
     });
 });
-
 
 app.listen(port, () => {
     console.log(`🚀 Server running at http://localhost:${port}`);

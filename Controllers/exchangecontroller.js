@@ -13,12 +13,14 @@ const submitExchangeRequest = async (req, res) => {
         }
 
         const { upload_title, upload_type, exchange_option, exchange_title, exchange_reason } = req.body;
-        const file_path = req.file.path;
-        const user_id = req.session.user.id;
 
+        const file_data = req.file.buffer;
+
+        const user_id = req.user.id;
+        
         const result = await pool.query(
-            'INSERT INTO exchanges (user_id, title, type, file_path, exchange_option, desired_title, reason) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *',
-            [user_id, upload_title, upload_type, file_path, exchange_option, exchange_title, exchange_reason]
+            'INSERT INTO exchanges (user_id, title, type, file_data, exchange_option, desired_title, reason) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *',
+            [user_id, upload_title, upload_type, file_data, exchange_option, exchange_title, exchange_reason]
         );
 
         res.status(201).json({ message: 'Exchange request submitted', data: result.rows[0] });
@@ -27,7 +29,6 @@ const submitExchangeRequest = async (req, res) => {
         res.status(500).json({ error: 'Server error' });
     }
 };
-
 
 const getUserExchangeRequests = async (req, res) => {
     try {

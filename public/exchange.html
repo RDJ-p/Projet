@@ -28,7 +28,7 @@
 
     <div class="container1">
         <h2>📚 Upload or Exchange Books/Documents</h2>
-        <form action="/exchange" method="POST" enctype="multipart/form-data">
+        <form action="/api/exchange" method="POST" enctype="multipart/form-data">
             <div class="form-group" style="animation-delay: 0.2s">
                 <label for="upload-title">Book Title</label>
                 <input type="text" id="upload-title" name="upload_title" required>
@@ -145,6 +145,25 @@
                 document.querySelector('.navbar ul').style.display = 'none';
             }
         });
+document.querySelector('form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    try {
+        const response = await fetch('/api/exchange', {
+            method: 'POST',
+            body: formData
+        });
+        const result = await response.json();
+        if (response.ok) {
+            alert('Upload successful!');
+        } else {
+            alert('Error: ' + result.error);
+        }
+    } catch (error) {
+        alert('Failed to submit: ' + error.message);
+    }
+});
+</script>
     </script>
 </body>
 </html>
