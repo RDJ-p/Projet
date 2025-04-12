@@ -10,16 +10,9 @@
     </head>
     <body>
         <nav class="navbar">
-            <a href="#" class="logo">
-                <img src="img/614c301a-37ba-44e4-9288-731f535ffd34 (1).png" alt="Logo">
+            <a href="main.html" class="logo">
+                <img src="img/logo (2).png" alt="Bookshelf">
             </a>
-            <ul>
-                <li><a href="main.html">Home</a></li>
-                <li><a href="#">Pages</a></li>
-                <li><a href="#">Events</a></li>
-                <li><a href="#">Blog</a></li>
-                <li><a href="#">Shop</a></li>
-            </ul>
             <div class="nav-icons">
                 <a href="cart.html">
                     <img src="img/cart-icon.png" alt="Cart">
@@ -81,40 +74,66 @@
             <p>© 2025 BOOKSHELF, ALL RIGHTS RESERVED</p>
         </footer>
         <script>
-        function loadCart() {
-    fetch('/api/cart', { credentials: 'include' })
-        .then(response => response.json())
-        .then(data => {
-        const cartContainer = document.querySelector('.cart-items');
-        const messageElement = document.querySelector('.message');
-
-        if (!data || !data.items || data.items.length === 0) {
-            messageElement.textContent = 'Your basket is currently empty.';
-            cartContainer.innerHTML = '';
-            return;
-        }
-
-        messageElement.textContent = `Your cart has ${data.items.length} item(s).`;
-        cartContainer.innerHTML = '';
-
-        data.items.forEach(item => {
-            const cartItemElement = document.createElement('div');
-            cartItemElement.classList.add('cart-item');
-            cartItemElement.innerHTML = `
-            <img src="${item.image}" alt="${item.productName}" width="50">
-            <span>${item.productName}</span>
-            <span>$${item.price}</span>
-            <input type="number" 
-                    value="${item.quantity}" 
-                    min="1" 
-                    onchange="updateQuantity(${item.productId}, this.value)">
-            <button onclick="removeFromCart(${item.productId})">Remove</button>
-            `;
-            cartContainer.appendChild(cartItemElement);
-        });
-        })
-        .catch(error => console.error('Error:', error));
-    }
+            function loadCart() {
+                fetch('/api/cart', { credentials: 'include' })
+                    .then(response => response.json())
+                    .then(data => {
+                        const cartContainer = document.querySelector('.cart-items');
+                        const messageElement = document.querySelector('.message');
+        
+                        const existingTotals = document.querySelector('.cart-totals');
+                        if (existingTotals) existingTotals.remove();
+        
+                        if (!data || !data.items || data.items.length === 0) {
+                            messageElement.textContent = 'Your basket is currently empty.';
+                            cartContainer.innerHTML = '';
+                            return;
+                        }
+        
+                        let totalBooks = 0;
+                        let totalPrice = 0;
+        
+                        messageElement.textContent = `Your cart has ${data.items.length} item(s).`;
+                        cartContainer.innerHTML = '';
+        
+                        data.items.forEach(item => {
+                            totalBooks += item.quantity;
+                            totalPrice += item.price * item.quantity;
+        
+                            const cartItemElement = document.createElement('div');
+                            cartItemElement.classList.add('cart-item');
+                            cartItemElement.innerHTML = `
+                                <img src="${item.image}" alt="${item.productName}" width="50">
+                                <span>${item.productName}</span>
+                                <span>$${item.price}</span>
+                                <input type="number" 
+                                       id="quantity-${item.productId}" 
+                                       value="${item.quantity}" 
+                                       min="1" 
+                                       onchange="updateQuantity(${item.productId})">
+                                <button onclick="removeFromCart(${item.productId})">Remove</button>
+                            `;
+                            cartContainer.appendChild(cartItemElement);
+                        });
+        
+                        const totalsElement = document.createElement('div');
+                        totalsElement.classList.add('cart-totals');
+                        totalsElement.innerHTML = `
+                            <div class="total-row">
+                                <span>Total Books:</span>
+                                <span>${totalBooks}</span>
+                            </div>
+                            <div class="total-row">
+                                <span>Total Price:</span>
+                                <span>$${totalPrice.toFixed(2)}</span>
+                            </div>
+                        `;
+        
+                        cartContainer.appendChild(totalsElement);
+                    })
+                    .catch(error => console.error('Error:', error));
+            }
+        
             function addToCart(productId, quantity) {
                 fetch('/api/cart', {
                     method: 'POST',
@@ -155,9 +174,9 @@
                 });
             }
         
-            function updateQuantity(productId) { 
+            function updateQuantity(productId) {
                 const newQuantity = document.getElementById(`quantity-${productId}`).value;
-                
+        
                 if (newQuantity < 1) {
                     alert("Quantity must be at least 1.");
                     document.getElementById(`quantity-${productId}`).value = 1;
@@ -185,6 +204,6 @@
             }
         
             window.onload = loadCart;
-        </script>
+        </script>        
     </body>
     </html>

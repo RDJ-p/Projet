@@ -1,81 +1,183 @@
-const pool = require('../config/db'); 
+const pool = require('../config/db');
 
 const cartController = {
-    getCart: (req, res) => {
-        const cart = req.session.cart || [];
-        res.json({ success: true, count: cart.length, items: cart });
-        console.log("Session Data:", req.session);
-    },
-
-    addToCart: async (req, res) => {
+    getCart: async (req, res) => {
         try {
-            const { productId, quantity } = req.body;
+            const userId = req.user.id; 
 
-            if (!productId || !quantity) {
-                return res.status(400).json({ success: false, error: 'Product ID and quantity are required' });
-            }
+            const result = await pool.query(`
+                SELECT 
+                    product_id AS "productId", 
+                    product_name AS "productName", 
+                    price, 
+                    quantity, 
+                    image 
+                FROM carte
+                WHERE user_id = $1  -- Only fetch items for the authenticated user
+            `, [userId]);
 
-            const result = await pool.query('SELECT * FROM products WHERE id = $1', [productId]);
-            if (result.rows.length === 0) {
-                return res.status(404).json({ success: false, error: 'Product not found' });
-            }
-
-            const product = result.rows[0]; 
-            const newItem = {
-                productId: product.id,
-                productName: product.title,
-                price: product.price,
-                quantity: parseInt(quantity),
-                image: product.image
-            };
-
-            if (!req.session.cart) req.session.cart = [];
-            const existingItem = req.session.cart.find(item => item.productId === newItem.productId);
-
-            if (existingItem) {
-                existingItem.quantity += newItem.quantity;
-            } else {
-                req.session.cart.push(newItem);
-            }
-
-            res.json({ success: true, message: 'Item added to cart', item: newItem });
+            res.json({ success: true, items: result.rows });
         } catch (error) {
             console.error(error);
             res.status(500).json({ success: false, error: 'Server error' });
         }
     },
 
-    removeFromCart: (req, res) => {
-        const { productId } = req.params;
-        req.session.cart = req.session.cart.filter(item => item.productId !== parseInt(productId));
-        res.json({ success: true, message: 'Item removed from cart' });
+    addToCart: async (req, res) => {
+        try {
+            const userId = req.user.id; 
+            const productId = parseInt(req.body.productId, 10);
+            const quantity = parseInt(req.body.quantity, 10);
+            
+            if (isNaN(productId)) {
+                return res.status(400).json({ 
+                    success: false, 
+                    error: 'Valid Product ID is required' 
+                });
+            }
+
+            const productResult = await pool.query(
+                'SELECT * FROM products WHERE id = $1',
+                [productId]
+            );
+            if (productResult.rows.length === 0) {
+                return res.status(404).json({ 
+                    success: false, 
+                    error: 'Product not found' 
+                });
+            }
+
+            const product = productResult.rows[0];
+            const newItem = {
+                productId: product.id,
+                productName: product.title, 
+                price: product.price,
+                quantity: quantity,
+                image: product.image
+            };
+
+            const existingItem = await pool.query(
+                'SELECT * FROM carte WHERE product_id = $1 AND user_id = $2',
+                [productId, userId]
+            );
+
+            if (existingItem.rows.length > 0) {
+                await pool.query(
+                    'UPDATE carte SET quantity = quantity + $1 WHERE product_id = $2 AND user_id = $3',
+                    [quantity, productId, userId]
+                );
+            } else {
+                await pool.query(
+                    `INSERT INTO carte 
+                        (product_id, product_name, price, quantity, image, user_id) 
+                     VALUES ($1, $2, $3, $4, $5, $6)`,
+                    [productId, product.title, product.price, quantity, product.image, userId]
+                );
+            }
+
+            res.json({ 
+                success: true, 
+                message: 'Item added to cart', 
+                item: newItem 
+            });
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({ success: false, error: 'Server error' });
+        }
     },
 
-    clearCart: (req, res) => {
-        req.session.cart = [];
-        res.json({ success: true, message: 'Cart cleared' });
+    removeFromCart: async (req, res) => {
+        try {
+            const userId = req.user.id; 
+            const productId = parseInt(req.params.productId, 10);
+            
+            if (isNaN(productId)) {
+                return res.status(400).json({ 
+                    success: false, 
+                    error: "Valid Product ID is required" 
+                });
+            }
+
+            const result = await pool.query(
+                'DELETE FROM carte WHERE product_id = $1 AND user_id = $2 RETURNING *',
+                [productId, userId]
+            );
+
+            if (result.rowCount === 0) {
+                return res.status(404).json({ 
+                    success: false, 
+                    error: "Item not found" 
+                });
+            }
+
+            res.json({ 
+                success: true, 
+                message: "Item removed from cart" 
+            });
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({ 
+                success: false, 
+                error: "Server error" 
+            });
+        }
     },
 
-    updateCartQuantity: (req, res) => {
-        const { productId } = req.params;
-        const { quantity } = req.body;
-
-        if (!req.session.cart) {
-            return res.status(400).json({ success: false, error: 'Cart is empty' });
+    clearCart: async (req, res) => {
+        try {
+            const userId = req.user.id; 
+            await pool.query('DELETE FROM carte WHERE user_id = $1', [userId]);
+            res.json({ success: true, message: 'Cart cleared' });
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({ success: false, error: 'Server error' });
         }
+    },
 
-        const item = req.session.cart.find(item => item.productId === parseInt(productId));
-        if (!item) {
-            return res.status(404).json({ success: false, error: 'Item not found' });
+    updateCartQuantity: async (req, res) => {
+        try {
+            const userId = req.user.id; 
+            const productId = parseInt(req.params.productId, 10);
+            const quantity = parseInt(req.body.quantity, 10);
+
+            if (isNaN(productId)) {
+                return res.status(400).json({ 
+                    success: false, 
+                    error: "Valid Product ID is required" 
+                });
+            }
+
+            if (quantity <= 0) {
+                return res.status(400).json({ 
+                    success: false, 
+                    error: 'Quantity must be greater than 0' 
+                });
+            }
+
+            const result = await pool.query(
+                'UPDATE carte SET quantity = $1 WHERE product_id = $2 AND user_id = $3 RETURNING *',
+                [quantity, productId, userId]
+            );
+
+            if (result.rowCount === 0) {
+                return res.status(404).json({ 
+                    success: false, 
+                    error: 'Item not found' 
+                });
+            }
+
+            res.json({ 
+                success: true, 
+                message: 'Quantity updated', 
+                item: result.rows[0] 
+            });
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({ 
+                success: false, 
+                error: 'Server error' 
+            });
         }
-
-        if (parseInt(quantity) <= 0) {
-            return res.status(400).json({ success: false, error: 'Quantity must be greater than 0' });
-        }
-
-        item.quantity = parseInt(quantity);
-
-        res.json({ success: true, message: 'Quantity updated', item });
     }
 };
 

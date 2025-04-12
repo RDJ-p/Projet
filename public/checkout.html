@@ -10,13 +10,10 @@
 <body>
     <nav class="navbar">
         <a href="#" class="logo">
-            <img src="img/614c301a-37ba-44e4-9288-731f535ffd34 (1).png" alt="Logo">
+            <img src="img/logo (2).png" alt="Bookshelf">
         </a>
         <ul>
             <li><a href="#">Home</a></li>
-            <li><a href="#">Pages</a></li>
-            <li><a href="#">Events</a></li>
-            <li><a href="#">Blog</a></li>
             <li><a href="#">Shop</a></li>
         </ul>
         <div class="nav-icons">
@@ -28,36 +25,38 @@
     <section class="login-section">
         <div class="login-container">
             <h2>CHECKOUT</h2>
-            <form action="#" method="POST">
+            <form id="checkoutForm">
                 <div class="input-group">
-                    <label for="email">FULL Name</label>
-                    <input type="email" id="Full name" name="Full name"  required>
-                </div>
-                <div class="input-group">
-                    <label for="email">Phone Number</label>
-                    <input type="email" id="Phone number" name="Phone Number"  required>
-                </div>
-                
-                <div class="input-group">
-                    <label for="email">Adress</label>
-                    <input type="email" id="adress" name="Adress"  required>
+                    <label for="fullName">Full Name</label>
+                    <input type="text" id="fullName" required>
                 </div>
                 <div class="input-group">
-                    <label for="password">Country</label>
-                    <input type="password" id="country" name="Country"  required>
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" required>
                 </div>
-
-               
-
-                <div class="form-action">
-                    <button type="submit" class="btn-submit">CHECKOUT</button>
+                <div class="input-group">
+                    <label for="address">Address</label>
+                    <textarea id="address" required></textarea>
                 </div>
-                
-                
+                <div class="input-group">
+                    <label for="country">Country</label>
+                    <input type="text" id="country" required>
+                </div>
+                <div class="order-summary">
+                    <h3>Order Summary</h3>
+                    <div id="cartItems"></div>
+                    <div class="total">
+                        <span>Total:</span>
+                        <span id="totalAmount"></span>
+                    </div>
+                </div>
+                <button type="submit" class="btn-submit">PLACE ORDER</button>
+            </form>
+        </div>
+    </section>        
             </form>
         </div>
     </section>
-
     <footer class="footer">
         <div class="container">
             <div class="row">
@@ -103,27 +102,53 @@
         <p>© 2025 BOOKSHELF, ALL RIGHTS RESERVED</p>
     </footer>
     <script>
-        function validateLoginForm(event) {
-            event.preventDefault();
+        document.getElementById("checkoutForm").addEventListener("submit", async function(e) {
+            e.preventDefault();
     
-            var username = document.getElementById("username").value;
-            var password = document.getElementById("password").value;
+            const fullName = document.getElementById("fullName").value;
+            const phone = document.getElementById("phone").value;
+            const address = document.getElementById("address").value;
+            const country = document.getElementById("country").value;
     
-            if (username === "" || password === "") {
-                alert("Both fields are required.");
-                return false; 
-            }
-                if (username.length < 3) {
-                alert("Username should be at least 3 characters long.");
-                return false;
+            const cartResponse = await fetch('/api/cart', { credentials: 'include' });
+            const cartData = await cartResponse.json();
+    
+            if (!cartData || !cartData.items || cartData.items.length === 0) {
+                alert("Your cart is empty!");
+                return;
             }
     
-            if (password.length < 6) {
-                alert("Password should be at least 6 characters long.");
-                return false;
+            const orderData = {
+                fullName,
+                phone,
+                address,
+                country,
+                items: cartData.items
+            };
+    
+            try {
+                const response = await fetch('/api/orders', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    credentials: 'include',
+                    body: JSON.stringify(orderData)
+                });
+    
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    alert("Failed to place order: " + errorData.message);
+                    return;
+                }
+    
+                const data = await response.json();
+                alert("Order placed successfully!");
+                window.location.href = "order.html";
+            } catch (error) {
+                console.error("Error placing order:", error);
+                alert("An error occurred while placing the order.");
             }
-            document.getElementById("loginForm").submit();  
-        }
-    </script>    
+        });
+    </script>
+    
 </body>
 </html>

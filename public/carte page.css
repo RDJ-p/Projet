@@ -227,3 +227,132 @@ body {
 .checkout-button:hover {
     background-color: lightcoral; 
 }
+/* Add to carte page.css */
+.cart-items {
+    width: 100%;
+    max-width: 800px;
+    margin: 20px auto;
+}
+
+.cart-item {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 15px;
+    margin: 15px 0;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease;
+}
+
+.cart-item:hover {
+    transform: translateY(-2px);
+}
+
+.cart-item img {
+    width: 80px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.cart-item span {
+    flex: 1;
+    font-size: 16px;
+    color: #333;
+}
+
+.cart-item input[type="number"] {
+    width: 60px;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    text-align: center;
+}
+
+.cart-item button {
+    background-color: #e63946;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.cart-item button:hover {
+    background-color: #d62839;
+}
+
+.message {
+    font-size: 18px;
+    color: #666;
+    margin: 20px 0;
+}
+
+/* Add media query for mobile responsiveness */
+@media (max-width: 768px) {
+    .cart-item {
+        flex-wrap: wrap;
+        gap: 10px;
+        padding: 10px;
+    }
+    
+    .cart-item img {
+        width: 60px;
+        height: 80px;
+    }
+    
+    .cart-item span {
+        flex: 100%;
+        text-align: center;
+    }
+    
+    .cart-item input[type="number"] {
+        order: 1;
+    }
+    
+    .cart-item button {
+        order: 2;
+    }
+}
+/* Add to CSS */
+.cart-totals {
+    width: 100%;
+    max-width: 800px;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.total-row {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0;
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.total-row:last-child {
+    border-bottom: none;
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+.total-row span:first-child {
+    color: #666;
+}
+
+.total-row span:last-child {
+    color: #333;
+}
+
+@media (max-width: 768px) {
+    .cart-totals {
+        margin: 20px auto;
+        padding: 15px;
+    }
+}

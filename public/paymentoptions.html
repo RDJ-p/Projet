@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bookshelf | Payment Options</title>
+    <link rel="stylesheet" href="aboutus.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="scroll-progress"></div>
+    
+    <nav class="navbar">
+        <a href="#" class="logo">
+            <img src="img/logo (2).png" alt="Bookshelf">
+        </a>
+        <div class="nav-links">
+            <a href="main.html">Home</a>
+        </div>
+        <div class="menu-toggle">
+            <img src="img/menu.png" alt="Menu" width="24">
+        </div>
+    </nav>
+
+    <section class="hero" style="background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('img/paimentoptions.png')">
+        <h1>Secure Payment Options</h1>
+    </section>
+
+    <section class="payment-methods">
+        <div class="stats" style="background: var(--grey-1); padding: 4rem 5%;">
+            <h2 style="text-align: center; margin-bottom: 3rem; font-size: 2rem;">Accepted Payment Methods</h2>
+            <div class="stats-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 2rem; justify-items: center;">
+                <div class="stat-card">
+                    <img src="img/visa-logo-png-2020.png" alt="Visa" style="height: 40px; margin-bottom: 1rem; transition: transform 0.3s;">
+                    <p>Visa</p>
+                </div>
+                <div class="stat-card">
+                    <img src="img/mastercard-26174.png" alt="Mastercard" style="height: 40px; margin-bottom: 1rem; transition: transform 0.3s;">
+                    <p>Mastercard</p>
+                </div>
+                <div class="stat-card">
+                    <img src="img/paypal-logo-png-2140.png" alt="PayPal" style="height: 40px; margin-bottom: 1rem; transition: transform 0.3s;">
+                    <p>PayPal</p>
+                </div>
+                <div class="stat-card">
+                    <img src="img/applepay.jpg" alt="Apple Pay" style="height: 40px; margin-bottom: 1rem; transition: transform 0.3s;">
+                    <p>Apple Pay</p>
+                </div>
+                <div class="stat-card">
+                    <img src="img/googlepay.jpg" alt="Google Pay" style="height: 40px; margin-bottom: 1rem; transition: transform 0.3s;">
+                    <p>Google Pay</p>
+                </div>
+                <div class="stat-card">
+                    <img src="img/amex.png" alt="American Express" style="height: 40px; margin-bottom: 1rem; transition: transform 0.3s;">
+                    <p>American Express</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <div class="section-text">
+            <h2>Safe & Secure Transactions</h2>
+            <p>All payments are processed through encrypted channels using 256-bit SSL technology. We never store your full payment details on our servers.</p>
+            <ul style="list-style: none; margin: 1.5rem 0;">
+                <li>✓ PCI-DSS compliant</li>
+                <li>✓ 3D Secure authentication</li>
+                <li>✓ Fraud protection monitoring</li>
+            </ul>
+        </div>
+        <div class="section-img">
+            <img src="img/secure-payment.jpg" alt="Secure Payment">
+        </div>
+    </section>
+
+    <section class="payment-form">
+        <div class="content-section" style="max-width: 600px; margin: 0 auto;">
+            <h2 style="text-align: center; margin-bottom: 2rem;">Payment Details</h2>
+            <form class="payment-details">
+                <div class="form-group">
+                    <label>Card Number</label>
+                    <input type="text" placeholder="4242 4242 4242 4242" class="form-input">
+                </div>
+                <div class="form-group">
+                    <label>Cardholder Name</label>
+                    <input type="text" placeholder="John Doe" class="form-input">
+                </div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                    <div class="form-group">
+                        <label>Expiration Date</label>
+                        <input type="text" placeholder="MM/YY" class="form-input">
+                    </div>
+                    <div class="form-group">
+                        <label>CVV</label>
+                        <input type="text" placeholder="123" class="form-input">
+                    </div>
+                </div>
+                <button class="btn" style="width: 100%; margin-top: 1.5rem;">Complete Payment</button>
+            </form>
+        </div>
+    </section>
+
+    <style>
+        .payment-details {
+            background: var(--grey-1);
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid var(--grey-3);
+            border-radius: 4px;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--grey-4);
+            box-shadow: 0 0 0 2px rgba(73, 80, 87, 0.2);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--grey-4);
+        }
+        .stat-card:hover img {
+            transform: scale(1.1);
+        }
+        
+        .payment-form {
+            background: var(--grey-2);
+            padding: 4rem 5%;
+        }
+
+        .payment-details {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+    </style>
+
+    <script>
+
+    </script>
+</body>
+</html>

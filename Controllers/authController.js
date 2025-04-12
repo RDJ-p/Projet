@@ -41,20 +41,21 @@ const authController = {
                 });
             }
 
-            const token = jwt.sign(
-                { 
-                    id: user.id, 
-                    email: user.email, 
-                    name: `${user.first_name} ${user.last_name}` 
-                },
-                process.env.JWT_SECRET,
-                { expiresIn: '1h' }
-            );
-  res.cookie('token', token, {
-    secure: process.env.NODE_ENV === 'production',
-    sameSite: 'strict',
-    path: '/' 
-}).redirect('/main.html');
+            const payload = { 
+                id: user.id,
+                email: user.email,
+                name: `${user.first_name} ${user.last_name}`,
+                role: user.role 
+            };
+            const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '1h' });
+
+            console.log('Authenticated user:', payload);
+
+            res.cookie('token', token, {
+                secure: process.env.NODE_ENV === 'production',
+                sameSite: 'strict',
+                path: '/' 
+            }).redirect('/main.html');
 
         } catch (error) {
             console.error('Login error:', error);
@@ -104,15 +105,15 @@ const authController = {
                 [firstName.trim(), lastName.trim(), email.trim(), hashedPassword]
             );
 
-            const token = jwt.sign(
-                { 
-                    id: result.rows[0].id, 
-                    email: result.rows[0].email, 
-                    name: `${firstName} ${lastName}` 
-                },
-                process.env.JWT_SECRET,
-                { expiresIn: '1h' }
-            );
+            const payload = {
+                id: result.rows[0].id, 
+                email: result.rows[0].email, 
+                name: `${firstName.trim()} ${lastName.trim()}`
+            };
+
+            const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '1h' });
+
+            console.log('Authenticated user:', payload);
 
             res.cookie('token', token, {
                 secure: process.env.NODE_ENV === 'production',
@@ -136,6 +137,5 @@ const authController = {
         }).redirect('/main.html');
     }
 };
-
 
 module.exports = authController;

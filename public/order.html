@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order History</title>
+    <link rel="stylesheet" href="carte page.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .order-container { 
+            max-width: 800px; 
+            margin: 20px auto; 
+            padding: 20px; 
+        }
+        .order-card { 
+            border: 1px solid #ddd; 
+            padding: 15px; 
+            margin-bottom: 20px; 
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        .order-header { 
+            display: flex; 
+            justify-content: space-between; 
+            margin-bottom: 10px; 
+        }
+        .order-item { 
+            display: flex; 
+            justify-content: space-between; 
+            margin: 5px 0; 
+            font-size: 14px;
+        }
+        .order-item span {
+            color: #333;
+        }
+        .loading { 
+            text-align: center; 
+            font-size: 18px; 
+            color: #666; 
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+    </nav>
+
+    <div class="about-section" style="text-align: center; font-size: 24px; font-weight: bold; padding: 20px 0;">
+        Order History
+    </div>
+    
+    <div class="order-container">
+        <div id="ordersList" class="loading">Loading your orders...</div>
+    </div>
+
+    <script>
+        async function loadOrders() {
+            try {
+                const response = await fetch('/api/orders', {
+                    credentials: 'include'
+                });
+
+                if (!response.ok) throw new Error('Failed to load orders');
+
+                const { orders } = await response.json();
+                const container = document.getElementById('ordersList');
+
+                if (orders.length === 0) {
+                    container.innerHTML = '<p>No orders found.</p>';
+                    return;
+                }
+
+                container.innerHTML = orders.map(order => `
+                    <div class="order-card">
+                        <div class="order-header">
+                            <span><strong>Order #${order.id}</strong></span>
+                            <span>${new Date(order.created_at).toLocaleDateString()}</span>
+                            <span>Total: $${order.total}</span>
+                            <span>Status: <strong>${order.status}</strong></span>
+                        </div>
+                        ${order.items.map(item => `
+                            <div class="order-item">
+                                <span>${item.product_name} (x${item.quantity})</span>
+                                <span>$${(item.price * item.quantity).toFixed(2)}</span>
+                            </div>
+                        `).join('')}
+                    </div>
+                `).join('');
+                
+            } catch (error) {
+                console.error('Error:', error);
+                document.getElementById('ordersList').innerHTML = `<p style="color: red;">Error loading orders. Please try again later.</p>`;
+            }
+        }
+
+        window.onload = loadOrders;
+    </script>
+</body>
+</html>
