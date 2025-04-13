@@ -32,9 +32,6 @@
             padding: 10px 20px;
             box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
         }
-        .logo img {
-            height: 50px;
-        }
         .navbar ul {
             display: flex;
             list-style: none;
@@ -341,15 +338,11 @@
         </a>
         <ul>
             <li><a href="main.html">Home</a></li>
-            <li><a href="#">Pages</a></li>
-            <li><a href="#">Events</a></li>
-            <li><a href="#">Blog</a></li>
-            <li><a href="#">Shop</a></li>
+            <li><a href="product.html">Shop</a></li>
         </ul>
         <div class="nav-icons">
-            <a href="#"><img src="img/cart.png" alt="Cart"></a>
+            <a href="carte page.html"><img src="img/cart.png" alt="Cart"></a>
             <a href="#"><img src="img/search.png" alt="Search"></a>
-            <a href="#"><img src="img/more.png" alt="Menu"></a>
         </div>
     </nav>    
     <main>
@@ -440,11 +433,11 @@
                 <div class="footer-col">
                     <h4>Publishers</h4>
                     <ul>
-                        <li><a href="#">Bestsellers</a></li>
-                        <li><a href="#">Interviews</a></li>
-                        <li><a href="#">Authors story</a></li>
-                        <li><a href="#">Book Fairs</a></li>
-                        <li><a href="#">Help (FAQ)</a></li>
+                        <li><a href="bestselling.html">Bestsellers</a></li>
+                        <li><a href="interview.html">Interviews</a></li>
+                        <li><a href="authorstory.html">Authors story</a></li>
+                        <li><a href="bookfair.html">Book Fairs</a></li>
+                        <li><a href="FAQ.html">Help (FAQ)</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
@@ -452,17 +445,17 @@
                     <ul>
                         <li><a href="#">Shipping</a></li>
                         <li><a href="#">Returns</a></li>
-                        <li><a href="#">Order Status</a></li>
-                        <li><a href="#">Payment Options</a></li>
+                        <li><a href="order.html">Order Status</a></li>
+                        <li><a href="paymentoptions.html">Payment Options</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
                     <h4>Online Shop</h4>
                     <ul>
-                        <li><a href="#">Books</a></li>
-                        <li><a href="#">Ebooks</a></li>
-                        <li><a href="#">Magazines</a></li>
-                        <li><a href="#">Newspapers</a></li>
+                        <li><a href="product.html">Books</a></li>
+                        <li><a href="product.html">Ebooks</a></li>
+                        <li><a href="product.html">Magazines</a></li>
+                        <li><a href="product.html">Newspapers</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
@@ -515,6 +508,52 @@
     }
     
     document.addEventListener("DOMContentLoaded", fetchBookDetails);
+    function addToCart() {
+    const bookId = getBookIdFromURL();
+    if (!bookId) return;
+
+    fetch('/api/cart', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            productId: bookId,
+            quantity: 1
+        }),
+        credentials: 'include'
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            alert('Item added to cart!');
+        } else {
+            alert('Failed to add item: ' + (data.error || 'Unknown error'));
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Failed to add item to cart');
+    });
+}
+let isFavorite = false;
+
+function toggleFavorite() {
+    const heartIcon = document.querySelector('.favorite-btn i');
+    isFavorite = !isFavorite;
+    
+    heartIcon.classList.toggle('far');
+    heartIcon.classList.toggle('fas');
+    
+    const bookId = getBookIdFromURL();
+    if (isFavorite) {
+        console.log(`Added book ${bookId} to favorites`);
+        
+    } else {
+        console.log(`Removed book ${bookId} from favorites`);
+    
+    }
+}
     </script>
 </body>
 </html>

@@ -1,100 +1,144 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Order History</title>
-    <link rel="stylesheet" href="carte page.css">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-        }
-        .order-container { 
-            max-width: 800px; 
-            margin: 20px auto; 
-            padding: 20px; 
-        }
-        .order-card { 
-            border: 1px solid #ddd; 
-            padding: 15px; 
-            margin-bottom: 20px; 
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-        }
-        .order-header { 
-            display: flex; 
-            justify-content: space-between; 
-            margin-bottom: 10px; 
-        }
-        .order-item { 
-            display: flex; 
-            justify-content: space-between; 
-            margin: 5px 0; 
-            font-size: 14px;
-        }
-        .order-item span {
-            color: #333;
-        }
-        .loading { 
-            text-align: center; 
-            font-size: 18px; 
-            color: #666; 
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Order History</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Cormorant Garamond', serif;
+      background-color: #f9f9f9;
+      color: #333;
+      margin: 0;
+      padding: 0;
+    }
+
+    .about-section {
+      text-align: center;
+      font-size: 36px;
+      font-weight: bold;
+      padding: 40px 20px;
+      color: #333;
+      background-color: #ffffff;
+      border-bottom: 3px solid #ddd;
+      letter-spacing: 1px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .order-container {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 30px;
+      background-color: #ffffff;
+      border-radius: 16px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      border: 1px solid #ddd;
+    }
+
+    .order-card {
+      background-color: #fafafa;
+      border-left: 6px solid #888;
+      border-radius: 12px;
+      margin-bottom: 30px;
+      padding: 20px 24px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .order-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+    }
+
+    .order-header {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      margin-bottom: 20px;
+      font-size: 16px;
+      font-weight: bold;
+      color: #555;
+    }
+
+    .order-item {
+      display: flex;
+      justify-content: space-between;
+      margin: 8px 0;
+      padding: 8px 0;
+      font-size: 15px;
+      color: #666;
+      border-bottom: 1px dashed #ddd;
+    }
+
+    .order-item:last-child {
+      border-bottom: none;
+    }
+
+    .order-item span:first-child {
+      font-weight: 800;
+    }
+
+    .loading {
+      text-align: center;
+      font-size: 18px;
+      color: #7a7a7a;
+      padding: 40px 0;
+    }
+  </style>
 </head>
 <body>
-    <nav class="navbar">
-    </nav>
+  <nav class="navbar"></nav>
 
-    <div class="about-section" style="text-align: center; font-size: 24px; font-weight: bold; padding: 20px 0;">
-        Order History
-    </div>
-    
-    <div class="order-container">
-        <div id="ordersList" class="loading">Loading your orders...</div>
-    </div>
+  <div class="about-section">
+    Order History
+  </div>
 
-    <script>
-        async function loadOrders() {
-            try {
-                const response = await fetch('/api/orders', {
-                    credentials: 'include'
-                });
+  <div class="order-container">
+    <div id="ordersList" class="loading">Loading your orders...</div>
+  </div>
 
-                if (!response.ok) throw new Error('Failed to load orders');
+  <script>
+    async function loadOrders() {
+      try {
+        const response = await fetch('/api/orders', {
+          credentials: 'include'
+        });
 
-                const { orders } = await response.json();
-                const container = document.getElementById('ordersList');
+        if (!response.ok) throw new Error('Failed to load orders');
 
-                if (orders.length === 0) {
-                    container.innerHTML = '<p>No orders found.</p>';
-                    return;
-                }
+        const { orders } = await response.json();
+        const container = document.getElementById('ordersList');
 
-                container.innerHTML = orders.map(order => `
-                    <div class="order-card">
-                        <div class="order-header">
-                            <span><strong>Order #${order.id}</strong></span>
-                            <span>${new Date(order.created_at).toLocaleDateString()}</span>
-                            <span>Total: $${order.total}</span>
-                            <span>Status: <strong>${order.status}</strong></span>
-                        </div>
-                        ${order.items.map(item => `
-                            <div class="order-item">
-                                <span>${item.product_name} (x${item.quantity})</span>
-                                <span>$${(item.price * item.quantity).toFixed(2)}</span>
-                            </div>
-                        `).join('')}
-                    </div>
-                `).join('');
-                
-            } catch (error) {
-                console.error('Error:', error);
-                document.getElementById('ordersList').innerHTML = `<p style="color: red;">Error loading orders. Please try again later.</p>`;
-            }
+        if (orders.length === 0) {
+          container.innerHTML = '<p>No orders found.</p>';
+          return;
         }
 
-        window.onload = loadOrders;
-    </script>
+        container.innerHTML = orders.map((order, index) => `
+              <div class="order-card">
+                  <div class="order-header">
+                      <span><strong>Order #${index + 1}</strong></span>
+                      <span>${new Date(order.created_at).toLocaleDateString()}</span>
+                      <span>Total: $${order.total}</span>
+                      <span>Status: <strong>${order.status}</strong></span>
+                  </div>
+                  ${order.items.map(item => `
+                      <div class="order-item">
+                          <span>${item.product_name} (x${item.quantity})</span>
+                          <span>$${(item.price * item.quantity).toFixed(2)}</span>
+                      </div>
+                  `).join('')}
+              </div>
+          `).join('');
+        
+      } catch (error) {
+        console.error('Error:', error);
+        document.getElementById('ordersList').innerHTML = `<p style="color: red;">Error loading orders. Please try again later.</p>`;
+      }
+    }
+
+    window.onload = loadOrders;
+  </script>
 </body>
 </html>
