@@ -636,4 +636,8 @@ h3 {
       height: 200px;
     }
   }
-  
+  .out-of-stock {
+    background-color: red;
+    color: white;
+    cursor: not-allowed;
+}

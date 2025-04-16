@@ -39,12 +39,11 @@
     </section>
     <script>
  function validateLoginForm(event) {
-        event.preventDefault(); // Keep this to handle validation first
+        event.preventDefault(); 
         
         var email = document.getElementById("email").value;
         var password = document.getElementById("password").value;
 
-        // Client-side validation
         if (email === "" || password === "") {
             alert("Both fields are required.");
             return false; 
@@ -60,7 +59,6 @@
             return false;
         }
 
-        // If validation passes, submit the form programmatically
         document.getElementById("loginForm").submit();
     }
     </script>

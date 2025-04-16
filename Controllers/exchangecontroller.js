@@ -16,18 +16,44 @@ exports.createExchange = async (req, res) => {
     `;
     const values = [
       userId,
-      upload_title,
+      upload_title.trim().toLowerCase(),
       upload_type,
-      'exchange', 
-      exchange_title,
+      'exchange',
+      exchange_title.trim().toLowerCase(),
       exchange_reason
     ];
 
     const result = await pool.query(query, values);
+    const insertedExchange = result.rows[0];
 
-    res.status(201).json({ success: true, exchange: result.rows[0] });
+    const matchQuery = `
+      SELECT * FROM exchanges 
+      WHERE user_id != $1
+        AND title = $2
+        AND desired_title = $3;
+    `;
+    const matchValues = [userId, insertedExchange.desired_title, insertedExchange.title];
+    const matchResult = await pool.query(matchQuery, matchValues);
+
+    const reverseMatchQuery = `
+      SELECT * FROM exchanges 
+      WHERE user_id != $1
+        AND title = $2
+        AND desired_title = $3;
+    `;
+    const reverseMatchValues = [userId, insertedExchange.title, insertedExchange.desired_title];
+    const reverseMatchResult = await pool.query(reverseMatchQuery, reverseMatchValues);
+
+    const matches = [...matchResult.rows, ...reverseMatchResult.rows];
+
+    res.status(201).json({
+      success: true,
+      exchange: insertedExchange,
+      matches: matches.length > 0 ? matches : null
+    });
   } catch (err) {
     console.error('Exchange insert error:', err);
     res.status(500).json({ error: 'Internal server error' });
   }
+  
 };

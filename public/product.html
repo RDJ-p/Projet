@@ -182,10 +182,13 @@ function addDataToHTML() {
                 <p>${book.author}</p>
                 <div class="price">$${book.price}</div>
             </div>
-            <div class="book-back">
-                <button class="add-to-cart" data-id="${book.id}">Add to Cart</button>
-                <button class="read-more" data-id="${book.id}">Read More</button>
-            </div>
+  <div class="book-back">
+    ${book.stock_status === "In Stock" 
+        ? `<button class="add-to-cart" data-id="${book.id}">Add to Cart</button>` 
+        : `<button class="out-of-stock" disabled>Out of Stock</button>`
+    }
+    <button class="read-more" data-id="${book.id}">Read More</button>
+</div>
         `;
         booksContainer.appendChild(newBook);
     });
@@ -233,7 +236,6 @@ function setupPagination(totalPages) {
     });
     paginationContainer.appendChild(nextButton);
 }
-
 function addToCart(productId, quantity) {
     console.log(`Adding product ${productId} to cart...`);
     
@@ -268,8 +270,6 @@ function toggleSearch() {
     searchBox.style.display = searchBox.style.display === "none" ? "block" : "none";
     searchBox.focus();
 }
-
-
 </script>
     
 </html>

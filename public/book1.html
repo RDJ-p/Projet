@@ -325,7 +325,11 @@
     outline: none;
     box-shadow: 0 0 5px rgba(255, 87, 51, 0.8);
 }
-
+.add-to-cart:disabled {
+    background-color: #a0a0a0;
+    color: white;
+    cursor: not-allowed;
+}
     </style>
 </head>
 <body>
@@ -341,8 +345,7 @@
             <li><a href="product.html">Shop</a></li>
         </ul>
         <div class="nav-icons">
-            <a href="carte page.html"><img src="img/cart.png" alt="Cart"></a>
-            <a href="#"><img src="img/search.png" alt="Search"></a>
+            <a href="carte page.html"><img src="img/cart-icon.png" alt="Cart"></a>
         </div>
     </nav>    
     <main>
@@ -472,88 +475,98 @@
         <p>© 2025 BOOKSHELF, ALL RIGHTS RESERVED</p>
     </footer>    
     <script>
-    function getBookIdFromURL() {
-        const params = new URLSearchParams(window.location.search);
-        return params.get("id"); 
-    }
-    
-    function fetchBookDetails() {
-        const bookId = getBookIdFromURL();
-        if (!bookId) {
-            console.error("No book ID found in URL.");
-            return;
+        function getBookIdFromURL() {
+            const params = new URLSearchParams(window.location.search);
+            return params.get("id"); 
         }
-    
-        fetch(`/api/products/${bookId}`, { credentials: 'include' }) 
-            .then(response => response.json())
-            .then(book => {
-                if (!book) {
-                    console.error("Book not found in API response.");
-                    return;
-                }
-    
-                document.querySelector('.book-title').textContent = book.title || "No Title Available";
-                document.querySelector('.book-author').textContent = book.author || "Unknown Author";
-                document.querySelector('.book-price').textContent = `$${book.price || "N/A"}`;
-                document.querySelector('.book-image img').src = book.image || "default-image.jpg";
-                document.querySelector('.book-description').textContent = book.description || "No description available.";
-                document.querySelector('.book-genre').innerHTML = `<strong>Genre:</strong> ${book.category || "Unknown"}`;
-                document.querySelector('.book-sku').innerHTML = `<strong>SKU:</strong> ${book.sku || "N/A"}`;
-    
-                const stockElement = document.querySelector('.book-stock');
-                stockElement.innerHTML = `<strong>Stock Status:</strong> ${book.stock_status || "Out of Stock"}`;
-                stockElement.classList.add(book.stock_status === "In Stock" ? "in-stock" : "out-of-stock");
-            })
-            .catch(error => console.error("Error fetching book data:", error));
-    }
-    
-    document.addEventListener("DOMContentLoaded", fetchBookDetails);
-    function addToCart() {
-    const bookId = getBookIdFromURL();
-    if (!bookId) return;
-
-    fetch('/api/cart', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            productId: bookId,
-            quantity: 1
-        }),
-        credentials: 'include'
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            alert('Item added to cart!');
-        } else {
-            alert('Failed to add item: ' + (data.error || 'Unknown error'));
-        }
-    })
-    .catch(error => {
-        console.error('Error:', error);
-        alert('Failed to add item to cart');
-    });
-}
-let isFavorite = false;
-
-function toggleFavorite() {
-    const heartIcon = document.querySelector('.favorite-btn i');
-    isFavorite = !isFavorite;
-    
-    heartIcon.classList.toggle('far');
-    heartIcon.classList.toggle('fas');
-    
-    const bookId = getBookIdFromURL();
-    if (isFavorite) {
-        console.log(`Added book ${bookId} to favorites`);
         
-    } else {
-        console.log(`Removed book ${bookId} from favorites`);
+        function fetchBookDetails() {
+            const bookId = getBookIdFromURL();
+            if (!bookId) {
+                console.error("No book ID found in URL.");
+                return;
+            }
     
-    }
-}
+            fetch(`/api/products/${bookId}`, { credentials: 'include' }) 
+                .then(response => response.json())
+                .then(book => {
+                    if (!book) {
+                        console.error("Book not found in API response.");
+                        return;
+                    }
+    
+                    document.querySelector('.book-title').textContent = book.title || "No Title Available";
+                    document.querySelector('.book-author').textContent = book.author || "Unknown Author";
+                    document.querySelector('.book-price').textContent = `$${book.price || "N/A"}`;
+                    document.querySelector('.book-image img').src = book.image || "default-image.jpg";
+                    document.querySelector('.book-description').textContent = book.description || "No description available.";
+                    document.querySelector('.book-genre').innerHTML = `<strong>Genre:</strong> ${book.category || "Unknown"}`;
+                    document.querySelector('.book-sku').innerHTML = `<strong>SKU:</strong> ${book.sku || "N/A"}`;
+    
+                    const stockElement = document.querySelector('.book-stock');
+                    const stockStatus = book.stock_status || "Out of Stock";
+                    stockElement.innerHTML = `<strong>Stock Status:</strong> ${stockStatus}`;
+                    stockElement.classList.add(stockStatus === "In Stock" ? "in-stock" : "out-of-stock");
+    
+                    const cartButton = document.querySelector('.add-to-cart');
+                    if (stockStatus !== "In Stock") {
+                        cartButton.disabled = true;
+                        cartButton.textContent = "Out of Stock";
+                        cartButton.style.backgroundColor = "#a0a0a0";
+                        cartButton.style.cursor = "not-allowed";
+                    }
+                })
+                .catch(error => console.error("Error fetching book data:", error));
+        }
+    
+        document.addEventListener("DOMContentLoaded", fetchBookDetails);
+    
+        function addToCart() {
+            const bookId = getBookIdFromURL();
+            if (!bookId) return;
+    
+            fetch('/api/cart', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    productId: bookId,
+                    quantity: 1
+                }),
+                credentials: 'include'
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('Item added to cart!');
+                } else {
+                    alert('Failed to add item: ' + (data.error || 'Unknown error'));
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Failed to add item to cart');
+            });
+        }
+    
+        let isFavorite = false;
+    
+        function toggleFavorite() {
+            const heartIcon = document.querySelector('.favorite-btn i');
+            isFavorite = !isFavorite;
+    
+            heartIcon.classList.toggle('far');
+            heartIcon.classList.toggle('fas');
+    
+            const bookId = getBookIdFromURL();
+            if (isFavorite) {
+                console.log(`Added book ${bookId} to favorites`);
+            } else {
+                console.log(`Removed book ${bookId} from favorites`);
+            }
+        }
     </script>
+    
 </body>
 </html>
