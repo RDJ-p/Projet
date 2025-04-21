@@ -30,6 +30,7 @@
     const adminRoutes = require('./Routes/adminRoutes');
     const orderRoutes = require('./Routes/orderRoutes');
     const authMiddleware = require('./middlewares/authMiddleware');
+    const wishlistRoutes = require('./routes/wishlistRoutes');
 
     app.use(helmet());
     app.use(cors({
@@ -53,6 +54,7 @@
     app.use('/api/exchange', authMiddleware.isAuthenticated, exchangeRoutes);
     app.use('/api/admin', adminRoutes);
     app.use('/api/orders', orderRoutes);
+    app.use('/api/wishlist', wishlistRoutes);
 
     app.get('/api/user', authMiddleware.isAuthenticated, (req, res) => {
         const { id, name, email, role } = req.user;

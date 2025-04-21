@@ -346,6 +346,7 @@
         </ul>
         <div class="nav-icons">
             <a href="carte page.html"><img src="img/cart-icon.png" alt="Cart"></a>
+            <a href="wishlist.html"><img src="img/icons8-wishlist-58.png" alt="wishlist"></a>
         </div>
     </nav>    
     <main>
@@ -553,19 +554,30 @@
         let isFavorite = false;
     
         function toggleFavorite() {
-            const heartIcon = document.querySelector('.favorite-btn i');
-            isFavorite = !isFavorite;
-    
-            heartIcon.classList.toggle('far');
-            heartIcon.classList.toggle('fas');
-    
-            const bookId = getBookIdFromURL();
-            if (isFavorite) {
-                console.log(`Added book ${bookId} to favorites`);
-            } else {
-                console.log(`Removed book ${bookId} from favorites`);
-            }
-        }
+    const heartIcon = document.querySelector('.favorite-btn i');
+    isFavorite = !isFavorite;
+
+    heartIcon.classList.toggle('far');
+    heartIcon.classList.toggle('fas');
+
+    const bookId = getBookIdFromURL();
+    const userId = 1; 
+
+    if (isFavorite) {
+        fetch('/api/wishlist', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ userId, bookId }),
+            credentials: 'include'
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (data.success) alert("Added to wishlist!");
+            else alert("Failed to add to wishlist");
+        });
+    } else {
+    }
+}
     </script>
     
 </body>
