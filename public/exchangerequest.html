@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Exchange Requests</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f7f7f7;
+      --white: #fff;
+      --grey: #555;
+      --light-grey: #ddd;
+      --blue-grey: #acc2d4;
+      --accent: #486581;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Cormorant Garamond', serif;
+      background-color: var(--bg);
+      color: var(--grey);
+      padding: 3rem 1rem;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 850px;
+      margin: auto;
+    }
+
+    h2 {
+      font-size: 2.2rem;
+      font-weight: 600;
+      color: var(--accent);
+      border-bottom: 2px solid var(--light-grey);
+      margin-top: 3rem;
+      margin-bottom: 1.2rem;
+      padding-bottom: 0.4rem;
+    }
+
+    .card {
+      background: var(--white);
+      padding: 1.8rem;
+      margin-bottom: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.05);
+      transition: transform 0.2s ease;
+      border-left: 6px solid var(--light-grey);
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+    }
+
+    .match-card {
+      background: #f1f7fa;
+      border-left-color: var(--blue-grey);
+    }
+
+    .status-pill {
+      background-color: #e4e4e4;
+      color: #444;
+      padding: 0.2rem 0.8rem;
+      border-radius: 20px;
+      font-size: 0.95rem;
+      display: inline-block;
+      margin-left: 0.6rem;
+    }
+
+    .match-badge {
+      background-color: var(--accent);
+      color: white;
+      font-size: 0.8rem;
+      padding: 0.3rem 0.6rem;
+      border-radius: 4px;
+      display: inline-block;
+      margin-bottom: 0.8rem;
+    }
+
+    h3 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    p {
+      margin: 0.4rem 0;
+      font-size: 1.05rem;
+    }
+
+    .action-btn {
+      margin-top: 1rem;
+      background-color: var(--accent);
+      color: white;
+      border: none;
+      padding: 0.6rem 1.2rem;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: background 0.3s;
+    }
+
+    .action-btn:hover {
+      background-color: #2e4a60;
+    }
+
+    @media (max-width: 600px) {
+      h2 { font-size: 1.6rem; }
+      h3 { font-size: 1.25rem; }
+      .card { padding: 1.2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h2>📬 Your Exchange Requests</h2>
+    <div id="requests-container"></div>
+
+    <h2>🤝 Active Matches</h2>
+    <div id="matches-container"></div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      try {
+        const response = await fetch('/api/exchange', {
+          headers: { Authorization: `Bearer ${getCookie('token')}` }
+        });
+  
+        const { pending, matches } = await response.json();
+  
+        document.getElementById('requests-container').innerHTML = pending.map(req => `
+          <div class="card">
+            <h3>${req.title} ➔ ${req.desired_title}</h3>
+            <p>📅 ${new Date(req.created_at).toLocaleDateString()}
+            </p>
+            <p>${req.reason}</p>
+          </div>
+        `).join('');
+  
+        document.getElementById('matches-container').innerHTML = matches.map(match => `
+  <div class="card match-card">
+    <div class="match-badge">MATCHED!</div>
+    <h3>Your ${match.title} ↔ Their ${match.desired_title}</h3>
+    <p>Matched with: <strong>${match.first_name} ${match.last_name}</strong> (${match.user_email || 'No email provided'})</p>
+    <div class="match-details">
+      <p>📖 Their Offer: ${match.title} (${match.type})</p>
+      <p>💡 Their Request: ${match.desired_title}</p>
+      <p>🗒️ Their Reason: "${match.reason}"</p>
+    </div>
+    <button class="action-btn" onclick="handleExchange('${match.id}')">Start Exchange</button>
+  </div>
+`).join('');
+
+
+
+  
+      } catch (error) {
+        console.error('Error loading exchange data:', error);
+      }
+    });
+  
+    function getCookie(name) {
+      const value = `; ${document.cookie}`;
+      const parts = value.split(`; ${name}=`);
+      if (parts.length === 2) return parts.pop().split(';').shift();
+    }
+  
+    function handleExchange(matchId) {
+      alert(`Starting exchange for match ID: ${matchId}`);
+    }
+  </script>
+  
+</body>
+</html>

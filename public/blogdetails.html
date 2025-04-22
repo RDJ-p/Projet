@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Great Gatsby Review | Literary Chronicle</title>
+    <title>Book Review | Literary Chronicle</title>
     <link rel="stylesheet" href="blogdetails.css">
     <link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
@@ -11,122 +11,359 @@
     <header class="header">
         <nav class="nav-container">
             <a href="#" class="logo">Literary Chronicle</a>
-            <nav class="main-nav">
-            </nav>
+            <nav class="main-nav"></nav>
         </nav>
     </header>
 
     <div class="review-container">
         <div class="review-section">
-            <h1 class="section-title">The Great Gatsby</h1>
-            <div class="rating-system">
-                <div>
-                    <span class="star">★</span>
-                    <span class="star">★</span>
-                    <span class="star">★</span>
-                    <span class="star">★</span>
-                    <span class="star">☆</span>
-                </div>
-                <span>4/5 Stars | Published 1925</span>
-            </div>
+            <h1 class="section-title">Loading...</h1>
+            <div class="rating-system" id="mainRating"></div>
         </div>
 
         <div class="book-metadata">
-            <div class="book-cover-large" 
-                 style="background-image: url('img/Thegreatgatsby.jpeg')">
-            </div>
+            <div class="book-cover-large"></div>
             <div>
                 <div class="book-stats">
                     <div class="stat-item">
                         <h3>Genre</h3>
-                        <p>Literary Fiction</p>
+                        <p>Loading...</p>
                     </div>
                     <div class="stat-item">
                         <h3>Pages</h3>
-                        <p>218</p>
+                        <p>Loading...</p>
                     </div>
                     <div class="stat-item">
                         <h3>Language</h3>
-                        <p>English</p>
+                        <p>Loading...</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>Author</h3>
+                        <p id="author">Loading...</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>Published</h3>
+                        <p id="published">Loading...</p>
                     </div>
                 </div>
 
                 <div class="review-section">
-                    <h2>Synopsis</h2>
-                    <p>A portrait of the Jazz Age in all of its decadence and excess, Gatsby is a tragic hero...</p>
-                    <div class="quote">
-                        "So we beat on, boats against the current, borne back ceaselessly into the past."
-                    </div>
+                    <h2>Summary</h2>
+                    <p id="summary">Loading book data...</p>
+                    <div class="quote"></div>
                 </div>
             </div>
         </div>
 
         <div class="review-section">
             <h2>Critical Analysis</h2>
-            <p>Fitzgerald's masterpiece explores the American Dream through the tragic figure of Jay Gatsby...</p>
-            <h3 style="margin: 2rem 0 1rem;">Key Themes</h3>
-            <ul style="list-style: none;">
-                <li>• The Corruption of the American Dream</li>
-                <li>• Class and Social Stratification</li>
-                <li>• The Mortality of Love</li>
-            </ul>
+            <p id="analysis"></p>
+            <h3>Key Themes</h3>
+            <ul class="themes-list"></ul>
         </div>
 
         <div class="comment-section">
-            <h2 class="section-title">Reader Comments (32)</h2>
-            
-            <div class="comment">
-                <div class="comment-header">
-                    <div class="comment-avatar"></div>
-                    <div>
-                        <h4>Sarah Johnson</h4>
-                        <small>3 days ago</small>
-                    </div>
-                </div>
-                <div class="rating-system">
-                    <span class="star">★</span>
-                    <span class="star">★</span>
-                    <span class="star">★</span>
-                    <span class="star">★</span>
-                    <span class="star">★</span>
-                </div>
-                <p>This book completely changed my perspective on the American Dream. Fitzgerald's prose is absolutely breathtaking.</p>
-            </div>
-
-            <div class="comment">
-                <div class="comment-header">
-                    <div class="comment-avatar"></div>
-                    <div>
-                        <h4>Michael Chen</h4>
-                        <small>1 week ago</small>
-                    </div>
-                </div>
-                <div class="rating-system">
-                    <span class="star">★</span>
-                    <span class="star">★</span>
-                    <span class="star">★</span>
-                    <span class="star">☆</span>
-                    <span class="star">☆</span>
-                </div>
-                <p>While I appreciate its historical significance, I found the characters somewhat unrelatable...</p>
-            </div>
+            <h2 class="section-title">Reader Comments</h2>
+            <div id="commentsContainer"></div>
 
             <div class="review-section">
                 <h3>Share Your Thoughts</h3>
-                <form class="comment-form">
-                    <textarea placeholder="Write your review..."></textarea>
-                    <div class="rating-system">
+                <form class="comment-form" onsubmit="postComment(event)">
+                    <textarea placeholder="Write your review..." required></textarea>
+                    <div class="rating-input">
                         <span>Your Rating:</span>
-                        <span class="star">☆</span>
-                        <span class="star">☆</span>
-                        <span class="star">☆</span>
-                        <span class="star">☆</span>
-                        <span class="star">☆</span>
+                        <div class="star-rating">
+                            <span class="star" onclick="setRating(1)">☆</span>
+                            <span class="star" onclick="setRating(2)">☆</span>
+                            <span class="star" onclick="setRating(3)">☆</span>
+                            <span class="star" onclick="setRating(4)">☆</span>
+                            <span class="star" onclick="setRating(5)">☆</span>
+                        </div>
                     </div>
                     <button class="btn" type="submit">Post Comment</button>
                 </form>
             </div>
         </div>
     </div>
+
+<script>
+    let userRating = 0;
+    const params = new URLSearchParams(window.location.search);
+    const bookId = params.get('book');
+
+    const bookData = {
+        gatsby: {
+            title: "The Great Gatsby",
+            summary: "F. Scott Fitzgerald's masterpiece explores the decadence and idealism of the Jazz Age through the enigmatic millionaire Jay Gatsby and his obsessive pursuit of Daisy Buchanan. The novel examines themes of social stratification, the corruption of the American Dream, and the transient nature of identity.",
+            genre: "Literary Fiction",
+            pages: "218",
+            language: "English",
+            author: "F. Scott Fitzgerald",
+            published: "1925",
+            cover: "img/Thegreatgatsby.jpeg",
+            quote: "\"So we beat on, boats against the current, borne back ceaselessly into the past.\"",
+            rating: 4,
+            themes: ["The American Dream", "Social Class", "Love and Obsession"],
+            analysis: "Fitzgerald's use of symbolic imagery (the green light, the eyes of Dr. T.J. Eckleburg) creates a haunting commentary on materialism. The unreliable narration through Nick Carraway adds layers to character motivations.",
+            comments: [
+                {user: "Emily R.", date: "2 days ago", rating: 5, text: "The prose is lyrical and haunting. Gatsby's tragic arc stays with you long after reading."},
+                {user: "Michael T.", date: "1 week ago", rating: 4, text: "A brilliant critique of wealth, though some characters felt underdeveloped."}
+            ]
+        },
+        "1984": {
+            title: "1984",
+            summary: "George Orwell's dystopian classic depicts a totalitarian regime under Big Brother's surveillance. Winston Smith's rebellion against thought control explores themes of reality manipulation, linguistic corruption, and individual autonomy.",
+            genre: "Dystopian Fiction",
+            pages: "328",
+            language: "English",
+            author: "George Orwell",
+            published: "1949",
+            cover: "img/1984.webp",
+            quote: "\"Big Brother is watching you.\"",
+            rating: 5,
+            themes: ["Totalitarianism", "Privacy", "Historical Revisionism"],
+            analysis: "Orwell's concept of Newspeak remains chillingly relevant. The rats scene represents the ultimate destruction of personal autonomy.",
+            comments: [
+                {user: "David K.", date: "5 days ago", rating: 5, text: "More relevant than ever in the digital age. The ending shattered me."},
+                {user: "Sophia M.", date: "2 weeks ago", rating: 4, text: "Brilliant ideas though the pacing slows in middle sections."}
+            ]
+        },
+        pride: {
+            title: "Pride and Prejudice",
+            summary: "Jane Austen's timeless comedy of manners follows Elizabeth Bennet as she navigates societal expectations and romantic misunderstandings with the aloof Mr. Darcy. The novel critiques marriage economics and class rigidity in Regency England.",
+            genre: "Classic Romance",
+            pages: "279",
+            language: "English",
+            author: "Jane Austen",
+            published: "1813",
+            cover: "https://m.media-amazon.com/images/I/71Q1tPupKjL._SL1360_.jpg",
+            quote: "\"It is a truth universally acknowledged...\"",
+            rating: 4,
+            themes: ["Social Status", "Female Agency", "Moral Growth"],
+            analysis: "Austen's ironic narrative voice elevates the romance into social commentary. The gradual humanization of Darcy showcases masterful character development.",
+            comments: [
+                {user: "Clara B.", date: "3 days ago", rating: 5, text: "Elizabeth Bennet is literature's finest heroine. Witty and wonderful!"},
+                {user: "Oliver W.", date: "1 week ago", rating: 4, text: "Some dialogues feel dated, but the romance remains iconic."}
+            ]
+        },
+        mobydick: {
+            title: "Moby-Dick",
+            summary: "Herman Melville's epic follows Captain Ahab's monomaniacal quest for the white whale. Blending adventure with philosophical musings, it explores humanity's relationship with nature and the limits of obsession.",
+            genre: "Adventure Fiction",
+            pages: "635",
+            language: "English",
+            author: "Herman Melville",
+            published: "1851",
+            cover: "img/mobydickblog.jpg",
+            quote: "\"Call me Ishmael.\"",
+            rating: 4,
+            themes: ["Obsession", "Man vs Nature", "Existentialism"],
+            analysis: "Melville's encyclopedic chapters about whaling serve as a metaphor for human knowledge acquisition. The multicultural crew reflects 19th-century globalization.",
+            comments: [
+                {user: "Nathan P.", date: "4 days ago", rating: 5, text: "The Shakespearean tragedy of the high seas. Queequeg is unforgettable!"},
+                {user: "Grace L.", date: "10 days ago", rating: 3, text: "Brilliant but demanding - the technical chapters tested my patience."}
+            ]
+        },
+        sapiens: {
+        title: "Sapiens",
+        summary: "Yuval Noah Harari traces the cognitive, agricultural, and scientific revolutions that shaped modern humanity. The book challenges conventional historical narratives and asks fundamental questions about the human condition.",
+        genre: "Non-Fiction / History",
+        pages: "443",
+        language: "English",
+        author: "Yuval Noah Harari",
+        published: "2011",
+        cover: "img/sapiens.webp",
+        quote: "\"Homo sapiens rules the world because it is the only animal that can believe in things that exist purely in its own imagination.\"",
+        rating: 5,
+        themes: ["Human Evolution", "Culture", "Cognition"],
+        analysis: "Harari blends history and philosophy to explore how myths and cooperation have shaped civilization. A provocative take on humanity’s rise.",
+        comments: [
+            { user: "Liam J.", date: "3 days ago", rating: 5, text: "A mind-expanding read. Every chapter surprised me." },
+            { user: "Emma S.", date: "1 week ago", rating: 4, text: "Very insightful, though the tone gets preachy at times." }
+        ]
+    },
+    educated: {
+        title: "Educated",
+        summary: "Tara Westover recounts her journey from a survivalist, unschooled upbringing in rural Idaho to earning a PhD from Cambridge. The memoir explores identity, resilience, and the transformative power of education.",
+        genre: "Memoir",
+        pages: "334",
+        language: "English",
+        author: "Tara Westover",
+        published: "2018",
+        cover: "img/educated.webp",
+        quote: "\"You can love someone and still choose to say goodbye to them.\"",
+        rating: 5,
+        themes: ["Education", "Family", "Self-Discovery"],
+        analysis: "A powerful portrait of reclaiming agency. Westover's clear-eyed storytelling sheds light on both trauma and hope.",
+        comments: [
+            { user: "Isabella R.", date: "6 days ago", rating: 5, text: "Absolutely gripping. A story of incredible courage." },
+            { user: "James H.", date: "1 week ago", rating: 4, text: "Raw and real, though emotionally heavy at times." }
+        ]
+    },
+    lighthouse: {
+        title: "To the Lighthouse",
+        summary: "Virginia Woolf’s stream-of-consciousness masterpiece captures fleeting perceptions and inner lives during two visits to a family’s summer home. The novel meditates on time, art, and loss.",
+        genre: "Modernist Fiction",
+        pages: "209",
+        language: "English",
+        author: "Virginia Woolf",
+        published: "1927",
+        cover: "img/lighthouse.jpg",
+        quote: "\"What is the meaning of life? That was all — a simple question; one that tended to close in on one with years.\"",
+        rating: 4,
+        themes: ["Time", "Art", "Family"],
+        analysis: "Woolf's lyrical narrative style creates a sense of emotional depth and temporal fluidity. A landmark in modernist literature.",
+        comments: [
+            { user: "Amelia F.", date: "2 days ago", rating: 5, text: "Poetic and profound. Woolf is a genius." },
+            { user: "Henry D.", date: "5 days ago", rating: 3, text: "Beautiful but hard to follow at times." }
+        ]
+    },
+    mrsdalloway: {
+        title: "Mrs Dalloway",
+        summary: "A day in the life of Clarissa Dalloway unfolds through a stream-of-consciousness lens, interweaving her thoughts with those of a shell-shocked war veteran. Woolf examines identity, memory, and the fabric of urban life.",
+        genre: "Modernist Fiction",
+        pages: "194",
+        language: "English",
+        author: "Virginia Woolf",
+        published: "1925",
+        cover: "img/mrdolloway.jpg",
+        quote: "\"Mrs Dalloway said she would buy the flowers herself.\"",
+        rating: 4,
+        themes: ["Mental Health", "Time", "Societal Expectations"],
+        analysis: "Woolf collapses time and space in a single day, crafting a layered portrait of post-war disillusionment.",
+        comments: [
+            { user: "Charlotte K.", date: "3 days ago", rating: 4, text: "Haunting and lyrical. A masterpiece of interiority." },
+            { user: "Ethan M.", date: "1 week ago", rating: 4, text: "Deeply moving once you get into the rhythm of the prose." }
+        ]
+    },
+    midnightlibrary: {
+        title: "The Midnight Library",
+        summary: "Nora Seed finds herself in a metaphysical library between life and death, where each book contains a version of her life had she made different choices. The novel explores regret, mental health, and second chances.",
+        genre: "Speculative Fiction",
+        pages: "288",
+        language: "English",
+        author: "Matt Haig",
+        published: "2020",
+        cover: "img/midnightlibrary.jpg",
+        quote: "\"You don’t have to understand life. You just have to live it.\"",
+        rating: 4,
+        themes: ["Regret", "Mental Health", "Alternate Realities"],
+        analysis: "A touching and accessible exploration of possibility and self-worth, blending philosophy with storytelling.",
+        comments: [
+            { user: "Lily A.", date: "1 day ago", rating: 5, text: "Uplifting and thought-provoking. Loved the concept!" },
+            { user: "Noah S.", date: "4 days ago", rating: 4, text: "Some parts were predictable, but overall very inspiring." }
+        ]
+    },
+    circe: {
+        title: "Circe",
+        summary: "Madeline Miller reimagines the myth of Circe, daughter of Helios, as a tale of female empowerment and transformation. Exiled to a remote island, Circe finds her voice and power in solitude and magic.",
+        genre: "Mythological Fiction",
+        pages: "393",
+        language: "English",
+        author: "Madeline Miller",
+        published: "2018",
+        cover: "img/circe.png",
+        quote: "\"When I was born, the name for what I was did not exist.\"",
+        rating: 5,
+        themes: ["Feminism", "Power", "Identity"],
+        analysis: "Miller weaves lyrical prose with mythic grandeur. Circe becomes a symbol of strength and independence in a patriarchal world.",
+        comments: [
+            { user: "Zoe M.", date: "2 days ago", rating: 5, text: "Absolutely spellbinding. Circe’s journey is unforgettable." },
+            { user: "Ryan T.", date: "6 days ago", rating: 4, text: "A beautiful retelling. Loved the poetic writing." }
+        ]
+    }
+};
+
+    function renderRating(rating) {
+        let stars = '';
+        for (let i = 1; i <= 5; i++) {
+            stars += i <= rating ? '★' : '☆';
+        }
+        return `<div>${stars}</div><span>${rating}/5 Stars</span>`;
+    }
+
+    if (bookData[bookId]) {
+        const data = bookData[bookId];
+        document.title = `${data.title} Review | Literary Chronicle`;
+        document.querySelector('.section-title').textContent = data.title;
+        document.getElementById('summary').textContent = data.summary;
+        document.getElementById('author').textContent = data.author;
+        document.getElementById('published').textContent = data.published;
+        document.querySelector('.book-cover-large').style.backgroundImage = `url('${data.cover}')`;
+        document.querySelectorAll('.stat-item p')[0].textContent = data.genre;
+        document.querySelectorAll('.stat-item p')[1].textContent = data.pages;
+        document.querySelectorAll('.stat-item p')[2].textContent = data.language;
+        document.querySelector('.quote').textContent = data.quote;
+        document.getElementById('mainRating').innerHTML = renderRating(data.rating);
+        document.getElementById('analysis').textContent = data.analysis;
+        
+        const themesList = document.querySelector('.themes-list');
+        data.themes.forEach(theme => {
+            const li = document.createElement('li');
+            li.textContent = `• ${theme}`;
+            themesList.appendChild(li);
+        });
+
+        const commentsContainer = document.getElementById('commentsContainer');
+        data.comments.forEach(comment => {
+            const div = document.createElement('div');
+            div.className = 'comment';
+            div.innerHTML = `
+                <div class="comment-header">
+                    <div class="comment-avatar"></div>
+                    <div>
+                        <h4>${comment.user}</h4>
+                        <small>${comment.date}</small>
+                    </div>
+                </div>
+                <div class="rating-system">${renderRating(comment.rating)}</div>
+                <p>${comment.text}</p>
+            `;
+            commentsContainer.appendChild(div);
+        });
+    }
+
+    function setRating(r) {
+        userRating = r;
+        const stars = document.querySelectorAll('.star-rating .star');
+        stars.forEach((star, index) => {
+            star.textContent = index < r ? '★' : '☆';
+        });
+    }
+
+    function postComment(e) {
+        e.preventDefault();
+        const text = document.querySelector('textarea').value.trim();
+        if (!text || userRating === 0) return;
+
+        const comment = {
+            user: "New Reader",
+            date: "Just now",
+            rating: userRating,
+            text: text
+        };
+
+        const div = document.createElement('div');
+        div.className = 'comment';
+        div.innerHTML = `
+            <div class="comment-header">
+                <div class="comment-avatar"></div>
+                <div>
+                    <h4>${comment.user}</h4>
+                    <small>${comment.date}</small>
+                </div>
+            </div>
+            <div class="rating-system">${renderRating(comment.rating)}</div>
+            <p>${comment.text}</p>
+        `;
+
+        document.getElementById('commentsContainer').prepend(div);
+        document.querySelector('textarea').value = '';
+        userRating = 0;
+        document.querySelectorAll('.star-rating .star').forEach(star => {
+            star.textContent = '☆';
+        });
+    }
+</script>
 </body>
 </html>

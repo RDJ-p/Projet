@@ -1,171 +1,176 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Literary Vault | Book Reviews & Recommendations</title>
-    <link rel="stylesheet" href="blogcss.css">
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-</head>
-<body>
-    <header class="main-header">
-        <nav class="nav-container">
-            <a href="#" class="logo">The Literary Vault</a>
-            <nav class="main-nav">
-                <a href="#fiction">Fiction</a>
-                <a href="#nonfiction">Non-Fiction</a>
-                <a href="#classics">Classics</a>
-                <a href="#authors">Authors</a>
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>The Literary Vault | Book Reviews & Recommendations</title>
+        <link rel="stylesheet" href="blogcss.css">
+        <link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <header class="main-header">
+            <nav class="nav-container">
+                <a href="#" class="logo">The Literary Vault</a>
+                <nav class="main-nav">
+                    <a href="#fiction">Fiction</a>
+                    <a href="#nonfiction">Non-Fiction</a>
+                    <a href="#classics">Classics</a>
+                    <a href="#authors">Authors</a>
+                </nav>
             </nav>
-        </nav>
-    </header>
+        </header>
 
-    <section class="hero">
-        <div class="hero-content">
-            <h1 style="font-size: 3rem; margin-bottom: 1rem;">Timeless Words, Modern Perspectives</h1>
-            <p style="font-size: 1.2rem;">Curated literary selections for discerning readers</p>
-        </div>
-    </section>
-
-    <main class="container">
-        <section class="section" id="fiction">
-            <h2 class="section-title">Contemporary Masterpieces</h2>
-            <div class="book-grid">
-                <div class="book-card">
-                    <div class="book-cover" style="background-image: url('img/Thegreatgatsby.jpeg')"></div>
-                    <div class="book-info">
-                        <h3 class="book-title">The Great Gatsby</h3>
-                        <p class="book-author">F. Scott Fitzgerald</p>
-                        <p>Jazz Age tragedy of obsession and reinvention</p>
-                        <button class="btn">Read Analysis</button>
-                    </div>
-                </div>
-
-                <div class="book-card">
-                    <div class="book-cover" style="background-image: url('img/1984.webp')"></div>
-                    <div class="book-info">
-                        <h3 class="book-title">1984</h3>
-                        <p class="book-author">George Orwell</p>
-                        <p>Dystopian vision of totalitarian control</p>
-                        <button class="btn">Read Analysis</button>
-                    </div>
-                </div>
-
+        <section class="hero">
+            <div class="hero-content">
+                <h1 style="font-size: 3rem; margin-bottom: 1rem;">Timeless Words, Modern Perspectives</h1>
+                <p style="font-size: 1.2rem;">Curated literary selections for discerning readers</p>
             </div>
         </section>
 
-        <section class="section" id="nonfiction">
-            <h2 class="section-title">Essential Knowledge</h2>
-            <div class="book-grid">
-                <div class="book-card">
-                    <div class="book-cover" style="background-image: url('img/sapiens.webp')"></div>
-                    <div class="book-info">
-                        <h3 class="book-title">Sapiens</h3>
-                        <p class="book-author">Yuval Noah Harari</p>
-                        <p>Brief history of humankind</p>
-                        <button class="btn">Read Review</button>
-                    </div>
-                </div>
-
-                <div class="book-card">
-                    <div class="book-cover" style="background-image: url('img/educated.webp')"></div>
-                    <div class="book-info">
-                        <h3 class="book-title">Educated</h3>
-                        <p class="book-author">Tara Westover</p>
-                        <p>Memoir of radical self-reinvention</p>
-                        <button class="btn">Read Review</button>
-                    </div>
-                </div>
-
-            </div>
-        </section>
-
-        <section class="section" id="authors">
-            <h2 class="section-title">Author Spotlight: Virginia Woolf</h2>
-            <div class="featured-author">
-                <div class="author-image" style="background-image: url('img/virginiawoolf.webp')"></div>
-                <div>
-                    <h3 style="font-size: 2rem; margin-bottom: 1rem;">Modernist Pioneer</h3>
-                    <p style="margin-bottom: 1rem;">Exploring the works and legacy of one of the 20th century's most innovative writers...</p>
-                    <div class="book-grid">
-                        <div class="book-card">
-                            <div class="book-cover" style="background-image: url('img/lighthouse.jpg')"></div>
-                            <div class="book-info">
-                                <h3 class="book-title">To the Lighthouse</h3>
-                                <button class="btn">Explore</button>
-                            </div>
-                        </div>
-                        <div class="book-card">
-                            <div class="book-cover" style="background-image: url('img/mrdolloway.jpg')"></div>
-                            <div class="book-info">
-                                <h3 class="book-title">Mrs Dalloway</h3>
-                                <button class="btn">Explore</button>
-                            </div>
+        <main class="container">
+            <section class="section" id="fiction">
+                <h2 class="section-title">Contemporary Masterpieces</h2>
+                <div class="book-grid">
+                    <div class="book-card">
+                        <div class="book-cover" style="background-image: url('img/Thegreatgatsby.jpeg')"></div>
+                        <div class="book-info">
+                            <h3 class="book-title">The Great Gatsby</h3>
+                            <p class="book-author">F. Scott Fitzgerald</p>
+                            <p>Jazz Age tragedy of obsession and reinvention</p>
+                            <button class="btn" onclick="goToDetails('gatsby')">Read Analysis</button>
                         </div>
                     </div>
-                </div>
-            </div>
-        </section>
 
-        <section class="section" id="classics">
-            <h2 class="section-title">Timeless Classics</h2>
-            <div class="quote-section">
-                "Classics are books which, the more we think we know them through hearsay, the more original, unexpected, and innovative we find them when we actually read them." 
-                <br>- Italo Calvino
-            </div>
-            <div class="book-grid">
-                <div class="book-card">
-                    <div class="book-cover" style="background-image: url('https://m.media-amazon.com/images/I/71Q1tPupKjL._SL1360_.jpg')"></div>
-                    <div class="book-info">
-                        <h3 class="book-title">Pride and Prejudice</h3>
-                        <p class="book-author">Jane Austen</p>
-                        <button class="btn">Study Guide</button>
+                    <div class="book-card">
+                        <div class="book-cover" style="background-image: url('img/1984.webp')"></div>
+                        <div class="book-info">
+                            <h3 class="book-title">1984</h3>
+                            <p class="book-author">George Orwell</p>
+                            <p>Dystopian vision of totalitarian control</p>
+                            <button class="btn" onclick="goToDetails('1984')">Read Analysis</button>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <section class="section" id="nonfiction">
+                <h2 class="section-title">Essential Knowledge</h2>
+                <div class="book-grid">
+                    <div class="book-card">
+                        <div class="book-cover" style="background-image: url('img/sapiens.webp')"></div>
+                        <div class="book-info">
+                            <h3 class="book-title">Sapiens</h3>
+                            <p class="book-author">Yuval Noah Harari</p>
+                            <p>Brief history of humankind</p>
+                            <button class="btn" onclick="goToDetails('sapiens')">Read Review</button>
+                        </div>
+                    </div>
+
+                    <div class="book-card">
+                        <div class="book-cover" style="background-image: url('img/educated.webp')"></div>
+                        <div class="book-info">
+                            <h3 class="book-title">Educated</h3>
+                            <p class="book-author">Tara Westover</p>
+                            <p>Memoir of radical self-reinvention</p>
+                            <button class="btn" onclick="goToDetails('educated')">Read Review</button>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <section class="section" id="authors">
+                <h2 class="section-title">Author Spotlight: Virginia Woolf</h2>
+                <div class="featured-author">
+                    <div class="author-image" style="background-image: url('img/virginiawoolf.webp')"></div>
+                    <div>
+                        <h3 style="font-size: 2rem; margin-bottom: 1rem;">Modernist Pioneer</h3>
+                        <p style="margin-bottom: 1rem;">Exploring the works and legacy of one of the 20th century's most innovative writers...</p>
+                        <div class="book-grid">
+                            <div class="book-card">
+                                <div class="book-cover" style="background-image: url('img/lighthouse.jpg')"></div>
+                                <div class="book-info">
+                                    <h3 class="book-title">To the Lighthouse</h3>
+                                    <button class="btn" onclick="goToDetails('lighthouse')">Explore</button>
+                                </div>
+                            </div>
+                            <div class="book-card">
+                                <div class="book-cover" style="background-image: url('img/mrdolloway.jpg')"></div>
+                                <div class="book-info">
+                                    <h3 class="book-title">Mrs Dalloway</h3>
+                                    <button class="btn" onclick="goToDetails('mrsdalloway')">Explore</button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
+            </section>
 
-                <div class="book-card">
-                    <div class="book-cover" style="background-image: url('img/mobydickblog.jpg')"></div>
-                    <div class="book-info">
-                        <h3 class="book-title">Moby-Dick</h3>
-                        <p class="book-author">Herman Melville</p>
-                        <button class="btn">Study Guide</button>
+            <section class="section" id="classics">
+                <h2 class="section-title">Timeless Classics</h2>
+                <div class="quote-section">
+                    "Classics are books which, the more we think we know them through hearsay, the more original, unexpected, and innovative we find them when we actually read them." 
+                    <br>- Italo Calvino
+                </div>
+                <div class="book-grid">
+                    <div class="book-card">
+                        <div class="book-cover" style="background-image: url('https://m.media-amazon.com/images/I/71Q1tPupKjL._SL1360_.jpg')"></div>
+                        <div class="book-info">
+                            <h3 class="book-title">Pride and Prejudice</h3>
+                            <p class="book-author">Jane Austen</p>
+                            <button class="btn" onclick="goToDetails('pride')">Study Guide</button>
+                        </div>
+                    </div>
+
+                    <div class="book-card">
+                        <div class="book-cover" style="background-image: url('img/mobydickblog.jpg')"></div>
+                        <div class="book-info">
+                            <h3 class="book-title">Moby-Dick</h3>
+                            <p class="book-author">Herman Melville</p>
+                            <button class="btn" onclick="goToDetails('mobydick')">Study Guide</button>
+                        </div>
                     </div>
                 </div>
+            </section>
+
+            <div class="newsletter">
+                <h2 style="font-size: 2rem; margin-bottom: 1rem;">Join Our Reading Circle</h2>
+                <p style="margin-bottom: 1.5rem;">Receive monthly curated reading lists and exclusive essays</p>
+                <form>
+                    <input type="email" placeholder="Enter your email">
+                    <button type="submit" class="btn" style="background: white; color: var(--primary);">Subscribe</button>
+                </form>
             </div>
-        </section>
 
-        <div class="newsletter">
-            <h2 style="font-size: 2rem; margin-bottom: 1rem;">Join Our Reading Circle</h2>
-            <p style="margin-bottom: 1.5rem;">Receive monthly curated reading lists and exclusive essays</p>
-            <form>
-                <input type="email" placeholder="Enter your email">
-                <button type="submit" class="btn" style="background: white; color: var(--primary);">Subscribe</button>
-            </form>
-        </div>
+            <section class="section">
+                <h2 class="section-title">Curator's Selection</h2>
+                <div class="book-grid">
+                    <div class="book-card">
+                        <div class="book-cover" style="background-image: url('img/midnightlibrary.jpg')"></div>
+                        <div class="book-info">
+                            <h3 class="book-title">The Midnight Library</h3>
+                            <p class="book-author">Matt Haig</p>
+                            <button class="btn" onclick="goToDetails('midnightlibrary')">Read Review</button>
+                        </div>
+                    </div>
 
-        <section class="section">
-            <h2 class="section-title">Curator's Selection</h2>
-            <div class="book-grid">
-                <div class="book-card">
-                    <div class="book-cover" style="background-image: url('img/midnightlibrary.jpg')"></div>
-                    <div class="book-info">
-                        <h3 class="book-title">The Midnight Library</h3>
-                        <p class="book-author">Matt Haig</p>
-                        <button class="btn">Read Review</button>
+                    <div class="book-card">
+                        <div class="book-cover" style="background-image: url('img/circe.png')"></div>
+                        <div class="book-info">
+                            <h3 class="book-title">Circe</h3>
+                            <p class="book-author">Madeline Miller</p>
+                            <button class="btn" onclick="goToDetails('circe')">Read Review</button>
+                        </div>
                     </div>
                 </div>
-
-                <div class="book-card">
-                    <div class="book-cover" style="background-image: url('img/circe.png')"></div>
-                    <div class="book-info">
-                        <h3 class="book-title">Circe</h3>
-                        <p class="book-author">Madeline Miller</p>
-                        <button class="btn">Read Review</button>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-</body>
-<script></script>
-</html>
+            </section>
+        </main>
+    </body>
+    <script>
+        function goToDetails(bookId) {
+            window.location.href = `blogdetails.html?book=${bookId}`;
+        }
+    </script>
+    
+    </html>

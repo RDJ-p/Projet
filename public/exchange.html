@@ -1,136 +1,170 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Upload & Exchange | My Bookstore</title>
-    <link rel="stylesheet" href="Exchangecss.css">
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@300;400;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Upload & Exchange | My Bookstore</title>
+  <link rel="stylesheet" href="Exchangecss.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@300;400;700&display=swap" rel="stylesheet"/>
 </head>
 <body>
-    <nav class="navbar">
-        <a href="#" class="logo">
-            <img src="img/logo (2).png" alt="Bookshelf">
-        </a>
-        <ul>
-            <li><a href="main.html">Home</a></li>
-            <li><a href="blog.html">Blog</a></li>
-            <li><a href="product.html">Shop</a></li>
-        </ul>
-        <div class="nav-icons">
-            <a href="#"><img src="img/cart-icon.png" alt="Cart"></a>
-            <a href="#"><img src="img/search.png" alt="Search"></a>
-            <a href="#"><img src="img/more.png" alt="Menu"></a>
-        </div>
-    </nav>
-
-    <div class="container1">
-        <h2>📚 Upload or Exchange Books/Documents</h2>
-        <form action="/api/exchange" method="POST">
-            <div class="form-group">
-                <label for="upload-title">Book You Own</label>
-                <input type="text" id="upload-title" name="upload_title" required>
-            </div>
-        
-            <div class="form-group">
-                <label for="upload-type">Document Type</label>
-                <select id="upload-type" name="upload_type">
-                    <option value="book">Book</option>
-                    <option value="document">Document</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="exchange-title">Book You Want</label>
-                <input type="text" id="exchange-title" name="exchange_title" required>
-            </div>
-            <div class="form-group">
-                <label for="exchange-reason">Reason for Exchange</label>
-                <textarea id="exchange-reason" name="exchange_reason" rows="3" required></textarea>
-            </div>
-            <button type="submit">Submit Request →</button>
-        </form>
+  <nav class="navbar">
+    <a href="#" class="logo">
+      <img src="img/logo (2).png" alt="Bookshelf" />
+    </a>
+    <ul>
+      <li><a href="main.html">Home</a></li>
+      <li><a href="blog.html">Blog</a></li>
+      <li><a href="product.html">Shop</a></li>
+      <a href="exchangerequest.html"><img src="img/dashboard-icon.png" alt="Request" /></a>
+    </ul>
+    <div class="nav-icons">
+      <a href="#"><img src="img/cart-icon.png" alt="Cart" /></a>
+      <a href="#"><img src="img/search.png" alt="Search" /></a>
+      <a href="#"><img src="img/more.png" alt="Menu" /></a>
     </div>
-    <footer class="footer">
-        <div class="container">
-            <div class="row">
-                <div class="footer-col">
-                    <h4>Publishers</h4>
-                    <ul>
-                        <li><a href="#">Bestsellers</a></li>
-                        <li><a href="#">Interviews</a></li>
-                        <li><a href="#">Authors story</a></li>
-                        <li><a href="#">Book Fairs</a></li>
-                        <li><a href="#">Help (FAQ)</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h4>Get help</h4>
-                    <ul>
-                        <li><a href="#">Shipping</a></li>
-                        <li><a href="#">Returns</a></li>
-                        <li><a href="#">Order Status</a></li>
-                        <li><a href="#">Payment Options</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h4>Online Shop</h4>
-                    <ul>
-                        <li><a href="#">Books</a></li>
-                        <li><a href="#">Ebooks</a></li>
-                        <li><a href="#">Magazines</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h4>Follow Us</h4>
-                    <div class="social-links">
-                        <a href="#"><img src="img/icons8-facebook-48.png" alt="Facebook"></a>
-                        <a href="#"><img src="img/icons8-twitter-50.png" alt="Twitter"></a>
-                        <a href="#"><img src="img/icons8-instagram-48.png" alt="Instagram"></a>
-                        <a href="#"><img src="img/icons8-linkedin-50.png" alt="LinkedIn"></a>
-                    </div>
-                </div>
-            </div>
+  </nav>
+
+  <div class="container1">
+    <h2>📚 Upload or Exchange Books/Documents</h2>
+    <form action="/api/exchange" method="POST">
+      <div class="form-group">
+        <label for="upload-title">Book You Own</label>
+        <input type="text" id="upload-title" name="upload_title" required />
+      </div>
+
+      <div class="form-group">
+        <label for="upload-type">Document Type</label>
+        <select id="upload-type" name="upload_type">
+          <option value="book">Book</option>
+          <option value="document">Document</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="exchange-title">Book You Want</label>
+        <input type="text" id="exchange-title" name="exchange_title" required />
+      </div>
+
+      <div class="form-group">
+        <label for="exchange-reason">Reason for Exchange</label>
+        <textarea id="exchange-reason" name="exchange_reason" rows="3" required></textarea>
+      </div>
+
+      <button type="submit">Submit Request →</button>
+    </form>
+
+    <div id="match-response" class="match-response"></div>
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="row">
+        <div class="footer-col">
+          <h4>Publishers</h4>
+          <ul>
+            <li><a href="#">Bestsellers</a></li>
+            <li><a href="#">Interviews</a></li>
+            <li><a href="#">Authors story</a></li>
+            <li><a href="#">Book Fairs</a></li>
+            <li><a href="#">Help (FAQ)</a></li>
+          </ul>
         </div>
-        <p>© 2025 BOOKSHELF, ALL RIGHTS RESERVED</p>
-    </footer>
-    <script>
-      document.querySelector('form').addEventListener('submit', async (e) => {
-    e.preventDefault();
-    
-    const formData = {
+        <div class="footer-col">
+          <h4>Get help</h4>
+          <ul>
+            <li><a href="#">Shipping</a></li>
+            <li><a href="#">Returns</a></li>
+            <li><a href="#">Order Status</a></li>
+            <li><a href="#">Payment Options</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Online Shop</h4>
+          <ul>
+            <li><a href="#">Books</a></li>
+            <li><a href="#">Ebooks</a></li>
+            <li><a href="#">Magazines</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Follow Us</h4>
+          <div class="social-links">
+            <a href="#"><img src="img/icons8-facebook-48.png" alt="Facebook" /></a>
+            <a href="#"><img src="img/icons8-twitter-50.png" alt="Twitter" /></a>
+            <a href="#"><img src="img/icons8-instagram-48.png" alt="Instagram" /></a>
+            <a href="#"><img src="img/icons8-linkedin-50.png" alt="LinkedIn" /></a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p>© 2025 BOOKSHELF, ALL RIGHTS RESERVED</p>
+  </footer>
+
+  <script>
+    document.querySelector('form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const formData = {
         upload_title: document.getElementById('upload-title').value,
         upload_type: document.getElementById('upload-type').value,
         exchange_title: document.getElementById('exchange-title').value,
         exchange_reason: document.getElementById('exchange-reason').value
-    };
+      };
 
-    try {
+      const responseDiv = document.getElementById('match-response');
+      responseDiv.innerHTML = '';
+
+      try {
         const response = await fetch('/api/exchange', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${getCookie('token')}`
-            },
-            body: JSON.stringify(formData)
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${getCookie('token')}`
+          },
+          body: JSON.stringify(formData)
         });
 
         const result = await response.json();
-        if (response.ok) {
-            alert('Request submitted successfully!');
-            window.location.reload();
-        } else {
-            alert('Error: ' + (result.error || 'Failed to submit request'));
-        }
-    } catch (error) {
-        alert('Failed to submit: ' + error.message);
-    }
-});
 
-function getCookie(name) {
-    const value = `; ${document.cookie}`;
-    const parts = value.split(`; ${name}=`);
-    if (parts.length === 2) return parts.pop().split(';').shift();
-}
-</script>
+        if (response.ok) {
+          if (result.matches && result.matches.length > 0) {
+            showResponseBox('match-success', `
+              <p>🎉 <strong>Match Found!</strong></p>
+              <p>Someone is ready to exchange <strong>"${formData.upload_title}"</strong> for <strong>"${formData.exchange_title}"</strong>.</p>
+              <p>Check your <a href="/dashboard">dashboard</a> to view the match details!</p>
+            `);
+          } else {
+            showResponseBox('match-waiting', `
+              <p>✅ Your request was submitted successfully.</p>
+              <p>We'll notify you when a matching exchange becomes available.</p>
+            `);
+          }
+
+          document.querySelector('form').reset();
+        } else {
+          showResponseBox('match-error', `❌ Error: ${result.error || 'Failed to submit request'}`);
+        }
+      } catch (error) {
+        showResponseBox('match-error', `❌ Failed to submit: ${error.message}`);
+      }
+    });
+
+    function showResponseBox(type, htmlContent) {
+      const responseDiv = document.getElementById('match-response');
+      responseDiv.innerHTML = `
+        <div class="${type}">
+          <span class="close-btn" onclick="this.parentElement.style.display='none';">&times;</span>
+          ${htmlContent}
+        </div>
+      `;
+    }
+
+    function getCookie(name) {
+      const value = `; ${document.cookie}`;
+      const parts = value.split(`; ${name}=`);
+      if (parts.length === 2) return parts.pop().split(';').shift();
+    }
+  </script>
 </body>
 </html>

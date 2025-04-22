@@ -27,33 +27,53 @@ exports.createExchange = async (req, res) => {
     const insertedExchange = result.rows[0];
 
     const matchQuery = `
-      SELECT * FROM exchanges 
-      WHERE user_id != $1
-        AND title = $2
-        AND desired_title = $3;
+      SELECT e.*, u.first_name, u.last_name, u.email AS user_email
+      FROM exchanges e
+      JOIN users u ON e.user_id = u.id
+      WHERE e.user_id != $1
+        AND ((e.title = $2 AND e.desired_title = $3) OR (e.title = $3 AND e.desired_title = $2))
     `;
-    const matchValues = [userId, insertedExchange.desired_title, insertedExchange.title];
+  
+    const matchValues = [userId, insertedExchange.title, insertedExchange.desired_title];
     const matchResult = await pool.query(matchQuery, matchValues);
-
-    const reverseMatchQuery = `
-      SELECT * FROM exchanges 
-      WHERE user_id != $1
-        AND title = $2
-        AND desired_title = $3;
-    `;
-    const reverseMatchValues = [userId, insertedExchange.title, insertedExchange.desired_title];
-    const reverseMatchResult = await pool.query(reverseMatchQuery, reverseMatchValues);
-
-    const matches = [...matchResult.rows, ...reverseMatchResult.rows];
 
     res.status(201).json({
       success: true,
       exchange: insertedExchange,
-      matches: matches.length > 0 ? matches : null
+      matches: matchResult.rows.length > 0 ? matchResult.rows : null
     });
   } catch (err) {
     console.error('Exchange insert error:', err);
     res.status(500).json({ error: 'Internal server error' });
   }
-  
+};
+
+exports.getExchanges = async (req, res) => {
+  try {
+    const userId = req.user.id;
+    
+    const pendingRequests = await pool.query(
+      'SELECT * FROM exchanges WHERE user_id = $1', 
+      [userId]
+    );
+
+    const matchesQuery = `
+      SELECT e.*, u.first_name, u.last_name, u.email AS user_email 
+      FROM exchanges e
+      JOIN users u ON e.user_id = u.id
+      WHERE e.user_id != $1
+        AND e.desired_title IN (SELECT title FROM exchanges WHERE user_id = $1)
+        AND e.title IN (SELECT desired_title FROM exchanges WHERE user_id = $1)
+    `;
+    const matchesResult = await pool.query(matchesQuery, [userId]);
+
+    res.json({
+      success: true,
+      pending: pendingRequests.rows,
+      matches: matchesResult.rows
+    });
+  } catch (error) {
+    console.error('Error fetching exchanges:', error);
+    res.status(500).json({ success: false, error: 'Failed to fetch exchanges' });
+  }
 };
