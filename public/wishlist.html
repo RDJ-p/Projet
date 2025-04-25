@@ -12,6 +12,7 @@
             padding: 30px;
             color: #333;
             animation: bgFlow 20s ease infinite;
+            background-size: 200% 200%;
         }
 
         @keyframes bgFlow {
@@ -43,13 +44,14 @@
             background: white;
             border-radius: 12px;
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-            transition: transform 0.6s;
+            transition: transform 0.3s, box-shadow 0.3s;
             transform-style: preserve-3d;
             position: relative;
         }
 
         .wishlist-item:hover .book-card {
-            transform: rotateY(10deg);
+            transform: scale(1.03);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
         }
 
         .book-front {
@@ -58,8 +60,9 @@
         }
 
         .book-front img {
-            max-width: 160px;
-            height: auto;
+            width: 160px;
+            height: 240px;
+            object-fit: cover;
             border-radius: 8px;
             margin-bottom: 15px;
         }
@@ -67,6 +70,9 @@
         .book-front h3 {
             font-size: 1.5em;
             margin: 0;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         .book-front p {
@@ -103,42 +109,59 @@
     <script>
         const userId = 1;
 
-        function fetchWishlist() {
-            fetch(`/api/wishlist?userId=${userId}`, { credentials: 'include' })
-                .then(res => res.json())
-                .then(books => {
-                    const container = document.getElementById('wishlist-container');
-                    container.innerHTML = books.map(book => `
-                        <div class="wishlist-item">
-                            <div class="book-card">
-                                <div class="book-front">
-                                    <a href="book1.html?id=${book.id}">
-                                        <img src="${book.image}" alt="${book.title}">
-                                    </a>
-                                    <h3>
-                                        <a href="book1.html?id=${book.id}">${book.title}</a>
-                                    </h3>
-                                    <p>${book.author}</p>
-                                    <button onclick="removeFromWishlist(${book.id})">Remove</button>
-                                </div>
+        async function fetchWishlist() {
+            const container = document.getElementById('wishlist-container');
+            container.innerHTML = "<p style='text-align:center;'>Loading...</p>";
+
+            try {
+                const res = await fetch(`/api/wishlist?userId=${userId}`, { credentials: 'include' });
+                const books = await res.json();
+
+                if (books.length === 0) {
+                    container.innerHTML = "<p style='text-align:center;'>Your wishlist is empty. Start adding some books!</p>";
+                    return;
+                }
+
+                container.innerHTML = books.map(book => `
+                    <div class="wishlist-item">
+                        <div class="book-card">
+                            <div class="book-front">
+                                <a href="book1.html?id=${encodeURIComponent(book.id)}">
+                                    <img src="${book.image}" alt="${book.title}" loading="lazy">
+                                </a>
+                                <h3>
+                                    <a href="book1.html?id=${encodeURIComponent(book.id)}">${book.title}</a>
+                                </h3>
+                                <p>${book.author}</p>
+                                <button onclick="removeFromWishlist(${book.id})">Remove</button>
                             </div>
                         </div>
-                    `).join('');
-                });
+                    </div>
+                `).join('');
+            } catch (error) {
+                container.innerHTML = "<p style='text-align:center; color: red;'>Failed to load wishlist. Try again later.</p>";
+                console.error(error);
+            }
         }
 
-        function removeFromWishlist(bookId) {
-            fetch('/api/wishlist', {
-                method: 'DELETE',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ userId, bookId }),
-                credentials: 'include'
-            })
-            .then(res => res.json())
-            .then(data => {
+        async function removeFromWishlist(bookId) {
+            if (!confirm("Remove this book from your wishlist?")) return;
+
+            try {
+                const res = await fetch('/api/wishlist', {
+                    method: 'DELETE',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ userId, bookId }),
+                    credentials: 'include'
+                });
+
+                const data = await res.json();
                 if (data.success) fetchWishlist();
                 else alert('Failed to remove from wishlist');
-            });
+            } catch (error) {
+                alert('Something went wrong while removing the book.');
+                console.error(error);
+            }
         }
 
         document.addEventListener("DOMContentLoaded", fetchWishlist);

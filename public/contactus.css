@@ -209,7 +209,7 @@ address {
 .franchise {
     display: flex;
     justify-content: space-between;
-    gap: 100px;
+    gap: 60px;
     padding: 50px;
     margin: auto;
     max-width: 1200px; 
@@ -218,4 +218,9 @@ address {
 .franchise > div {
     flex: 1 1 calc(16.66% - 20px); 
     box-sizing: border-box;
+}
+.navbar ul li a.active {
+    font-weight: bold;
+    color: red;  
+    text-decoration: underline;
 }

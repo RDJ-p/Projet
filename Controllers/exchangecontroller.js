@@ -33,7 +33,7 @@ exports.createExchange = async (req, res) => {
       WHERE e.user_id != $1
         AND ((e.title = $2 AND e.desired_title = $3) OR (e.title = $3 AND e.desired_title = $2))
     `;
-  
+
     const matchValues = [userId, insertedExchange.title, insertedExchange.desired_title];
     const matchResult = await pool.query(matchQuery, matchValues);
 
@@ -43,7 +43,6 @@ exports.createExchange = async (req, res) => {
       matches: matchResult.rows.length > 0 ? matchResult.rows : null
     });
   } catch (err) {
-    console.error('Exchange insert error:', err);
     res.status(500).json({ error: 'Internal server error' });
   }
 };
@@ -51,9 +50,9 @@ exports.createExchange = async (req, res) => {
 exports.getExchanges = async (req, res) => {
   try {
     const userId = req.user.id;
-    
+
     const pendingRequests = await pool.query(
-      'SELECT * FROM exchanges WHERE user_id = $1', 
+      'SELECT * FROM exchanges WHERE user_id = $1',
       [userId]
     );
 
@@ -73,7 +72,78 @@ exports.getExchanges = async (req, res) => {
       matches: matchesResult.rows
     });
   } catch (error) {
-    console.error('Error fetching exchanges:', error);
     res.status(500).json({ success: false, error: 'Failed to fetch exchanges' });
+  }
+};
+
+exports.getMessages = async (req, res) => {
+  try {
+    const { exchangeId } = req.params;
+    const userId = req.user.id;
+
+    const exchangeInfo = await pool.query(
+      `SELECT * FROM exchanges WHERE id = $1`,
+      [exchangeId]
+    );
+
+    if (exchangeInfo.rows.length === 0) {
+      return res.status(404).json({ error: 'Exchange not found' });
+    }
+
+    const currentExchange = exchangeInfo.rows[0];
+
+    // Check if user is part of any reciprocal exchange
+    const isParticipant = await pool.query(
+      `SELECT 1 FROM exchanges 
+       WHERE user_id = $1 AND (
+         (title = $2 AND desired_title = $3) OR 
+         (title = $3 AND desired_title = $2)
+       )`,
+      [userId, currentExchange.title, currentExchange.desired_title]
+    );
+
+    if (currentExchange.user_id !== userId && isParticipant.rows.length === 0) {
+      return res.status(403).json({ error: 'Not authorized for this exchange' });
+    }
+
+    // Get messages from ALL reciprocal exchanges
+    const messages = await pool.query(
+      `SELECT m.*, u.first_name || ' ' || u.last_name as sender_name 
+       FROM messages m
+       JOIN users u ON m.sender_id = u.id
+       WHERE exchange_id IN (
+         SELECT id FROM exchanges 
+         WHERE (title = $1 AND desired_title = $2)
+            OR (title = $2 AND desired_title = $1)
+       )
+       ORDER BY timestamp ASC`,
+      [currentExchange.title, currentExchange.desired_title]
+    );
+
+    res.json(messages.rows);
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to fetch messages' });
+  }
+};
+
+exports.sendMessage = async (req, res) => {
+  try {
+    const { exchangeId } = req.params;
+    const { content } = req.body;
+    const userId = req.user.id;
+
+    if (!content) {
+      return res.status(400).json({ error: 'Message content required' });
+    }
+
+    await pool.query(
+      `INSERT INTO messages (exchange_id, sender_id, content)
+       VALUES ($1, $2, $3)`,
+      [exchangeId, userId, content.trim()]
+    );
+
+    res.json({ success: true });
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to send message' });
   }
 };

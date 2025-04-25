@@ -298,7 +298,8 @@ body {
     gap: 2rem;
     padding: 4rem 2rem;
     max-width: 1500px;
-    margin: 0 auto;
+    margin: 0 auto; 
+    text-align: center;
 }
 
 .book {
@@ -431,11 +432,12 @@ h3 {
 
 .fourplacement {
     display: flex;
-    flex-direction: row;   
-    justify-content: space-between;
-    padding: 40px 40px;
-    margin-top: 40px;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+    padding: 40px 20px;
+    margin: 40px auto;
+    max-width: 1400px;
 }
 
 .author-card {
@@ -446,6 +448,13 @@ h3 {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     width: 250px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.author-card {
+    flex: 1 1 250px;
+    min-width: 250px;
+    max-width: 300px;
+    padding: 20px;
+    margin: 10px;
 }
 p{
     font-size: 20px;
@@ -1328,9 +1337,9 @@ p { font-weight: 600; }
     }
     
     .author-card {
-        width: 200px;
+        flex: 1 1 30%;
     }
-    
+
     .author-card img {
         width: 200px;
         height: 200px;
@@ -1408,8 +1417,15 @@ p { font-weight: 600; }
     .image-composition2 {
         height: 300px;
     }
+.fourplacement {
+    flex-direction: column;
+    align-items: center;
 }
-
+.author-card {
+    width: 100%;
+    max-width: 400px;
+}
+}
 @media (max-width: 576px) {
     .header {
         font-size: 1.5rem;

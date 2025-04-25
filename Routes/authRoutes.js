@@ -12,6 +12,9 @@ router.post('/login', authController.login);
 router.get('/register', authMiddleware.isGuest, authController.showRegister);
 router.post('/register', authController.register);
 router.get('/logout', authController.logout);
+router.get('/verify/:token', authController.verifyEmail);
+router.post('/resend-verification', authController.resendVerification);
+router.post('/change-password', authMiddleware.isAuthenticated, authController.changePassword);
 
 
 router.get('/dashboard', 

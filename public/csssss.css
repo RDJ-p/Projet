@@ -641,3 +641,8 @@ h3 {
     color: white;
     cursor: not-allowed;
 }
+.navbar ul li a.active {
+    font-weight: bold;
+    color: red;  
+    text-decoration: underline;
+}
