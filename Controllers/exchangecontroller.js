@@ -92,7 +92,6 @@ exports.getMessages = async (req, res) => {
 
     const currentExchange = exchangeInfo.rows[0];
 
-    // Check if user is part of any reciprocal exchange
     const isParticipant = await pool.query(
       `SELECT 1 FROM exchanges 
        WHERE user_id = $1 AND (
@@ -106,7 +105,6 @@ exports.getMessages = async (req, res) => {
       return res.status(403).json({ error: 'Not authorized for this exchange' });
     }
 
-    // Get messages from ALL reciprocal exchanges
     const messages = await pool.query(
       `SELECT m.*, u.first_name || ' ' || u.last_name as sender_name 
        FROM messages m
