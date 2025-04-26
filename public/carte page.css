@@ -227,7 +227,6 @@ body {
 .checkout-button:hover {
     background-color: lightcoral; 
 }
-/* Add to carte page.css */
 .cart-items {
     width: 100%;
     max-width: 800px;
@@ -291,7 +290,6 @@ body {
     margin: 20px 0;
 }
 
-/* Add media query for mobile responsiveness */
 @media (max-width: 768px) {
     .cart-item {
         flex-wrap: wrap;
@@ -317,7 +315,6 @@ body {
         order: 2;
     }
 }
-/* Add to CSS */
 .cart-totals {
     width: 100%;
     max-width: 800px;
