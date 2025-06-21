@@ -1,153 +1,211 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register | Bookshelf</title>
-    <link rel="stylesheet" href="checkout.css">
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Checkout | Bookshelf</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&family=Cormorant:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="checkout.css" />
+  <script src="https://www.paypal.com/sdk/js?client-id=AT9BqNJTCTq5te_CuJKTenoHGQokRfxj49Tm8dm0b-demj7OWGbKMmCbEYOmklCmfBKwOLaIgbyTbbug"></script>
 </head>
 <body>
-    <nav class="navbar">
-        <a href="#" class="logo">
-            <img src="img/logo (2).png" alt="Bookshelf">
-        </a>
-        <ul>
-            <li><a href="main.html">Home</a></li>
-            <li><a href="product.html">Shop</a></li>
-        </ul>
-        <div class="nav-icons">
-            <a href="carte page.html"><img src="img/cart-icon.png" alt="Cart"></a>
-        </div>
-    </nav>
 
-    <section class="login-section">
-        <div class="login-container">
-            <h2>CHECKOUT</h2>
-            <form id="checkoutForm">
-                <div class="input-group">
-                    <label for="fullName">Full Name</label>
-                    <input type="text" id="fullName" required>
-                </div>
-                <div class="input-group">
-                    <label for="phone">Phone Number</label>
-                    <input type="tel" id="phone" required>
-                </div>
-                <div class="input-group">
-                    <label for="address">Address</label>
-                    <textarea id="address" required></textarea>
-                </div>
-                <div class="input-group">
-                    <label for="country">Country</label>
-                    <input type="text" id="country" required>
-                </div>
-                <div class="order-summary">
-                    <h3>Order Summary</h3>
-                    <div id="cartItems"></div>
-                    <div class="total">
-                        <span>Total:</span>
-                        <span id="totalAmount"></span>
-                    </div>
-                </div>
-                <button type="submit" class="btn-submit">PLACE ORDER</button>
-            </form>
+<header style="display: flex; align-items: center; justify-content: space-between; padding: 1rem;">
+  <div class="navbar-logo" style="flex: 1;">
+    <img src="img/Frame 3.png" alt="Logo">
+  </div>
+
+  <nav style="flex: 1; display: flex; justify-content: center; gap: 1.5rem; font-size: 1rem;">
+    <a href="main.html">Home</a>
+    <a href="product.html">Shop</a>
+    <a href="checkout.css" class="active" style="font-weight: bold; border-bottom: 2px solid #2e3d59; padding-bottom: 2px;">Checkout</a>
+    <a href="order.html">Orders</a>
+  </nav>
+
+  <div class="navbar-buttons" style="flex: 1; display: flex; justify-content: flex-end;">
+  </div>
+</header>
+
+
+
+
+ <section class="login-section">
+  <div class="visual-panel">
+    <img src="img/checkoutbanner (1).jpg" alt="Books promotion image">
+  </div>
+
+  <div class="login-container">
+    <h2>CHECKOUT</h2>
+    <form id="checkoutForm">
+      <div class="input-group">
+        <label for="fullName">Full Name</label>
+        <input type="text" id="fullName" required />
+      </div>
+      <div class="input-group">
+        <label for="phone">Phone Number</label>
+        <input type="tel" id="phone" required />
+      </div>
+      <div class="input-group">
+        <label for="address">Address</label>
+        <textarea id="address" required></textarea>
+      </div>
+      <div class="input-group">
+        <label for="country">Country</label>
+        <input type="text" id="country" required />
+      </div>
+      <div class="order-summary">
+        <h3>Order Summary</h3>
+        <div id="cartItems"></div>
+        <div class="total">
+          <span>Total:</span>
+          <span id="totalAmount">--</span>
         </div>
-    </section>        
-            </form>
+      </div>
+      <button type="submit" class="btn-submit">PLACE ORDER</button>
+    </form>
+    <div id="paypal-button-container" style="margin-top: 20px;"></div>
+  </div>
+</section>
+  <footer class="footer">
+    <div class="wrapper">
+      <div class="footer-left">
+        <div class="footer-logo">
+          <img src="img/Frame 3.png" alt="Bookshelf Logo" class="w-[120px] mb-2 bg-white p-1 rounded">
+          <div class="tagline">ESCAPE INTO STORIES</div>
         </div>
-    </section>
-    <footer class="footer">
-        <div class="container">
-            <div class="row">
-                <div class="footer-col">
-                    <h4>Publishers</h4>
-                    <ul>
-                        <li><a href="#">Bestsellers</a></li>
-                        <li><a href="#">Interviews</a></li>
-                        <li><a href="#">Authors story</a></li>
-                        <li><a href="#">Book Fairs</a></li>
-                        <li><a href="#">Help (FAQ)</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h4>Get help</h4>
-                    <ul>
-                        <li><a href="#">Shipping</a></li>
-                        <li><a href="#">Returns</a></li>
-                        <li><a href="#">Order Status</a></li>
-                        <li><a href="#">Payment Options</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h4>Online Shop</h4>
-                    <ul>
-                        <li><a href="#">Books</a></li>
-                        <li><a href="#">Ebooks</a></li>
-                        <li><a href="#">Magazines</a></li>
-                        <li><a href="#">Newspapers</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h4>Follow Us</h4>
-                    <div class="social-links">
-                        <a href="#"><img src="img/icons8-facebook-48.png" alt="Facebook"></a>
-                        <a href="#"><img src="img/icons8-twitter-50.png" alt="Twitter"></a>
-                        <a href="#"><img src="img/icons8-instagram-48.png" alt="Instagram"></a>
-                        <a href="#"><img src="img/icons8-linkedin-50.png" alt="LinkedIn"></a>
-                    </div>
-                </div>
-            </div>
+      </div>
+
+      <div class="footer-center">
+        <div class="footer-column">
+          <h4>PUBLISHERS</h4>
+          <a href="#">Best Seller</a>
+          <a href="#">Interviews</a>
+          <a href="#">Authors Stories</a>
+          <a href="#">Book Fires</a>
+          <a href="#">Help (FAQ)</a>
         </div>
-        <p>© 2025 BOOKSHELF, ALL RIGHTS RESERVED</p>
-    </footer>
-    <script>
-        document.getElementById("checkoutForm").addEventListener("submit", async function(e) {
-            e.preventDefault();
-    
-            const fullName = document.getElementById("fullName").value;
-            const phone = document.getElementById("phone").value;
-            const address = document.getElementById("address").value;
-            const country = document.getElementById("country").value;
-    
-            const cartResponse = await fetch('/api/cart', { credentials: 'include' });
-            const cartData = await cartResponse.json();
-    
-            if (!cartData || !cartData.items || cartData.items.length === 0) {
-                alert("Your cart is empty!");
-                return;
-            }
-    
-            const orderData = {
-                fullName,
-                phone,
-                address,
-                country,
-                items: cartData.items
-            };
-    
-            try {
-                const response = await fetch('/api/orders', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    credentials: 'include',
-                    body: JSON.stringify(orderData)
-                });
-    
-                if (!response.ok) {
-                    const errorData = await response.json();
-                    alert("Failed to place order: " + errorData.message);
-                    return;
-                }
-    
-                const data = await response.json();
-                alert("Order placed successfully!");
-                window.location.href = "order.html";
-            } catch (error) {
-                console.error("Error placing order:", error);
-                alert("An error occurred while placing the order.");
-            }
-        });
-    </script>
-    
+        <div class="footer-column">
+          <h4>GET HELP</h4>
+          <a href="#">Shipping</a>
+          <a href="#">Return</a>
+          <a href="#">Order Status</a>
+          <a href="#">Book Fires</a>
+          <a href="#">Payment Options</a>
+        </div>
+        <div class="footer-column">
+          <h4>ONLINE SHOPS</h4>
+          <a href="#">Books</a>
+          <a href="#">E-Books</a>
+          <a href="#">Magazine</a>
+        </div>
+      </div>
+
+      <div class="footer-right">
+        <div class="footer-socials">
+          <img src="img/icons8-instagram-48.png" alt="Instagram">
+          <img src="img/icons8-facebook-48.png" alt="Facebook">
+          <img src="img/icons8-twitter-50.png" alt="Twitter">
+        </div>
+        <div class="copyright">© 2025 BOOKSHELF, ALL RIGHTS RESERVED</div>
+      </div>
+    </div>
+  </footer>
+<script>
+  document.getElementById("checkoutForm").addEventListener("submit", async function (e) {
+    e.preventDefault();
+
+    const fullName = document.getElementById("fullName").value;
+    const phone = document.getElementById("phone").value;
+    const address = document.getElementById("address").value;
+    const country = document.getElementById("country").value;
+
+    try {
+      const cartResponse = await fetch("/api/cart", { credentials: "include" });
+      const cartData = await cartResponse.json();
+
+      if (!cartData || !cartData.items || cartData.items.length === 0) {
+        alert("Your cart is empty!");
+        return;
+      }
+
+      const cartItemsDiv = document.getElementById("cartItems");
+     cartItemsDiv.innerHTML = cartData.items.map(item => `
+  <div class="card">
+    <div class="card-image">
+      <img src="${item.image || 'img/placeholder.png'}" alt="${item.productName}" />
+    </div>
+    <div class="card-details">
+      <div class="card-name">${item.productName}</div>
+      <div class="card-price">$${item.price} × ${item.quantity}</div>
+    </div>
+  </div>
+`).join("");
+
+
+      let totalAmount = 0;
+      cartData.items.forEach(item => {
+        totalAmount += item.price * item.quantity;
+      });
+      document.getElementById("totalAmount").textContent = `$${totalAmount.toFixed(2)}`;
+
+      const orderData = {
+        fullName,
+        phone,
+        address,
+        country,
+        items: cartData.items,
+      };
+
+      const response = await fetch("/api/orders", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify(orderData),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        alert("Failed to place order: " + errorData.message);
+        return;
+      }
+
+      alert("Order placed successfully! Now complete payment with PayPal.");
+
+      paypal.Buttons({
+        createOrder: function (data, actions) {
+          return actions.order.create({
+            purchase_units: [{
+              amount: {
+                value: totalAmount.toFixed(2),
+              },
+            }],
+          });
+        },
+        onApprove: function (data, actions) {
+          return actions.order.capture().then(function (details) {
+            alert("Payment completed by " + details.payer.name.given_name);
+
+            fetch("/api/orders/paypal-confirmation", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              credentials: "include",
+              body: JSON.stringify({
+                paypalOrderId: details.id,
+                payerEmail: details.payer.email_address,
+              }),
+            });
+
+            window.location.href = "thank-you.html";
+          });
+        },
+      }).render("#paypal-button-container");
+
+    } catch (error) {
+      console.error("Checkout error:", error);
+      alert("Something went wrong. Please try again.");
+    }
+  });
+</script>
+
 </body>
 </html>

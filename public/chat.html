@@ -1,191 +1,405 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Exchange Chat</title>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --bg: #f7f7f7;
-      --white: #fff;
-      --accent: #486581;
-      --grey: #555;
-      --light-grey: #ddd;
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>BookBound Messenger</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Nunito&display=swap" rel="stylesheet">
+    <style>
+    * {
+      box-sizing: border-box;
     }
-
     body {
-      font-family: 'Cormorant Garamond', serif;
-      background-color: var(--bg);
       margin: 0;
-      padding: 2rem;
+      padding: 0;
+      font-family: 'Nunito', sans-serif;
+      background: linear-gradient(145deg, #f0ebe1, #e4ded5);
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
 
-    .container {
+    .chat-container {
+      width: 95%;
       max-width: 800px;
-      margin: 0 auto;
-      background: var(--white);
-      border-radius: 12px;
-      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.05);
-      padding: 2rem;
+      height: 90vh;
+      background: #ffffff;
+      border-radius: 16px;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.1);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      animation: fadeIn 0.6s ease-in-out;
     }
 
     .chat-header {
-      border-bottom: 2px solid var(--light-grey);
-      padding-bottom: 1rem;
-      margin-bottom: 2rem;
-    }
-
-    .chat-header h2 {
-      color: var(--accent);
-      margin: 0;
+      background: #2C3E50;
+      color: white;
+      padding: 1.2rem;
+      text-align: center;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      letter-spacing: 1px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.05);
     }
 
     .chat-messages {
-      height: 60vh;
+      flex: 1;
+      padding: 1rem 1.5rem;
       overflow-y: auto;
-      padding: 1rem;
-      background: #fafafa;
-      border-radius: 8px;
-      margin-bottom: 1rem;
+      background: #fdfcf9;
+      scroll-behavior: smooth;
     }
 
     .message {
-      margin-bottom: 1.5rem;
-      padding: 1rem;
-      border-radius: 8px;
-      background: var(--white);
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+      display: flex;
+      margin-bottom: 1rem;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: slideUp 0.3s ease forwards;
     }
 
     .message.sent {
-      background: #f1f7fa;
-      margin-left: 20%;
+      justify-content: flex-end;
     }
 
     .message.received {
-      margin-right: 20%;
+      justify-content: flex-start;
     }
 
-    .message-header {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 0.5rem;
-      font-size: 0.9rem;
-      color: var(--grey);
-    }
-
-    .message-input {
-      display: flex;
-      gap: 1rem;
-    }
-
-    textarea {
-      flex-grow: 1;
+    .bubble {
+      max-width: 75%;
       padding: 1rem;
-      border: 1px solid var(--light-grey);
-      border-radius: 8px;
-      resize: none;
-      font-family: inherit;
       font-size: 1rem;
+      border-radius: 16px;
+      line-height: 1.4;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+      animation: fadeIn 0.3s ease;
     }
 
-    button {
-      background: var(--accent);
+    .message.sent .bubble {
+      background-color: #2C3E50;
+      color: white;
+      border-bottom-right-radius: 6px;
+    }
+
+    .message.received .bubble {
+      background-color: #e8f0f4;
+      color: #2C3E50;
+      border-bottom-left-radius: 6px;
+    }
+
+    .chat-input {
+      display: flex;
+      padding: 1rem;
+      background: #fafafa;
+      border-top: 1px solid #ddd;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .chat-input input {
+      flex: 1;
+      padding: 0.8rem 1.2rem;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 24px;
+      outline: none;
+      transition: border-color 0.2s ease;
+    }
+
+    .chat-input input:focus {
+      border-color: #2C3E50;
+    }
+
+    .chat-input button {
+      background: #2C3E50;
       color: white;
       border: none;
-      padding: 0.8rem 1.5rem;
-      border-radius: 8px;
-      cursor: pointer;
+      padding: 0.8rem 1.2rem;
       font-size: 1rem;
-      transition: background 0.3s;
+      border-radius: 24px;
+      cursor: pointer;
+      transition: background 0.2s ease;
     }
 
-    button:hover {
-      background: #2e4a60;
+    .chat-input button:hover {
+      background: #1b2a38;
+    }
+
+    .upload-label {
+      font-size: 1.2rem;
+      cursor: pointer;
+    }
+
+    .preview-container {
+      display: flex;
+      align-items: center;
+      background: #f0f0f0;
+      padding: 8px 12px;
+      margin: 0 1rem 1rem;
+      border-radius: 12px;
+      max-width: 320px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+      gap: 10px;
+    }
+
+    .preview-container img {
+      width: 60px;
+      height: 60px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+
+    .preview-container button {
+      background: none;
+      border: none;
+      font-size: 1.2rem;
+      cursor: pointer;
+      color: #c0392b;
+    }
+
+    #report-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.6);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    #report-modal .modal-content {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      max-width: 400px;
+      width: 90%;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    @keyframes slideUp {
+      to { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <div class="chat-header">
-      <h2>Exchange Chat</h2>
-      <p id="exchange-details"></p>
-    </div>
-    
+  <div class="chat-container">
+    <div class="chat-header">📚 BookBound Messenger</div>
     <div class="chat-messages" id="chat-messages"></div>
-    
-    <div class="message-input">
-      <textarea id="message-input" placeholder="Type your message..." rows="3"></textarea>
-      <button onclick="sendMessage()">Send</button>
+<div class="chat-input">
+  <input id="message-input" type="text" placeholder="Write your thoughts..." />
+
+  <label class="upload-label" for="image-input">
+    📎
+    <input id="image-input" type="file" accept="image/*" style="display: none;" />
+  </label>
+
+  <button id="send-btn" onclick="sendMessage()">Send</button>
+</div>
+
+<div id="image-preview-container" class="preview-container" style="display: none;">
+  <img id="image-preview" src="" alt="preview" />
+  <button onclick="clearImagePreview()">✖</button>
+</div>
+
+  </div>
+
+  <div id="report-modal">
+    <div class="modal-content">
+      <h3 style="margin-bottom: 10px;">Report Message</h3>
+      <p style="margin-bottom: 10px;">Why are you reporting this message?</p>
+      <select id="report-reason" style="width: 100%; padding: 8px; margin-bottom: 10px;">
+        <option value="" disabled selected>Select a reason</option>
+        <option value="Harassment">Harassment</option>
+        <option value="Spam">Spam</option>
+        <option value="Hate speech">Hate speech</option>
+        <option value="Inappropriate content">Inappropriate content</option>
+        <option value="Other">Other (please specify below)</option>
+      </select>
+      <textarea id="report-custom" style="width: 100%; padding: 8px; display: none;" rows="3" placeholder="Write your reason..."></textarea>
+      <div style="margin-top: 10px; text-align: right;">
+        <button onclick="submitReport()" style="margin-right: 8px; padding: 8px 12px; background: #2C3E50; color: white; border: none; border-radius: 6px;">Submit</button>
+        <button onclick="closeReportModal()" style="padding: 8px 12px;">Cancel</button>
+      </div>
     </div>
   </div>
 
-  <script>
-    const exchangeId = new URLSearchParams(window.location.search).get('exchangeId');
-    
-    async function loadMessages() {
-      try {
-        const response = await fetch(`/api/exchange/${exchangeId}/messages`, {
-          headers: { Authorization: `Bearer ${getCookie('token')}` }
-        });
-        const messages = await response.json();
-        
-        const messagesContainer = document.getElementById('chat-messages');
-        messagesContainer.innerHTML = messages.map(msg => `
-          <div class="message ${msg.sender_id === currentUserId() ? 'sent' : 'received'}">
-            <div class="message-header">
-              <span>${msg.sender_name}</span>
-              <span>${new Date(msg.timestamp).toLocaleString()}</span>
-            </div>
-            <div>${msg.content}</div>
+<script>
+  const proposalId = new URLSearchParams(window.location.search).get('proposalId');
+  let currentReportMessageId = null;
+
+  async function loadMessages() {
+    const res = await fetch(`/api/chat/proposals/${proposalId}/messages`, {
+  headers: { Authorization: `Bearer ${getCookie('token')}` }
+});
+const { messages, partnerName } = await res.json();
+document.querySelector('.chat-header').innerText = ` Chat with ${partnerName}`;
+
+    const container = document.getElementById('chat-messages');
+    const currentUserId = getCurrentUserId();
+
+    container.innerHTML = messages.map((m, index) => {
+      const time = new Date(m.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+      const isOwnMessage = m.sender_id === currentUserId;
+      return `
+        <div class="message ${isOwnMessage ? 'sent' : 'received'}" style="animation-delay: ${index * 0.05}s">
+          <div class="bubble">
+            ${m.content ? `<div>${m.content}</div>` : ''}
+            ${m.image_url ? `<img src="${m.image_url}" style="max-width: 100%; margin-top: 8px; border-radius: 12px;" />` : ''}
+            <div style="font-size: 0.75rem; margin-top: 6px; text-align: right; opacity: 0.6;">${time}</div>
+            ${isOwnMessage 
+              ? `<button onclick="deleteMessage(${m.id})" style="font-size: 0.7rem; color: #e74c3c; background: none; border: none; margin-top: 4px; cursor: pointer;"> Delete</button>` 
+              : `<button onclick="reportMessage(${m.id})" style="font-size: 0.7rem; color: #c0392b; background: none; border: none; margin-top: 4px; cursor: pointer;">🚩 Report</button>`}
           </div>
-        `).join('');
-        
-        messagesContainer.scrollTop = messagesContainer.scrollHeight;
-      } catch (error) {
-        console.error('Error loading messages:', error);
-      }
+        </div>
+      `;
+    }).join('');
+
+    container.scrollTop = container.scrollHeight;
+  }
+
+ async function sendMessage() {
+  const input = document.getElementById('message-input');
+  const imageInput = document.getElementById('image-input');
+  const content = input.value.trim();
+  const imageFile = imageInput?.files?.[0];
+
+  if (!content && !imageFile) return;
+
+  const formData = new FormData();
+  if (content) formData.append('content', content);
+  if (imageFile) formData.append('image', imageFile);
+
+  await fetch(`/api/chat/proposals/${proposalId}/messages`, {
+    method: 'POST',
+    headers: {
+      'Authorization': `Bearer ${getCookie('token')}`
+    },
+    body: formData
+  });
+
+  input.value = '';
+  if (imageInput) imageInput.value = '';
+  loadMessages();
+}
+
+async function deleteMessage(messageId) {
+  if (!confirm("Are you sure you want to delete this message?")) return;
+
+  const res = await fetch(`/api/chat/messages/${messageId}`, {
+    method: 'DELETE',
+    headers: {
+      'Authorization': `Bearer ${getCookie('token')}`
     }
+  });
 
-    async function sendMessage() {
-      const messageInput = document.getElementById('message-input');
-      const content = messageInput.value.trim();
-      
-      if (!content) return;
-
-      try {
-        await fetch(`/api/exchange/${exchangeId}/messages`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${getCookie('token')}`
-          },
-          body: JSON.stringify({ content })
-        });
-        
-        messageInput.value = '';
-        loadMessages();
-      } catch (error) {
-        console.error('Error sending message:', error);
-      }
-    }
-
-    function getCookie(name) {
-      const value = `; ${document.cookie}`;
-      const parts = value.split(`; ${name}=`);
-      if (parts.length === 2) return parts.pop().split(';').shift();
-    }
-
-    function currentUserId() {
-      const token = getCookie('token');
-      if (!token) return null;
-      const payload = JSON.parse(atob(token.split('.')[1]));
-      return payload.id;
-    }
-
+  if (res.ok) {
     loadMessages();
-    setInterval(loadMessages, 5000);
-  </script>
+  } else {
+    alert("Failed to delete message.");
+  }
+}
+
+function reportMessage(messageId) {
+  currentReportMessageId = messageId;
+  document.getElementById('report-modal').style.display = 'flex';
+}
+
+function closeReportModal() {
+  document.getElementById('report-modal').style.display = 'none';
+  document.getElementById('report-reason').value = '';
+  document.getElementById('report-custom').value = '';
+  document.getElementById('report-custom').style.display = 'none';
+}
+
+document.getElementById('report-reason').addEventListener('change', function () {
+  const isOther = this.value === 'Other';
+  document.getElementById('report-custom').style.display = isOther ? 'block' : 'none';
+});
+
+async function submitReport() {
+  const reasonSelect = document.getElementById('report-reason');
+  const custom = document.getElementById('report-custom').value.trim();
+  const selected = reasonSelect.value;
+
+  let reason = selected;
+  if (selected === 'Other') {
+    if (!custom) {
+      alert("Please provide a reason.");
+      return;
+    }
+    reason = custom;
+  }
+
+  const res = await fetch(`/api/chat/messages/${currentReportMessageId}/report`, {
+    method: 'POST',
+    headers: {
+      'Authorization': `Bearer ${getCookie('token')}`,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ reason })
+  });
+
+  if (res.ok) {
+    alert("Message reported. Thank you.");
+    closeReportModal();
+  } else {
+    alert("Failed to report message.");
+  }
+}
+
+function getCookie(name) {
+  const value = `; ${document.cookie}`;
+  const parts = value.split(`; ${name}=`);
+  if (parts.length === 2) return parts.pop().split(';').shift();
+}
+
+function getCurrentUserId() {
+  const token = getCookie('token');
+  if (!token) return null;
+  try {
+    return JSON.parse(atob(token.split('.')[1])).id;
+  } catch {
+    return null;
+  }
+}
+
+loadMessages();
+setInterval(loadMessages, 5000);
+
+if (proposal?.status === 'completed') {
+  document.querySelector('.chat-input input[type="text"]').disabled = true;
+  document.querySelector('.chat-input input[type="text"]').placeholder = "Exchange completed.";
+  document.querySelector('.chat-input button').disabled = true;
+}
+document.getElementById('image-input').addEventListener('change', function () {
+  const file = this.files[0];
+  if (!file) return;
+
+  const reader = new FileReader();
+  reader.onload = function (e) {
+    document.getElementById('image-preview').src = e.target.result;
+    document.getElementById('image-preview-container').style.display = 'flex';
+  };
+  reader.readAsDataURL(file);
+});
+
+function clearImagePreview() {
+  const imageInput = document.getElementById('image-input');
+  imageInput.value = '';
+  document.getElementById('image-preview-container').style.display = 'none';
+}
+
+</script>
+
 </body>
 </html>

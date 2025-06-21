@@ -1,176 +1,289 @@
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>The Literary Vault | Book Reviews & Recommendations</title>
-        <link rel="stylesheet" href="blogcss.css">
-        <link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    </head>
-    <body>
-        <header class="main-header">
-            <nav class="nav-container">
-                <a href="" class="logo">The Literary Vault</a>
-                <nav class="main-nav">
-                    <a href="#fiction">Fiction</a>
-                    <a href="#nonfiction">Non-Fiction</a>
-                    <a href="#classics">Classics</a>
-                    <a href="#authors">Authors</a>
-                </nav>
-            </nav>
-        </header>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>The Literary Vault | Book Reviews & Recommendations</title>
+  <link rel="stylesheet" href="blogcss.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    .post-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+    .post-card {
+      border: 1px solid #ddd;
+      padding: 1rem;
+      border-radius: 8px;
+      background: white;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .post-card h3 {
+      margin-bottom: 0.5rem;
+    }
+    .post-card p {
+      font-size: 0.95rem;
+    }
+    .book-cover {
+      width: 100%;
+      height: 200px;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      border-radius: 6px;
+      margin-bottom: 10px;
+    }
+    .typewriter {
+  display: inline-block;
+  overflow: hidden;
+  border-right: 2px solid #333; 
+  white-space: nowrap;
+  margin: 0 auto;
+  letter-spacing: 0.05em;
+  animation: typing 4s steps(35, end), blink 0.75s step-end infinite;
+  font-size: 3rem;
+}
 
-        <section class="hero">
-            <div class="hero-content">
-                <h1 style="font-size: 3rem; margin-bottom: 1rem;">Timeless Words, Modern Perspectives</h1>
-                <p style="font-size: 1.2rem;">Curated literary selections for discerning readers</p>
-            </div>
-        </section>
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
 
-        <main class="container">
-            <section class="section" id="fiction">
-                <h2 class="section-title">Contemporary Masterpieces</h2>
-                <div class="book-grid">
-                    <div class="book-card">
-                        <div class="book-cover" style="background-image: url('img/Thegreatgatsby.jpeg')"></div>
-                        <div class="book-info">
-                            <h3 class="book-title">The Great Gatsby</h3>
-                            <p class="book-author">F. Scott Fitzgerald</p>
-                            <p>Jazz Age tragedy of obsession and reinvention</p>
-                            <button class="btn" onclick="goToDetails('gatsby')">Read Analysis</button>
-                        </div>
-                    </div>
+@keyframes blink {
+  from, to { border-color: transparent }
+  50% { border-color: #333 }
+}
 
-                    <div class="book-card">
-                        <div class="book-cover" style="background-image: url('img/1984.webp')"></div>
-                        <div class="book-info">
-                            <h3 class="book-title">1984</h3>
-                            <p class="book-author">George Orwell</p>
-                            <p>Dystopian vision of totalitarian control</p>
-                            <button class="btn" onclick="goToDetails('1984')">Read Analysis</button>
-                        </div>
-                    </div>
+  </style>
+</head>
+<body>
+  <header class="main-header">
+    <nav class="nav-container">
+      <a href="" class="logo">The Literary Vault</a>
+      <nav class="main-nav">
+        <a href="main.html">Home</a>
+        <a href="/profile.html">My Posts</a>
+        <a href="/favorites.html" style="font-weight: bold; color: #2C3E50; border-bottom: 2px solid #2C3E50;">Blog</a>
+        <a href="/logout">Newsletter</a>
+      </nav>
+    </nav>
+  </header>
 
+  <section class="hero">
+    <div class="hero-content">
+      <h1 class="typewriter">Timeless Words, Modern Perspectives</h1>
+      <p style="font-size: 1.2rem;">Curated literary selections for discerning readers seeking timeless insight.</p>
+    </div>
+  </section>
+
+  <div style="text-align:center; margin-top: 2rem;">
+    <input type="text" id="searchInput" placeholder="Search blog posts..." style="padding: 10px; width: 80%; max-width: 400px;">
+  </div>
+
+  <div style="text-align:center; margin-top: 2rem;">
+    <button class="btn" onclick="togglePostForm()">+ Add a Post</button>
+  </div>
+
+  <div id="postForm" style="display:none; margin: 2rem auto; max-width: 600px;">
+    <h2>Create a Blog Post</h2>
+    <form onsubmit="submitPost(event)">
+      <input type="text" id="postTitle" placeholder="Post Title" required style="width:100%; padding:10px; margin-bottom:10px;">
+      <textarea id="postContent" placeholder="Your content..." rows="6" required style="width:100%; padding:10px;"></textarea>
+      <h3>Book Information</h3>
+      <input type="text" id="bookTitle" placeholder="Book Title" required style="width:100%; padding:10px; margin-bottom:10px;">
+      <input type="text" id="bookAuthor" placeholder="Author" required style="width:100%; padding:10px; margin-bottom:10px;">
+      <input type="text" id="bookGenre" placeholder="Genre" required style="width:100%; padding:10px; margin-bottom:10px;">
+      <input type="text" id="bookLanguage" placeholder="Language" required style="width:100%; padding:10px; margin-bottom:10px;">
+      <input type="number" id="bookPages" placeholder="Pages" required style="width:100%; padding:10px; margin-bottom:10px;">
+      <input type="text" id="bookPublished" placeholder="Published" required style="width:100%; padding:10px; margin-bottom:10px;">
+      <textarea id="bookSummary" placeholder="Book Summary" required style="width:100%; padding:10px; margin-bottom:10px;"></textarea>
+      <input type="text" id="bookQuote" placeholder="Favorite Quote" required style="width:100%; padding:10px; margin-bottom:10px;">
+      <input type="text" id="bookCover" placeholder="Cover Image URL" required style="width:100%; padding:10px; margin-bottom:10px;">
+      <button type="submit" class="btn" style="margin-top:10px;">Submit Post</button>
+    </form>
+    <p id="postMessage" style="margin-top: 10px;"></p>
+  </div>
+
+  <main class="container" id="book-sections">
+  </main>
+
+  <div class="newsletter">
+    <h2 style="font-size: 2rem; margin-bottom: 1rem;">Join Our Reading Circle</h2>
+    <p style="margin-bottom: 1.5rem;">Receive monthly curated reading lists and exclusive essays</p>
+    <form>
+      <input type="email" placeholder="Enter your email" required/>
+      <button type="submit" class="btn" style="background: white; color: var(--primary);">Subscribe</button>
+    </form>
+  </div>
+
+  <script>
+    function goToDetails(bookId) {
+      window.location.href = `blogdetails.html?book=${bookId}`;
+    }
+
+    function formatSectionTitle(key) {
+      const map = {
+        fiction: "Contemporary Masterpieces",
+        nonfiction: "Essential Knowledge",
+        classics: "Timeless Classics",
+        authors: "Author Spotlight",
+        featured: "Curator's Selection"
+      };
+      return map[key] || key;
+    }
+
+    function truncate(text, maxLength) {
+      return text.length > maxLength ? text.slice(0, maxLength) + '...' : text;
+    }
+
+    function togglePostForm() {
+      const form = document.getElementById('postForm');
+      form.style.display = form.style.display === 'none' ? 'block' : 'none';
+    }
+
+    async function submitPost(e) {
+      e.preventDefault();
+      const title = document.getElementById('postTitle').value.trim();
+      const content = document.getElementById('postContent').value.trim();
+      const bookMetadata = {
+        book_title: document.getElementById('bookTitle').value.trim(),
+        author: document.getElementById('bookAuthor').value.trim(),
+        genre: document.getElementById('bookGenre').value.trim(),
+        language: document.getElementById('bookLanguage').value.trim(),
+        pages: document.getElementById('bookPages').value.trim(),
+        published: document.getElementById('bookPublished').value.trim(),
+        summary: document.getElementById('bookSummary').value.trim(),
+        quote: document.getElementById('bookQuote').value.trim(),
+        cover: document.getElementById('bookCover').value.trim()
+      };
+      try {
+        const res = await fetch('/api/posts', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          credentials: 'include',
+          body: JSON.stringify({ title, content, ...bookMetadata })
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error || 'Something went wrong');
+        document.getElementById('postMessage').textContent = `✅ Post created: ${data.title}`;
+        e.target.reset();
+        loadPosts();
+      } catch (err) {
+        document.getElementById('postMessage').textContent = `❌ Error: ${err.message}`;
+      }
+    }
+
+    let allPosts = [];
+
+function renderPosts(posts) {
+  const section = document.getElementById('latest-posts-section');
+  const grid = section.querySelector('.post-grid');
+  const defaultCover = 'https://res.cloudinary.com/demo/image/upload/sample.jpg'; 
+
+  grid.innerHTML = posts.map(post => {
+const cover = post.cover ? post.cover : defaultCover;
+
+
+    return `
+      <div class="post-card">
+        <div class="book-cover" style="background-image: url('${cover}')"></div>
+        <h3>${post.title}</h3>
+        <p>${truncate(post.content, 100)}</p>
+        <button class="btn" onclick="window.location.href='blogdetails.html?post=${post.id}'">Read More</button>
+      </div>
+    `;
+  }).join('');
+}
+
+
+
+    function filterPosts(posts, query) {
+      const lower = query.toLowerCase();
+return posts.filter(post =>
+  (post.title && post.title.toLowerCase().includes(lower)) ||
+  (post.content && post.content.toLowerCase().includes(lower)) ||
+  (post.book_title && post.book_title.toLowerCase().includes(lower))
+);
+
+    }
+
+    async function loadPosts() {
+      const res = await fetch('/api/posts');
+      const posts = await res.json();
+      allPosts = posts;
+
+      const container = document.getElementById('book-sections');
+      const oldSection = document.getElementById('latest-posts-section');
+      if (oldSection) container.removeChild(oldSection);
+
+      const section = document.createElement('section');
+      section.className = 'section';
+      section.id = 'latest-posts-section';
+      section.innerHTML = `
+        <h2 class="section-title">Latest Posts</h2>
+        <div class="post-grid"></div>
+      `;
+      container.appendChild(section);
+
+      renderPosts(posts);
+    }
+
+    document.getElementById('searchInput').addEventListener('input', (e) => {
+      const filtered = filterPosts(allPosts, e.target.value);
+      renderPosts(filtered);
+    });
+
+    async function loadBooks() {
+      const res = await fetch('/api/books/blog');
+      const books = await res.json();
+
+      const sections = {
+        fiction: [],
+        nonfiction: [],
+        classics: [],
+        authors: [],
+        featured: []
+      };
+
+      books.forEach(book => {
+        const genre = (book.genre || '').toLowerCase();
+        if (genre.includes('fiction') && !genre.includes('non')) sections.fiction.push(book);
+        else if (genre.includes('non-fiction') || genre.includes('memoir')) sections.nonfiction.push(book);
+        else if (genre.includes('classic')) sections.classics.push(book);
+        else if ((book.author || '').toLowerCase().includes('woolf')) sections.authors.push(book);
+        else sections.featured.push(book);
+      });
+
+      const container = document.getElementById('book-sections');
+      for (const [sectionId, bookList] of Object.entries(sections)) {
+        if (!bookList.length) continue;
+        const section = document.createElement('section');
+        section.className = 'section';
+        section.id = sectionId;
+        section.innerHTML = `
+          <h2 class="section-title">${formatSectionTitle(sectionId)}</h2>
+          <div class="book-grid">
+            ${bookList.map(book => `
+              <div class="book-card">
+                <div class="book-cover" style="background-image: url('${book.cover}')"></div>
+                <div class="book-info">
+                  <h3 class="book-title">${book.title}</h3>
+                  <p class="book-author">${book.author}</p>
+                  <p>${truncate(book.summary || '', 80)}</p>
+                  <button class="btn" onclick="goToDetails('${book.id}')">Read More</button>
                 </div>
-            </section>
+              </div>
+            `).join('')}
+          </div>
+        `;
+        container.appendChild(section);
+      }
+    }
 
-            <section class="section" id="nonfiction">
-                <h2 class="section-title">Essential Knowledge</h2>
-                <div class="book-grid">
-                    <div class="book-card">
-                        <div class="book-cover" style="background-image: url('img/sapiens.webp')"></div>
-                        <div class="book-info">
-                            <h3 class="book-title">Sapiens</h3>
-                            <p class="book-author">Yuval Noah Harari</p>
-                            <p>Brief history of humankind</p>
-                            <button class="btn" onclick="goToDetails('sapiens')">Read Review</button>
-                        </div>
-                    </div>
-
-                    <div class="book-card">
-                        <div class="book-cover" style="background-image: url('img/educated.webp')"></div>
-                        <div class="book-info">
-                            <h3 class="book-title">Educated</h3>
-                            <p class="book-author">Tara Westover</p>
-                            <p>Memoir of radical self-reinvention</p>
-                            <button class="btn" onclick="goToDetails('educated')">Read Review</button>
-                        </div>
-                    </div>
-
-                </div>
-            </section>
-
-            <section class="section" id="authors">
-                <h2 class="section-title">Author Spotlight: Virginia Woolf</h2>
-                <div class="featured-author">
-                    <div class="author-image" style="background-image: url('img/virginiawoolf.webp')"></div>
-                    <div>
-                        <h3 style="font-size: 2rem; margin-bottom: 1rem;">Modernist Pioneer</h3>
-                        <p style="margin-bottom: 1rem;">Exploring the works and legacy of one of the 20th century's most innovative writers...</p>
-                        <div class="book-grid">
-                            <div class="book-card">
-                                <div class="book-cover" style="background-image: url('img/lighthouse.jpg')"></div>
-                                <div class="book-info">
-                                    <h3 class="book-title">To the Lighthouse</h3>
-                                    <button class="btn" onclick="goToDetails('lighthouse')">Explore</button>
-                                </div>
-                            </div>
-                            <div class="book-card">
-                                <div class="book-cover" style="background-image: url('img/mrdolloway.jpg')"></div>
-                                <div class="book-info">
-                                    <h3 class="book-title">Mrs Dalloway</h3>
-                                    <button class="btn" onclick="goToDetails('mrsdalloway')">Explore</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section class="section" id="classics">
-                <h2 class="section-title">Timeless Classics</h2>
-                <div class="quote-section">
-                    "Classics are books which, the more we think we know them through hearsay, the more original, unexpected, and innovative we find them when we actually read them." 
-                    <br>- Italo Calvino
-                </div>
-                <div class="book-grid">
-                    <div class="book-card">
-                        <div class="book-cover" style="background-image: url('https://m.media-amazon.com/images/I/71Q1tPupKjL._SL1360_.jpg')"></div>
-                        <div class="book-info">
-                            <h3 class="book-title">Pride and Prejudice</h3>
-                            <p class="book-author">Jane Austen</p>
-                            <button class="btn" onclick="goToDetails('pride')">Study Guide</button>
-                        </div>
-                    </div>
-
-                    <div class="book-card">
-                        <div class="book-cover" style="background-image: url('img/mobydickblog.jpg')"></div>
-                        <div class="book-info">
-                            <h3 class="book-title">Moby-Dick</h3>
-                            <p class="book-author">Herman Melville</p>
-                            <button class="btn" onclick="goToDetails('mobydick')">Study Guide</button>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <div class="newsletter">
-                <h2 style="font-size: 2rem; margin-bottom: 1rem;">Join Our Reading Circle</h2>
-                <p style="margin-bottom: 1.5rem;">Receive monthly curated reading lists and exclusive essays</p>
-                <form>
-                    <input type="email" placeholder="Enter your email">
-                    <button type="submit" class="btn" style="background: white; color: var(--primary);">Subscribe</button>
-                </form>
-            </div>
-
-            <section class="section">
-                <h2 class="section-title">Curator's Selection</h2>
-                <div class="book-grid">
-                    <div class="book-card">
-                        <div class="book-cover" style="background-image: url('img/midnightlibrary.jpg')"></div>
-                        <div class="book-info">
-                            <h3 class="book-title">The Midnight Library</h3>
-                            <p class="book-author">Matt Haig</p>
-                            <button class="btn" onclick="goToDetails('midnightlibrary')">Read Review</button>
-                        </div>
-                    </div>
-
-                    <div class="book-card">
-                        <div class="book-cover" style="background-image: url('img/circe.png')"></div>
-                        <div class="book-info">
-                            <h3 class="book-title">Circe</h3>
-                            <p class="book-author">Madeline Miller</p>
-                            <button class="btn" onclick="goToDetails('circe')">Read Review</button>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </main>
-    </body>
-    <script>
-        function goToDetails(bookId) {
-            window.location.href = `blogdetails.html?book=${bookId}`;
-        }
-    </script>
-    
-    </html>
+    loadBooks();
+    loadPosts();
+  </script>
+</body>
+</html>

@@ -5,18 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login | Bookshelf</title>
     <link rel="stylesheet" href="login-pag.css">
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Cormorant&display=swap" rel="stylesheet">
 </head>
 <body>
-    <header class="header">   
-         </header>
-    <nav class="navbar">
-        <a href="#" class="logo">
-            <a href="main.html" class="logo">
-                <img src="img/logo (2).png" alt="Bookshelf">
-            </a>      
-    </nav>
-    <section class="login-section">
+<section class="login-wrapper">
+<div class="login-left" style="position: relative;">
+    <div class="image-overlay"></div>
+    <img src="img/loginbanner (2).jpg" alt="Library" class="login-image">
+    <img src="img/Frame 3.png" alt="Logo"
+     style="position: absolute; top: 10px; left: 10px; height: 50px;
+            background-color: white; padding: 5px; border-radius: 5px;">
+</div>
+    <div class="login-right">
         <div class="login-container">
             <h2>Login to Your Account</h2>
             <form action="/auth/login" method="POST" id="loginForm" onsubmit="return validateLoginForm(event)">
@@ -24,43 +24,71 @@
                     <label for="email">Email</label>
                     <input type="email" id="email" name="email" placeholder="Enter your email" required>
                 </div>
-                <div class="input-group">
+                <div class="input-group password-group">
                     <label for="password">Password</label>
                     <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                    <span class="toggle-password" onclick="togglePassword()">👁‍🗨</span>
                 </div>
+
+                <div class="forgot-password-link" style="text-align: right; margin: 8px 0;">
+                <a href="/ForgotPassword.html" style="font-size: 14px; color: #1f2937; text-decoration: none;">Forgot Password?</a>
+                </div>
+
                 <div class="form-action">
                     <button type="submit" class="btn-submit">Login</button>
                 </div>
                 <div class="signup-link">
                     <p>Don't have an account? <a href="register.html">Sign Up</a></p>
                 </div>
+                <div id="error-message" class="error-message"></div>
             </form>
         </div>
-    </section>
-    <script>
- function validateLoginForm(event) {
-        event.preventDefault(); 
-        
-        var email = document.getElementById("email").value;
-        var password = document.getElementById("password").value;
+    </div>
+</section>
+<script>
+function togglePassword() {
+    const passwordInput = document.getElementById("password");
+    passwordInput.type = passwordInput.type === "password" ? "text" : "password";
+}
 
-        if (email === "" || password === "") {
-            alert("Both fields are required.");
-            return false; 
-        }
+async function validateLoginForm(event) {
+    event.preventDefault();
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value.trim();
+    const errorMessage = document.getElementById("error-message");
+    const submitButton = document.querySelector(".btn-submit");
+    errorMessage.textContent = "";
+    submitButton.disabled = true;
+    submitButton.textContent = "Logging in...";
 
-        if (email.length < 3) {
-            alert("Email should be at least 3 characters long.");
-            return false;
-        }
-
-        if (password.length < 6) {
-            alert("Password should be at least 6 characters long.");
-            return false;
-        }
-
-        document.getElementById("loginForm").submit();
+    if (!email || !password) {
+        errorMessage.textContent = "Both fields are required.";
+        submitButton.disabled = false;
+        submitButton.textContent = "Login";
+        return false;
     }
-    </script>
+
+    try {
+        const response = await fetch('/auth/login', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({ email, password })
+        });
+
+        if (response.redirected) {
+            window.location.href = response.url;
+        } else {
+            const data = await response.json();
+            errorMessage.textContent = data?.error || "Login failed. Please try again.";
+        }
+    } catch (error) {
+        errorMessage.textContent = "An unexpected error occurred.";
+    } finally {
+        submitButton.disabled = false;
+        submitButton.textContent = "Login";
+    }
+    return false;
+}
+</script>
 </body>
 </html>

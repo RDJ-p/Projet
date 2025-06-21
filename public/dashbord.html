@@ -5,52 +5,114 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard | Bookshelf</title>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@400;500;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://kit.fontawesome.com/YOUR_KIT_ID.js" crossorigin="anonymous"></script>
     <style>
 :root {
-  --primary-dark: #0A0A0A;
-  --secondary-dark: #1F1F1F;
-  --accent-light: #E8E8E8;
-  --soft-grey: #AAAAAA;
-  --border-grey: rgba(232, 232, 232, 0.1);
+  --primary-dark: #ffffff;
+  --accent-light: #333333;
+  --border-grey: rgba(0, 0, 0, 0.1);
   --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --gold-accent: #70c0d8;
 }
 
 body {
-    margin: 0;
-    font-family: 'Cormorant', serif;
-    background: var(--primary-dark);
-    color: var(--accent-light);
-    line-height: 1.6;
-    -webkit-font-smoothing: antialiased;
+  margin: 0;
+  font-family: 'Cormorant', serif;
+  background: white; 
+  color: var(--accent-light);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+header {
+  background-color: white;
+  padding: 10px 0;
+}
+
+.navbar-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 30px 40px;
+  position: relative;
+}
+
+.navbar-logo {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  left: 40px;
+}
+
+.navbar-logo img {
+  height: 40px;
+  margin-right: 10px;
+}
+
+.logo-text {
+  font-size: 22px;
+  font-weight: 700;
+  color: #333;
+}
+
+.logo-light {
+  color: #888;
+}
+
+.navbar-center {
+  margin: 0 auto;
+  display: flex;
+  gap: 25px;
+  font-size: 18px;
+}
+
+.navbar-center a {
+  text-decoration: none;
+  color: #333;
+  position: relative;
+}
+
+.navbar-center a.active::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: -3px;
+  left: 0;
+  background-color: #333;
 }
 
 .dashboard-container {
-    display: flex;
-    min-height: 100vh;
-    background: linear-gradient(45deg, var(--primary-dark) 0%, #151515 100%);
+  display: flex;
+  min-height: 100%;
+  background: transparent;
+  padding: 0;
 }
 
+
 .dashboard-sidebar {
-    width: 280px;
-    background: var(--secondary-dark);
-    padding: 2rem 1.5rem;
-    border-right: 1px solid rgba(232, 232, 232, 0.1);
-    position: relative;
-    z-index: 2;
+    width: 250px;
+    background-color: #2C3E50;
+    color: white;
+    padding-top: 2rem;
+    height: 100%;
+    border-right: none;
 }
 
 .dashboard-main {
     flex: 1;
     padding: 3rem;
-    position: relative;
+    background-color: white;
 }
 
 .user-profile {
-    text-align: center;
-    margin-bottom: 2.5rem;
-    padding-bottom: 2rem;
-    border-bottom: 1px solid rgba(232, 232, 232, 0.1);
+  text-align: center;
+  margin-bottom: 2.5rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--border-grey);
+  color: #ffffff; 
 }
 
 .user-avatar {
@@ -58,7 +120,6 @@ body {
     height: 100px;
     border-radius: 50%;
     margin-bottom: 1.2rem;
-    border: 3px solid var(--gold-accent);
     object-fit: cover;
 }
 
@@ -73,48 +134,48 @@ body {
     position: relative;
 }
 
+
 .dashboard-menu a {
-    display: flex;
-    align-items: center;
-    padding: 1rem 1.5rem;
-    color: var(--accent-light);
+    color: white;
+    padding: 1rem 2rem;
     text-decoration: none;
-    border-radius: 6px;
-    transition: var(--transition);
-    position: relative;
+    display: block;
+    font-size: 1rem;
     font-weight: 500;
+    transition: background 0.3s;
+    border-radius: 0;
 }
 
-.dashboard-menu a:hover {
-    background: rgba(232, 232, 232, 0.05);
-    transform: translateX(5px);
-}
-
-.dashboard-menu .active {
-    background: rgba(232, 232, 232, 0.08);
-    border-left: 4px solid var(--gold-accent);
-    transform: translateX(8px);
+.dashboard-menu a:hover,
+.dashboard-menu a.active {
+    background-color: white;
+    color: #2C3E50;
 }
 
 .dashboard-menu i {
     width: 28px;
     font-size: 1.1rem;
     margin-right: 1rem;
-    color: var(--gold-accent);
 }
-
+.dashboard-menu .active i {
+  color: #2C3E50; 
+}
 .dashboard-cards {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     gap: 2rem;
     margin-top: 2rem;
 }
+@media (max-width: 900px) {
+  .dashboard-cards {
+    grid-template-columns: 1fr !important;
+  }
+}
 
 .card {
     background: var(--secondary-dark); 
     padding: 1rem;
     border-radius: 12px;
-    border: 1px solid var(--border-grey);
     position: relative;
     overflow: hidden;
     transition: var(--transition);
@@ -122,7 +183,7 @@ body {
 
 .card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 10px 30px rgba(255, 255, 255, 0.05); 
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05); 
 }
 
 .card::before {
@@ -132,7 +193,6 @@ body {
     left: 0;
     width: 4px;
     height: 100%;
-    background: var(--accent-light);
 }
 
 .card h3 {
@@ -150,7 +210,7 @@ body {
     left: 0;
     width: 50px;
     height: 2px;
-    background: rgba(255, 255, 255, 0.1); 
+    background: var(--border-grey); 
 }
 
 
@@ -172,13 +232,32 @@ body {
 }
 
 .account-info li {
-    padding: 1rem;
-    background: rgba(232, 232, 232, 0.03);
-    border-radius: 6px;
-    margin: 0.8rem 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 1rem 1.5rem;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.03);
+    font-size: 1rem;
+    color: #2C3E50;
+}
+
+.account-info li span {
+    font-weight: 500;
+}
+
+.account-info li .badge {
+    margin-left: 0.5rem;
+    font-size: 0.85rem;
+}
+
+.account-info li .resend-container {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
 }
 
 .badge {
@@ -191,7 +270,7 @@ body {
 }
 
 .verified-badge {
-    background: #2E7D32;
+    background: #39813d;
     color: var(--accent-light);
 }
 
@@ -201,7 +280,7 @@ body {
 
 .user-item {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: 1.5rem;
     padding: 1rem;
     background: rgba(232, 232, 232, 0.03);
@@ -214,8 +293,8 @@ body {
     align-items: center;
     padding: 1rem 2rem;
     margin-top: 2rem;
-    background: var(--gold-accent);
-    color: var(--primary-dark);
+    background: #2C3E50;
+    color: white;
     text-decoration: none;
     border-radius: 6px;
     transition: var(--transition);
@@ -232,7 +311,10 @@ body {
 }
 
 .input-group {
-    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1.5rem;
+    flex: 1;
 }
 
 .input-group label {
@@ -243,29 +325,28 @@ body {
 }
 
 .input-group input {
-    width: 100%;
-    padding: 0.8rem 1rem;
-    background: var(--primary-dark);
-    border: 1px solid rgba(232, 232, 232, 0.1);
-    color: var(--accent-light);
-    border-radius: 6px;
+    padding: 0.75rem 1rem;
     font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    background: #fff;
 }
 
 .btn-submit {
+    grid-column: span 2;
     padding: 0.8rem 2rem;
-    background: var(--gold-accent);
-    color: var(--primary-dark);
-    font-weight: bold;
+    background-color: #1f2a40;
+    color: white;
     border: none;
     border-radius: 6px;
+    font-weight: 600;
     cursor: pointer;
-    transition: var(--transition);
+    transition: background 0.3s;
+    justify-self: start;
 }
 
 .btn-submit:hover {
-    background: #e5c76a;
-    box-shadow: 0 4px 12px rgba(212, 175, 55, 0.2);
+    background-color: #0d192e;
 }
 
 @media (max-width: 768px) {
@@ -337,217 +418,531 @@ body {
     box-shadow: 0 4px 10px rgba(255, 255, 255, 0.05);
     transform: translateY(-2px);
 }
+.dashboard-wrapper {
+  max-width: 1200px;        
+  margin: 3rem auto;
+  border-radius: 12px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  background: #ffffff;
+  display: flex;
+  min-height: 80vh;
+
+  /* ✅ Border adjustment */
+  border-right: none;
+  border-top: none;
+  border-bottom: none;
+  border-bottom-left-radius: 12px;
+}
+
+.dashboard-main h1,
+.settings-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #1f2a40;
+    margin-bottom: 2rem;
+}
+
+.password-form {
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.password-form .form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.password-form label {
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: #333;
+}
+
+.password-form input {
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background: #fff;
+}
+
+.save-btn {
+  align-self: flex-start;
+  padding: 0.75rem 1.5rem;
+  background-color: #2C3E50;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.save-btn:hover {
+  background-color: #1A252F;
+}
+#personalInfoForm {
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+#personalInfoForm .input-group label {
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: #333;
+}
+
+#personalInfoForm .input-group input {
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background: #fff;
+}
+
+#personalInfoForm .btn-submit {
+  align-self: flex-start;
+  padding: 0.75rem 1.5rem;
+  background-color: #2C3E50;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+#personalInfoForm .btn-submit:hover {
+  background-color: #1A252F;
+}
+
 
     </style>
 <body>
-    <div class="dashboard-container">
-        <div class="dashboard-sidebar">
-            <div class="user-profile">
-                <img src="img/default-user.png" alt="User Avatar" class="user-avatar">
-                <h2 id="userName">Loading...</h2>
-                <p id="userEmail">Loading...</p>
-            </div>
-            <ul class="dashboard-menu">
-                <li><a href="main.html" class="active"><i class="fas fa-home"></i> Dashboard</a></li>
-                <li><a href="order.html"><i class="fas fa-book"></i> My Orders <span id="orderCountBadge" class="badge">0</span></a></li>
-                <li><a href="wishlist.html"><i class="fas fa-heart"></i> Wishlist</a></li>
-                <li><a href="/settings"><i class="fas fa-cog"></i> Settings</a></li>
-            </ul>
-        </div>
-
-        <div class="dashboard-main">
-            <h1>Welcome Back, <span id="userFirstName">User</span>!</h1>
-            <div class="dashboard-cards">
-                <div class="card">
-                    <h3>Recent Orders</h3>
-                    <div id="recentOrders" class="recent-orders">
-                        <p>Loading orders...</p>
-                    </div>
-                </div>
-                <div class="card">
-                    <h3>Account Overview</h3>
-                    <ul class="account-info">
-                        <li>Member since: <span id="joinDate">2024</span></li>
-                        <li>Email verification: 
-                            <span id="verificationStatus" class="badge">Unverified</span>
-                            <button id="resendVerification" style="display:none; margin-left:10px;" class="btn-small">Resend Verification</button>
-                        </li>
-                        <li>Total orders: 0</li>
-                        <li>Wishlist items: 0</li>
-                    </ul>
-                </div>
-                <div class="card">
-                    <h3>Change Password</h3>
-                    <form id="changePasswordForm" onsubmit="return handlePasswordChange(event)">
-                        <div class="input-group">
-                            <label>Current Password</label>
-                            <input type="password" id="currentPassword" required>
-                        </div>
-                        <div class="input-group">
-                            <label>New Password</label>
-                            <input type="password" id="newPassword" required>
-                        </div>
-                        <button type="submit" class="btn-submit">Change Password</button>
-                    </form>
-                </div>
-            </div>
-            <div id="adminSection" style="display: none;">
-                <div class="dashboard-cards">
-                    <div class="card">
-                        <h3>Users <span id="usersCount" class="badge"></span></h3>
-                        <div class="recent-orders">
-                            <div id="usersList"></div>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <h3>Platform Statistics</h3>
-                        <ul class="account-info">
-                            <li>Total Users: <span id="totalUsers">0</span></li>
-                            <li>Total Products: <span id="totalProducts">0</span></li>
-                            <li>Total Orders: <span id="totalOrders">0</span></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <a href="main.html" class="go-home-btn">Go to Home</a>
-        </div>        
+<header>
+  <div class="navbar-container">
+    <div class="navbar-logo">
+      <img src="img/Frame 3.png" alt="Logo">
     </div>
-    <script>
-        fetch('/api/user')
-            .then(response => response.json())
-            .then(user => {
-                if (user.success) {
-                    document.getElementById('userName').textContent = user.name;
-                    document.getElementById('userEmail').textContent = user.email;
-                    document.getElementById('userFirstName').textContent = user.name.split(' ')[0];
-                    const verificationStatus = document.getElementById('verificationStatus');
-                    const resendBtn = document.getElementById('resendVerification');
+    <nav class="navbar-center">
+      <a href="main.html">Home</a>
+      <a href="contactus.html">Contact Us</a>
+      <a href="dashbord.html" class="active">Dashboard</a>
+      <a href="About us.html">About Us</a>
+    </nav>
+  </div>
+</header>
+<div class="dashboard-wrapper">
+  <div class="dashboard-container">
+    <div class="dashboard-sidebar">
+      <div class="user-profile">
+        <img src="img/team-3.png" alt="User Avatar" class="user-avatar">
+        <h2 id="userName">Loading...</h2>
+        <p id="userEmail">Loading...</p>
+      </div>
+      <ul class="dashboard-menu">
+        <li><a href="#" onclick="showSection('personal')" class="active"><i class="fas fa-user"></i> Personal Info</a></li>
+        <li><a href="#" onclick="showSection('orders')"><i class="fas fa-book"></i> My Orders <span id="orderCountBadge" class="badge">0</span></a></li>
+        <li><a href="#" onclick="showSection('wishlist'); loadWishlist();"><i class="fas fa-heart"></i> Wishlist</a></li>
+        <li><a href="#" onclick="showSection('settings')"><i class="fas fa-cog"></i> Settings</a></li>
+      </ul>
+    </div>
 
-                    if (user.verified) {
-                        verificationStatus.textContent = 'Verified';
-                        verificationStatus.classList.add('verified-badge');
-                        resendBtn.style.display = 'none';
-                    } else {
-                        verificationStatus.textContent = 'Unverified';
-                        verificationStatus.classList.add('unverified-badge');
-                        resendBtn.style.display = 'inline-block';
-                    }
+    <div class="dashboard-main">
+  <h1>Welcome Back, <span id="userFirstName">User</span>!</h1>
 
-                    resendBtn.addEventListener('click', async (e) => {
-                        e.preventDefault();
-                        try {
-                            await fetch('/auth/resend-verification', { method: 'POST' });
-                            alert('Verification email resent! Check your inbox.');
-                        } catch (error) {
-                            alert('Error resending verification email');
-                        }
-                    });
+  <div id="section-personal" class="section">
+    <div class="dashboard-cards">
+      <div class="card">
+        <h3>Edit Personal Information</h3>
+        <form id="personalInfoForm">
+          <div class="input-group">
+            <label for="first_name">First Name</label>
+            <input type="text" id="first_name" name="first_name" disabled>
+          </div>
+          <div class="input-group">
+            <label for="last_name">Last Name</label>
+            <input type="text" id="last_name" name="last_name" disabled>
+          </div>
+          <div class="input-group">
+            <label for="phone">Phone Number</label>
+            <input type="text" id="phone" name="phone" disabled>
+          </div>
+          <div class="input-group">
+            <label for="address">Address</label>
+            <input type="text" id="address" name="address" disabled>
+          </div>
+          <div class="input-group">
+            <label for="age">Age</label>
+            <input type="number" id="age" name="age" disabled>
+          </div>
+          <button type="button" class="btn-submit" id="editBtn">Edit</button>
+          <button type="submit" class="btn-submit" id="saveBtn" style="display: none;">Update Info</button>
+        </form>
+      </div>
 
-                    loadOrders();
+      <div class="card">
+        <h3>Account Overview</h3>
+        <ul class="account-info">
+          <li>Member since: <span id="joinDate">2024</span></li>
+          <li>
+            <div>Email verification:</div>
+            <div class="resend-container">
+              <span id="verificationStatus" class="badge">Unverified</span>
+              <button id="resendVerification" class="btn-small">Resend</button>
+            </div>
+          </li>
+          <li>Total orders: 0</li>
+          <li>Wishlist items: 0</li>
+        </ul>
+      </div>
+    </div>
+  </div>
 
-                    if (user.role === 'admin') {
-                        const adminMenuItem = document.createElement('li');
-                        adminMenuItem.innerHTML = ` 
-                            <a href="#admin" id="adminLink">
-                                <i class="fas fa-lock"></i> Admin Panel
-                            </a>
-                        `;
-                        document.querySelector('.dashboard-menu').appendChild(adminMenuItem);
+  <div id="section-wishlist" class="section" style="display: none;">
+    <h2>My Wishlist</h2>
+    <div id="wishlistItems" class="dashboard-cards"></div>
+  </div>
 
-                        const adminLink = document.getElementById('adminLink');
-                        const adminSection = document.getElementById('adminSection');
-                        adminLink.addEventListener('click', (e) => {
-                            e.preventDefault();
-                            adminSection.style.display = 'block';
-                            loadAdminData();
-                        });
-                    }
-                } else {
-                    document.getElementById('userName').textContent = 'Guest';
-                    document.getElementById('userEmail').textContent = '';
-                }
-            })
-            .catch(error => {
-                document.getElementById('userName').textContent = 'Guest';
-                document.getElementById('userEmail').textContent = '';
-            });
+  <div id="section-orders" class="section" style="display: none;">
+    <h2>My Orders</h2>
+    <div id="recentOrders" class="recent-orders">
+      <p>Loading orders...</p>
+    </div>
+    <div class="card" style="margin-top: 2rem;">
+      <h3>Orders Over Time</h3>
+      <canvas id="ordersChart" height="300"></canvas>
+    </div>
+  </div>
 
-        async function loadOrders() {
-            try {
-                const response = await fetch('/api/orders', {
-                    credentials: 'include'
-                });
-                const { orders } = await response.json();
-                document.getElementById('orderCountBadge').textContent = orders.length;
-                const ordersContainer = document.getElementById('recentOrders');
-                if (orders.length === 0) {
-                    ordersContainer.innerHTML = '<p>No recent orders.</p>';
-                } else {
-                    ordersContainer.innerHTML = orders.map(order => `
-                        <div class="order-item">
-                            <h4>Order #${order.id}</h4>
-                            <span>${new Date(order.created_at).toLocaleDateString()}</span>
-                            <span>Total: $${order.total}</span>
-                            <span>Status: ${order.status}</span>
-                            <div class="order-products">
-                                <h5>Products:</h5>
-                                <ul>
-                                    ${order.items.map(item => `
-                                        <li>${item.product_name} (x${item.quantity}) - $${(item.price * item.quantity).toFixed(2)}</li>
-                                    `).join('')}
-                                </ul>
-                            </div>
-                        </div>
-                    `).join('');
-                }
-            } catch (error) {
-                document.getElementById('recentOrders').innerHTML = '<p>Error loading orders.</p>';
+  <div id="section-settings" class="section" style="display: none;">
+    <h2 class="settings-title">Update Your Password</h2>
+    <form id="changePasswordForm" class="password-form" onsubmit="return handlePasswordChange(event)">
+      <div class="form-group">
+        <label for="currentPassword">Old password</label>
+        <input type="password" id="currentPassword" required>
+      </div>
+      <div class="form-group">
+        <label for="newPassword">New password</label>
+        <input type="password" id="newPassword" required>
+      </div>
+      <div class="form-group">
+        <label for="confirmPassword">Confirm the new password</label>
+        <input type="password" id="confirmPassword" required>
+      </div>
+      <button type="submit" class="save-btn">Save Changes</button>
+    </form>
+  </div>
+
+  <div id="adminSection" class="section" style="display: none;">
+    <div class="dashboard-cards">
+      <div class="card">
+        <h3>Users <span id="usersCount" class="badge"></span></h3>
+        <div class="recent-orders">
+          <div id="usersList"></div>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Platform Statistics</h3>
+        <ul class="account-info">
+          <li>Total Users: <span id="totalUsers">0</span></li>
+          <li>Total Products: <span id="totalProducts">0</span></li>
+          <li>Total Orders: <span id="totalOrders">0</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<a href="main.html" class="go-home-btn">Go to Home</a>
+</body>
+
+<script>
+function showSection(sectionName) {
+  document.querySelectorAll('.section').forEach(section => section.style.display = 'none');
+  const targetSection = document.getElementById(`section-${sectionName}`) || document.getElementById(`${sectionName}Section`);
+  if (targetSection) targetSection.style.display = 'block';
+  document.querySelectorAll('.dashboard-menu a').forEach(link => link.classList.remove('active'));
+  document.querySelectorAll('.dashboard-menu a').forEach(link => {
+    if (link.getAttribute('onclick')?.includes(sectionName)) {
+      link.classList.add('active');
+    }
+  });
+}
+
+Promise.all([
+  fetch('/api/user'),
+  fetch('/api/user/info')
+])
+.then(async ([authRes, infoRes]) => {
+  const auth = await authRes.json();
+  const info = await infoRes.json();
+
+  if (auth.success && info.success) {
+    const user = info.user;
+
+    document.getElementById('userName').textContent = `${user.first_name} ${user.last_name}`;
+    document.getElementById('userEmail').textContent = user.email;
+    document.getElementById('userFirstName').textContent = user.first_name;
+
+    document.getElementById('first_name').value = user.first_name || '';
+    document.getElementById('last_name').value = user.last_name || '';
+    document.getElementById('phone').value = user.phone || '';
+    document.getElementById('address').value = user.address || '';
+    document.getElementById('age').value = user.age || '';
+
+    if (document.getElementById('fullName')) {
+      document.getElementById('fullName').textContent = `${user.first_name} ${user.last_name}`;
+      document.getElementById('phoneNumber').textContent = user.phone || 'Not set';
+      document.getElementById('shippingAddress').textContent = user.address || 'Not set';
+      document.getElementById('dob').textContent = user.age ? `Age ${user.age}` : 'Not set';
+    }
+
+    const verificationStatus = document.getElementById('verificationStatus');
+    const resendBtn = document.getElementById('resendVerification');
+    if (user.verified) {
+      verificationStatus.textContent = 'Verified';
+      verificationStatus.classList.add('verified-badge');
+      resendBtn.style.display = 'none';
+    } else {
+      verificationStatus.textContent = 'Unverified';
+      verificationStatus.classList.add('unverified-badge');
+      resendBtn.style.display = 'inline-block';
+    }
+
+    resendBtn.addEventListener('click', async (e) => {
+      e.preventDefault();
+      try {
+        await fetch('/auth/resend-verification', { method: 'POST' });
+        alert('Verification email resent! Check your inbox.');
+      } catch (error) {
+        alert('Error resending verification email');
+      }
+    });
+
+    if (auth.role === 'admin') {
+      const adminMenuItem = document.createElement('li');
+      adminMenuItem.innerHTML = `
+        <a href="#" onclick="showSection('admin')" id="adminLink">
+          <i class="fas fa-lock"></i> Admin Panel
+        </a>
+      `;
+      document.querySelector('.dashboard-menu').appendChild(adminMenuItem);
+
+      const adminLink = document.getElementById('adminLink');
+      adminLink.addEventListener('click', (e) => {
+        e.preventDefault();
+        showSection('admin');
+        loadAdminData();
+      });
+    }
+
+    loadOrders();
+    showSection('personal');
+  } else {
+    document.getElementById('userName').textContent = 'Guest';
+    document.getElementById('userEmail').textContent = '';
+  }
+})
+.catch(error => {
+  console.error('User fetch error:', error);
+  document.getElementById('userName').textContent = 'Guest';
+  document.getElementById('userEmail').textContent = '';
+});
+
+async function loadOrders() {
+  try {
+    const response = await fetch('/api/orders', { credentials: 'include' });
+    const { orders } = await response.json();
+
+    document.getElementById('orderCountBadge').textContent = orders.length;
+    const totalOrdersEl = document.querySelector('#section-personal li:nth-child(3)');
+    if (totalOrdersEl) {
+      totalOrdersEl.textContent = `Total orders: ${orders.length}`;
+    }
+
+    const ordersContainer = document.getElementById('recentOrders');
+    if (orders.length === 0) {
+      ordersContainer.innerHTML = '<p>No recent orders.</p>';
+    } else {
+      const recentOrders = orders.slice(0, 5);
+      ordersContainer.innerHTML = recentOrders.map(order => `
+        <div class="order-item">
+          <h4>Order #${order.id}</h4>
+          <span>${new Date(order.created_at).toLocaleDateString()}</span>
+          <span>Total: $${order.total}</span>
+          <span>Status: ${order.status}</span>
+          <div class="order-products">
+            <h5>Products:</h5>
+            <ul>
+              ${order.items.map(item => `
+                <li>${item.product_name} (x${item.quantity}) - $${(item.price * item.quantity).toFixed(2)}</li>
+              `).join('')}
+            </ul>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    const ordersPerDate = {};
+    orders.forEach(order => {
+      const date = new Date(order.created_at).toLocaleDateString();
+      ordersPerDate[date] = (ordersPerDate[date] || 0) + 1;
+    });
+
+    const labels = Object.keys(ordersPerDate);
+    const data = Object.values(ordersPerDate);
+    const ctx = document.getElementById('ordersChart');
+    if (ctx) {
+      new Chart(ctx.getContext('2d'), {
+        type: 'line',
+        data: {
+          labels: labels,
+          datasets: [{
+            label: 'Orders',
+            data: data,
+            borderColor: '#2C3E50',
+            backgroundColor: 'rgba(44, 62, 80, 0.1)',
+            borderWidth: 2,
+            tension: 0.3,
+            pointRadius: 4,
+            fill: true
+          }]
+        },
+        options: {
+          responsive: true,
+          scales: {
+            y: {
+              beginAtZero: true,
+              ticks: { precision: 0 }
             }
-        }
-
-        async function loadAdminData() {
-            try {
-                const [statsRes, usersRes] = await Promise.all([
-                    fetch('/api/admin/stats'),
-                    fetch('/api/admin/users')
-                ]);
-                const stats = await statsRes.json();
-                const users = await usersRes.json();
-                document.getElementById('totalUsers').textContent = stats.users;
-                document.getElementById('totalProducts').textContent = stats.products;
-                document.getElementById('totalOrders').textContent = stats.orders;
-                const usersList = document.getElementById('usersList');
-                usersList.innerHTML = users.users.map(user => `
-                    <div class="user-item">
-                        <span>${user.email}</span>
-                        <span>${user.first_name} ${user.last_name}</span>
-                        <span>Joined: ${new Date(user.created_at).toLocaleDateString()}</span>
-                    </div>
-                `).join('');
-            } catch (error) {}
-        }
-
-        async function handlePasswordChange(e) {
-            e.preventDefault();
-            const currentPassword = document.getElementById('currentPassword').value;
-            const newPassword = document.getElementById('newPassword').value;
-            try {
-                const response = await fetch('/auth/change-password', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ currentPassword, newPassword })
-                });
-                const result = await response.json();
-                if (result.success) {
-                    alert('Password changed successfully!');
-                    document.getElementById('changePasswordForm').reset();
-                } else {
-                    alert(result.error || 'Password change failed');
-                }
-            } catch (error) {
-                alert('Error changing password');
+          },
+          plugins: {
+            legend: {
+              display: false
             }
+          }
         }
-    </script>
+      });
+    }
+
+  } catch (error) {
+    document.getElementById('recentOrders').innerHTML = '<p>Error loading orders.</p>';
+  }
+}
+
+async function loadAdminData() {
+  try {
+    const [statsRes, usersRes] = await Promise.all([
+      fetch('/api/admin/stats'),
+      fetch('/api/admin/users')
+    ]);
+    const stats = await statsRes.json();
+    const users = await usersRes.json();
+    document.getElementById('totalUsers').textContent = stats.users;
+    document.getElementById('totalProducts').textContent = stats.products;
+    document.getElementById('totalOrders').textContent = stats.orders;
+    const usersList = document.getElementById('usersList');
+    usersList.innerHTML = users.users.map(user => `
+      <div class="user-item">
+        <span>${user.email}</span>
+        <span>${user.first_name} ${user.last_name}</span>
+        <span>Joined: ${new Date(user.created_at).toLocaleDateString()}</span>
+      </div>
+    `).join('');
+  } catch (error) {
+    console.error('Failed to load admin data');
+  }
+}
+
+document.getElementById('personalInfoForm').addEventListener('submit', async function (e) {
+  e.preventDefault();
+
+  const first_name = document.getElementById('first_name').value;
+  const last_name = document.getElementById('last_name').value;
+  const phone = document.getElementById('phone').value;
+  const address = document.getElementById('address').value;
+  const age = document.getElementById('age').value;
+
+  try {
+    const response = await fetch('/api/user/info', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      credentials: 'include',
+      body: JSON.stringify({ first_name, last_name, phone, address, age })
+    });
+
+    const data = await response.json();
+    if (data.success) {
+      alert('Information updated!');
+    } else {
+      alert(data.error || 'Update failed');
+    }
+  } catch (err) {
+    alert('Server error while updating info');
+  }
+});
+
+async function handlePasswordChange(e) {
+  e.preventDefault();
+  const currentPassword = document.getElementById('currentPassword').value;
+  const newPassword = document.getElementById('newPassword').value;
+  try {
+    const response = await fetch('/auth/change-password', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ currentPassword, newPassword })
+    });
+    const result = await response.json();
+    if (result.success) {
+      alert('Password changed successfully!');
+      document.getElementById('changePasswordForm').reset();
+    } else {
+      alert(result.error || 'Password change failed');
+    }
+  } catch (error) {
+    alert('Error changing password');
+  }
+}
+
+async function loadWishlist() {
+  try {
+    const res = await fetch('/api/wishlist?userId=1', { credentials: 'include' });
+    const books = await res.json();
+    const container = document.getElementById('wishlistItems');
+    container.innerHTML = '';
+
+    if (books.length === 0) {
+      container.innerHTML = '<p>Your wishlist is empty.</p>';
+      return;
+    }
+
+    container.innerHTML = books.map(book => `
+      <div class="card" onclick="window.location.href='book1.html?id=${encodeURIComponent(book.id)}'" style="cursor:pointer;">
+        <div style="background-image: url('${book.image}'); height: 180px; background-size: cover; border-radius: 8px;"></div>
+        <h3>${book.title}</h3>
+        <p style="margin-top: 0.5rem;">${book.author}</p>
+      </div>
+    `).join('');
+  } catch (err) {
+    document.getElementById('wishlistItems').innerHTML = '<p>Error loading wishlist.</p>';
+  }
+}
+
+document.getElementById('editBtn').addEventListener('click', function () {
+  const inputs = document.querySelectorAll('#personalInfoForm input');
+  inputs.forEach(input => input.disabled = false);
+  document.getElementById('editBtn').style.display = 'none';
+  document.getElementById('saveBtn').style.display = 'inline-block';
+});
+</script>
+
+
 </body>
 </html>

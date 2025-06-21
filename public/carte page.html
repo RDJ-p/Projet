@@ -1,209 +1,253 @@
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-        <link href="https://fonts.googleapis.com/css2?family=Cormorant&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="carte page.css">
-        <title>Cart</title>
-    </head>
-    <body>
-        <nav class="navbar">
-            <a href="main.html" class="logo">
-                <img src="img/logo (2).png" alt="Bookshelf">
-            </a>
-            <div class="nav-icons">
-                <a href="cart.html">
-                    <img src="img/cart-icon.png" alt="Cart">
-                </a>
-                <a href="#"><img src="img/search.png" alt="Search"></a>
-                <a href="#"><img src="img/more.png" alt="Menu"></a>
-            </div>
-        </nav>
-        <div class="about-section">Cart</div>
-        <div class="container1">
-            <p class="message">Your basket is currently empty.</p>
-            <div class="cart-items"></div>
-            <button class="return-button" onclick="window.location.href='product.html'">RETURN TO SHOP</button>
-            <button class="checkout-button" onclick="window.location.href='checkout.html'">Proceed to Checkout</button>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Cart - Bookshelf</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Cormorant', serif;
+    }
+  </style>
+</head>
+<body class="flex flex-col min-h-screen">
+
+<header class="flex items-center justify-between px-6 py-4 bg-white-100  relative z-10">
+  <div class="w-1/3 flex items-center justify-start">
+    <img src="img/Frame 3.png" alt="Logo" class="h-10">
+  </div>
+
+  <nav class="w-1/3 hidden md:flex justify-center gap-6 text-lg">
+    <a href="main.html" class="text-gray-800 hover:text-black">Home</a>
+    <a href="shop.html" class="text-gray-800 hover:text-black relative after:content-[''] after:absolute after:h-0.5 after:w-full after:bg-black after:left-0 after:-bottom-1">Shop</a>
+    <a href="wishlist.html" class="text-gray-800 hover:text-black">Wishlist</a>
+    <a href="order.html" class="text-gray-800 hover:text-black">Orders</a>
+  </nav>
+
+  <div class="w-1/3 hidden md:flex justify-end">
+    <a href="wishlist.html" class="flex items-center gap-1 text-gray-800 font-semibold">
+      <img src="img/wishlist-icon.png" alt="Wishlist Icon" class="w-4 h-4">
+    </a>
+  </div>
+
+  <button id="menu-toggle" class="md:hidden text-gray-800 focus:outline-none absolute right-4 top-4">
+    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+    </svg>
+  </button>
+</header>
+
+<div class="w-screen h-[300px] relative overflow-hidden mt-4">
+  <img src="img/cartbanner22 (2).jpg" alt="Cart" class="w-full h-full object-cover " />
+</div>
+
+  <main class="flex-grow py-10 px-4 max-w-4xl mx-auto text-center">
+    <p class="message text-lg text-gray-700 mb-6">Your basket is currently empty.</p>
+
+    <div class="cart-items space-y-4"></div>
+
+    <button onclick="window.location.href='product.html'" class="return-button bg-[#2C3E50] hover:bg-[#1c2833] text-white px-6 py-3 rounded mt-12 uppercase font-bold">
+      Return to Shop
+    </button>
+
+    <button onclick="checkCartBeforeCheckout()" class="checkout-button bg-[#2C3E50] hover:bg-[#1c2833] text-white px-6 py-3 rounded mt-5 font-bold">
+      Proceed to Checkout
+    </button>
+  </main>
+
+  <footer class="bg-[#2C3E50] text-white py-10">
+    <div class="max-w-7xl mx-auto px-4 flex flex-wrap justify-between gap-8">
+      <div>
+        <img src="img/Frame 3.png" alt="Bookshelf Logo" class="w-[120px] mb-2 bg-white p-1 rounded">
+        <div class="text-xs mt-1 tracking-wider">ESCAPE INTO STORIES</div>
+      </div>
+
+      <div class="flex flex-wrap gap-10">
+        <div>
+          <h4 class="font-bold text-sm border-b-2 border-white inline-block pb-1 uppercase">Publishers</h4>
+          <ul class="mt-2 text-sm space-y-1">
+            <li><a href="#" class="hover:underline">Best Seller</a></li>
+            <li><a href="#" class="hover:underline">Interviews</a></li>
+            <li><a href="#" class="hover:underline">Authors Stories</a></li>
+            <li><a href="#" class="hover:underline">Book Fires</a></li>
+            <li><a href="#" class="hover:underline">Help (FAQ)</a></li>
+          </ul>
         </div>
-        
-        <footer class="footer">
-            <div class="container">
-                <div class="row">
-                    <div class="footer-col">
-                        <h4>Publishers</h4>
-                        <ul>
-                            <li><a href="#">Bestsellers</a></li>
-                            <li><a href="#">Interviews</a></li>
-                            <li><a href="#">Authors story</a></li>
-                            <li><a href="#">Book Fairs</a></li>
-                            <li><a href="#">Help (FAQ)</a></li>
-                        </ul>
-                    </div>
-                    <div class="footer-col">
-                        <h4>Get help</h4>
-                        <ul>
-                            <li><a href="#">Shipping</a></li>
-                            <li><a href="#">Returns</a></li>
-                            <li><a href="#">Order Status</a></li>
-                            <li><a href="#">Payment Options</a></li>
-                        </ul>
-                    </div>
-                    <div class="footer-col">
-                        <h4>Online Shop</h4>
-                        <ul>
-                            <li><a href="#">Books</a></li>
-                            <li><a href="#">Ebooks</a></li>
-                            <li><a href="#">Magazines</a></li>
-                            <li><a href="#">Newspapers</a></li>
-                        </ul>
-                    </div>
-                    <div class="footer-col">
-                        <h4>Follow Us</h4>
-                        <div class="social-links">
-                            <a href="#"><img src="img/icons8-facebook-48.png" alt="Facebook"></a>
-                            <a href="#"><img src="img/icons8-twitter-50.png" alt="Twitter"></a>
-                            <a href="#"><img src="img/icons8-instagram-48.png" alt="Instagram"></a>
-                            <a href="#"><img src="img/icons8-linkedin-50.png" alt="LinkedIn"></a>
-                        </div>
-                    </div>
-                </div>
+        <div>
+          <h4 class="font-bold text-sm border-b-2 border-white inline-block pb-1 uppercase">Get Help</h4>
+          <ul class="mt-2 text-sm space-y-1">
+            <li><a href="#" class="hover:underline">Shipping</a></li>
+            <li><a href="#" class="hover:underline">Return</a></li>
+            <li><a href="#" class="hover:underline">Order Status</a></li>
+            <li><a href="#" class="hover:underline">Book Fires</a></li>
+            <li><a href="#" class="hover:underline">Payment Options</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-bold text-sm border-b-2 border-white inline-block pb-1 uppercase">Online Shops</h4>
+          <ul class="mt-2 text-sm space-y-1">
+            <li><a href="#" class="hover:underline">Books</a></li>
+            <li><a href="#" class="hover:underline">E-Books</a></li>
+            <li><a href="#" class="hover:underline">Magazine</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="text-sm text-right">
+        <div class="flex justify-end gap-3 mb-2">
+        <img src="img/icons8-instagram-48.png" alt="Instagram" class="w-[25px]">
+        <img src="img/icons8-facebook-48.png" alt="Facebook" class="w-[25px]">
+        <img src="img/icons8-twitter-50.png" alt="Twitter" class="w-[25px]">
+        </div>
+        <p>© 2025 BOOKSHELF, ALL RIGHTS RESERVED</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    function loadCart() {
+      fetch('/api/cart', { credentials: 'include' })
+        .then(response => response.json())
+        .then(data => {
+          const cartContainer = document.querySelector('.cart-items');
+          const messageElement = document.querySelector('.message');
+
+          const existingTotals = document.querySelector('.cart-totals');
+          if (existingTotals) existingTotals.remove();
+
+          if (!data || !data.items || data.items.length === 0) {
+            messageElement.textContent = 'Your basket is currently empty.';
+            cartContainer.innerHTML = '';
+            return;
+          }
+
+          let totalBooks = 0;
+          let totalPrice = 0;
+
+          messageElement.textContent = `Your cart has ${data.items.length} item(s).`;
+          cartContainer.innerHTML = '';
+
+          data.items.forEach(item => {
+            totalBooks += item.quantity;
+            totalPrice += item.price * item.quantity;
+
+            const cartItemElement = document.createElement('div');
+            cartItemElement.className = 'cart-item flex flex-wrap md:flex-nowrap items-center justify-between gap-4 bg-gray-100 p-4 rounded shadow';
+            cartItemElement.innerHTML = `
+              <img src="${item.image}" alt="${item.productName}" class="w-20 h-28 object-cover rounded">
+              <span class="flex-1 text-left font-semibold">${item.productName}</span>
+              <span class="text-gray-700">$${item.price}</span>
+              <input type="number" id="quantity-${item.productId}" value="${item.quantity}" min="1"
+                class="w-16 px-2 py-1 border border-gray-300 rounded text-center"
+                onchange="updateQuantity(${item.productId})">
+              <button onclick="removeFromCart(${item.productId})"
+                class="bg-[#2C3E50] text-white px-4 py-2 rounded hover:bg-[#1c2833]">
+                Remove
+              </button>
+            `;
+            cartContainer.appendChild(cartItemElement);
+          });
+
+          const totalsElement = document.createElement('div');
+          totalsElement.className = 'cart-totals bg-white p-4 mt-6 rounded shadow text-left';
+          totalsElement.innerHTML = `
+            <div class="flex justify-between border-b pb-2 mb-2">
+              <span class="text-gray-600">Total Books:</span>
+              <span class="font-semibold">${totalBooks}</span>
             </div>
-            <p>© 2025 BOOKSHELF, ALL RIGHTS RESERVED</p>
-        </footer>
-        <script>
-            function loadCart() {
-                fetch('/api/cart', { credentials: 'include' })
-                    .then(response => response.json())
-                    .then(data => {
-                        const cartContainer = document.querySelector('.cart-items');
-                        const messageElement = document.querySelector('.message');
-        
-                        const existingTotals = document.querySelector('.cart-totals');
-                        if (existingTotals) existingTotals.remove();
-        
-                        if (!data || !data.items || data.items.length === 0) {
-                            messageElement.textContent = 'Your basket is currently empty.';
-                            cartContainer.innerHTML = '';
-                            return;
-                        }
-        
-                        let totalBooks = 0;
-                        let totalPrice = 0;
-        
-                        messageElement.textContent = `Your cart has ${data.items.length} item(s).`;
-                        cartContainer.innerHTML = '';
-        
-                        data.items.forEach(item => {
-                            totalBooks += item.quantity;
-                            totalPrice += item.price * item.quantity;
-        
-                            const cartItemElement = document.createElement('div');
-                            cartItemElement.classList.add('cart-item');
-                            cartItemElement.innerHTML = `
-                                <img src="${item.image}" alt="${item.productName}" width="50">
-                                <span>${item.productName}</span>
-                                <span>$${item.price}</span>
-                                <input type="number" 
-                                       id="quantity-${item.productId}" 
-                                       value="${item.quantity}" 
-                                       min="1" 
-                                       onchange="updateQuantity(${item.productId})">
-                                <button onclick="removeFromCart(${item.productId})">Remove</button>
-                            `;
-                            cartContainer.appendChild(cartItemElement);
-                        });
-        
-                        const totalsElement = document.createElement('div');
-                        totalsElement.classList.add('cart-totals');
-                        totalsElement.innerHTML = `
-                            <div class="total-row">
-                                <span>Total Books:</span>
-                                <span>${totalBooks}</span>
-                            </div>
-                            <div class="total-row">
-                                <span>Total Price:</span>
-                                <span>$${totalPrice.toFixed(2)}</span>
-                            </div>
-                        `;
-        
-                        cartContainer.appendChild(totalsElement);
-                    })
-                    .catch(error => console.error('Error:', error));
-            }
-        
-            function addToCart(productId, quantity) {
-                fetch('/api/cart', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ productId, quantity }),
-                    credentials: 'include'
-                })
-                .then(response => {
-                    if (!response.ok) throw new Error('Network response was not ok');
-                    return response.json();
-                })
-                .then(data => {
-                    alert(data.message);
-                    loadCart();
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    alert('Failed to add item to cart');
-                });
-            }
-        
-            function removeFromCart(productId) {
-                fetch(`/api/cart/${productId}`, { 
-                    method: 'DELETE',
-                    credentials: 'include' 
-                })
-                .then(response => {
-                    if (!response.ok) throw new Error('Network response was not ok');
-                    return response.json();
-                })
-                .then(data => {
-                    alert(data.message);
-                    loadCart();
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    alert('Failed to remove item from cart');
-                });
-            }
-        
-            function updateQuantity(productId) {
-                const newQuantity = document.getElementById(`quantity-${productId}`).value;
-        
-                if (newQuantity < 1) {
-                    alert("Quantity must be at least 1.");
-                    document.getElementById(`quantity-${productId}`).value = 1;
-                    return;
-                }
-        
-                fetch(`/api/cart/${productId}`, { 
-                    method: 'PATCH',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ quantity: newQuantity }),
-                    credentials: 'include' 
-                })
-                .then(response => {
-                    if (!response.ok) throw new Error('Network response was not ok');
-                    return response.json();
-                })
-                .then(data => {
-                    alert(data.message);
-                    loadCart();
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    alert('Failed to update quantity');
-                });
-            }
-        
-            window.onload = loadCart;
-        </script>        
-    </body>
-    </html>
+            <div class="flex justify-between">
+              <span class="text-gray-600">Total Price:</span>
+              <span class="font-semibold">$${totalPrice.toFixed(2)}</span>
+            </div>
+          `;
+          cartContainer.appendChild(totalsElement);
+        })
+        .catch(error => console.error('Error:', error));
+    }
+
+    function addToCart(productId, quantity) {
+      fetch('/api/cart', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ productId, quantity }),
+        credentials: 'include'
+      })
+      .then(response => response.json())
+      .then(data => {
+        alert(data.message);
+        loadCart();
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        alert('Failed to add item to cart');
+      });
+    }
+
+    function removeFromCart(productId) {
+      fetch(`/api/cart/${productId}`, {
+        method: 'DELETE',
+        credentials: 'include'
+      })
+      .then(response => response.json())
+      .then(data => {
+        alert(data.message);
+        loadCart();
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        alert('Failed to remove item from cart');
+      });
+    }
+
+    function updateQuantity(productId) {
+      const newQuantity = document.getElementById(`quantity-${productId}`).value;
+
+      if (newQuantity < 1) {
+        alert("Quantity must be at least 1.");
+        document.getElementById(`quantity-${productId}`).value = 1;
+        return;
+      }
+
+      fetch(`/api/cart/${productId}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ quantity: newQuantity }),
+        credentials: 'include'
+      })
+      .then(response => response.json())
+      .then(data => {
+        alert(data.message);
+        loadCart();
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        alert('Failed to update quantity');
+      });
+    }
+
+    async function checkCartBeforeCheckout() {
+      try {
+        const response = await fetch('/api/cart', { credentials: 'include' });
+        const data = await response.json();
+
+        if (!data || !data.items || data.items.length === 0) {
+          alert("Your cart is empty. Please add items before proceeding to checkout.");
+          return;
+        }
+        window.location.href = 'checkout.html';
+      } catch (error) {
+        console.error("Failed to check cart:", error);
+        alert("Error checking cart. Please try again.");
+      }
+    }
+
+    window.onload = loadCart;
+    document.getElementById('menu-toggle').addEventListener('click', function() {
+  const nav = document.getElementById('main-nav');
+  nav.classList.toggle('hidden');
+});
+  </script>
+</body>
+</html>

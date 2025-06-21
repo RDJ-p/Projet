@@ -2,165 +2,416 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Upload & Exchange | My Bookstore</title>
-  <link rel="stylesheet" href="Exchangecss.css"/>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@300;400;700&display=swap" rel="stylesheet"/>
-</head>
-<body>
-  <nav class="navbar">
-    <a href="#" class="logo">
-      <img src="img/logo (2).png" alt="Bookshelf" />
-    </a>
-    <ul>
-      <li><a href="main.html">Home</a></li>
-      <li><a href="product.html">Shop</a></li>
-      <li><a href="exchange.html" class="active">Exchange</a></li>
-      <li><a href="exchangerequest.html">Request</a></li>
-  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Digital Library Exchange</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Cormorant Garamond', serif;
+      background-color: #ffffff;
+    }
+    .animate-fade-in {
+      animation: fadeIn 1s ease-out forwards;
+      opacity: 0;
+    }
 
-    </ul>
-  </nav>
-  <div class="container1">
-    <h2>📚 Upload or Exchange Books/Documents</h2>
-    <form action="/api/exchange" method="POST">
-      <div class="form-group">
-        <label for="upload-title">Book You Own</label>
-        <input type="text" id="upload-title" name="upload_title" required />
-      </div>
-
-      <div class="form-group">
-        <label for="upload-type">Document Type</label>
-        <select id="upload-type" name="upload_type">
-          <option value="book">Book</option>
-          <option value="document">Document</option>
-        </select>
-      </div>
-
-      <div class="form-group">
-        <label for="exchange-title">Book You Want</label>
-        <input type="text" id="exchange-title" name="exchange_title" required />
-      </div>
-
-      <div class="form-group">
-        <label for="exchange-reason">Reason for Exchange</label>
-        <textarea id="exchange-reason" name="exchange_reason" rows="3" required></textarea>
-      </div>
-
-      <button type="submit">Submit Request →</button>
-    </form>
-
-    <div id="match-response" class="match-response"></div>
-  </div>
-
-  <footer class="footer">
-    <div class="container">
-      <div class="row">
-        <div class="footer-col">
-          <h4>Publishers</h4>
-          <ul>
-            <li><a href="bestselling.html">Bestsellers</a></li>
-            <li><a href="interview.html">Interviews</a></li>
-            <li><a href="authorstory.html">Authors story</a></li>
-            <li><a href="bookfair.html">Book Fairs</a></li>
-            <li><a href="FAQ.html">Help (FAQ)</a></li>
-          </ul>
-        </div>
-        <div class="footer-col">
-          <h4>Get help</h4>
-          <ul>
-            <li><a href="#">Shipping</a></li>
-            <li><a href="#">Returns</a></li>
-            <li><a href="order.html">Order Status</a></li>
-            <li><a href="paymentoptions.html">Payment Options</a></li>
-          </ul>
-        </div>
-        <div class="footer-col">
-          <h4>Online Shop</h4>
-          <ul>
-            <li><a href="product.html">Books</a></li>
-            <li><a href="product.html">Ebooks</a></li>
-            <li><a href="product.html">Magazines</a></li>
-          </ul>
-        </div>
-        <div class="footer-col">
-          <h4>Follow Us</h4>
-          <div class="social-links">
-            <a href="#"><img src="img/icons8-facebook-48.png" alt="Facebook" /></a>
-            <a href="#"><img src="img/icons8-twitter-50.png" alt="Twitter" /></a>
-            <a href="#"><img src="img/icons8-instagram-48.png" alt="Instagram" /></a>
-            <a href="#"><img src="img/icons8-linkedin-50.png" alt="LinkedIn" /></a>
-          </div>
-        </div>
-      </div>
-    </div>
-    <p>© 2025 BOOKSHELF, ALL RIGHTS RESERVED</p>
-  </footer>
-
-  <script>
-    document.querySelector('form').addEventListener('submit', async (e) => {
-      e.preventDefault();
-
-      const formData = {
-        upload_title: document.getElementById('upload-title').value,
-        upload_type: document.getElementById('upload-type').value,
-        exchange_title: document.getElementById('exchange-title').value,
-        exchange_reason: document.getElementById('exchange-reason').value
-      };
-
-      const responseDiv = document.getElementById('match-response');
-      responseDiv.innerHTML = '';
-
-      try {
-        const response = await fetch('/api/exchange', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${getCookie('token')}`
-          },
-          body: JSON.stringify(formData)
-        });
-
-        const result = await response.json();
-
-        if (response.ok) {
-          if (result.matches && result.matches.length > 0) {
-            showResponseBox('match-success', `
-              <p>🎉 <strong>Match Found!</strong></p>
-              <p>Someone is ready to exchange <strong>"${formData.upload_title}"</strong> for <strong>"${formData.exchange_title}"</strong>.</p>
-              <p>Check your <a href="/dashboard">dashboard</a> to view the match details!</p>
-            `);
-          } else {
-            showResponseBox('match-waiting', `
-              <p>✅ Your request was submitted successfully.</p>
-              <p>We'll notify you when a matching exchange becomes available.</p>
-            `);
-          }
-
-          document.querySelector('form').reset();
-        } else {
-          showResponseBox('match-error', `❌ Error: ${result.error || 'Failed to submit request'}`);
-        }
-      } catch (error) {
-        showResponseBox('match-error', `❌ Failed to submit: ${error.message}`);
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
       }
+    }
+
+    #my-books > div,
+    #available-books > div {
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    #my-books > div:hover,
+    #available-books > div:hover {
+      transform: scale(1.02);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    }
+    @keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.animate-fade-in-up {
+  animation: fadeInUp 1s ease-out forwards;
+}
+  </style>
+</head>
+<body class="text-[#2C3E50] bg-white">
+<section 
+  class="relative bg-cover bg-center text-white px-6 text-center flex items-center justify-center min-h-[100vh] overflow-hidden"
+  style="background-image: url('img/100.jpg');"
+>
+<div class="absolute inset-0 bg-[#2C3E50]/80"></div>
+  <div class="relative z-10 max-w-xl mx-auto space-y-6 animate-fade-in-up">
+   <h1 class="text-5xl font-bold leading-tight">Empowering Readers Through Book Exchange</h1>
+  <p class="text-2xl text-white/90">Connect with fellow book lovers. Share stories, swap knowledge, and grow your personal library — one meaningful exchange at a time.</p>
+    <a href="#share-section" class="inline-block bg-white text-[#2C3E50] px-6 py-3 rounded-full font-semibold shadow hover:bg-gray-100 transition">
+       Start Sharing
+    </a>
+  </div>
+</section>
+  <main class="container mx-auto px-4 py-12 space-y-16">
+
+    <section id="share-section" class="bg-white p-8 rounded-3xl shadow-xl border space-y-6 animate-fade-in">
+      <h2 class="text-4xl font-bold text-center">Share a Book</h2>
+      <form id="share-form" class="space-y-4">
+        <div class="grid md:grid-cols-2 gap-4">
+          <input type="text" id="share-title" placeholder="Book Title" required class="w-full p-3 border rounded" />
+          <select id="share-type" required class="w-full p-3 border rounded">
+            <option value="book">Book</option>
+            <option value="novel">Novel</option>
+            <option value="comic">Comic</option>
+            <option value="magazine">Magazine</option>
+            <option value="manual">Manual</option>
+            <option value="biography">Biography</option>
+            <option value="guide">Guide</option>
+            <option value="encyclopedia">Encyclopedia</option>
+            <option value="journal">Journal</option>
+            <option value="poetry">Poetry</option>
+          </select>
+          <input type="text" id="share-author" placeholder="Author (optional)" class="w-full p-3 border rounded" />
+          <select id="share-condition" class="w-full p-3 border rounded">
+            <option value="">Condition</option>
+            <option>Like New</option>
+            <option>Good</option>
+            <option>Fair</option>
+          </select>
+          <input type="text" id="share-genre" placeholder="Genre (optional)" class="w-full p-3 border rounded" />
+          <input type="text" id="share-city" placeholder="Your City" required class="w-full p-3 border rounded" />
+          <input type="url" id="share-image-url" placeholder="Image URL (optional)" class="w-full p-3 border rounded" />
+        </div>
+        <textarea id="share-notes" placeholder="Notes (optional)" rows="3" class="w-full p-3 border rounded"></textarea>
+        <button type="submit" class="w-full bg-[#2C3E50] text-white py-3 rounded hover:bg-blue-700 transition"> Share Book</button>
+      </form>
+    </section>
+
+    <section class="space-y-6 animate-fade-in">
+      <h2 class="text-4xl font-bold text-center">My Books</h2>
+      <div id="my-books" class="grid gap-6 md:grid-cols-2 lg:grid-cols-3"></div>
+    </section>
+<div class="container mx-auto px-4 mt-12">
+  <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
+    <input id="book-search" type="text" placeholder="Search title or author..." class="p-2 border rounded" />
+
+    <select id="book-type" class="p-2 border rounded">
+      <option value="">All Types</option>
+      <option value="book">Book</option>
+      <option value="novel">Novel</option>
+      <option value="comic">Comic</option>
+      <option value="magazine">Magazine</option>
+      <option value="manual">Manual</option>
+      <option value="biography">Biography</option>
+      <option value="guide">Guide</option>
+      <option value="encyclopedia">Encyclopedia</option>
+      <option value="journal">Journal</option>
+      <option value="poetry">Poetry</option>
+    </select>
+
+    <select id="book-condition" class="p-2 border rounded">
+      <option value="">All Conditions</option>
+      <option value="Like New">Like New</option>
+      <option value="Good">Good</option>
+      <option value="Fair">Fair</option>
+    </select>
+
+    <input id="book-genre" type="text" placeholder="Genre (optional)" class="p-2 border rounded" />
+    <input id="book-city" type="text" placeholder="City (optional)" class="p-2 border rounded" />
+
+    <select id="book-sort" class="p-2 border rounded">
+      <option value="recent">Sort: Most Recent</option>
+      <option value="title_asc">Title (A–Z)</option>
+      <option value="title_desc">Title (Z–A)</option>
+    </select>
+  </div>
+</div>
+    <section class="space-y-6 animate-fade-in">
+      <h2 class="text-4xl font-bold text-center">Available Books</h2>
+      <div id="available-books" class="grid gap-6 md:grid-cols-2 lg:grid-cols-3"></div>
+    </section>
+
+    <div id="pagination-controls" class="flex justify-center items-center gap-2 mt-6"></div>
+
+    <section class="bg-white p-8 rounded-3xl shadow-xl border space-y-6 animate-fade-in">
+      <h2 class="text-4xl font-bold text-center">Propose an Exchange</h2>
+      <form id="proposal-form" class="grid md:grid-cols-2 gap-6">
+        <input type="number" id="target-book-id" placeholder="Target Book ID" required class="w-full p-3 border rounded" />
+        <select id="offer-title" required class="w-full p-3 border rounded">
+          <option value="">Select one of your books</option>
+        </select>
+        <input type="text" id="offer-author" placeholder="Author (optional)" class="w-full p-3 border rounded" />
+        <select id="offer-condition" class="w-full p-3 border rounded">
+          <option value="">Condition</option>
+          <option>Like New</option>
+          <option>Good</option>
+          <option>Fair</option>
+        </select>
+        <input type="text" id="offer-genre" placeholder="Genre (optional)" class="w-full p-3 border rounded" />
+        <input type="url" id="offer-image-url" placeholder="Image URL (optional)" class="w-full p-3 border rounded" />
+        <textarea id="offer-notes" placeholder="Notes (optional)" rows="2" class="w-full p-3 border rounded md:col-span-2"></textarea>
+        <input type="text" id="proposal-city" placeholder="Your City (optional)" class="w-full p-3 border rounded" />
+        <textarea id="proposal-reason" placeholder="Why do you want this book?" rows="3" required class="w-full p-3 border rounded md:col-span-2"></textarea>
+        <button type="submit" class="w-full bg-[#2C3E50] text-white py-3 rounded hover:bg-blue-700 transition md:col-span-2">Send Proposal</button>
+      </form>
+    </section>
+    <div class="text-center mt-8">
+  <a href="proposals.html" class="inline-block bg-[#2C3E50] text-white px-6 py-3 rounded-full font-semibold shadow hover:bg-blue-700 transition">
+    View Exchange Proposals
+  </a>
+</div>
+
+  </main>
+</body>
+</html>
+
+
+<script>
+  let myBookMap = {};
+  let currentPage = 1;
+  const booksPerPage = 12;
+
+  document.addEventListener('DOMContentLoaded', () => {
+    loadMyBooks();
+    loadAvailableBooks(currentPage);
+    setupAutoFillFromSelection();
+
+    ['book-search', 'book-type', 'book-condition', 'book-genre', 'book-city', 'book-sort'].forEach(id => {
+      document.getElementById(id)?.addEventListener('input', () => loadAvailableBooks(1));
+    });
+  });
+
+  async function loadMyBooks() {
+    try {
+      const res = await fetch('/api/books/mine', { headers: authHeaders() });
+      const books = await res.json();
+      const container = document.getElementById('my-books');
+      const offerSelect = document.getElementById('offer-title');
+      container.innerHTML = '';
+      offerSelect.innerHTML = '<option value="">Select one of your books</option>';
+      myBookMap = {};
+
+      books.forEach(book => {
+        myBookMap[book.title] = book;
+        const option = document.createElement('option');
+        option.value = book.title;
+        option.textContent = book.title;
+        offerSelect.appendChild(option);
+
+        const bookCard = document.createElement('div');
+        bookCard.className = 'p-4 bg-white rounded shadow flex gap-4';
+        bookCard.innerHTML = `
+          ${book.image_url ? `<img src="${book.image_url}" alt="${book.title}" class="w-24 h-32 object-cover rounded border">` : ''}
+          <div>
+            <h3 class="text-lg font-semibold text-blue-900">${book.title}</h3>
+            <p class="text-sm text-gray-600">Type: ${book.type}</p>
+            ${book.author ? `<p class="text-sm">Author: ${book.author}</p>` : ''}
+            ${book.genre ? `<p class="text-sm">Genre: ${book.genre}</p>` : ''}
+            ${book.condition ? `<p class="text-sm">Condition: ${book.condition}</p>` : ''}
+            ${book.city ? `<p class="text-sm">City: ${book.city}</p>` : ''}
+            ${book.notes ? `<p class="text-sm italic text-gray-500 mt-1">"${book.notes}"</p>` : ''}
+            <button onclick="deleteBook(${book.id})" class="mt-2 inline-block bg-red-100 text-red-800 text-sm px-3 py-1 rounded hover:bg-red-200">Delete</button>
+          </div>`;
+        container.appendChild(bookCard);
+      });
+    } catch (e) {
+      console.error(e);
+    }
+  }
+
+  async function loadAvailableBooks(page = 1) {
+    currentPage = page;
+
+    const params = new URLSearchParams({
+      page,
+      limit: booksPerPage
     });
 
-    function showResponseBox(type, htmlContent) {
-      const responseDiv = document.getElementById('match-response');
-      responseDiv.innerHTML = `
-        <div class="${type}">
-          <span class="close-btn" onclick="this.parentElement.style.display='none';">&times;</span>
-          ${htmlContent}
-        </div>
-      `;
-    }
+    const search = document.getElementById('book-search')?.value.trim();
+    const type = document.getElementById('book-type')?.value;
+    const condition = document.getElementById('book-condition')?.value;
+    const genre = document.getElementById('book-genre')?.value.trim();
+    const city = document.getElementById('book-city')?.value.trim();
+    const sort = document.getElementById('book-sort')?.value;
 
-    function getCookie(name) {
-      const value = `; ${document.cookie}`;
-      const parts = value.split(`; ${name}=`);
-      if (parts.length === 2) return parts.pop().split(';').shift();
+    if (search) params.append('search', search);
+    if (type) params.append('type', type);
+    if (condition) params.append('condition', condition);
+    if (genre) params.append('genre', genre);
+    if (city) params.append('city', city);
+    if (sort) params.append('sort', sort);
+
+    try {
+      const res = await fetch(`/api/books/available?${params.toString()}`, { headers: authHeaders() });
+      const { books, total } = await res.json();
+      const container = document.getElementById('available-books');
+      container.innerHTML = '';
+
+      books.forEach(book => {
+        const bookCard = document.createElement('div');
+        bookCard.className = 'p-4 bg-white rounded shadow flex gap-4';
+        bookCard.innerHTML = `
+          ${book.image_url ? `<img src="${book.image_url}" alt="${book.title}" class="w-24 h-32 object-cover rounded border">` : ''}
+          <div>
+            <h3 class="text-lg font-semibold text-blue-900">${book.title}</h3>
+            <p class="text-sm text-gray-600">Type: ${book.type}</p>
+            ${book.author ? `<p class="text-sm">Author: ${book.author}</p>` : ''}
+            ${book.genre ? `<p class="text-sm">Genre: ${book.genre}</p>` : ''}
+            ${book.condition ? `<p class="text-sm">Condition: ${book.condition}</p>` : ''}
+            ${book.city ? `<p class="text-sm">City: ${book.city}</p>` : ''}
+            ${book.notes ? `<p class="text-sm italic text-gray-500 mt-1">"${book.notes}"</p>` : ''}
+            <button onclick="prefillForm(${book.id})" class="mt-2 inline-block bg-blue-100 text-blue-900 text-sm px-3 py-1 rounded hover:bg-blue-200">Use in Form</button>
+          </div>`;
+        container.appendChild(bookCard);
+      });
+
+      renderPaginationControls(total, page);
+    } catch (e) {
+      console.error(e);
     }
-  </script>
+  }
+
+  function renderPaginationControls(totalItems, currentPage) {
+    const totalPages = Math.ceil(totalItems / booksPerPage);
+    const controls = document.getElementById('pagination-controls');
+    controls.innerHTML = '';
+
+    for (let i = 1; i <= totalPages; i++) {
+      const btn = document.createElement('button');
+      btn.textContent = i;
+      btn.className = `px-3 py-1 rounded ${i === currentPage ? 'bg-blue-900 text-white' : 'bg-gray-200 text-black'} hover:bg-blue-400`;
+      btn.addEventListener('click', () => loadAvailableBooks(i));
+      controls.appendChild(btn);
+    }
+  }
+
+  function prefillForm(id) {
+    document.getElementById('target-book-id').value = id;
+  }
+
+  function setupAutoFillFromSelection() {
+    const offerSelect = document.getElementById('offer-title');
+    offerSelect.addEventListener('change', () => {
+      const title = offerSelect.value;
+      const book = myBookMap[title];
+      if (book) {
+        document.getElementById('offer-author').value = book.author || '';
+        document.getElementById('offer-condition').value = book.condition || '';
+        document.getElementById('offer-genre').value = book.genre || '';
+        document.getElementById('offer-image-url').value = book.image_url || '';
+        document.getElementById('offer-notes').value = book.notes || '';
+        document.getElementById('proposal-city').value = book.city || '';
+      }
+    });
+  }
+
+  document.getElementById('share-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const data = {
+      title: document.getElementById('share-title').value.trim(),
+      type: document.getElementById('share-type').value,
+      author: document.getElementById('share-author').value.trim(),
+      condition: document.getElementById('share-condition').value,
+      genre: document.getElementById('share-genre').value.trim(),
+      notes: document.getElementById('share-notes').value.trim(),
+      image_url: document.getElementById('share-image-url').value.trim(),
+      city: document.getElementById('share-city').value.trim()
+    };
+
+    try {
+      const res = await fetch('/api/books', {
+        method: 'POST',
+        headers: {
+          ...authHeaders(),
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      });
+
+      if (!res.ok) throw new Error('Sharing failed');
+      alert('Book shared successfully!');
+      document.getElementById('share-form').reset();
+      loadMyBooks();
+      loadAvailableBooks(currentPage);
+    } catch (err) {
+      alert('Error sharing book.');
+      console.error(err);
+    }
+  });
+
+  document.getElementById('proposal-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const data = {
+      target_book_id: document.getElementById('target-book-id').value,
+      offer_title: document.getElementById('offer-title').value,
+      reason: document.getElementById('proposal-reason').value.trim(),
+      offer_author: document.getElementById('offer-author').value.trim(),
+      offer_condition: document.getElementById('offer-condition').value,
+      offer_genre: document.getElementById('offer-genre').value.trim(),
+      offer_notes: document.getElementById('offer-notes').value.trim(),
+      city: document.getElementById('proposal-city').value.trim(),
+      offer_image_url: document.getElementById('offer-image-url').value.trim()
+    };
+
+    try {
+      const res = await fetch('/api/books/proposal', {
+        method: 'POST',
+        headers: {
+          ...authHeaders(),
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      });
+
+      if (!res.ok) throw new Error('Proposal failed');
+      alert('Proposal sent successfully!');
+      document.getElementById('proposal-form').reset();
+    } catch (err) {
+      alert('Error submitting proposal.');
+      console.error(err);
+    }
+  });
+
+  function authHeaders() {
+    return {
+      'Authorization': `Bearer ${getCookie('token')}`
+    };
+  }
+
+  function getCookie(name) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
+  }
+
+  async function deleteBook(bookId) {
+    if (!confirm('Are you sure you want to delete this book?')) return;
+
+    try {
+      const res = await fetch(`/api/books/${bookId}`, {
+        method: 'DELETE',
+        headers: authHeaders()
+      });
+
+      if (!res.ok) throw new Error('Delete failed');
+      alert('Book deleted successfully!');
+      loadMyBooks();
+    } catch (err) {
+      alert('Error deleting book.');
+      console.error(err);
+    }
+  }
+</script>
+
+
 </body>
 </html>

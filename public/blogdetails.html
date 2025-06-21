@@ -1,369 +1,528 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Book Review | Literary Chronicle</title>
-    <link rel="stylesheet" href="blogdetails.css">
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book Review | Literary Chronicle</title>
+  <link rel="stylesheet" href="blogdetails.css">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+    .comment.reply {
+      margin-left: 30px;
+      border-left: 2px solid #ccc;
+      padding-left: 15px;
+      margin-top: 10px;
+    }
+.book-detail-split {
+  max-width: 1000px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+.upper-split {
+  display: flex;
+ gap: 3rem;
+   flex-wrap: wrap;
+  margin-bottom: 2rem;
+  align-items: flex-start;
+}
+
+.left-side {
+  flex: 1;
+  min-width: 280px;
+  text-align: center;
+}
+
+.book-cover-large {
+  width: 280px;
+  height: 400px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 10px;
+  margin: 0 auto;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.post-title {
+  font-size: 3rem;
+  font-weight: 800;
+  margin-bottom: 0.5rem;
+  text-align: center;
+  color: #2C3E50;
+}
+
+.right-side {
+  flex: 2;
+  min-width: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 1rem;
+}
+
+.right-side h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.book-summary {
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: #333;
+}
+
+.quote {
+  margin-top: 1.5rem;
+  font-style: italic;
+  color: #666;
+}
+
+.book-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.stat-item h3 {
+  margin-bottom: 0.25rem;
+  font-size: 1rem;
+  color: #555;
+}
+
+.stat-item p {
+  font-size: 0.95rem;
+  font-weight: bold;
+  color: #111;
+}
+
+.comment {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  background: #f9f9f9;
+}
+
+.comment.reply {
+  margin-left: 30px;
+  border-left: 2px solid #ccc;
+  padding-left: 15px;
+  margin-top: 10px;
+}
+
+.comment-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #1a1a1a;
+  color: #fff;
+  font-weight: bold;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 10px;
+  flex-shrink: 0;
+}
+
+.star-rating {
+  display: inline-flex;
+  cursor: pointer;
+}
+
+.star-rating .star {
+  font-size: 24px;
+  color: #ccc;
+  transition: color 0.2s;
+  padding: 0 2px;
+}
+
+.star-rating .star.hovered,
+.star-rating .star.active {
+  color: #f39c12;
+}
+
+@media (max-width: 768px) {
+  .upper-split {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .right-side {
+    text-align: center;
+  }
+}
+.post-header {
+  text-align: center;
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.post-header .post-title {
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.post-meta {
+  font-style: italic;
+  font-size: 1rem;
+  color: #666;
+}
+.review-section{
+padding: 0;
+}
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    color: var(--primary);
+    font-size: 2.2rem;
+    font-weight: 700;
+    text-decoration: none;
+    letter-spacing: 1px;
+}
+
+.main-nav {
+    display: flex;
+    gap: 2rem;
+}
+
+.main-nav a {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.main-nav a:hover {
+    color: var(--accent);
+}
+
+.main-nav a::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--accent);
+    transition: width 0.3s ease;
+}
+
+.main-nav a:hover::after {
+    width: 100%;
+}
+</style>
+
+
 </head>
 <body>
-    <header class="header">
-        <nav class="nav-container">
-            <a href="#" class="logo">Literary Chronicle</a>
-            <nav class="main-nav"></nav>
-        </nav>
-    </header>
-
-    <div class="review-container">
-        <div class="review-section">
-            <h1 class="section-title">Loading...</h1>
-            <div class="rating-system" id="mainRating"></div>
-        </div>
-
-        <div class="book-metadata">
-            <div class="book-cover-large"></div>
-            <div>
-                <div class="book-stats">
-                    <div class="stat-item">
-                        <h3>Genre</h3>
-                        <p>Loading...</p>
-                    </div>
-                    <div class="stat-item">
-                        <h3>Pages</h3>
-                        <p>Loading...</p>
-                    </div>
-                    <div class="stat-item">
-                        <h3>Language</h3>
-                        <p>Loading...</p>
-                    </div>
-                    <div class="stat-item">
-                        <h3>Author</h3>
-                        <p id="author">Loading...</p>
-                    </div>
-                    <div class="stat-item">
-                        <h3>Published</h3>
-                        <p id="published">Loading...</p>
-                    </div>
-                </div>
-
-                <div class="review-section">
-                    <h2>Summary</h2>
-                    <p id="summary">Loading book data...</p>
-                    <div class="quote"></div>
-                </div>
-            </div>
-        </div>
-
-        <div class="review-section">
-            <h2>Critical Analysis</h2>
-            <p id="analysis"></p>
-            <h3>Key Themes</h3>
-            <ul class="themes-list"></ul>
-        </div>
-
-        <div class="comment-section">
-            <h2 class="section-title">Reader Comments</h2>
-            <div id="commentsContainer"></div>
-
-            <div class="review-section">
-                <h3>Share Your Thoughts</h3>
-                <form class="comment-form" onsubmit="postComment(event)">
-                    <textarea placeholder="Write your review..." required></textarea>
-                    <div class="rating-input">
-                        <span>Your Rating:</span>
-                        <div class="star-rating">
-                            <span class="star" onclick="setRating(1)">☆</span>
-                            <span class="star" onclick="setRating(2)">☆</span>
-                            <span class="star" onclick="setRating(3)">☆</span>
-                            <span class="star" onclick="setRating(4)">☆</span>
-                            <span class="star" onclick="setRating(5)">☆</span>
-                        </div>
-                    </div>
-                    <button class="btn" type="submit">Post Comment</button>
-                </form>
-            </div>
-        </div>
+  <header class="main-header">
+    <nav class="nav-container">
+      <a href="" class="logo">The Literary Vault</a>
+      <nav class="main-nav">
+        <a href="main.html">Home</a>
+        <a href="profile.html">My Posts</a>
+        <a href="blog.html" style="font-weight: bold; color: #2C3E50; border-bottom: 2px solid #2C3E50;">Blog</a>
+        <a href="/logout">Newsletter</a>
+      </nav>
+    </nav>
+  </header>
+  <div class="review-container">
+    <div class="review-section">
+      <div class="rating-system" id="mainRating"></div>
     </div>
 
-<script>
+<section class="book-detail-split">
+<div class="post-header">
+  <h1 id="bookTitleDisplay" class="post-title">Loading...</h1>
+  <p id="postedBy" class="post-meta">Posted by...</p>
+</div>
+
+
+  <div class="upper-split">
+    <div class="left-side">
+      <div class="book-cover-large" id="bookCover"></div>
+    </div>
+    <div class="right-side">
+      <p id="summary" class="book-summary">Loading book data...</p>
+      <div class="quote" id="quote"></div>
+    </div>
+  </div>
+
+  <div class="book-stats">
+    <div class="stat-item"><h3>Genre</h3><p id="genre">Loading...</p></div>
+    <div class="stat-item"><h3>Pages</h3><p id="pages">Loading...</p></div>
+    <div class="stat-item"><h3>Language</h3><p id="language">Loading...</p></div>
+    <div class="stat-item"><h3>Author</h3><p id="author">Loading...</p></div>
+    <div class="stat-item"><h3>Published</h3><p id="published">Loading...</p></div>
+  </div>
+</section>
+
+
+    <div class="review-section">
+      <h2>Critical Analysis</h2>
+      <p id="analysis"></p>
+      <h3>Key Themes</h3>
+      <ul class="themes-list"></ul>
+    </div>
+
+    <div class="comment-section">
+      <h2 class="section-title">Reader Comments</h2>
+      <div id="commentsContainer"></div>
+
+      <div class="review-section">
+        <h3>Share Your Thoughts</h3>
+        <form class="comment-form" onsubmit="postComment(event)">
+          <textarea placeholder="Write your review..." required></textarea>
+          <div class="rating-input">
+            <span>Your Rating:</span>
+            <div class="star-rating">
+              <span class="star" onclick="setRating(1)">☆</span>
+              <span class="star" onclick="setRating(2)">☆</span>
+              <span class="star" onclick="setRating(3)">☆</span>
+              <span class="star" onclick="setRating(4)">☆</span>
+              <span class="star" onclick="setRating(5)">☆</span>
+            </div>
+          </div>
+          <button class="btn" type="submit">Post Comment</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script>
     let userRating = 0;
     const params = new URLSearchParams(window.location.search);
-    const bookId = params.get('book');
+    const postParam = params.get('post');
+    let postId = null;
+    let currentUserId = null;
 
-    const bookData = {
-        gatsby: {
-            title: "The Great Gatsby",
-            summary: "F. Scott Fitzgerald's masterpiece explores the decadence and idealism of the Jazz Age through the enigmatic millionaire Jay Gatsby and his obsessive pursuit of Daisy Buchanan. The novel examines themes of social stratification, the corruption of the American Dream, and the transient nature of identity.",
-            genre: "Literary Fiction",
-            pages: "218",
-            language: "English",
-            author: "F. Scott Fitzgerald",
-            published: "1925",
-            cover: "img/Thegreatgatsby.jpeg",
-            quote: "\"So we beat on, boats against the current, borne back ceaselessly into the past.\"",
-            rating: 4,
-            themes: ["The American Dream", "Social Class", "Love and Obsession"],
-            analysis: "Fitzgerald's use of symbolic imagery (the green light, the eyes of Dr. T.J. Eckleburg) creates a haunting commentary on materialism. The unreliable narration through Nick Carraway adds layers to character motivations.",
-            comments: [
-                {user: "Emily R.", date: "2 days ago", rating: 5, text: "The prose is lyrical and haunting. Gatsby's tragic arc stays with you long after reading."},
-                {user: "Michael T.", date: "1 week ago", rating: 4, text: "A brilliant critique of wealth, though some characters felt underdeveloped."}
-            ]
-        },
-        "1984": {
-            title: "1984",
-            summary: "George Orwell's dystopian classic depicts a totalitarian regime under Big Brother's surveillance. Winston Smith's rebellion against thought control explores themes of reality manipulation, linguistic corruption, and individual autonomy.",
-            genre: "Dystopian Fiction",
-            pages: "328",
-            language: "English",
-            author: "George Orwell",
-            published: "1949",
-            cover: "img/1984.webp",
-            quote: "\"Big Brother is watching you.\"",
-            rating: 5,
-            themes: ["Totalitarianism", "Privacy", "Historical Revisionism"],
-            analysis: "Orwell's concept of Newspeak remains chillingly relevant. The rats scene represents the ultimate destruction of personal autonomy.",
-            comments: [
-                {user: "David K.", date: "5 days ago", rating: 5, text: "More relevant than ever in the digital age. The ending shattered me."},
-                {user: "Sophia M.", date: "2 weeks ago", rating: 4, text: "Brilliant ideas though the pacing slows in middle sections."}
-            ]
-        },
-        pride: {
-            title: "Pride and Prejudice",
-            summary: "Jane Austen's timeless comedy of manners follows Elizabeth Bennet as she navigates societal expectations and romantic misunderstandings with the aloof Mr. Darcy. The novel critiques marriage economics and class rigidity in Regency England.",
-            genre: "Classic Romance",
-            pages: "279",
-            language: "English",
-            author: "Jane Austen",
-            published: "1813",
-            cover: "https://m.media-amazon.com/images/I/71Q1tPupKjL._SL1360_.jpg",
-            quote: "\"It is a truth universally acknowledged...\"",
-            rating: 4,
-            themes: ["Social Status", "Female Agency", "Moral Growth"],
-            analysis: "Austen's ironic narrative voice elevates the romance into social commentary. The gradual humanization of Darcy showcases masterful character development.",
-            comments: [
-                {user: "Clara B.", date: "3 days ago", rating: 5, text: "Elizabeth Bennet is literature's finest heroine. Witty and wonderful!"},
-                {user: "Oliver W.", date: "1 week ago", rating: 4, text: "Some dialogues feel dated, but the romance remains iconic."}
-            ]
-        },
-        mobydick: {
-            title: "Moby-Dick",
-            summary: "Herman Melville's epic follows Captain Ahab's monomaniacal quest for the white whale. Blending adventure with philosophical musings, it explores humanity's relationship with nature and the limits of obsession.",
-            genre: "Adventure Fiction",
-            pages: "635",
-            language: "English",
-            author: "Herman Melville",
-            published: "1851",
-            cover: "img/mobydickblog.jpg",
-            quote: "\"Call me Ishmael.\"",
-            rating: 4,
-            themes: ["Obsession", "Man vs Nature", "Existentialism"],
-            analysis: "Melville's encyclopedic chapters about whaling serve as a metaphor for human knowledge acquisition. The multicultural crew reflects 19th-century globalization.",
-            comments: [
-                {user: "Nathan P.", date: "4 days ago", rating: 5, text: "The Shakespearean tragedy of the high seas. Queequeg is unforgettable!"},
-                {user: "Grace L.", date: "10 days ago", rating: 3, text: "Brilliant but demanding - the technical chapters tested my patience."}
-            ]
-        },
-        sapiens: {
-        title: "Sapiens",
-        summary: "Yuval Noah Harari traces the cognitive, agricultural, and scientific revolutions that shaped modern humanity. The book challenges conventional historical narratives and asks fundamental questions about the human condition.",
-        genre: "Non-Fiction / History",
-        pages: "443",
-        language: "English",
-        author: "Yuval Noah Harari",
-        published: "2011",
-        cover: "img/sapiens.webp",
-        quote: "\"Homo sapiens rules the world because it is the only animal that can believe in things that exist purely in its own imagination.\"",
-        rating: 5,
-        themes: ["Human Evolution", "Culture", "Cognition"],
-        analysis: "Harari blends history and philosophy to explore how myths and cooperation have shaped civilization. A provocative take on humanity’s rise.",
-        comments: [
-            { user: "Liam J.", date: "3 days ago", rating: 5, text: "A mind-expanding read. Every chapter surprised me." },
-            { user: "Emma S.", date: "1 week ago", rating: 4, text: "Very insightful, though the tone gets preachy at times." }
-        ]
-    },
-    educated: {
-        title: "Educated",
-        summary: "Tara Westover recounts her journey from a survivalist, unschooled upbringing in rural Idaho to earning a PhD from Cambridge. The memoir explores identity, resilience, and the transformative power of education.",
-        genre: "Memoir",
-        pages: "334",
-        language: "English",
-        author: "Tara Westover",
-        published: "2018",
-        cover: "img/educated.webp",
-        quote: "\"You can love someone and still choose to say goodbye to them.\"",
-        rating: 5,
-        themes: ["Education", "Family", "Self-Discovery"],
-        analysis: "A powerful portrait of reclaiming agency. Westover's clear-eyed storytelling sheds light on both trauma and hope.",
-        comments: [
-            { user: "Isabella R.", date: "6 days ago", rating: 5, text: "Absolutely gripping. A story of incredible courage." },
-            { user: "James H.", date: "1 week ago", rating: 4, text: "Raw and real, though emotionally heavy at times." }
-        ]
-    },
-    lighthouse: {
-        title: "To the Lighthouse",
-        summary: "Virginia Woolf’s stream-of-consciousness masterpiece captures fleeting perceptions and inner lives during two visits to a family’s summer home. The novel meditates on time, art, and loss.",
-        genre: "Modernist Fiction",
-        pages: "209",
-        language: "English",
-        author: "Virginia Woolf",
-        published: "1927",
-        cover: "img/lighthouse.jpg",
-        quote: "\"What is the meaning of life? That was all — a simple question; one that tended to close in on one with years.\"",
-        rating: 4,
-        themes: ["Time", "Art", "Family"],
-        analysis: "Woolf's lyrical narrative style creates a sense of emotional depth and temporal fluidity. A landmark in modernist literature.",
-        comments: [
-            { user: "Amelia F.", date: "2 days ago", rating: 5, text: "Poetic and profound. Woolf is a genius." },
-            { user: "Henry D.", date: "5 days ago", rating: 3, text: "Beautiful but hard to follow at times." }
-        ]
-    },
-    mrsdalloway: {
-        title: "Mrs Dalloway",
-        summary: "A day in the life of Clarissa Dalloway unfolds through a stream-of-consciousness lens, interweaving her thoughts with those of a shell-shocked war veteran. Woolf examines identity, memory, and the fabric of urban life.",
-        genre: "Modernist Fiction",
-        pages: "194",
-        language: "English",
-        author: "Virginia Woolf",
-        published: "1925",
-        cover: "img/mrdolloway.jpg",
-        quote: "\"Mrs Dalloway said she would buy the flowers herself.\"",
-        rating: 4,
-        themes: ["Mental Health", "Time", "Societal Expectations"],
-        analysis: "Woolf collapses time and space in a single day, crafting a layered portrait of post-war disillusionment.",
-        comments: [
-            { user: "Charlotte K.", date: "3 days ago", rating: 4, text: "Haunting and lyrical. A masterpiece of interiority." },
-            { user: "Ethan M.", date: "1 week ago", rating: 4, text: "Deeply moving once you get into the rhythm of the prose." }
-        ]
-    },
-    midnightlibrary: {
-        title: "The Midnight Library",
-        summary: "Nora Seed finds herself in a metaphysical library between life and death, where each book contains a version of her life had she made different choices. The novel explores regret, mental health, and second chances.",
-        genre: "Speculative Fiction",
-        pages: "288",
-        language: "English",
-        author: "Matt Haig",
-        published: "2020",
-        cover: "img/midnightlibrary.jpg",
-        quote: "\"You don’t have to understand life. You just have to live it.\"",
-        rating: 4,
-        themes: ["Regret", "Mental Health", "Alternate Realities"],
-        analysis: "A touching and accessible exploration of possibility and self-worth, blending philosophy with storytelling.",
-        comments: [
-            { user: "Lily A.", date: "1 day ago", rating: 5, text: "Uplifting and thought-provoking. Loved the concept!" },
-            { user: "Noah S.", date: "4 days ago", rating: 4, text: "Some parts were predictable, but overall very inspiring." }
-        ]
-    },
-    circe: {
-        title: "Circe",
-        summary: "Madeline Miller reimagines the myth of Circe, daughter of Helios, as a tale of female empowerment and transformation. Exiled to a remote island, Circe finds her voice and power in solitude and magic.",
-        genre: "Mythological Fiction",
-        pages: "393",
-        language: "English",
-        author: "Madeline Miller",
-        published: "2018",
-        cover: "img/circe.png",
-        quote: "\"When I was born, the name for what I was did not exist.\"",
-        rating: 5,
-        themes: ["Feminism", "Power", "Identity"],
-        analysis: "Miller weaves lyrical prose with mythic grandeur. Circe becomes a symbol of strength and independence in a patriarchal world.",
-        comments: [
-            { user: "Zoe M.", date: "2 days ago", rating: 5, text: "Absolutely spellbinding. Circe’s journey is unforgettable." },
-            { user: "Ryan T.", date: "6 days ago", rating: 4, text: "A beautiful retelling. Loved the poetic writing." }
-        ]
-    }
-};
 
     function renderRating(rating) {
-        let stars = '';
-        for (let i = 1; i <= 5; i++) {
-            stars += i <= rating ? '★' : '☆';
-        }
-        return `<div>${stars}</div><span>${rating}/5 Stars</span>`;
-    }
-
-    if (bookData[bookId]) {
-        const data = bookData[bookId];
-        document.title = `${data.title} Review | Literary Chronicle`;
-        document.querySelector('.section-title').textContent = data.title;
-        document.getElementById('summary').textContent = data.summary;
-        document.getElementById('author').textContent = data.author;
-        document.getElementById('published').textContent = data.published;
-        document.querySelector('.book-cover-large').style.backgroundImage = `url('${data.cover}')`;
-        document.querySelectorAll('.stat-item p')[0].textContent = data.genre;
-        document.querySelectorAll('.stat-item p')[1].textContent = data.pages;
-        document.querySelectorAll('.stat-item p')[2].textContent = data.language;
-        document.querySelector('.quote').textContent = data.quote;
-        document.getElementById('mainRating').innerHTML = renderRating(data.rating);
-        document.getElementById('analysis').textContent = data.analysis;
-        
-        const themesList = document.querySelector('.themes-list');
-        data.themes.forEach(theme => {
-            const li = document.createElement('li');
-            li.textContent = `• ${theme}`;
-            themesList.appendChild(li);
-        });
-
-        const commentsContainer = document.getElementById('commentsContainer');
-        data.comments.forEach(comment => {
-            const div = document.createElement('div');
-            div.className = 'comment';
-            div.innerHTML = `
-                <div class="comment-header">
-                    <div class="comment-avatar"></div>
-                    <div>
-                        <h4>${comment.user}</h4>
-                        <small>${comment.date}</small>
-                    </div>
-                </div>
-                <div class="rating-system">${renderRating(comment.rating)}</div>
-                <p>${comment.text}</p>
-            `;
-            commentsContainer.appendChild(div);
-        });
+      if (!rating || rating <= 0) return '';
+      let stars = '';
+      for (let i = 1; i <= 5; i++) {
+        stars += i <= rating ? '★' : '☆';
+      }
+      return `<div>${stars}</div><span>${rating}/5 Stars</span>`;
     }
 
     function setRating(r) {
-        userRating = r;
-        const stars = document.querySelectorAll('.star-rating .star');
-        stars.forEach((star, index) => {
-            star.textContent = index < r ? '★' : '☆';
-        });
+  userRating = r;
+  updateStars();
+}
+
+function updateStars() {
+  const stars = document.querySelectorAll('.star-rating .star');
+  stars.forEach((star, index) => {
+    star.classList.remove('active');
+    if (index < userRating) star.classList.add('active');
+  });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  const stars = document.querySelectorAll('.star-rating .star');
+  stars.forEach((star, index) => {
+    star.addEventListener('mouseenter', () => {
+      stars.forEach((s, i) => {
+        s.classList.toggle('hovered', i <= index);
+      });
+    });
+    star.addEventListener('mouseleave', () => {
+      stars.forEach(s => s.classList.remove('hovered'));
+    });
+  });
+});
+ async function deleteComment(commentId) {
+    if (!confirm("Are you sure you want to delete this comment?")) return;
+
+    const res = await fetch(`/api/posts/${postId}/comments/${commentId}`, {
+      method: 'DELETE',
+      credentials: 'include'
+    });
+
+    if (res.ok) {
+      loadComments(); 
+    } else {
+      const err = await res.json();
+      alert(`Error: ${err.error}`);
     }
+  }
 
-    function postComment(e) {
-        e.preventDefault();
-        const text = document.querySelector('textarea').value.trim();
-        if (!text || userRating === 0) return;
+    async function loadPostAndComments() {
+      if (!postParam) return;
 
-        const comment = {
-            user: "New Reader",
-            date: "Just now",
-            rating: userRating,
-            text: text
-        };
+      const res = await fetch(`/api/posts/${postParam}`);
+      const post = await res.json();
+      if (!post || !post.title) return;
 
+      postId = post.id;
+      document.title = `${post.title} | Literary Chronicle`;
+      document.querySelector('.section-title').textContent = post.title;
+      document.getElementById('bookTitleDisplay').textContent = post.book_title || 'Untitled';
+      const postDate = new Date(post.created_at).toLocaleDateString(undefined, {
+  year: 'numeric', month: 'long', day: 'numeric'
+});
+document.getElementById('postedBy').textContent = `Posted by ${post.posted_by || 'Anonymous'} on ${postDate}`;
+      document.getElementById('analysis').textContent = post.content;
+      document.querySelector('.book-cover-large').style.backgroundImage = `url('${post.cover}')`;
+      document.querySelectorAll('.stat-item p')[0].textContent = post.genre;
+      document.querySelectorAll('.stat-item p')[1].textContent = post.pages || '—';
+      document.querySelectorAll('.stat-item p')[2].textContent = post.language || '—';
+      document.getElementById('author').textContent = post.book_author || 'Unknown';
+      document.getElementById('published').textContent = post.published;
+      document.getElementById('summary').textContent = post.summary;
+      document.querySelector('.quote').textContent = post.quote;
+
+ const authorStat = document.createElement('div');
+  authorStat.className = 'stat-item';
+  authorStat.innerHTML = `
+    <h3>Posted by</h3>
+    <p>${post.posted_by || 'Anonymous'}</p>
+  `;
+  document.querySelector('.book-stats').appendChild(authorStat);
+      loadComments();
+    }
+    function getInitials(name = '') {
+  const trimmed = name.trim();
+  if (!trimmed) return '?';
+  return trimmed.split(' ').map(n => n[0]).join('').toUpperCase();
+}
+
+
+    async function loadComments() {
+      if (!postId) return;
+      const res = await fetch(`/api/posts/${postId}/comments`);
+      const comments = await res.json();
+
+      const commentsContainer = document.getElementById('commentsContainer');
+      commentsContainer.innerHTML = '';
+
+      const topLevel = comments.filter(c => !c.parent_comment_id);
+      const replies = comments.filter(c => c.parent_comment_id);
+
+   function renderReplies(parentId) {
+  return replies
+    .filter(reply => reply.parent_comment_id === parentId)
+    .map(reply => `
+      <div class="comment reply">
+        <div class="comment-header">
+          <div class="comment-avatar">${getInitials(reply.name || 'Reader')}</div>
+          <div>
+            <h4>${reply.name || 'Reader'}</h4>
+            <small>${new Date(reply.created_at).toLocaleDateString()}</small>
+          </div>
+        </div>
+        <p>${reply.content}</p>
+        ${reply.user_id === currentUserId ? `<button class="btn" onclick="deleteComment(${reply.id})">Delete</button>` : ''}
+      </div>
+    `).join('');
+}
+
+
+      topLevel.forEach(comment => {
         const div = document.createElement('div');
         div.className = 'comment';
         div.innerHTML = `
-            <div class="comment-header">
-                <div class="comment-avatar"></div>
-                <div>
-                    <h4>${comment.user}</h4>
-                    <small>${comment.date}</small>
-                </div>
+          <div class="comment-header">
+<div class="comment-avatar">${getInitials(comment.name || 'Reader')}</div>
+            <div>
+              <h4>${comment.name || 'Reader'}</h4>
+              <small>${new Date(comment.created_at).toLocaleDateString()}</small>
             </div>
-            <div class="rating-system">${renderRating(comment.rating)}</div>
-            <p>${comment.text}</p>
+          </div>
+          <div class="rating-system">${renderRating(comment.rating)}</div>
+          <p>${comment.content}</p>
+          <button class="btn" onclick="toggleReplyBox(${comment.id})">Reply</button>
+${comment.user_id === currentUserId ? `<button class="btn" onclick="deleteComment(${comment.id})">Delete</button>` : ''}
+          <div id="reply-box-${comment.id}" style="display:none; margin-top:10px;">
+            <textarea id="reply-text-${comment.id}" placeholder="Write your reply..."></textarea>
+            <button class="btn" onclick="submitReply(${comment.id})">Post Reply</button>
+          </div>
+          ${renderReplies(comment.id)}
         `;
-
-        document.getElementById('commentsContainer').prepend(div);
-        document.querySelector('textarea').value = '';
-        userRating = 0;
-        document.querySelectorAll('.star-rating .star').forEach(star => {
-            star.textContent = '☆';
-        });
+        commentsContainer.appendChild(div);
+      });
     }
-</script>
+
+    function toggleReplyBox(commentId) {
+      const box = document.getElementById(`reply-box-${commentId}`);
+      box.style.display = box.style.display === 'none' ? 'block' : 'none';
+    }
+
+    async function submitReply(parentId) {
+      const text = document.getElementById(`reply-text-${parentId}`).value.trim();
+      if (!text || !postId) return;
+
+      await fetch(`/api/posts/${postId}/comments`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify({
+          content: text,
+          parent_comment_id: parentId
+        })
+      });
+
+      loadComments();
+    }
+
+    async function postComment(e) {
+      e.preventDefault();
+
+      const form = e.target;
+      const textarea = form.querySelector('textarea');
+      const text = textarea.value.trim();
+
+      if (!text || !postId) return;
+
+      const payload = { content: text };
+      if (userRating > 0) {
+        payload.rating = userRating;
+      }
+
+      const res = await fetch(`/api/posts/${postId}/comments`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify(payload)
+      });
+
+      if (!res.ok) {
+        const err = await res.json();
+        console.error("Error submitting comment:", err);
+        return;
+      }
+
+      textarea.value = '';
+      setRating(0);
+      loadComments();
+    }
+
+fetchCurrentUser().then(loadPostAndComments);
+    async function fetchCurrentUser() {
+  try {
+    const res = await fetch('/api/posts/me', { credentials: 'include' });
+    if (res.ok) {
+      const data = await res.json();
+      currentUserId = data.id;
+    }
+  } catch (err) {
+    console.error('Failed to fetch current user:', err);
+  }
+}
+
+  </script>
 </body>
 </html>

@@ -1,4 +1,4 @@
-const pool = require('../config/db'); 
+const pool = require('../config/db');
 
 const productController = {
     getAllProducts: async (req, res) => {
@@ -81,40 +81,46 @@ const productController = {
         }
     },
 
-    recommendBook: async (req, res) => {
-        const { author = '', maxPrice = 10000, category = '' } = req.query;
+recommendBook: async (req, res) => {
+    const { author = '', maxPrice = 10000, category = '' } = req.query;
 
-        try {
-            let query = `SELECT *, 
-                            CASE 
-                                WHEN LOWER(author) = LOWER($2) THEN 2
-                                WHEN LOWER(author) LIKE LOWER($2) THEN 1
-                                ELSE 0
-                            END AS author_score,
-                            ABS(price - $1) AS price_diff
-                        FROM products
-                        WHERE price <= $1`;
-            let values = [maxPrice, `%${author}%`];
+    try {
+        let values = [parseFloat(maxPrice), `%${author}%`];
+        let query = `
+            SELECT *,
+                (
+                    (CASE 
+                        WHEN LOWER(author) = LOWER($2) THEN 3
+                        WHEN LOWER(author) LIKE LOWER($2) THEN 2
+                        ELSE 0
+                    END) * 2 +
+                    (CASE 
+                        WHEN LOWER(category) = LOWER($3) THEN 2
+                        ELSE 0
+                    END) -
+                    ABS(price - $1) / 10
+                ) AS score
+            FROM products
+            WHERE price <= $1
+              AND stock_status = 'In Stock'
+        `;
 
-            if (category) {
-                query += ` AND LOWER(category) = LOWER($3)`;
-                values.push(category);
-            }
-
-            query += ` ORDER BY author_score DESC, price_diff ASC LIMIT 1`;
-
-            const result = await pool.query(query, values);
-
-            if (result.rows.length > 0) {
-                res.json(result.rows[0]);
-            } else {
-                res.json({});
-            }
-        } catch (error) {
-            console.error("Error in AI recommendation:", error);
-            res.status(500).json({ error: "Failed to recommend a book." });
+        if (category) {
+            values.push(category);
+            query += ` AND LOWER(category) = LOWER($3)`;
         }
-    },
+
+        query += ` ORDER BY score DESC LIMIT 5`;
+
+        const result = await pool.query(query, values);
+
+        res.json(result.rows.length > 0 ? result.rows : []);
+    } catch (error) {
+        console.error("Error in AI recommendation:", error);
+        res.status(500).json({ error: "Failed to recommend a book." });
+    }
+},
+
 
     addToCart: async (req, res) => {
         const { productId, quantity } = req.body;
@@ -149,6 +155,33 @@ const productController = {
         } catch (error) {
             console.error("Erreur lors de l'ajout au panier :", error);
             res.status(500).json({ error: "Erreur serveur lors de l'ajout au panier." });
+        }
+    },
+
+    getSimilarBooks: async (req, res) => {
+        const { category, maxPrice = 10000 } = req.query;
+
+        if (!category) {
+            return res.status(400).json({ error: 'Category is required.' });
+        }
+
+        try {
+            const query = `
+                SELECT id, title, image, price 
+                FROM products 
+                WHERE LOWER(category) = LOWER($1) 
+                  AND price <= $2
+                ORDER BY RANDOM()
+                LIMIT 6
+            `;
+            const values = [category, maxPrice];
+
+            const result = await pool.query(query, values);
+
+            res.json(result.rows);
+        } catch (error) {
+            console.error('Error fetching similar books:', error);
+            res.status(500).json({ error: 'Failed to fetch similar books.' });
         }
     }
 };

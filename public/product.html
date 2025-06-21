@@ -9,117 +9,151 @@
     <script defer src="script.js"></script> 
 </head>
 <body>
+        <nav class="navbar">
+  <div class="navbar-logo">
+    <a href="main.html">
+      <img src="img/Frame 3.png" alt="Bookshelf">
+    </a>
+  </div>
 
-    <header class="header">FREE SHIPPING FOR ORDERS OVER $50</header>
-    <nav class="navbar">
-        <a href="#" class="logo">
-            <img src="img/logo (2).png" alt="Bookshelf">
-        </a>
-        <ul>
-            <li><a href="main.html">Home</a></li>
-            <li><a href="ai-recommendation.html">AI Recommendation</a></li>
-            <li><a href="product.html" class="active">Shop</a></li>
+  <button class="hamburger" id="hamburger">&#9776;</button>
+
+  <ul class="navbar-links" id="nav-links">
+      <li><a href="main.html">Home</a></li>
+    <li><a href="ai-recommendation.html">AI Recommendation</a></li>
+    <li><a href="product.html" class="active">Shop</a></li>
+  </ul>
+
+  <div class="nav-icons">
+    <a href="carte page.html"><img src="img/cart-icon.png" alt="Cart" class="icon"></a>
+    <a href="wishlist.html"><img src="img/wishlist-icon.png" alt="Wishlist" class="icon"></a>
+  </div>
+</nav>
+<section class="hero-banner">
+  <div class="hero-content">
+  </div>
+</section>
+<div class="typewriter" id="loader">
+  <div class="slide"><i></i></div>
+  <div class="paper"></div>
+  <div class="keyboard"></div>
+</div>
+<div class="container1">
+  <div class="content" style="width: 100%;">
+
+    <!-- Unified Top Filter Bar: Price + Category + Sort -->
+   <div class="top-filter-bar compact-layout">
+  <div class="filter-menu">
+    <div class="filter-group">
+      <div>
+        <label for="priceFilter">Max Price:</label>
+        <input type="range" id="priceFilter" min="0" step="5">
+        <span id="priceValue">$0 - $100</span>
+      </div>
+
+      <div>
+        <label for="categorySelect">Category:</label>
+        <select id="categorySelect">
+          <option value="all">All</option>
+          <option value="fiction">Fiction</option>
+          <option value="non-fiction">Non-Fiction</option>
+          <option value="mystery">Mystery</option>
+          <option value="science-fiction">Science Fiction</option>
+          <option value="romance">Romance</option>
+          <option value="biography">Biography</option>
+          <option value="historical-fiction">Historical Fiction</option>
+          <option value="thriller">Thriller</option>
+          <option value="fantasy">Fantasy</option>
+          <option value="horror">Horror</option>
+          <option value="young-adult">Young Adult (YA)</option>
+          <option value="children">Children's Books</option>
+          <option value="self-help">Self-Help</option>
+          <option value="poetry">Poetry</option>
+          <option value="cookbooks">Cookbooks</option>
+          <option value="art-design">Art & Design</option>
+          <option value="philosophy">Philosophy</option>
+          <option value="science">Science</option>
+          <option value="health-wellness">Health & Wellness</option>
+          <option value="politics">Politics</option>
+          <option value="Magazine">Magazine</option>
+          <option value="ebook">ebook</option>
+        </select>
+      </div>
+
+      <div>
+        <label for="sortPrice">Sort by:</label>
+        <select id="sortPrice">
+          <option value="asc">Price: Low to High</option>
+          <option value="desc">Price: High to Low</option>
+          <option value="az">Title: A-Z</option>
+          <option value="za">Title: Z-A</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div class="search-area">
+    <label for="search-box">Search:</label>
+    <input type="text" id="search-box" placeholder="Search books...">
+  </div>
+</div>
 
 
-            
-        </ul>
-        <div class="nav-icons">
-            <a href="carte page.html"><img src="img/cart-icon.png" alt="Cart"></a>
-            <a href="wishlist.html"><img src="img/icons8-wishlist-58.png" alt="wishlist"></a>
-            <a href="#" id="search-icon"><img src="img/search.png" alt="Search"></a>
-            <input type="text" id="search-box" placeholder="Search books..." style="display:none;">
-        </div>
-    </nav>    
+    <!-- Product list -->
+    <div class="listProduct" id="booksContainer"></div>
+    <div id="pagination" class="pagination-container"></div>
+  </div>
+</div>
 
-    <div class="container1">
-        <div class="sidebar">
-            <h3>Filter by Price</h3>
-            <input type="range" id="priceFilter" min="0" step="5">
-                   <span id="priceValue">$0 - $100</span>
-            
-            <h3>Sort by</h3>
-            <select id="sortPrice">
-                <option value="asc">Price: Low to High</option>
-                <option value="desc">Price: High to Low</option>
-            </select>
-    
-            <h3>Categories</h3>
-            <select id="categorySelect">
-                <option value="all">All</option>
-                <option value="fiction">Fiction</option>
-                <option value="non-fiction">Non-Fiction</option>
-                <option value="mystery">Mystery</option>
-                <option value="science-fiction">Science Fiction</option>
-                <option value="romance">Romance</option>
-                <option value="biography">Biography</option>
-                <option value="historical-fiction">Historical Fiction</option>
-                <option value="thriller">Thriller</option>
-                <option value="fantasy">Fantasy</option>
-                <option value="horror">Horror</option>
-                <option value="young-adult">Young Adult (YA)</option>
-                <option value="children">Children's Books</option>
-                <option value="self-help">Self-Help</option>
-                <option value="poetry">Poetry</option>
-                <option value="cookbooks">Cookbooks</option>
-                <option value="art-design">Art & Design</option>
-                <option value="philosophy">Philosophy</option>
-                <option value="science">Science</option>
-                <option value="health-wellness">Health & Wellness</option>
-                <option value="politics">Politics</option>
-                <option value="Magazine">Magazine</option>
-                <option value="ebook">ebook</option>
-            </select>       
-        </div>
         <div class="content">
-            <h1 class="title">Book Collection</h1>
             <div class="listProduct" id="booksContainer"></div>
             <div id="pagination" class="pagination-container"></div>
         </div>
     </div>
-    <footer class="footer">
-        <div class="container">
-            <div class="row">
-                <div class="footer-col">
-                    <h4>Publishers</h4>
-                    <ul>
-                        <li><a href="#">Bestsellers</a></li>
-                        <li><a href="#">Interviews</a></li>
-                        <li><a href="#">Authors story</a></li>
-                        <li><a href="#">Book Fairs</a></li>
-                        <li><a href="#">Help (FAQ)</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h4>Get help</h4>
-                    <ul>
-                        <li><a href="#">Shipping</a></li>
-                        <li><a href="#">Returns</a></li>
-                        <li><a href="#">Order Status</a></li>
-                        <li><a href="#">Payment Options</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h4>Online Shop</h4>
-                    <ul>
-                        <li><a href="#">Books</a></li>
-                        <li><a href="#">Ebooks</a></li>
-                        <li><a href="#">Magazines</a></li>
-                        <li><a href="#">Newspapers</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h4>Follow Us</h4>
-                    <div class="social-links">
-                        <a href="#"><img src="img/icons8-facebook-48.png" alt="Facebook"></a>
-                        <a href="#"><img src="img/icons8-twitter-50.png" alt="Twitter"></a>
-                        <a href="#"><img src="img/icons8-instagram-48.png" alt="Instagram"></a>
-                        <a href="#"><img src="img/icons8-linkedin-50.png" alt="LinkedIn"></a>
-                    </div>
-                </div>
-            </div>
+  <footer class="footer">
+    <div class="wrapper">
+      <div class="footer-left">
+        <div class="footer-logo">
+          <img src="img/Frame 3.png" alt="Bookshelf Logo" class="w-[120px] mb-2 bg-white p-1 rounded">
+          <div class="tagline">ESCAPE INTO STORIES</div>
         </div>
-        <p>© 2025 BOOKSHELF, ALL RIGHTS RESERVED</p>
-    </footer>
+      </div>
+
+      <div class="footer-center">
+        <div class="footer-column">
+          <h4>PUBLISHERS</h4>
+          <a href="#">Best Seller</a>
+          <a href="#">Interviews</a>
+          <a href="#">Authors Stories</a>
+          <a href="#">Book Fires</a>
+          <a href="#">Help (FAQ)</a>
+        </div>
+        <div class="footer-column">
+          <h4>GET HELP</h4>
+          <a href="#">Shipping</a>
+          <a href="#">Return</a>
+          <a href="#">Order Status</a>
+          <a href="#">Book Fires</a>
+          <a href="#">Payment Options</a>
+        </div>
+        <div class="footer-column">
+          <h4>ONLINE SHOPS</h4>
+          <a href="#">Books</a>
+          <a href="#">E-Books</a>
+          <a href="#">Magazine</a>
+        </div>
+      </div>
+
+      <div class="footer-right">
+        <div class="footer-socials">
+          <img src="img/icons8-instagram-48.png" alt="Instagram">
+          <img src="img/icons8-facebook-48.png" alt="Facebook">
+          <img src="img/icons8-twitter-50.png" alt="Twitter">
+        </div>
+        <div class="copyright">© 2025 BOOKSHELF, ALL RIGHTS RESERVED</div>
+      </div>
+    </div>
+  </footer>
 </body>
 <script>
     let allProducts = null;
@@ -175,14 +209,14 @@ function addDataToHTML() {
     let booksContainer = document.getElementById("booksContainer");
     booksContainer.innerHTML = "";
 
-    filteredProducts.forEach(book => {
-        const newBook = document.createElement("div");
-        newBook.classList.add("book-card");
-        newBook.innerHTML = `
+ filteredProducts.forEach(book => {
+const newBook = document.createElement("div");
+newBook.classList.add("book-card");
+newBook.innerHTML = `
             <div class="book-front">
                 <img src="${book.image}" alt="${book.title}">
-                <h2>${book.title}</h2>
                 <p>${book.author}</p>
+                <h2>${book.title}</h2>
                 <div class="price">$${book.price}</div>
             </div>
   <div class="book-back">
@@ -273,6 +307,48 @@ function toggleSearch() {
     searchBox.style.display = searchBox.style.display === "none" ? "block" : "none";
     searchBox.focus();
 }
+function fetchProducts() {
+    document.getElementById("loader").style.display = "block"; // Show loader
+
+    let category = document.getElementById("categorySelect").value;
+    let priceLimit = document.getElementById("priceFilter").value;
+    let sortOption = document.getElementById("sortPrice").value;
+    let searchQuery = document.getElementById("search-box").value.toLowerCase();
+
+    const queryParams = new URLSearchParams({
+        page: currentPage,
+        limit: booksPerPage,
+        minPrice: 0,
+        maxPrice: priceLimit,
+        category: category !== "all" ? category : "",
+        search: searchQuery,
+        sort: sortOption
+    }).toString();
+
+    fetch(`/api/products?${queryParams}`, { credentials: 'include' })
+        .then(response => response.json())
+        .then(data => {
+            filteredProducts = data.products;
+            maxPrice = data.maxPrice;
+
+            let priceSlider = document.getElementById("priceFilter");
+            priceSlider.max = maxPrice;
+            priceSlider.value = priceLimit;
+
+            document.getElementById("priceValue").textContent = `$0 - $${priceSlider.value}`;
+
+            addDataToHTML();
+            setupPagination(data.totalPages);
+        })
+        .catch(error => console.error('Error fetching products:', error))
+        .finally(() => {
+            document.getElementById("loader").style.display = "none"; 
+        });
+}
+  document.getElementById("hamburger").addEventListener("click", function () {
+    const navLinks = document.getElementById("nav-links");
+    navLinks.classList.toggle("show");
+  });
 </script>
     
 </html>

@@ -1,128 +1,149 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link rel="stylesheet" href="pricing.css">
-    <title>Document</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pricing | Bookshelf</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Cormorant', serif;
+    }
+    @keyframes fade-up {
+      0% { opacity: 0; transform: translateY(20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    .animate-fade-up { animation: fade-up 0.6s ease-out both; }
+  </style>
 </head>
-<body>
-    <nav class="navbar">
-        <a href="#" class="logo">
-            <img src="img/logo (2).png" alt="Bookshelf">
-        </a>
-        <ul>
-            <li><a href="main.html">Home</a></li>
-            <li><a href="blog.html">Blog</a></li>
-            <li><a href="product.html">Shop</a></li>
-            <li><a href="pricing.html" class="active">Pricing</a></li>
-        </ul>
-        <div class="nav-icons">
-            <a href="product.html"><img src="img/cart-icon.png" alt="Cart"></a>
+<body class="bg-white text-gray-800 flex flex-col min-h-screen">
+
+<header class="flex items-center justify-between px-6 py-4 bg-gray-100 shadow-md">
+  <div class="flex items-center space-x-3">
+    <img src="img/Frame 3.png" alt="Logo" class="h-10">
+  </div>
+  <nav class="flex space-x-6 text-lg">
+    <a href="blog.html" class="hover:text-blue-600">Blogs</a>
+    <a href="#" class="hover:text-blue-600">Shop</a>
+  <a href="#" class="text-blue-600 font-semibold border-b-2 border-blue-600">Pricing</a>
+    <a href="product.html" class="text-blue-600 font-semibold border-b-2 border-blue-600">Orders</a>
+  </nav>
+  <div class="w-[120px]"></div> 
+</header>
+
+  <main class="flex-1">
+    <section class="bg-gradient-to-br from-gray-50 to-gray-100 py-14 text-center px-4">
+      <h1 class="text-3xl md:text-4xl font-bold text-[#2C3E50] mb-4">Choose the Plan That Fits You Best</h1>
+      <p class="max-w-2xl mx-auto text-gray-600 leading-relaxed">
+        Dive into a world filled with stories, emotions, and knowledge. Our platform opens the doors to literature in all its forms—whether it’s timeless classics, contemporary novels, poetry, or thought-provoking essays. Whether you're a passionate reader or simply curious to explore, you'll find a space here dedicated to discovery, sharing, and a true love for books.
+      </p>
+    </section>
+
+    <section class="py-12 px-6 bg-white">
+      <div class="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+        
+        <div class="bg-white border border-gray-200 shadow-md rounded-2xl p-6 text-center transform transition duration-300 hover:scale-105 hover:shadow-xl animate-fade-up">
+          <div class="flex justify-center mb-3">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-[#2C3E50]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l6.16-3.422a12.083 12.083 0 01.34 6.068L12 21l-6.5-4.354a12.083 12.083 0 01.34-6.068L12 14z" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold mb-2">Discovery Plan</h3>
+          <p class="text-gray-500 mb-6">For regular readers who want more.</p>
+          <ul class="text-sm text-gray-600 space-y-2 mb-6 text-left">
+            <li>• Unlimited access to all digital books</li>
+            <li>• Read online or offline</li>
+            <li>• Up to 5 personal reading lists</li>
+            <li>• Personalized book suggestions</li>
+          </ul>
+          <button class="w-full bg-white text-[#2C3E50] font-semibold border border-[#2C3E50] py-2 rounded-full hover:bg-gray-100 transition text-sm">Get Premium Plan for <strong>FREE</strong></button>
         </div>
-    </nav>
-    <div class="main-content">
-        <div class="about-section">Pricing Options</div> 
-        <section class="cards" id="services">
-            <div class="titre">
-                <p class="title">pricing options</p>
-                <h2 class="latest">Latest books online</h2>
-                <p class="uinim">Explore a wide range of books at unbeatable prices</p>
-            </div>
-            <div class="content">
-                <div class="card">
-                    <div class="basic">
-                        <h2>Basic</h2>
-                    </div>
-                    <div class="info">
-                        <p class="price">$ <span class="amount">9.00</span> <span class="monthly">/ MONTHLY</span></p>
-                        <ul class="list">
-                            <li>Unlimited access to all features</li>
-                            <li>24/7 customer support</li>
-                            <li>Exclusive member discounts</li>
-                        </ul>
-                        <button class="buy-button">BUY NOW</button>
-                    </div>
-                </div>
 
-                <div class="card">
-                    <div class="basic">
-                        <h2>Profesional</h2>
-                    </div>
-                    <div class="info">
-                        <p class="price">$ <span class="amount">49.00</span> <span class="monthly">/ MONTHLY</span></p>
-                        <ul class="list">
-                            <li>Access to premium content and resources</li>
-                            <li>Regular updates and new features added</li>
-                            <li>Personalized recommendations and offers</li>
-                        </ul>
-                        <button class="buy-button">BUY NOW</button>
-                    </div>
-                </div>
+        <div class="bg-white border border-gray-200 shadow-md rounded-2xl p-6 text-center relative transform transition duration-300 hover:scale-105 hover:shadow-xl animate-fade-up delay-150">
+          <span class="absolute top-4 right-4 bg-blue-100 text-blue-700 text-xs font-bold px-2 py-1 rounded-full">Popular</span>
+          <div class="flex justify-center mb-3">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-pink-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold mb-2">Passion Plan</h3>
+          <p class="text-gray-500 mb-6">For regular readers who want more.</p>
+          <ul class="text-sm text-gray-600 space-y-2 mb-6 text-left">
+            <li>• Unlimited access to all digital books</li>
+            <li>• Read online or offline</li>
+            <li>• Up to 5 personal reading lists</li>
+            <li>• Personalized book suggestions</li>
+          </ul>
+          <button class="w-full bg-[#2C3E50] text-white font-semibold py-2 rounded-full hover:bg-[#1b2a38] transition text-sm">Get Passion Plan for <strong>16.99 $</strong></button>
+        </div>
 
-                <div class="card">
-                    <div class="basic">
-                        <h2>Basic</h2>
-                    </div>
-                    <div class="info">
-                        <p class="dollar">$ <span class="amount">99.00</span> <span class="monthly">/ MONTHLY</span></p>
-                        <ul class="parag">
-                            <li>Early access to new releases and products</li>
-                            <li>Customizable plans to fit your needs</li>
-                            <li>Ad-free experience for uninterrupted browsing</li>
-                        </ul>
-                        <button class="buy-button">BUY NOW</button>
-                    </div>
-                </div>
-            </div>
-        </section>
+        <div class="bg-white border border-gray-200 shadow-md rounded-2xl p-6 text-center transform transition duration-300 hover:scale-105 hover:shadow-xl animate-fade-up delay-300">
+          <div class="flex justify-center mb-3">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-yellow-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2l4-4m1.414-1.414A2 2 0 0016 7H8a2 2 0 00-1.414.586L3 11l1 5a2 2 0 002 2h12a2 2 0 002-2l1-5-3.586-3.586z" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold mb-2">Premium Plan</h3>
+          <p class="text-gray-500 mb-6">For regular readers who want more.</p>
+          <ul class="text-sm text-gray-600 space-y-2 mb-6 text-left">
+            <li>• Unlimited access to all digital books</li>
+            <li>• Read online or offline</li>
+            <li>• Up to 5 personal reading lists</li>
+            <li>• Personalized book suggestions</li>
+          </ul>
+          <button class="w-full bg-[#2C3E50] text-white font-semibold py-2 rounded-full hover:bg-[#1b2a38] transition text-sm">Get Premium Plan for <strong>22.99 $</strong></button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="bg-[#2C3E50] text-white text-sm py-10 px-6">
+    <div class="max-w-6xl mx-auto flex flex-wrap justify-between gap-8">
+      <div>
+        <img src="img/Frame 3.png" alt="Bookshelf Logo" class="w-[120px] mb-2 bg-white p-1 rounded">
+        <div class="text-xs tracking-wider">ESCAPE INTO STORIES</div>
+      </div>
+      <div class="flex flex-wrap gap-12">
+        <div>
+          <h4 class="font-semibold mb-2">PUBLISHERS</h4>
+          <ul class="space-y-1 text-gray-300">
+            <li><a href="#" class="hover:underline">Best Seller</a></li>
+            <li><a href="#" class="hover:underline">Interviews</a></li>
+            <li><a href="#" class="hover:underline">Authors Stories</a></li>
+            <li><a href="#" class="hover:underline">Book Fires</a></li>
+            <li><a href="#" class="hover:underline">Help (FAQ)</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-semibold mb-2">GET HELP</h4>
+          <ul class="space-y-1 text-gray-300">
+            <li><a href="#" class="hover:underline">Shipping</a></li>
+            <li><a href="#" class="hover:underline">Return</a></li>
+            <li><a href="#" class="hover:underline">Order Status</a></li>
+            <li><a href="#" class="hover:underline">Payment Options</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-semibold mb-2">ONLINE SHOPS</h4>
+          <ul class="space-y-1 text-gray-300">
+            <li><a href="#" class="hover:underline">Books</a></li>
+            <li><a href="#" class="hover:underline">E-Books</a></li>
+            <li><a href="#" class="hover:underline">Magazine</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="text-right">
+        <div class="flex justify-end space-x-3 mb-2">
+          <img src="img/icons8-facebook-48.png" alt="Facebook" class="h-5">
+          <img src="img/icons8-twitter-50.png" alt="Twitter" class="h-5">
+          <img src="img/icons8-instagram-48.png" alt="Instagram" class="h-5">
+        </div>
+        <p class="text-xs">© 2025 BOOKSHELF, ALL RIGHTS RESERVED</p>
+      </div>
     </div>
+  </footer>
 
-    <footer class="footer">
-        <div class="container">
-            <div class="row">
-                <div class="footer-col">
-                    <h4>Publishers</h4>
-                    <ul>
-                        <li><a href="#">Bestsellers</a></li>
-                        <li><a href="#">Interviews</a></li>
-                        <li><a href="#">Authors story</a></li>
-                        <li><a href="#">Book Fairs</a></li>
-                        <li><a href="#">Help (FAQ)</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h4>Get help</h4>
-                    <ul>
-                        <li><a href="#">Shipping</a></li>
-                        <li><a href="#">Returns</a></li>
-                        <li><a href="#">Order Status</a></li>
-                        <li><a href="#">Payment Options</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h4>Online Shop</h4>
-                    <ul>
-                        <li><a href="#">Books</a></li>
-                        <li><a href="#">Ebooks</a></li>
-                        <li><a href="#">Magazines</a></li>
-                        <li><a href="#">Newspapers</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h4>Follow Us</h4>
-                    <div class="social-links">
-                        <a href="#"><img src="img/icons8-facebook-48.png" alt="Facebook"></a>
-                        <a href="#"><img src="img/icons8-twitter-50.png" alt="Twitter"></a>
-                        <a href="#"><img src="img/icons8-instagram-48.png" alt="Instagram"></a>
-                        <a href="#"><img src="img/icons8-linkedin-50.png" alt="LinkedIn"></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <p>© 2025 BOOKSHELF, ALL RIGHTS RESERVED</p>
-    </footer>    
 </body>
 </html>

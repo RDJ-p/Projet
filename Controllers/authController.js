@@ -3,6 +3,8 @@ const jwt = require('jsonwebtoken');
 const path = require('path');
 const pool = require('../config/db');
 const nodemailer = require('nodemailer');
+const crypto = require('crypto');
+
 
 const authController = {
     showLogin: (req, res) => {
@@ -221,6 +223,92 @@ const authController = {
             res.status(500).json({ success: false, error: 'Server error' });
         }
     },
+    forgotPassword: async (req, res) => {
+    try {
+        const { email } = req.body;
+
+        const result = await pool.query('SELECT * FROM users WHERE email = $1', [email]);
+        const user = result.rows[0];
+
+        if (!user) {
+            return res.status(400).json({ success: false, error: 'Email not found' });
+        }
+
+        const token = crypto.randomBytes(32).toString('hex');
+        const expiration = new Date(Date.now() + 3600000); // 1 hour
+
+        await pool.query(
+            'UPDATE users SET reset_token = $1, reset_token_expiration = $2 WHERE id = $3',
+            [token, expiration, user.id]
+        );
+
+        const resetLink = `${process.env.BASE_URL}/auth/reset-password/${token}`;
+
+        const transporter = nodemailer.createTransport({
+            host: 'sandbox.smtp.mailtrap.io',
+            port: 2525,
+            auth: {
+                user: '010cd747abe60d',
+                pass: '8a838f20ed6406'
+            }
+        });
+
+        const mailOptions = {
+            from: process.env.EMAIL_USER,
+            to: email,
+            subject: 'Reset your password',
+            html: `
+                <p>Hello ${user.first_name},</p>
+                <p>Click below to reset your password:</p>
+                <a href="${resetLink}">${resetLink}</a>
+                <p>This link will expire in 1 hour.</p>
+            `
+        };
+
+        await transporter.sendMail(mailOptions);
+
+        res.json({ success: true, message: 'Reset link sent to your email' });
+
+    } catch (error) {
+        console.error('Forgot Password Error:', error);
+        res.status(500).json({ success: false, error: 'Internal server error' });
+    }
+},
+
+resetPassword: async (req, res) => {
+    try {
+        const { token } = req.params;
+        const { newPassword } = req.body;
+
+        console.log("Reset route hit");
+        console.log("Reset Password Token:", token);
+
+        const result = await pool.query(
+            'SELECT * FROM users WHERE reset_token = $1 AND reset_token_expiration > NOW()',
+            [token]
+        );
+
+        const user = result.rows[0];
+
+        if (!user) {
+            return res.status(400).json({ success: false, error: 'Invalid or expired token' });
+        }
+
+        const hashedPassword = await bcrypt.hash(newPassword, 10);
+
+        await pool.query(
+            'UPDATE users SET password = $1, reset_token = NULL, reset_token_expiration = NULL WHERE id = $2',
+            [hashedPassword, user.id]
+        );
+
+        res.json({ success: true, message: 'Password reset successful' });
+
+    } catch (error) {
+        console.error('Reset Password Error:', error);
+        res.status(500).json({ success: false, error: 'Internal server error' });
+    }
+},
+
 
     changePassword: async (req, res) => {
         try {

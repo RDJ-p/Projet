@@ -38,10 +38,93 @@
             cursor: pointer;
             border-radius: 8px;
         }
-        .result {
-            margin-top: 20px;
-            font-size: 18px;
-        }
+  .result {
+    margin-top: 40px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 24px;
+    justify-content: center;
+    align-items: stretch;
+}
+
+.book-card {
+    background: #ffffff;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    max-width: 100%;
+}
+
+.book-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+}
+
+.book-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    background: #f0f0f0;
+}
+
+.book-card-content {
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex-grow: 1;
+}
+
+.book-title {
+    font-size: 17px;
+    font-weight: 600;
+    color: #222;
+    line-height: 1.3;
+}
+
+.book-author {
+    font-size: 14px;
+    color: #666;
+}
+
+.book-category {
+    display: inline-block;
+    background: #edf2fa;
+    color: #3367d6;
+    font-size: 12px;
+    padding: 4px 10px;
+    border-radius: 14px;
+    width: fit-content;
+    font-weight: 500;
+}
+
+.book-price {
+    font-size: 16px;
+    font-weight: bold;
+    color: #1a73e8;
+    margin-top: 4px;
+}
+
+.book-card a {
+    margin-top: auto;
+    display: inline-block;
+    background: #1a73e8;
+    color: white;
+    padding: 10px 14px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 14px;
+    text-align: center;
+    transition: background 0.2s ease;
+}
+
+.book-card a:hover {
+    background: #0d56c1;
+}
+
     </style>
 </head>
 <body>
@@ -78,33 +161,53 @@
         <div class="result" id="recommendationResult"></div>
     </div>
 
-    <script>
-      function getRecommendation() {
+<script>
+function getRecommendation() {
     const author = document.getElementById("authorInput").value;
-    const maxPrice = document.getElementById("priceInput").value;
+    const maxPrice = document.getElementById("priceInput").value || 10000;
     const category = document.getElementById("categorySelect").value;
 
-    const params = new URLSearchParams({
-        author: author,
-        maxPrice: maxPrice || 10000,
-        category: category
-    });
+    const params = new URLSearchParams({ author, maxPrice, category });
+
+    const resultDiv = document.getElementById("recommendationResult");
+    resultDiv.innerHTML = "<p>Loading recommendations...</p>";
 
     fetch(`/api/products/recommendation?${params}`)
         .then(res => res.json())
         .then(data => {
-            if (data && data.id) {
-                window.location.href = `book1.html?id=${data.id}`;
+            resultDiv.innerHTML = "";
+
+            if (Array.isArray(data) && data.length > 0) {
+                data.forEach(book => {
+                    const card = document.createElement("div");
+                    card.className = "book-card";
+
+                    card.innerHTML = `
+                        <img src="${book.image || 'default-cover.jpg'}" alt="${book.title}">
+                        <div class="book-card-content">
+                            <div class="book-title">${book.title}</div>
+                            <div class="book-author">by ${book.author}</div>
+                            <div class="book-category">${book.category}</div>
+                            <div class="book-price">$${book.price}</div>
+                            <a href="book1.html?id=${book.id}">View Details</a>
+                        </div>
+                    `;
+
+                    resultDiv.appendChild(card);
+                });
             } else {
-                document.getElementById("recommendationResult").textContent = "No book matched your preferences.";
+                resultDiv.innerHTML = "<p>No book matched your preferences.</p>";
             }
         })
         .catch(err => {
-            document.getElementById("recommendationResult").textContent = "Error fetching recommendation.";
+            resultDiv.innerHTML = "<p>Error fetching recommendation.</p>";
             console.error(err);
         });
 }
-    </script>
+</script>
+
+
+
 
 </body>
 </html>

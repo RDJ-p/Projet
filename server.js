@@ -31,7 +31,10 @@
     const orderRoutes = require('./Routes/orderRoutes');
     const authMiddleware = require('./middlewares/authMiddleware');
     const wishlistRoutes = require('./routes/wishlistRoutes');
-    
+    const bookRoutes = require('./Routes/bookRoutes');
+    const chatRoutes = require('./Routes/chatRoutes');
+    const userRoutes = require('./Routes/userRoutes');
+    const reviewRoutes = require('./Routes/reviewRoutes');
 
     app.use(helmet());
     app.use(cors({
@@ -56,6 +59,11 @@
     app.use('/api/admin', adminRoutes);
     app.use('/api/orders', orderRoutes);
     app.use('/api/wishlist', wishlistRoutes);
+    app.use('/api/books', bookRoutes);
+    app.use('/api/chat', chatRoutes);
+    app.use('/api/user', userRoutes);
+    app.use('/api/reviews', reviewRoutes);
+    app.use('/api/posts', require('./routes/blogPostRoutes'));
 
     app.get('/api/user', authMiddleware.isAuthenticated, (req, res) => {
         const { id, name, email, role } = req.user;
@@ -67,6 +75,7 @@
             role
         });
     });
+
 
     app.get('/dashboard', authMiddleware.isAuthenticated, (req, res) => {
         res.sendFile(path.join(__dirname, 'public/dashboard.html'));

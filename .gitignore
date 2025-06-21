@@ -1,0 +1,11 @@
+# Node
+node_modules/
+.env
+*.log
+
+# OS
+.DS_Store
+
+# Others
+dist/
+build/

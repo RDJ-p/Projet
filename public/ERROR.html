@@ -1,19 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="ERROR.css">
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant&display=swap" rel="stylesheet">
-
-    <title>Document</title>
-</head>
-<body>
-    <div class="container">
-        <div class="er404">
-        <p>Oops! Page Not Found</p>
-        <a href="main.html">Go back to HomePage</a>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Page Not Found - Bookstore</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600&display=swap" rel="stylesheet">
+    <style>
+      body {
+        font-family: 'Cormorant Garamond', serif;
+        background: linear-gradient(135deg, #2C3E50, #2C3E50 30%, #34495E 100%);
+      }
+    </style>
+  </head>
+  <body class="text-white h-screen flex items-center justify-center">
+    <div class="text-center px-6">
+      <h1 class="text-9xl font-bold drop-shadow-md">404</h1>
+      <p class="text-2xl mt-4 mb-2">Page not found</p>
+      <p class="text-md mb-6">Looks like you've wandered out of the library...</p>
+      <a href="main.html" class="inline-block bg-white text-[#2C3E50] hover:bg-gray-200 font-semibold px-6 py-3 rounded-lg transition shadow-lg">
+        Go to Home
+      </a>
     </div>
-    </div>
-</body>
+  </body>
 </html>

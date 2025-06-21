@@ -1,467 +1,432 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="height=device-height, initial-scale=1.0">
-        <link rel="stylesheet" href="maincss.css">
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <title>Bookshelf</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+ <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.ripples/0.5.3/jquery.ripples.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@300;400;500;600;700&display=swap" rel="stylesheet">  
+<link rel="stylesheet" href="maincss.css" />
+  <title>Bookshelf</title>
 </head>
 <body>
-    <nav class="navbar">
-        <ul>
-            <li><a href="#">Home</a></li>
-            <li class="dropdown">
-                <a href="#">Pages</a>
-                <ul class="dropdown-menu">
-                    <li><a href="About us.html">About Us</a></li>
-                    <li><a href="bestselling.html">Best Selling author</a></li>
-                    <li><a href="pricing.html">Pricing</a></li>
-                    <li><a href="ERROR.html">Error</a></li>
-                    <li><a href="contactus.html">Contact Us</a></li>
-                    <li><a href="FAQ.html">FAQ</a></li>
-                </ul>
-            </li>
-            <li><a href="#events">Events</a></li>
-            <li><a href="blog.html">Blog</a></li>
-            <li><a href="product.html">Shop</a></li>
-            <li><a href="exchange.html">Exchange</a></li>
-        </ul>
-        <div class="nav-icons">
-            <a href="carte page.html"><img src="img/cart-icon.png" alt="Cart"></a>
-            <div id="auth-buttons">
-            </div>
-        </div>
-    </nav>
-    <div class="slider-container">
-        <div class="slider">
-            <div class="slide">
-                <img src="img/bookstable.jpg" alt="Bookshelf interior">
-                <div class="text-overlay1">  
-                    <h2>It's BOOKSHELF</h2>
-                    <h1>We Love Literature</h1>
-                    <p>Literature opens doors to new worlds, ideas, and emotions. It allows us to explore different perspectives and connect with others through shared stories.</p>
-                    <button class="explore">Explore Now</button>
-                </div>
-            </div>
-            <div class="slide">
-                <img src="img/backgroundmain.jpg" alt="Cozy Library">
-                <div class="text-overlay2">  
-                    <h2>Escape into Stories</h2>
-                    <h1>Every Page Holds a New Adventure</h1>
-                    <p>Books are time machines, portals, and windows to wisdom. From epic tales to thought-provoking essays, every book has a story to tell.</p>
-                    <button class="explore">Discover More</button>
-                </div>
-            </div>
-        </div>
-        <button class="prev" onclick="changeSlide(-1)">❮</button>
-        <button class="next" onclick="changeSlide(1)">❯</button>
-    </div>
-    <div class="book-grid">
-        <div class="book">
-            <div class="image-wrapper">
-                <img src="img/Thegreatgatsby.jpeg" alt="Thegreatgatsby">
-                <a href="book1.html?id=1" class="read-more">Read More</a>
-            </div>
-            <h4>F. Scott Fitzgerald</h4>
-            <h3>The Great Gatsby</h3>
-            <p class="price">$15.99</p>
-            <div class="stars">
-                ★★★★☆ <span>(128)</span>
-            </div>
-        </div>
-        <div class="book">
-            <div class="image-wrapper">
-                <img src="img/1984.webp" alt="1984">
-                <a href="book1.html?id=2" class="read-more">Read More</a>
-            </div>
-            <h4>George Orwell</h4>
-            <h3>1984</h3>
-            <p class="price">$12.99</p>
-            <div class="stars">
-                ★★★★☆ <span>(128)</span>
-            </div>
-        </div>
-        <div class="book">
-            <div class="image-wrapper">
-                <img src="img/To Kill a Mockingbird.jpg" alt="To Kill a Mockingbird">
-                <a href="book1.html?id=3" class="read-more">Read More</a>
-            </div>
-            <h4>Harper Lee</h4>
-            <h3>To Kill a Mockingbird</h3>
-            <p class="price">$14.50</p>
-            <div class="stars">
-                ★★★★☆ <span>(128)</span>
-            </div>
-        </div>
-        <div class="book">
-            <div class="image-wrapper">
-                <img src="img/harrypotter.jpg" alt="harrypotter">
-                <a href="book1.html?id=4" class="read-more">Read More</a>
-            </div>
-            <h4>J.K. Rowling</h4>
-            <h3>Harry Potter and the Sorcerer's Stone</h3>
-            <p class="price"><span class="old-price">$18.99</span> <span class="new-price">$30.00</span></p>
-            <div class="stars">
-                ★★★★☆ <span>(128)</span>
-            </div>
-        </div>
-        <div class="book">
-            <div class="image-wrapper">
-                <img src="img/thehobbit.jpg" alt="thehobbit">
-                <a href="book1.html?id=5" class="read-more">Read More</a>
-            </div>
-            <h4>J.R.R. Tolkien</h4>
-            <h3>The Hobbit</h3>
-            <p class="price">$20.00</p>
-            <div class="stars">
-                ★★★★☆ <span>(128)</span>
-            </div>
-        </div>
-        <div class="book">
-            <div class="image-wrapper">
-                <img src="img/pride.jpg" alt="pride">
-                <a href="book1.html?id=6" class="read-more">Read More</a>
-            </div>
-            <h4>Jane Austen</h4>
-            <h3>Pride and Prejudice</h3>
-            <p class="price">$<span class="discounted">10.99</span></p>
-            <div class="stars">
-                ★★★★☆ <span>(128)</span>
-            </div>
-        </div>
-        <div class="book">
-            <div class="image-wrapper">
-                <img src="img/mobydick.jpg" alt="mobydick">
-                <a href="book1.html?id=7" class="read-more">Read More</a>
-            </div>
-            <h4>Herman Melville</h4>
-            <h3>Moby-Dick</h3>
-            <p class="price">$17.99</p>
-            <div class="stars">
-                ★★★★☆ <span>(128)</span>
-            </div>
-        </div>
-        <div class="book">
-            <div class="image-wrapper">
-                <img src="img/thecatcherintherye.jpg" alt="thecatcherintherye">
-                <a href="book1.html?id=8" class="read-more">Read More</a>
-            </div>
-            <h4>J.D. Salinge</h4>
-            <h3>The Catcher in the Rye</h3>
-            <p class="price">$13.99</p>
-            <div class="stars">
-                ★★★★☆ <span>(128)</span>
-            </div>
-        </div>
-        <div class="book">
-            <div class="image-wrapper">
-                <img src="img/thesilentpatient.jpg" alt="thesilentpatient">
-                <a href="book1.html?id=9" class="read-more">Read More</a>
-            </div>
-            <h4>Alex Michaelides"</h4>
-            <h3>The Silent Patient</h3>
-            <p class="price"><span class="old-price">$14.99</span> <span class="new-price">$30.00</span></p>
-        </div>
-        <div class="book">
-            <div class="image-wrapper">
-                <img src="img/dune.jpg" alt="Dune">
-                <a href="book1.html?id=10" class="read-more">Read More</a>
-            </div>
-            <h4>Frank Herbert</h4>
-            <h3>Dune</h3>
-            <p class="price">$16.99</p>
-        </div>
-    </div>
-    <div class="image-container">
-        <img src="img/bluebackground.jpg" alt="bluebackground">
-        <div class="overlay-text">❦ Our Services <br>We offer personalized book recommendations, special orders, gift wrapping, and author events. Our bookstore is dedicated to helping you find your next great read while providing a cozy space to enjoy your books.</div>
-    </div>    
-    <div class="container">
-    <div class="author">   
-        <h1>Authors of the month</h1>
-        <p>Every month, we celebrate the work of talented authors who have captivated readers with their unique storytelling. From emerging voices to established names, we shine a spotlight on their latest releases, explore their literary journeys, and offer a deeper look into their creative processes. Join us in discovering new books and gaining insights into the minds of some of the best writers of today.</p>
-    </div>
-    </div>  
-    <div class="fourplacement">
-        <div class="author-card">
-            <img src="img/haruki.jpg" alt="haruki">
-            <h1>Haruki Murakami</h1>
-            <p class="authorparagraphe">Master of surreal storytelling and modern existentialism. Famous for "Kafka on the Shore" and "1Q84."</p>
-        </div>
-        <div class="author-card">
-            <img src="img/mostafa.jpg" alt="mostafa">
-            <h1>Mostafa Mahmoud</h1>
-            <p class="authorparagraphe">A deep thinker blending science, philosophy, and spirituality. His works like "Dialogue with an Atheist" continue to inspire readers worldwide.</p>
-        </div>
-        <div class="author-card">
-            <img src="img/chimanda.jpg" alt="chimanda">
-            <h1>Chimamanda Ngozi Adichie</h1>
-            <p class="authorparagraphe">A powerful voice in contemporary literature, known for "Half of a Yellow Sun" and "Americanah," exploring identity</p>
-        </div>
-        <div class="author-card">
-            <img src="img/atwood.jpg" alt="atwood">
-            <h1> Margaret Atwood</h1>
-            <p class="authorparagraphe" >Renowned for dystopian and feminist literature, with books like "The Handmaid’s Tale" and "The Testaments."</p>
-        </div>
-    </div>
-    <div class="line1">
-        <div class="left1">
-            <h2>Autobiography</h2>
-            <h1>This Month’s Guest: Haruki Murakami</h1>
-            <p>This month, we are beyond thrilled to feature the literary legend Haruki Murakami, whose unique blend of the surreal and the deeply introspective has captivated readers around the world. Whether it’s the strange, dream-like worlds in Kafka on the Shore, the enigmatic allure of Norwegian Wood, or the mind-bending narrative of 1Q84, Murakami’s works have resonated deeply with fans of magical realism and contemporary fiction alike. </p>
-                 <button class="btn-auto">Read More</button>
-                </div>
-        <div class="image-composition">
-            <img src="img/harukisketch.jpg" alt="Typewriter" class="haruki">
-            <img src="img/haruki.jpg" alt="Factory" class="haruki-sketch">
-        </div>
-    </div>
-    <div class="line2">
-        <div class="left2">
-            <div class="image-composition2">
-                <img src="img/yellow.png" alt="background" class="background">
-                <img src="img/louver.jpg" alt="louver" class="Louver">
-                <img src="img/girl.jpg" alt="girl" class="Girl">
-            </div>
-        </div>
-        <div class="right2">
-            <h2>Autobiography</h2>
-            <h1>Travelogue of the year</h1>
-            <p class="paragraphe2">This year, our Travelogue of the Year takes us on a literary adventure—one not across vast landscapes, but through the quiet aisles and hidden corners of some of the most charming bookstores around the world. These bookstores, often tucked away in side streets or nestled in forgotten corners of cities, offer more than just books; they offer an escape, a place where time slows, and stories breathe life into the air.
-            </p>
-                 <button class="btn-auto">Read More</button>
-                </div>
-    </div>
-    <div class="events-container" id="events">
-        <h5 class="subheading">Events</h5>
-        <h1 class="title">Book promotions</h1>
-        <p class="description">
-            "Discover exciting book events near you! Join us for festivals, signings, and fairs to celebrate literature and meet your favorite authors."        </p>
-        <div class="event-list">
-            <div class="event">
-                <p class="date">21.07.2025 / <span>LA, CALIFORNIA</span></p>
-                <p class="event-name">Festival of Books</p>
-                <button class="btn">See Tickets</button>
-            </div>
-            <div class="event">
-                <p class="date">25.07.2025 / <span>PARIS, FRANCE</span></p>
-                <p class="event-name">Book Signing</p>
-                <button class="btn sold-out">Sold Out</button>
-            </div>
-            <div class="event">
-                <p class="date">26.07.2025 / <span>NEW YORK, US</span></p>
-                <p class="event-name">Book Fair</p>
-                <button class="btn">See Tickets</button>
-            </div>
-            <div class="event">
-                <p class="date">31.07.2025 / <span>BARCELONA, SPAIN</span></p>
-                <p class="event-name">Promotion Book</p>
-                <button class="btn">See Tickets</button>
-            </div>
-        </div>
-    </div>
-    <div class="franchise">
-        <img src="img/home-2-client-1.png" alt="BOOKLOGO">
-        <img src="img/home-2-client-2.png" alt="Make Dream">
-        <img src="img/home-2-client-3.png" alt="likeRead">
-        <img src="img/home-2-client-4.png" alt="Pocket book">
-        <img src="img/home-2-client-5.png" alt="booky">
-        <img src="img/home-2-client-6.png" alt="royalbooks">
-     </div>
-     <div class="blog-section">
-        <h2 class="blog-title">Latest from Our Blog</h2>
-        <div class="blog-container">
-            <div class="blog-card">
-                <img src="img/Blog Image1.jpg" alt="Blog Image1">
-                <div class="blog-content">
-                    <h3>5 Must-Read Novels to Add to Your Collection This Year</h3>
-                    <p>Discover five incredible books that every reader should experience. From gripping thrillers to heartfelt stories, these novels will keep you hooked!</p>
-                    <a href="#" class="read-more">Read More</a>
-                </div>
-            </div>
-            <div class="blog-card">
-                <img src="img/Blog Image2.jpg" alt="Blog Image2">
-                <div class="blog-content">
-                    <h3>How to Find the Perfect Book Based on Your Mood</h3>
-                    <p>Your emotions can guide your next great read! Whether you're seeking adventure, comfort, or inspiration, we’ll help you find the perfect book.   </p>
-                    <a href="#" class="read-more">Read More</a>
-                </div>
-            </div>
-            <div class="blog-card">
-                <img src="img/Blog Image3.jpg" alt="Blog Image3">
-                <div class="blog-content">
-                    <h3>A Journey Through Literary Classics: Where to Start?</h3>
-                    <p>Want to explore classic literature but don’t know where to begin? Here’s a simple guide to timeless stories that are perfect for first-time readers.</p>
-                    <a href="#" class="read-more">Read More</a>
-                </div>
-            </div>
-        </div>
-    </div>
-    <button class="scroll-to-top" onclick="scrollToTop()">↑</button>
-</body>
-    <footer class="footer">
-        <div class="container">
-            <div class="row">
-                <div class="footer-col">
-                    <h4>Publishers</h4>
-                    <ul>
-                        <li><a href="bestselling.html">Bestsellers</a></li>
-                        <li><a href="interview.html">Interviews</a></li>
-                        <li><a href="authorstory.html">Authors story</a></li>
-                        <li><a href="bookfair.html">Book Fairs</a></li>
-                        <li><a href="FAQ.html">Help (FAQ)</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h4>Get help</h4>
-                    <ul>
-                        <li><a href="#">Shipping</a></li>
-                        <li><a href="#">Returns</a></li>
-                        <li><a href="#">Order Status</a></li>
-                        <li><a href="paymentoptions.html">Payment Options</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h4>Online Shop</h4>
-                    <ul>
-                        <li><a href="product.html">Books</a></li>
-                        <li><a href="product.html">Ebooks</a></li>
-                        <li><a href="product.html">Magazines</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h4>Follow Us</h4>
-                    <div class="social-links">
-                        <a href="#"><img src="img/icons8-facebook-48.png" alt="Facebook"></a>
-                        <a href="#"><img src="img/icons8-twitter-50.png" alt="Twitter"></a>
-                        <a href="#"><img src="img/icons8-instagram-48.png" alt="Instagram"></a>
-                        <a href="#"><img src="img/icons8-linkedin-50.png" alt="LinkedIn"></a>
-                        <div class="input-group">
-                            <input type="email" class="input" id="Email" name="Email" placeholder="Bookshelf@gmail.com" autocomplete="off">
-                            <input class="button--submit" value="Subscribe" type="submit">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <p>© 2025 BOOKSHELF, ALL RIGHTS RESERVED</p>
-    </footer>
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-    animateImages();
-    initSlider();
-    setupSearch();
-});
+<header class="navbar">
+  <div class="logo">
+    <img src="img/Frame 3.png" alt="Bookshelf Logo" />
+  </div>
 
-function animateTextOverlay() {
-    const overlays = document.querySelectorAll(".text-overlay");
+  <div class="nav-toggle" id="navToggle">☰</div>
 
-    overlays.forEach((overlay) => {
-        overlay.style.animation = "none";
-        void overlay.offsetHeight;
-        overlay.style.animation = "slideUp 0.8s ease-out forwards";
-    });
-}
+  <nav class="nav-menu" id="navMenu">
+    <div class="nav-links">
+      <a href="main.html" class="active">Home</a>
+      <a href="product.html">Shop</a>
+      <a href="About us.html">About us</a>
+      <a href="exchange.html">Exchange</a>
+      <a href="blog.html">Our Blog</a>
+    </div>
+    <div class="auth-buttons">
+      <button class="signup">SIGNUP</button>
+      <button class="login">LOGIN</button>
+    </div>
+  </nav>
+</header>
 
-function animateImages() {
-    const images = document.querySelectorAll(".image-composition2 img");
 
-    images.forEach((image, index) => {
-        setTimeout(() => {
-            image.classList.add("animate");
-        }, index * 300);
-    });
-}
+  <main>
+    <section id="home">
+      <div class="container">
+        <div class="home-content">
+          <div class="home-text">
+            <h2>Escape into Stories</h2>
+            <h3 class="typing-wrapper">
+            <span class="typed-text"></span><span class="cursor">|</span>
+            </h3>
+            <p>Books are time machines, portals, and windows to wisdom. From epic tales to thought-provoking essays, every book has a story to tell.</p>
+            <button class="discover-btn">
+              DISCOVER MORE
+              <img src="img/flowbite_arrow-up-outline.png" alt="arrow" />
+            </button>
+          </div>
+          <img src="img/Group 8.png" class="home-img" alt="Home Illustration" />
+        </div>
+      </div>
+    </section>
 
-function setupSearch() {
-    const searchIcon = document.getElementById("search-icon");
-    const searchBox = document.getElementById("search-box");
+<section id="seller">
+  <div class="container">
+    <div class="seller-items">
+      <div class="heading">
+        <h2>Best Seller</h2>
+        <hr>
+      </div>
+      <button class="discover-btn">
+        DISCOVER MORE
+        <img src="img/flowbite_arrow-up-outline.png" alt="arrow" />
+      </button>
+    </div>
 
-    if (searchIcon && searchBox) {
-        searchIcon.addEventListener("click", (event) => {
-            event.preventDefault();
-            searchBox.style.display =
-                searchBox.style.display === "none" || searchBox.style.display === ""
-                    ? "block"
-                    : "none";
-            if (searchBox.style.display === "block") {
-                searchBox.focus();
-            }
-        });
+<div class="item scroll-wrapper" id="bestSellerScroll">
+      <div class="scroll-track">
+        <div class="images" data-id="69">
+          <img src="img/design-for-writers-book-cover-tf-2-a-million-to-one.png" class="img1" alt="design1">
+          <h3>TONY FAGGIOLI</h3>
+          <h4>A MILLION TO ONE</h4>
+          <div class="stars">
+            <i class="fas fa-star"></i><i class="fas fa-star"></i>
+            <i class="fas fa-star"></i><i class="fas fa-star"></i>
+            <i class="fa-regular fa-star"></i>
+          </div>
+          <span class="price">30,00$</span>
+        </div>
 
-        document.addEventListener("click", (event) => {
-            if (!searchIcon.contains(event.target) && !searchBox.contains(event.target)) {
-                searchBox.style.display = "none";
-            }
-        });
+        <div class="images" data-id="67">
+          <img src="img/9780593422182.png" class="img2" alt="design2">
+          <h3>DAVID YOON</h3>
+          <h4>CITY OF ORANGE</h4>
+          <div class="stars">
+            <i class="fas fa-star"></i><i class="fas fa-star"></i>
+            <i class="fas fa-star"></i><i class="fas fa-star"></i>
+            <i class="fa-regular fa-star"></i>
+          </div>
+          <span class="price">30,00$</span>
+        </div>
+
+        <div class="images" data-id="68">
+          <img src="img/laura-barrett-illustrator-beloved-girls-book-cover.png" class="img3" alt="design3">
+          <h3>HARRIET EVANS</h3>
+          <h4>THE BELOVED GIRLS</h4>
+          <div class="stars">
+            <i class="fas fa-star"></i><i class="fas fa-star"></i>
+            <i class="fas fa-star"></i><i class="fas fa-star"></i>
+            <i class="fa-regular fa-star"></i>
+          </div>
+          <span class="price">30,00$</span>
+        </div>
+
+        <div class="images" data-id="43">
+          <img src="img/a-man-called-ove-9781476738024_hr.jpg" class="img4" alt="design4">
+          <h3>Fredrik Backman</h3>
+          <h4>A MAN CALLED OVE</h4>
+          <div class="stars">
+            <i class="fas fa-star"></i><i class="fas fa-star"></i>
+            <i class="fas fa-star"></i><i class="fas fa-star"></i>
+            <i class="fa-regular fa-star"></i>
+          </div>
+          <span class="price">30,00$</span>
+        </div>
+        
+        <!-- Add more .images blocks here as needed -->
+         
+        <div class="images" data-id="52">
+          <img src="img/beforewewere.jpg" class="img4" alt="Before We Were Strangers">
+          <h3>Renée Carlino</h3>
+          <h4>BEFORE WE WERE STRANGERS</h4>
+          <div class="stars">
+            <i class="fas fa-star"></i><i class="fas fa-star"></i>
+            <i class="fas fa-star"></i><i class="fas fa-star"></i>
+            <i class="fa-regular fa-star"></i>
+          </div>
+          <span class="price">16.50$</span>
+        </div>
+
+          <div class="images" data-id="70">
+          <img src="img/teaspoonearthandsea.png" class="img4" alt="design4">
+          <h3>DINA NAYERI</h3>
+          <h4>A TEASPOON OF EARTH & SEA</h4>
+          <div class="stars">
+            <i class="fas fa-star"></i><i class="fas fa-star"></i>
+            <i class="fas fa-star"></i><i class="fas fa-star"></i>
+            <i class="fa-regular fa-star"></i>
+          </div>
+          <span class="price">30,00$</span>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="Services" class="ripple-section">
+  <div class="services-overlay">
+    <div class="services-text">
+      <h2>Our Services</h2>
+      <p>
+        We offer personalized book recommendations, special orders, gift wrapping, and author events.
+        Our bookstore is dedicated to helping you find your next great read while providing a cozy space
+        to enjoy your books.
+      </p>
+      <div class="button-group">
+        <button class="shop-button">SHOP</button>
+        <button class="about-button">ABOUT US</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+    
+   <section id="Authors">
+      <div class="container">
+        <div class="authors-content">
+          <div class="heading">
+            <h2>Authors of the month</h2>
+            <hr>
+          </div>
+         <button class="discover-btn">
+              DISCOVER MORE
+              <img src="img/flowbite_arrow-up-outline.png" class="arrow" alt="arrow" />
+         </button>
+        </div>
+        <div class="item">
+          <p>Every month, we celebrate the work of talented authors who have captivated readers with their unique storytelling. From emerging voices to established names, we shine a spotlight on their latest releases, explore their literary journeys, and offer a deeper look into their creative processes. Join us in discovering new books and gaining insights into the minds of some of the best writers of today.</p>
+        </div>
+
+        <div class="items">
+          <div class="image-item">
+            <img src="img/haruki.jpg" class="img" alt="Haruki Murakami">
+            <h3>Haruki Murakami</h3>
+             <p>Master of surreal storytelling and modern existentialism. Famous for "Kafka on the Shore" and "1Q84."</p>  
+          </div>
+          <div class="image-item">
+            <img src="img/mostafa.jpg" class="img" alt="Mostafa Mahmoud">
+            <h3>Mostafa Mahmoud</h3>
+             <p>A deep thinker blending science, philosophy, and spirituality. His works like "Dialogue with an Atheist" continue to inspire readers worldwide.</p>  
+          </div>
+          <div class="image-item">
+            <img src="img/chimanda.jpg" class="img" alt="Chimamanda Ngozi Adichie">
+            <h3>Chimamanda Ngozi Adichie</h3>
+             <p>A powerful voice in contemporary literature, known for "Half of a Yellow Sun" and "Americanah," exploring identity</p>  
+          </div>
+          <div class="image-item">
+            <img src="img/atwood.jpg" class="img" alt="Margaret Atwood">
+            <h3>Margaret Atwood</h3>
+             <p>Renowned for dystopian and feminist literature, with books like "The Handmaid’s Tale" and "The Testaments."</p>  
+          </div>
+        </div>
+      </div>
+   </section>
+
+   <section id="book-promotion">
+  <div class="container">
+    <div class="heading">
+      <h2>Upcoming Book Events</h2>
+      <hr>
+    </div>
+
+    <div class="book-promotion-grid">
+      <!-- Event 1 -->
+      <div class="event-card">
+        <div class="event-info">
+          <span class="date">12 APR 2025</span>
+          <h3>Festival of Books</h3>
+          <p><i class="fas fa-location-dot"></i> LA, California</p>
+          <p class="desc">Join hundreds of book lovers and meet bestselling authors in this two-day festival.</p>
+        </div>
+        <button class="btn-tickets">See Ticket</button>
+      </div>
+
+      <!-- Event 2 -->
+      <div class="event-card sold-out">
+        <div class="event-info">
+          <span class="date">18 MAY 2025</span>
+          <h3>Author Signing</h3>
+          <p><i class="fas fa-location-dot"></i> Paris, France</p>
+          <p class="desc">Meet your favorite writers and get your books signed in the heart of Paris.</p>
+        </div>
+        <button class="btn-tickets" disabled>Sold Out</button>
+      </div>
+
+      <!-- Event 3 -->
+      <div class="event-card">
+        <div class="event-info">
+          <span class="date">12 APR 2025</span>
+          <h3>Book Launch Party</h3>
+          <p><i class="fas fa-location-dot"></i> New York, US</p>
+          <p class="desc">Celebrate a highly anticipated new release with readings, Q&A, and giveaways.</p>
+        </div>
+        <button class="btn-tickets">See Ticket</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="testimonials">
+  <div class="container">
+    <div class="heading">
+      <h2>What Our Readers Say</h2>
+      <hr />
+    </div>
+    <div class="testimonial-cards">
+
+      <div class="testimonial">
+        <p>"Bookshelf has reignited my love for reading! Every order feels like a gift to myself."</p>
+        <div class="stars">
+          <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+          <i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+        </div>
+        <div class="user">
+          <img src="img/man (1).png" alt="Sarah L.">
+          <h4>Sarah L.</h4>
+        </div>
+      </div>
+
+      <div class="testimonial">
+        <p>"Excellent service and curated book lists that never disappoint. The 'Staff Picks' are gold."</p>
+        <div class="stars">
+          <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+          <i class="fas fa-star"></i><i class="fas fa-star"></i>
+        </div>
+        <div class="user">
+          <img src="img/man.png" alt="James A.">
+          <h4>James A.</h4>
+        </div>
+      </div>
+
+      <div class="testimonial">
+        <p>"Bookshelf's fast delivery and stunning book packaging make every purchase feel premium."</p>
+        <div class="stars">
+          <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+          <i class="fas fa-star-half-alt"></i><i class="far fa-star"></i>
+        </div>
+        <div class="user">
+          <img src="img/woman2.png" alt="Amina R.">
+          <h4>Amina R.</h4>
+        </div>
+      </div>
+
+      <div class="testimonial">
+        <p>"The collection is diverse and the recommendations always match my taste. Highly recommend!"</p>
+        <div class="stars">
+          <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+          <i class="fas fa-star"></i><i class="fas fa-star"></i>
+        </div>
+        <div class="user">
+          <img src="img/woman.png" alt="Lorie.H">
+          <h4>David H.</h4>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+<section id="blog">
+  <div class="container">
+    <div class="blog-content">
+      <div class="heading">
+        <h2>Latest from Our Blog</h2>
+        <hr>
+      </div>
+      <button class="discover-btn">
+        DISCOVER MORE
+        <img src="img/flowbite_arrow-up-outline.png" class="arrow" alt="arrow" />
+      </button>
+    </div>
+
+    <div class="blog-text">
+      <a href="blog.html" class="item">
+        <img src="img/Rectangle 6.png" alt="Latest one">
+        <h3>The Power of Perspective</h3>
+        <p>In The Midnight Library, Matt Haig takes readers on a poignant journey between life and death.</p>
+      </a>
+      <a href="blog.html" class="item">
+        <img src="img/Rectangle 6.png" alt="Latest two">
+        <h3>Breaking the Silence</h3>
+        <p>Kristin Hannah’s The Nightingale is a stirring tribute to the resilience of women during World War II.</p>
+      </a>
+      <a href="blog.html" class="item">
+        <img src="img/Rectangle 6.png" alt="Latest three">
+        <h3>The Quiet Genius of A Man Called Ove</h3>
+        <p>Fredrik Backman’s A Man Called Ove is a masterclass in character-driven storytelling.</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+
+  <footer class="footer">
+    <div class="wrapper">
+      <div class="footer-left">
+        <div class="footer-logo">
+        <div class="logo-text">BOOK<span class="light">SHELF</span></div>
+          <div class="tagline">ESCAPE INTO STORIES</div>
+        </div>
+      </div>
+
+      <div class="footer-center">
+        <div class="footer-column">
+          <h4>PUBLISHERS</h4>
+          <a href="bestselling.html">Best Seller</a>
+          <a href="interview.html">Interviews</a>
+          <a href="authorstory.html">Authors Stories</a>
+         <a href="bookfair.html">BookFair</a>
+          <a href="FAQ.html">Help (FAQ)</a>
+        </div>
+        <div class="footer-column">
+          <h4>GET HELP</h4>
+          <a href="#">Shipping</a>
+          <a href="#">Return</a>
+          <a href="order.html">Order Status</a>
+          <a href="paymentoptions.html">Payment Options</a>
+        </div>
+        <div class="footer-column">
+          <h4>ONLINE SHOPS</h4>
+          <a href="product.html">Books</a>
+          <a href="product.html">E-Books</a>
+          <a href="product.html">Magazine</a>
+        </div>
+      </div>
+
+      <div class="footer-right">
+        <div class="footer-socials">
+          <img src="img/icons8-instagram-48.png" alt="Instagram">
+          <img src="img/icons8-facebook-48.png" alt="Facebook">
+          <img src="img/icons8-twitter-50.png" alt="Twitter">
+        </div>
+        <div class="copyright">© 2025 BOOKSHELF, ALL RIGHTS RESERVED</div>
+      </div>
+    </div>
+  </footer>
+</main>
+<script>
+  const scrollContainer = document.getElementById('bestSellerScroll');
+  const scrollContent = scrollContainer.querySelector('.scroll-track');
+
+  let scrollAmount = 0;
+  let speed = 0.5; // pixels per frame
+  let animationFrame;
+
+  function autoScroll() {
+    scrollAmount += speed;
+    if (scrollAmount >= scrollContent.scrollWidth - scrollContainer.clientWidth) {
+      scrollAmount = 0; // reset to loop
     }
-}
+    scrollContainer.scrollLeft = scrollAmount;
+    animationFrame = requestAnimationFrame(autoScroll);
+  }
 
-function initSlider() {
-    const slides = document.querySelectorAll(".slide");
-    const slider = document.querySelector(".slider");
-    const prevButton = document.querySelector(".prev");
-    const nextButton = document.querySelector(".next");
-    let currentSlide = 0;
-    let slideInterval = setInterval(nextSlide, 5000); 
+  autoScroll(); // start
 
-    function showSlide(index) {
-        if (!slider) return; 
-        slider.style.transform = `translateX(-${index * 100}vw)`;
-    }
+  // Optional: pause on hover
+  scrollContainer.addEventListener('mouseenter', () => cancelAnimationFrame(animationFrame));
+  scrollContainer.addEventListener('mouseleave', () => autoScroll());
 
-    function nextSlide() {
-        currentSlide = (currentSlide + 1) % slides.length;
-        showSlide(currentSlide);
-    }
-    function changeSlide(direction) {
-        clearInterval(slideInterval); 
-        currentSlide = (currentSlide + direction + slides.length) % slides.length;
-        showSlide(currentSlide);
-        slideInterval = setInterval(nextSlide, 5000); 
-    }
-    if (prevButton) prevButton.addEventListener("click", () => changeSlide(-1));
-    if (nextButton) nextButton.addEventListener("click", () => changeSlide(1));
-}
-function scrollToTop() {
-    window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-    });
-}
+  const navToggle = document.getElementById('navToggle');
+  const navMenu = document.getElementById('navMenu');
 
-window.onscroll = function() {
-    let button = document.querySelector('.scroll-to-top');
-    if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
-        button.style.display = 'block';
-    } else {
-        button.style.display = 'none';
-    }
-};
+  navToggle.addEventListener('click', () => {
+    navMenu.classList.toggle('active');
+  });
 function isLoggedIn() {
     return document.cookie
         .split('; ')
         .some(cookie => cookie.startsWith('token='));
 }
 
-    function updateAuthButtons() {
-        const authDiv = document.getElementById('auth-buttons');
-        if (!authDiv) return;
-
-        if (isLoggedIn()) {
-            authDiv.innerHTML = `
-<a href="/auth/logout"><button class="button" id="logout-btn">Logout</button></a>
-            `;
-        } else {
-            authDiv.innerHTML = `
-                <a href="Login page.html"><button class="button">Login</button></a>
-            `;
-        }
-    }
-
-    document.addEventListener('DOMContentLoaded', updateAuthButtons);
-    function getUsernameFromToken() {
+function getUsernameFromToken() {
     const cookie = document.cookie.split('; ').find(row => row.startsWith('token='));
     if (!cookie) return null;
     
@@ -478,7 +443,7 @@ function isLoggedIn() {
 }
 
 function updateAuthButtons() {
-    const authDiv = document.getElementById('auth-buttons');
+    const authDiv = document.querySelector('.auth-buttons');
     if (!authDiv) return;
 
     if (isLoggedIn()) {
@@ -487,18 +452,21 @@ function updateAuthButtons() {
             <div class="user-menu">
                 <div class="username-display">${username}</div>
                 <div class="dropdown-content">
-                    <a href="carte page.html">🛒 My Cart</a>
-                    <a href="dashbord.html">📊 Dashboard</a>
-                    <a href="/auth/logout">🚪 Logout</a>
-                </div>
+                   <a href="carte page.html">🛍️ My Cart</a>
+                    <a href="dashbord.html">📈 Dashboard</a>
+                    <a href="/auth/logout">🔓 Logout</a>
+                  </div>
             </div>
         `;
     } else {
         authDiv.innerHTML = `
-            <a href="Login page.html"><button class="button">Login</button></a>
+            <a href="Login page.html"><button class="signup">SIGNUP</button></a>
+            <a href="Login page.html"><button class="login">LOGIN</button></a>
         `;
     }
 }
+
+document.addEventListener('DOMContentLoaded', updateAuthButtons);
 
 document.addEventListener('click', (e) => {
     if (e.target.closest('.dropdown-content a[href="/auth/logout"]')) {
@@ -507,6 +475,82 @@ document.addEventListener('click', (e) => {
             .then(() => window.location.reload());
     }
 });
+document.addEventListener('click', (e) => {
+  const userMenu = document.querySelector('.user-menu');
+  
+  if (e.target.closest('.username-display')) {
+    userMenu.classList.toggle('open');
+  } else if (!e.target.closest('.user-menu')) {
+    userMenu?.classList.remove('open');
+  }
 
-        </script>
+  if (e.target.closest('.dropdown-content a[href="/auth/logout"]')) {
+    e.preventDefault();
+    fetch('/auth/logout')
+      .then(() => window.location.reload());
+  }
+});
+  const typedTextSpan = document.querySelector(".typed-text");
+  const cursorSpan = document.querySelector(".cursor");
+
+  const parts = [
+    { text: "Every Page Holds", isHTML: false },
+    { text: "<br>", isHTML: true },
+    { text: "a New ", isHTML: false },
+    { text: "<span class='home'>Adventure</span>", isHTML: true }
+  ];
+
+  let partIndex = 0;
+  let charIndex = 0;
+  let typingDelay = 80;
+
+  function type() {
+    if (partIndex >= parts.length) return;
+
+    const current = parts[partIndex];
+
+    if (current.isHTML) {
+      typedTextSpan.innerHTML += current.text;
+      partIndex++;
+      setTimeout(type, 400);
+    } else {
+      if (charIndex < current.text.length) {
+        typedTextSpan.innerHTML += current.text.charAt(charIndex);
+        charIndex++;
+        setTimeout(type, typingDelay);
+      } else {
+        partIndex++;
+        charIndex = 0;
+        setTimeout(type, 400);
+      }
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    setTimeout(type, 500);
+  });
+  document.querySelectorAll('.images[data-id]').forEach(card => {
+  card.style.cursor = 'pointer';
+  card.addEventListener('click', () => {
+    const id = card.getAttribute('data-id');
+    window.location.href = `book1.html?id=${id}`;
+  });
+});
+</script>
+<script>
+  $(document).ready(function() {
+    $('.ripple-section').ripples({
+      resolution: 512,
+      dropRadius: 20, // controls ripple size
+      perturbance: 0.04 // controls ripple intensity
+    });
+  });
+   setInterval(() => {
+    const $el = $('.ripple-section');
+    const x = Math.random() * $el.outerWidth();
+    const y = Math.random() * $el.outerHeight();
+    $el.ripples('drop', x, y, 20, 0.04); // radius and strength
+  }, 2000);
+</script>
+</body>
 </html>

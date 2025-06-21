@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Book Title - Bookshelf</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
  * {
@@ -13,115 +14,186 @@
     box-sizing: border-box;
     font-family: 'Cormorant', serif;
 }
-        body {
-            background-color: #f4f4f4; 
-            color: #333;
-        }
-        .header {
-            background: #000000d8;
-            color: white;
-            padding: 15px;
-            font-size: 15px;
-            font-weight: bold;
-            text-align: center;
-        }
-        .navbar {
-            display: flex;
-            align-items: center;
-            background: white;
-            padding: 10px 20px;
-            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-        }
-        .navbar ul {
-            display: flex;
-            list-style: none;
-            margin-left: 20px;
-            padding: 0;
-        }
-        .navbar ul li {
-            margin: 0 15px;
-        }
-        .navbar ul li a {
-            text-decoration: none;
-            color: black;
-            font-size: 18px;
-            font-weight: bold;
-            padding: 8px 15px;
-            transition: 0.3s;
-        }
-        .navbar ul li a:hover {
-            color: #ff5733;
-        }
-        .nav-icons {
-            display: flex;
-            align-items: center;
-            margin-left: auto; 
-        }
-        .nav-icons img {
-            width: 25px; 
-            height: auto;
-            cursor: pointer;
-            transition: 0.3s;
-            margin: 0 10px;
-        }
-        .nav-icons img:hover {
-            opacity: 0.7; 
-        }
-        .footer {
-            background: #000000d8;          
-            color: white;
-            text-align: center;
-            padding: 30px 0;
-        }
-        .container {
-            max-width: 1170px;
-            margin: auto;
-        }
-        .row {
-            display: flex;
-            flex-wrap: wrap;
-        }
-        .footer-col {
-            width: 25%;
-            padding: 0 15px;
-        }
-        .footer-col h4 {
-            font-size: 18px;
-            color: #ffffff;
-            text-transform: capitalize;
-            margin-bottom: 20px;
-            position: relative;
-        }
-        .footer-col h4::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            bottom: -10px;
-            background-color: #ffffff;
-            height: 2px;
-            width: 50px;
-        }
-        .footer-col ul {
-            list-style: none;
-        }
-        .footer-col ul li {
-            margin-bottom: 10px;
-        }
-        .footer-col ul li a {
-            font-size: 16px;
-            color: #bbbbbb;
-            text-decoration: none;
-            display: block;
-            transition: all 0.3s ease;
-        }
-        .footer-col ul li a:hover {
-            color: #ffffff;
-            padding-left: 8px;
-        }
-        .footer-col .social-links a {
-            display: inline-block;
-            margin: 0 10px 10px 0;
-        }
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: white;
+  color: #333;
+}
+
+h1, h2, h3, .book-title, .review-title {
+  font-family: 'Cormorant', serif;
+
+}
+.navbar {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  padding: 12px 40px;
+  background-color: white;
+}
+    .navbar-logo {
+      display: flex;
+      align-items: center;
+    }
+
+    .navbar-logo img {
+      height: 40px;
+      margin-right: 10px;
+    }
+
+.navbar-menu {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  font-size: 18px;
+  position: relative;
+  left: 50%;
+  transform: translateX(-55%);
+}
+.navbar-buttons {
+  display: flex;
+  gap: 25px;
+  align-items: center;
+}
+
+    .navbar-menu a {
+      text-decoration: none;
+      color: #333;
+      position: relative;
+    }
+
+    .navbar-menu a.active::after {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 2px;
+      bottom: -3px;
+      left: 0;
+      background-color: #333;
+    }
+
+@media (max-width: 768px) {
+  .navbar {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto;
+    text-align: center;
+  }
+
+  .navbar-menu {
+    position: static;
+    transform: none;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 10px;
+  }
+
+  .navbar-buttons {
+    justify-content: center;
+    margin-top: 10px;
+  }
+}
+
+   .btn.wishlist, .btn.cart {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: transparent;
+  color: #2C3E50;
+  border: 1px solid #2C3E50;
+  padding: 6px 14px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  font-family: 'Cormorant', serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.btn.wishlist i,
+.btn.cart i {
+  font-size: 16px;
+}
+
+.btn.wishlist:hover,
+.btn.cart:hover {
+  background-color: #2C3E50;
+  color: white;
+}
+
+footer.footer {
+  background-color: #2C3E50;
+  color: white;
+  padding: 40px 60px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+
+.footer-left {
+  flex: 1;
+  min-width: 180px;
+}
+
+.footer-logo .logo-text {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.footer-logo .logo-text .light {
+  color: #b0b8c1;
+}
+
+.footer-logo .tagline {
+  font-size: 12px;
+  margin-top: 4px;
+  letter-spacing: 1px;
+}
+
+.footer-center {
+  flex: 2;
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  gap: 40px;
+}
+
+.footer-column {
+  min-width: 140px;
+}
+
+.footer-column h4 {
+  font-weight: 700;
+  font-size: 14px;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+  border-bottom: 2px solid white;
+  display: inline-block;
+  padding-bottom: 4px;
+}
+
+.footer-column a {
+  display: block;
+  color: white;
+  text-decoration: none;
+  margin-bottom: 6px;
+  font-size: 13px;
+}
+
+.footer-right {
+  text-align: right;
+  min-width: 160px;
+  font-size: 12px;
+}
+
+.footer-socials {
+  margin-bottom: 10px;
+}
+
+.footer-socials img {
+  width: 25px;
+  margin-left: 10px;
+  vertical-align: middle;
+}
         @media (max-width: 767px) {
             .footer-col {
                 width: 50%;
@@ -133,92 +205,137 @@
                 width: 100%;
             }
         }
-        .book-details {
-            max-width: 1200px;
-            margin: 50px auto;
-            padding: 0 20px;
-            display: flex;
-            gap: 40px;
-            background-color: #ffffff; 
-            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
-        }
-        .book-image {
-            flex: 1;
-            max-width: 400px;
-            position: relative;
-        }
-        .book-image img {
-            width: 100%;
-            height: auto;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        }
-        .book-info {
-            flex: 2;
-            padding: 20px;
-        }
-        .book-title {
-            font-size: 2.5em;
-            margin-bottom: 15px;
-            color: #333;
-        }
-        .book-author {
-            font-size: 1.4em;
-            color: #666;
-            margin-bottom: 20px;
-        }
-        .book-price {
-            font-size: 1.8em;
-            color: #333;
-            margin: 20px 0;
-        }
-        .book-description {
-            line-height: 1.6;
-            margin-bottom: 30px;
-            font-size: 1.1em;
-        }
-        .book-genre,
-        .book-sku,
-        .book-stock {
-            font-size: 1.1em;
-            color: #333;
-            margin-bottom: 15px;
-        }
+.book-details {
+  max-width: 1100px;
+  margin: 60px auto;
+  padding: 30px;
+  display: flex;
+  gap: 50px;
+  background-color: white;
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  align-items: center;
+}
+
+.book-image {
+  position: relative;
+  width: 360px;
+  flex-shrink: 0;
+  overflow: visible; 
+  z-index: 0;
+}
+
+.book-image img {
+  width: 100%;
+  border-radius: 16px;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.1);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  transform-origin: center center;
+  z-index: 1;
+  position: relative;
+}
+
+.book-image:hover img {
+  transform: scale(1.05) rotateZ(0.5deg);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+}.book-image:hover img {
+  transform: scale(1.05) rotateZ(0.5deg) translateY(-5px);
+}
+.book-info {
+    flex: 1;
+    padding: 0 10px;
+}
+.book-title {
+  font-size: 3rem;
+  font-weight: 700;
+  color: #2C3E50;
+  margin-bottom: 10px;
+}
+
+.book-author {
+  font-size: 1rem;
+  color: black;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+
+.book-price {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: #2C3E50;
+  margin: 0;
+}
+.book-description {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #444;
+  margin-bottom: 20px;
+}
+
+.book-genre,
+.book-sku,
+.book-stock {
+  font-size: 1rem;
+  margin-bottom: 10px;
+  color: #444;
+}
         .book-stock.in-stock {
             color: green;
             font-weight: bold;
         }
-        .book-stock.out-of-stock {
-            color: red;
-            font-weight: bold;
-        }
-        .add-to-cart {
-            background: #333;
-            color: white;
-            border: none;
-            padding: 15px 30px;
-            font-size: 1.1em;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-        .add-to-cart:hover {
-            background: #555;
-        }
-        .favorite-btn {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: white;
-            border: none;
-            padding: 10px;
-            border-radius: 50%;
-            cursor: pointer;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-        }
-        .social-share {
-            margin-top: 30px;
-            display: flex;
-            gap: 15px;
-        }
+
+.book-stock.out-of-stock {
+  color: red;
+  font-weight: bold;
+}
+
+.add-to-cart {
+  background-color: #2C3E50;
+  color: white;
+  border: none;
+  padding: 12px 28px;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: background 0.3s ease;
+}
+.add-to-cart:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+ 
+.favorite-btn {
+  position: absolute;
+  left: 10px; 
+  top: 20px;
+  width: 40px;
+  height: 40px;
+  background-color: #eaf0f5;
+  border: none;
+  border-radius: 50%;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  transition: background 0.3s ease;
+    z-index: 2;
+}
+
+.social-share {
+    margin-top: 25px;
+    display: flex;
+    gap: 15px;
+}
+@media (min-width: 768px) {
+    .book-details {
+        align-items: center;
+    }
+}
         .social-share button {
             padding: 10px 20px;
             border: 1px solid #ddd;
@@ -229,69 +346,137 @@
             gap: 8px;
         }
         .reviews-section {
-            margin-top: 50px;
-            background-color: #f9f9f9;
-            padding: 30px;
-            box-shadow: 0px 2px 5px rgba(0,0,0,0.1);
-        }
-        .review-title {
-            font-size: 1.8em;
-            margin-bottom: 20px;
-            color: #333;
-        }
-        .review-list {
-            list-style: none;
-            padding: 0;
-        }
-        .review-list li {
-            margin-bottom: 20px;
-            padding: 15px;
-            background-color: #ffffff;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-        .review-list .reviewer-name {
-            font-weight: bold;
-            font-size: 1.1em;
-            margin-bottom: 5px;
-        }
-        .review-list .review-text {
-            font-size: 1.1em;
-            line-height: 1.6;
-            color: #666;
-        }
-        .stars {
-            color: #ff9900;
-            margin-bottom: 10px;
-        }
-        .similar-products {
-            margin-top: 50px;
-            display: grid;
-            grid-template-columns: repeat(4, 1fr); 
-            gap: 20px;
-        }
-        .similar-product {
-            text-align: center;
-            padding: 20px;
-            background-color: #ffffff;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-        .similar-product img {
-            width: 100%;
-            height: auto;
-            margin-bottom: 10px;
-        }
-        .similar-product h3 {
-            font-size: 1.2em;
-            margin-bottom: 10px;
-        }
-        .similar-product p {
-            font-size: 1.1em;
-            color: #666;
-        }
+  max-width: 900px;
+  margin: 60px auto;
+  padding: 30px;
+  background-color: #ffffff;
+  box-shadow: 0px 6px 18px rgba(0, 0, 0, 0.06);
+  border-radius: 16px;
+}
+
+.review-title {
+  font-size: 2em;
+  font-weight: 600;
+  margin-bottom: 30px;
+  text-align: center;
+  color: #2C3E50;
+}
+
+.review-list {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.review-list li {
+  display: flex;
+  gap: 20px;
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.reviewer-avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: #2C3E50;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+.review-content {
+  flex: 1;
+}
+
+.reviewer-name {
+  font-weight: bold;
+  font-size: 1.1em;
+  margin-bottom: 6px;
+  color: #333;
+}
+
+.stars {
+  color: #ffc107;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.review-text {
+  font-size: 1em;
+  line-height: 1.6;
+  color: #555;
+}
+  .similar-products {
+  margin: 50px auto;
+   padding: 0 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 24px;
+  max-width: 1200px;
+}
+
+.similar-product {
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.similar-product:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+}
+
+.similar-product img {
+    width: 100%;
+    height: 280px;
+    object-fit: cover;
+}
+
+.similar-product h3 {
+    font-size: 1.2em;
+    color: #333;
+    margin: 16px;
+}
+
+.similar-product p {
+    font-size: 1.1em;
+    color: #666;
+    margin: 0 16px 16px;
+}
+
+.similar-product .read-more {
+    margin: 0 16px 20px;
+    align-self: start;
+    background-color: #2C3E50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-size: 0.95em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-decoration: none;
+    text-align: center;
+}
+
+.similar-product .read-more:hover {
+    background-color: #415972;
+}
+
         @media (max-width: 768px) {
             .book-details {
                 flex-direction: column;
@@ -333,255 +518,757 @@
 .logo img {
     height: 80px;
 }
+ .book-card {
+    width: 240px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+.book-card div:last-child {
+  color: #2C3E50; /* matches theme and improves visibility */
+  font-weight: 600;
+}
+  .book-card img {
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+    transition: transform 0.3s ease, filter 0.3s ease;
+  }
+
+  .book-card:hover img {
+    filter: blur(2px);
+  }
+.book-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 15px;
+}
+
+.book-meta p {
+  font-size: 1rem;
+  color: #444;
+}
+.book-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 25px;
+}
+.stars {
+  color: #ff9900;
+  font-size: 1.2em;
+  margin-bottom: 8px;
+  letter-spacing: 1px;
+}
+.star-rating {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: center;
+  font-size: 2rem;
+  color: #ccc;
+  cursor: pointer;
+  gap: 5px;
+}
+
+.star-rating span:hover,
+.star-rating span:hover ~ span,
+.star-rating span.selected,
+.star-rating span.selected ~ span {
+  color: #ffc107;
+}
+.styled-review-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.styled-review-form textarea {
+  padding: 12px;
+  font-size: 1em;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  resize: vertical;
+  min-height: 100px;
+  font-family: 'Inter', sans-serif;
+}
+
+.styled-review-form button {
+  background-color: #2C3E50;
+  color: white;
+  padding: 12px;
+  font-size: 1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.styled-review-form button:hover {
+  background-color: #1c2833;
+}
+
+.rating-group {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+.rating-group .star {
+  color: #ccc;
+  transition: color 0.2s;
+}
+
+.rating-group .star.selected,
+.rating-group .star:hover,
+.rating-group .star:hover ~ .star {
+  color: #2C3E50;
+}
+.reviews-grid {
+  display: flex;
+  gap: 40px; 
+  flex-wrap: wrap;
+}
+
+
+.reviews-left {
+  flex: 2;
+  min-width: 300px;
+  max-height: 600px; 
+  overflow-y: auto;
+   padding-right: 30px;
+  scrollbar-width: thin;
+  scrollbar-color: #ccc transparent;
+}
+
+.reviews-left::-webkit-scrollbar {
+  width: 6px;
+}
+.reviews-left::-webkit-scrollbar-thumb {
+  background-color: #ccc;
+  border-radius: 10px;
+}
+
+.reviews-right {
+  flex: 1;
+  min-width: 280px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+    padding-left: 30px;
+}
+
+
+.summary-box {
+  text-align: center;
+  background-color: #f1f1f1;
+  padding: 20px;
+  border-radius: 12px;
+  font-family: 'Inter', sans-serif;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+.summary-score {
+  font-size: 1.8em;
+  color: #2C3E50;
+  font-weight: bold;
+}
+
+.summary-count {
+  color: #777;
+  font-size: 0.95em;
+  margin-top: 6px;
+}
+
+.review-form-container h3 {
+  text-align: center;
+  color: #2C3E50;
+  margin-bottom: 12px;
+}
+.book-highlights {
+  max-width: 900px;
+  margin: 60px auto;
+  padding: 40px;
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.book-highlights:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.08);
+}
+
+.highlight-title {
+  text-align: center;
+  color: #2C3E50;
+  font-size: 2em;
+  font-weight: 700;
+  margin-bottom: 30px;
+  position: relative;
+}
+
+.highlight-title::after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 3px;
+  background: #2C3E50;
+  margin: 10px auto 0 auto;
+  border-radius: 2px;
+}
+
+.highlight-list {
+  list-style: none;
+  padding-left: 0;
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: #444;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px 40px;
+}
+
+.highlight-list li {
+  position: relative;
+  padding-left: 16px;
+}
+
+.highlight-list li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: #2C3E50;
+  font-size: 1.2em;
+  line-height: 1;
+}
+.book-highlights {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.6s ease forwards;
+  animation-delay: 0.2s;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
     </style>
 </head>
 <body>
-    <header class="header">
-        FREE SHIPPING FOR ORDERS OVER $50
-    </header>
-    <nav class="navbar">
-        <a href="#" class="logo">
-            <img src="img/logo (2).png" alt="Bookshelf">
-        </a>
-        <ul>
-            <li><a href="main.html">Home</a></li>
-            <li><a href="product.html">Shop</a></li>
-        </ul>
-        <div class="nav-icons">
-            <a href="carte page.html"><img src="img/cart-icon.png" alt="Cart"></a>
-            <a href="wishlist.html"><img src="img/icons8-wishlist-58.png" alt="wishlist"></a>
-        </div>
-    </nav>    
-    <main>
-        <div class="book-details">
-            <div class="book-image">
-                <button class="favorite-btn" onclick="toggleFavorite()">
-                    <i class="far fa-heart"></i>
-                </button>
-                <img id="book-image" src="" alt="Book Image">
+<div class="navbar">
+    <div class="navbar-logo">
+      <img src="img/Frame 3.png" alt="Logo">
+    </div>
+    <div class="navbar-menu">
+      <a href="main.html">Home</a>
+      <a href="product.html" class="active">Shop</a>
+      <a href="wishlist.html" >Wishlist</a>
+      <a href="order.html">Orders</a>
+    </div>
+  <div class="navbar-buttons">
+  <a href="wishlist.html">
+    <img src="img/wishlist-icon.png" alt="Wishlist" style="height: 28px;">
+  </a>
+  <a href="carte page.html">
+    <img src="img/cart-icon.png" alt="Cart" style="height: 28px;">
+  </a>
+</div>
+</div>
+  </div>
+<main>
+<div class="book-details">
+<div class="book-image">
+<button class="favorite-btn" id="wishlist-btn" onclick="toggleFavorite()">
+<i class="far fa-heart"></i>
+</button>
+<img id="book-image" src="" alt="Book Image">
+</div>
+<div class="book-info">
+  <h1 class="book-title"></h1>
+  <p class="book-author"></p>
+  <p class="book-description"></p>
 
+<div class="book-meta">
+  <p class="book-genre"></p>
+  <p class="book-sku"></p>
+  <p class="book-stock"></p>
+</div>
+
+
+  <div class="book-bottom">
+    <p class="book-price"></p>
+    <button class="add-to-cart" onclick="addToCart()">Add to Cart</button>
+  </div>
+
+  <div class="social-share">
+    <button onclick="shareOnFacebook()">
+      <i class="fab fa-facebook"></i> Share
+    </button>
+    <button onclick="shareOnTwitter()">
+      <i class="fab fa-twitter"></i> Tweet
+    </button>
+  </div>
+</div>
+ </div>
+<section class="book-highlights">
+  <h2 class="highlight-title">Book Highlights</h2>
+  <ul class="highlight-list">
+    <li>High-quality paperback or hardcover edition</li>
+    <li>Includes a complimentary bookmark</li>
+    <li>Perfect for fans of fiction, drama, or thrillers</li>
+    <li>Engaging storyline with rich character development</li>
+    <li>Ships within 24 hours</li>
+    <li>Great gift for book lovers</li>
+    <li>Over 1,000 happy readers and counting</li>
+  </ul>
+</section>
+
+
+
+<div class="reviews-section">
+  <h2 class="review-title">Customer Reviews</h2>
+
+  <div class="reviews-grid">
+    <div class="reviews-left">
+      <ul class="review-list">
+      </ul>
+    </div>
+
+    <div class="reviews-right">
+      <canvas id="ratingsChart" width="300" height="200"></canvas>
+      <div id="review-summary" class="summary-box">
+        <div class="summary-score">★ 0.0 out of 5</div>
+        <div class="summary-count">Based on 0 reviews</div>
+      </div>
+
+      <div class="review-form-container">
+        <h3>Leave a Review</h3>
+        <form id="reviewForm" class="styled-review-form">
+          <div class="rating-group">
+            <span class="star" data-value="5">&#9733;</span>
+            <span class="star" data-value="4">&#9733;</span>
+            <span class="star" data-value="3">&#9733;</span>
+            <span class="star" data-value="2">&#9733;</span>
+            <span class="star" data-value="1">&#9733;</span>
+          </div>
+          <input type="hidden" id="reviewStars" required>
+
+          <textarea id="reviewText" placeholder="Write your review..." required></textarea>
+          <button type="submit">Submit Review</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+
+
+<section style="max-width: 1200px; margin: 60px auto;">
+  <h2 style="font-size: 1.8em; margin-bottom: 30px; font-weight: bold; color: #2C3E50; text-align: center;">Related products</h2>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 50px;">
+
+    <!-- The Silent Patient -->
+    <div class="book-card">
+      <a href="book1.html?id=9">
+        <img src="img/thesilentpatient.jpg" alt="The Silent Patient">
+      </a>
+      <div style="margin-top: 10px;">
+        <div style="font-weight: 600;">The Silent Patient</div>
+        <div style="color: #888; font-size: 14px;">$14.99</div>
+      </div>
+    </div>
+
+    <!-- The Catcher in the Rye -->
+    <div class="book-card">
+      <a href="book1.html?id=8">
+        <img src="img/thecatcherintherye.jpg" alt="The Catcher in the Rye">
+      </a>
+      <div style="margin-top: 10px;">
+        <div style="font-weight: 600;">The Catcher in the Rye</div>
+        <div style="color: #888; font-size: 14px;">$12.99</div>
+      </div>
+    </div>
+
+    <!-- Dune -->
+    <div class="book-card">
+      <a href="book1.html?id=10">
+        <img src="img/dune.jpg" alt="Dune">
+      </a>
+      <div style="margin-top: 10px;">
+        <div style="font-weight: 600;">DUNE</div>
+        <div style="color: #888; font-size: 14px;">$18.99</div>
+      </div>
+    </div>
+
+    <!-- 1984 -->
+    <div class="book-card">
+      <a href="book1.html?id=2">
+        <img src="img/1984.webp" alt="1984">
+      </a>
+      <div style="margin-top: 10px;">
+        <div style="font-weight: 600;">1984</div>
+        <div style="color: #888; font-size: 14px;">$22.99</div>
+      </div>
+    </div>
+          <!-- it ends with us -->
+               <div class="book-card">
+            <a href="book1.html?id=49">
+              <img src="img/itsendswithus.jpg" alt="it ends with us ">
+            </a>
+            <div style="margin-top: 10px;">
+              <div style="font-weight: 600;">It ends with us </div>
+              <div style="color: #888; font-size: 14px;">$14.99</div>
             </div>
-            <div class="book-info">
-                <h1 class="book-title"></h1> 
-                <p class="book-author"></p>  
-                <p class="book-price"></p>   
-                <p class="book-genre"></p>   
-                <p class="book-sku"></p>     
-                <p class="book-stock"></p>   
-                <p class="book-description"></p> 
-                <button class="add-to-cart" onclick="addToCart()">Add to Cart</button>
-                <div class="social-share">
-                    <button onclick="shareOnFacebook()">
-                        <i class="fab fa-facebook"></i> Share
-                    </button>
-                    <button onclick="shareOnTwitter()">
-                        <i class="fab fa-twitter"></i> Tweet
-                    </button>
-                </div>
-            </div>
-        </div>
-        <div class="reviews-section">
-            <h2 class="review-title">Customer Reviews</h2>
-            <ul class="review-list">
-                <li>
-                    <div class="reviewer-name">Alice Johnson</div>
-                    <div class="stars">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star-half-alt"></i>
-                    </div>
-                    <p class="review-text">This book was absolutely fantastic! It kept me hooked from beginning to end. A must-read for adventure lovers!</p>
-                </li>
-                <li>
-                    <div class="reviewer-name">James Smith</div>
-                    <div class="stars">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star-half-alt"></i>
-                        <i class="far fa-star"></i>
-                    </div>
-                    <p class="review-text">Great book! Some parts were slow, but overall a great read.</p>
-                </li>
-            </ul>
-        </div>
-        <div class="similar-products">
-            <div class="similar-product">
-                <img src="img/thesilentpatient.jpg" alt="thesilentpatient">
-                <h3>The silent patient</h3>
-                <p>$14.99</p>
-                <a href="book1.html?id=8" class="read-more">Read More</a>
-            </div>
-            <div class="similar-product">
-                <img src="img/thecatcherintherye.jpg" alt="thecatcherintherye">
-                <h3>The Catcher in the Rye</h3>
-                <p>$12.99</p>
-                <a href="book1.html?id=9" class="read-more">Read More</a>
-            </div>
-            <div class="similar-product">
-                <img src="img/dune.jpg" alt="Dune">
-                <h3>DUNE</h3>
-                <p>$18.99</p>
-                <a href="book1.html?id=10" class="read-more">Read More</a>
-            </div>
-            <div class="similar-product">
-                <img src="img/1984.webp" alt="1984">
-                <h3>1984</h3>
-                <p>$22.99</p>
-                <a href="book1.html?id=2" class="read-more">Read More</a>
-            </div>
-        </div>
+          </div>
+  </div>
+</section>
     </main>
-    <footer class="footer">
-        <div class="container">
-            <div class="row">
-                <div class="footer-col">
-                    <h4>Publishers</h4>
-                    <ul>
-                        <li><a href="bestselling.html">Bestsellers</a></li>
-                        <li><a href="interview.html">Interviews</a></li>
-                        <li><a href="authorstory.html">Authors story</a></li>
-                        <li><a href="bookfair.html">Book Fairs</a></li>
-                        <li><a href="FAQ.html">Help (FAQ)</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h4>Get help</h4>
-                    <ul>
-                        <li><a href="#">Shipping</a></li>
-                        <li><a href="#">Returns</a></li>
-                        <li><a href="order.html">Order Status</a></li>
-                        <li><a href="paymentoptions.html">Payment Options</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h4>Online Shop</h4>
-                    <ul>
-                        <li><a href="product.html">Books</a></li>
-                        <li><a href="product.html">Ebooks</a></li>
-                        <li><a href="product.html">Magazines</a></li>
-                        <li><a href="product.html">Newspapers</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h4>Follow Us</h4>
-                    <div class="social-links">
-                        <a href="#"><img src="img/icons8-facebook-48.png" alt="Facebook"></a>
-                        <a href="#"><img src="img/icons8-twitter-50.png" alt="Twitter"></a>
-                        <a href="#"><img src="img/icons8-instagram-48.png" alt="Instagram"></a>
-                        <a href="#"><img src="img/icons8-linkedin-50.png" alt="LinkedIn"></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <p>© 2025 BOOKSHELF, ALL RIGHTS RESERVED</p>
-    </footer>    
-    <script>
-        function getBookIdFromURL() {
-            const params = new URLSearchParams(window.location.search);
-            return params.get("id"); 
-        }
-        
-        function fetchBookDetails() {
-            const bookId = getBookIdFromURL();
-            if (!bookId) {
-                console.error("No book ID found in URL.");
-                return;
-            }
-    
-            fetch(`/api/products/${bookId}`, { credentials: 'include' }) 
-                .then(response => response.json())
-                .then(book => {
-                    if (!book) {
-                        console.error("Book not found in API response.");
-                        return;
-                    }
-    
-                    document.querySelector('.book-title').textContent = book.title || "No Title Available";
-                    document.querySelector('.book-author').textContent = book.author || "Unknown Author";
-                    document.querySelector('.book-price').textContent = `$${book.price || "N/A"}`;
-                    document.querySelector('.book-image img').src = book.image || "default-image.jpg";
-                    document.querySelector('.book-description').textContent = book.description || "No description available.";
-                    document.querySelector('.book-genre').innerHTML = `<strong>Genre:</strong> ${book.category || "Unknown"}`;
-                    document.querySelector('.book-sku').innerHTML = `<strong>SKU:</strong> ${book.sku || "N/A"}`;
-    
-                    const stockElement = document.querySelector('.book-stock');
-                    const stockStatus = book.stock_status || "Out of Stock";
-                    stockElement.innerHTML = `<strong>Stock Status:</strong> ${stockStatus}`;
-                    stockElement.classList.add(stockStatus === "In Stock" ? "in-stock" : "out-of-stock");
-    
-                    const cartButton = document.querySelector('.add-to-cart');
-                    if (stockStatus !== "In Stock") {
-                        cartButton.disabled = true;
-                        cartButton.textContent = "Out of Stock";
-                        cartButton.style.backgroundColor = "#a0a0a0";
-                        cartButton.style.cursor = "not-allowed";
-                    }
-                })
-                .catch(error => console.error("Error fetching book data:", error));
-        }
-    
-        document.addEventListener("DOMContentLoaded", fetchBookDetails);
-    
-        function addToCart() {
-            const bookId = getBookIdFromURL();
-            if (!bookId) return;
-    
-            fetch('/api/cart', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    productId: bookId,
-                    quantity: 1
-                }),
-                credentials: 'include'
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    alert('Item added to cart!');
-                } else {
-                    alert('Failed to add item: ' + (data.error || 'Unknown error'));
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('Failed to add item to cart');
-            });
-        }
-    
-        let isFavorite = false;
-    
-        function toggleFavorite() {
-    const heartIcon = document.querySelector('.favorite-btn i');
-    isFavorite = !isFavorite;
+ <footer class="footer">
+  <div class="footer-left">
+    <div class="footer-logo">
+      <div class="logo-text">BOOK<span class="light">SHELF</span></div>
+      <div class="tagline">ESCAPE INTO STORIES</div>
+    </div>
+  </div>
 
-    heartIcon.classList.toggle('far');
-    heartIcon.classList.toggle('fas');
+  <div class="footer-center">
+    <div class="footer-column">
+      <h4>PUBLISHERS</h4>
+      <a href="#">Best Seller</a>
+      <a href="#">Interviews</a>
+      <a href="#">Authors Stories</a>
+      <a href="#">Book Fires</a>
+      <a href="#">Help (FAQ)</a>
+    </div>
+    <div class="footer-column">
+      <h4>GET HELP</h4>
+      <a href="#">Shipping</a>
+      <a href="#">Return</a>
+      <a href="#">Order Status</a>
+      <a href="#">Book Fires</a>
+      <a href="#">Payment Options</a>
+    </div>
+    <div class="footer-column">
+      <h4>ONLINE SHOPS</h4>
+      <a href="#">Books</a>
+      <a href="#">E-Books</a>
+      <a href="#">Magazine</a>
+    </div>
+  </div>
+  <div class="footer-right">
+    <div class="footer-socials">
+      <img src="img/icons8-instagram-48.png" alt="Instagram">
+      <img src="img/icons8-facebook-48.png" alt="Facebook">
+      <img src="img/icons8-twitter-50.png" alt="Twitter">
+    </div>
+    <div class="copyright">© 2025 BOOKSHELF, ALL RIGHTS RESERVED</div>
+  </div>
+</footer>
+<script>
+  let userId = null;
 
-    const bookId = getBookIdFromURL();
-    const userId = 1; 
-
-    if (isFavorite) {
-        fetch('/api/wishlist', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ userId, bookId }),
-            credentials: 'include'
-        })
-        .then(res => res.json())
-        .then(data => {
-            if (data.success) alert("Added to wishlist!");
-            else alert("Failed to add to wishlist");
-        });
-    } else {
-    }
+async function fetchUserId() {
+try {
+  const resUser = await fetch('/api/user', { credentials: 'include' });
+  const userData = await resUser.json();
+  if (!userData.success || !userData.id) return null;
+  return userData.id;
+} catch {
+  return null;
 }
-    </script>
-    
+}
+function getBookIdFromURL() {
+const params = new URLSearchParams(window.location.search);
+const id = params.get("id");
+return id && !isNaN(id) ? parseInt(id) : null;
+}
+
+function fetchBookDetails() {
+const bookId = getBookIdFromURL();
+if (!bookId) return;
+
+fetch(`/api/products/${bookId}`, { credentials: 'include' }) 
+  .then(response => response.json())
+  .then(book => {
+    if (!book) return;
+
+    document.querySelector('.book-title').textContent = book.title || "No Title Available";
+    document.querySelector('.book-author').textContent = book.author || "Unknown Author";
+    document.querySelector('.book-price').textContent = `$${book.price || "N/A"}`;
+    document.querySelector('.book-image img').src = book.image || "default-image.jpg";
+    document.querySelector('.book-description').textContent = book.description || "No description available.";
+    document.querySelector('.book-genre').innerHTML = `<strong>Genre:</strong> ${book.category || "Unknown"}`;
+    document.querySelector('.book-sku').innerHTML = `<strong>SKU:</strong> ${book.sku || "N/A"}`;
+
+    const stockElement = document.querySelector('.book-stock');
+    const stockStatus = book.stock_status || "Out of Stock";
+    stockElement.innerHTML = `<strong>Stock Status:</strong> ${stockStatus}`;
+    stockElement.classList.add(stockStatus === "In Stock" ? "in-stock" : "out-of-stock");
+
+    const cartButton = document.querySelector('.add-to-cart');
+    if (stockStatus !== "In Stock") {
+      cartButton.disabled = true;
+      cartButton.textContent = "Out of Stock";
+      cartButton.style.backgroundColor = "#a0a0a0";
+      cartButton.style.cursor = "not-allowed";
+    }
+  });
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+fetchBookDetails();
+updateWishlistIconState();
+loadReviews();
+});
+
+function addToCart() {
+const bookId = getBookIdFromURL();
+if (!bookId) return;
+
+fetch('/api/cart', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({ productId: bookId, quantity: 1 }),
+  credentials: 'include'
+})
+.then(response => response.json())
+.then(data => {
+  if (data.success) {
+    alert('Item added to cart!');
+  } else {
+    alert('Failed to add item: ' + (data.error || 'Unknown error'));
+  }
+});
+}
+
+let isFavorite = false;
+
+async function updateWishlistIconState() {
+userId = await fetchUserId();
+if (!userId) return;
+const bookId = getBookIdFromURL();
+const heartIcon = document.querySelector('#wishlist-btn i');
+
+try {
+  const res = await fetch(`/api/wishlist?userId=${userId}`, { credentials: 'include' });
+  const wishlist = await res.json();
+  const found = wishlist.some(book => String(book.id) === String(bookId));
+
+  if (found) {
+    heartIcon.classList.remove('far');
+    heartIcon.classList.add('fas');
+    isFavorite = true;
+  } else {
+    heartIcon.classList.remove('fas');
+    heartIcon.classList.add('far');
+    isFavorite = false;
+  }
+} catch (err) {
+  console.error('Failed to update wishlist icon:', err);
+}
+}
+
+async function toggleFavorite() {
+const heartIcon = document.querySelector('.favorite-btn i');
+const bookId = getBookIdFromURL();
+userId = await fetchUserId();
+if (!userId) return; // or show a login message
+
+isFavorite = !isFavorite;
+
+if (isFavorite) {
+  heartIcon.classList.remove('far');
+  heartIcon.classList.add('fas');
+
+  try {
+    const res = await fetch('/api/wishlist', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ userId, bookId }),
+      credentials: 'include'
+    });
+
+    const data = await res.json();
+    if (!data.success) {
+      isFavorite = false;
+      heartIcon.classList.add('far');
+      heartIcon.classList.remove('fas');
+      alert("Failed to add to wishlist");
+    }
+  } catch (error) {
+    isFavorite = false;
+    heartIcon.classList.add('far');
+    heartIcon.classList.remove('fas');
+  }
+} else {
+  heartIcon.classList.remove('fas');
+  heartIcon.classList.add('far');
+
+  try {
+    const res = await fetch('/api/wishlist', {
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ userId, bookId }),
+      credentials: 'include'
+    });
+
+    const data = await res.json();
+    if (!data.success) {
+      isFavorite = true;
+      heartIcon.classList.add('fas');
+      heartIcon.classList.remove('far');
+      alert("Failed to remove from wishlist");
+    }
+  } catch (error) {
+    isFavorite = true;
+    heartIcon.classList.add('fas');
+    heartIcon.classList.remove('far');
+  }
+}
+}
+
+async function loadReviews() {
+const bookId = getBookIdFromURL();
+if (!bookId || isNaN(bookId)) {
+  console.warn("Invalid or missing book ID");
+  return;
+}
+
+const res = await fetch(`/api/reviews/${bookId}`, { credentials: 'include' });
+const reviews = await res.json();
+
+const list = document.querySelector(".review-list");
+const summary = document.getElementById("review-summary");
+list.innerHTML = '';
+
+if (!reviews.length) {
+  list.innerHTML = '<p style="text-align: center; color: #777;">No reviews yet. Be the first to review!</p>';
+  summary.innerHTML = `
+    <div style="font-size: 1.6em; color: #2C3E50;">★ 0.0 out of 5</div>
+    <div style="color: #888; font-size: 0.95em;">Based on 0 reviews</div>`;
+  return;
+}
+
+const reviewCounts = [0, 0, 0, 0, 0]; // index 0 = 1★, index 4 = 5★
+
+reviews.forEach(review => {
+  const stars = review.stars;
+  if (stars >= 1 && stars <= 5) {
+    reviewCounts[stars - 1]++;
+  }
+});
+
+const totalStars = reviews.reduce((sum, r) => sum + r.stars, 0);
+const avg = (totalStars / reviews.length).toFixed(1);
+summary.innerHTML = `
+  <div style="font-size: 1.6em; color: #2C3E50;">★ ${avg} out of 5</div>
+  <div style="color: #888; font-size: 0.95em;">Based on ${reviews.length} reviews</div>`;
+
+reviews.forEach(review => {
+  const initials = review.name.split(" ").map(n => n[0]).join("").toUpperCase();
+  list.innerHTML += `
+    <li>
+      <div class="reviewer-avatar">${initials}</div>
+      <div class="review-content">
+        <div class="reviewer-name">${review.name}</div>
+        <div class="stars">${'★'.repeat(review.stars)}${'☆'.repeat(5 - review.stars)}</div>
+        <p class="review-text">${review.content}</p>
+        <div style="font-size: 0.85em; color: #999;">Reviewed on ${new Date(review.created_at).toDateString()}</div>
+      </div>
+    </li>
+  `;
+});
+
+const ctx = document.getElementById('ratingsChart').getContext('2d');
+new Chart(ctx, {
+  type: 'bar',
+  data: {
+    labels: ['1★', '2★', '3★', '4★', '5★'],
+    datasets: [{
+      label: '# of Reviews',
+      data: reviewCounts,
+      backgroundColor: '#2C3E50',
+      borderRadius: 8,
+    }]
+  },
+  options: {
+    indexAxis: 'y',
+    scales: {
+      x: { beginAtZero: true, precision: 0 }
+    },
+    plugins: {
+      legend: { display: false }
+    }
+  }
+});
+}
+
+// Star click logic
+document.querySelectorAll(".rating-group .star").forEach(star => {
+star.addEventListener("click", function () {
+  const value = this.getAttribute("data-value");
+  document.getElementById("reviewStars").value = value;
+
+  document.querySelectorAll(".rating-group .star").forEach(s => s.classList.remove("selected"));
+  this.classList.add("selected");
+  let prev = this.previousElementSibling;
+  while (prev) {
+    prev.classList.add("selected");
+    prev = prev.previousElementSibling;
+  }
+});
+});
+
+// Review submission logic
+document.getElementById("reviewForm").addEventListener("submit", async function (e) {
+e.preventDefault();
+
+const bookId = getBookIdFromURL();
+const stars = parseInt(document.getElementById("reviewStars").value);
+const content = document.getElementById("reviewText").value.trim();
+
+if (!stars || !content) {
+  alert("Please provide both a star rating and review text.");
+  return;
+}
+
+try {
+  const res = await fetch("/api/reviews", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    credentials: "include",
+    body: JSON.stringify({ book_id: bookId, stars, content }),
+  });
+
+  const data = await res.json();
+
+  if (data.success) {
+    alert("Review submitted successfully!");
+    loadReviews();
+    this.reset();
+    document.getElementById("reviewStars").value = "";
+    document.querySelectorAll(".rating-group .star").forEach(s => s.classList.remove("selected"));
+  } else {
+    alert("Failed to submit review: " + (data.error || "Unknown error"));
+  }
+} catch (err) {
+  console.error("Review submission failed:", err);
+  alert("You must be logged in to submit a review.");
+}
+});
+</script>
+
 </body>
 </html>

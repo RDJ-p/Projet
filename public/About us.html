@@ -1,170 +1,258 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bookshelf | About</title>
-    <link rel="stylesheet" href="aboutus.css">
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@400;600&display=swap" rel="stylesheet">
-</head>
-<body>
-    <div class="scroll-progress"></div>
-    
-    <nav class="navbar">
-        <a href="#" class="logo">
-            <img src="img/logo (2).png" alt="Bookshelf">
-        </a>
-        <div class="nav-links">
-            <a href="main.html">Home</a>
-            <a href="product.html">Collections</a>
-            <a href="contactus.html">Contact</a>
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Bookshelf | About</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@400;600&display=swap" rel="stylesheet">
+        <style>
+            body { font-family: 'Cormorant', serif; }
+        </style>
+    </head>
+    <body class="bg-white text-black pt-3">
+        <div class="fixed top-0 left-0 h-[3px] bg-gray-700 z-50 transition-all duration-300" id="scroll-progress"></div>
+
+    <nav class="bg-white px-6 py-3 relative z-50">
+    <div class="max-w-7xl mx-auto flex items-center justify-between">
+        <div class="flex items-center space-x-3">
+        <img src="img/Frame 3.png" alt="Bookshelf Logo" class="h-10">
         </div>
-        <div class="menu-toggle">
-            <img src="img/menu.png" alt="Menu" width="24">
+
+        <button id="menu-toggle" class="md:hidden text-gray-800 focus:outline-none">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2"
+            viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+        </button>
+
+        <div class="hidden md:absolute md:left-1/2 md:transform md:-translate-x-1/2 md:flex">
+        <ul class="flex space-x-6 text-gray-800 text-lg font-medium">
+            <li><a href="#" class="hover:text-[#1d2a3d]">Home</a></li>
+            <li><a href="#" class="hover:text-[#1d2a3d]">Shop</a></li>
+            <li><a href="#" class="font-bold border-b-2 border-[#1d2a3d] pb-1">About us </a></li>
+            <li><a href="#" class="hover:text-[#1d2a3d]">Orders</a></li>
+        </ul>
         </div>
+    </div>
+
+    <div id="mobile-menu" class="md:hidden hidden mt-4 px-6">
+        <ul class="flex flex-col space-y-4 text-gray-800 text-base font-medium">
+        <li><a href="#" class="hover:text-[#1d2a3d]">Blogs</a></li>
+        <li><a href="#" class="hover:text-[#1d2a3d]">Events</a></li>
+        <li><a href="#" class="hover:text-[#1d2a3d]">Shop</a></li>
+        <li><a href="#" class="hover:text-[#1d2a3d]">About Us</a></li>
+        </ul>
+    </div>
     </nav>
 
-    <section class="hero">
-        <h1>Discover the World of Literature</h1>
-    </section>
 
-    <section class="stats">
-        <div class="stat-card">
-            <div class="stat-number">15K+</div>
-            <p>Books in Collection</p>
-        </div>
-        <div class="stat-card">
-            <div class="stat-number">200+</div>
-            <p>Publishing Partners</p>
-        </div>
-        <div class="stat-card">
-            <div class="stat-number">25</div>
-            <p>Expert Curators</p>
-        </div>
-        <div class="stat-card">
-            <div class="stat-number">1M+</div>
-            <p>Books Delivered</p>
-        </div>
-    </section>
+        <section class="relative h-[60vh] flex items-center justify-center text-white text-center mt-16 bg-fixed bg-cover bg-center" style="background-image: url('img/test1.jpg')">
+            <div class="absolute inset-0 bg-black bg-opacity-40"></div>
+            <h1 class="relative text-4xl md:text-5xl px-4 max-w-3xl animate-[slideUp_1.2s_ease-out]">Discover the World of Literature</h1>
+        </section>
 
-    <section class="content-section">
-        <div class="section-img">
-            <img src="img/booksfactory.jpg" alt="Our History">
-        </div>
-        <div class="section-text">
-            <h2>Our Literary Journey</h2>
-            <p>Established in 2010, Bookshelf has grown from a small neighborhood bookstore to a leading literary hub. Our curated collections span 25 genres, offering both timeless classics and contemporary masterpieces.</p>
-            <p>We partner with independent authors and major publishers to bring diverse voices to our shelves. Our expert team selects each title through a rigorous review process, ensuring quality and relevance.</p>
-            <button class="btn" onclick="window.location.href='product.html'">Explore Collection</button>
-        </div>
-    </section>
+        <section class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 px-[5%] py-16 bg-gray-50">
+            <div class="text-center p-8 bg-white rounded shadow hover:shadow-lg transition-transform transform hover:-translate-y-2 hover:scale-105 cursor-pointer">
+                <div class="text-3xl text-gray-700 font-semibold mb-2">15K+</div>
+                <p>Books in Collection</p>
+            </div>
+            <div class="text-center p-8 bg-white rounded shadow hover:shadow-lg transition-transform transform hover:-translate-y-2 hover:scale-105 cursor-pointer">
+                <div class="text-3xl text-gray-700 font-semibold mb-2">200+</div>
+                <p>Publishing Partners</p>
+            </div>
+            <div class="text-center p-8 bg-white rounded shadow hover:shadow-lg transition-transform transform hover:-translate-y-2 hover:scale-105 cursor-pointer">
+                <div class="text-3xl text-gray-700 font-semibold mb-2">25</div>
+                <p>Expert Curators</p>
+            </div>
+            <div class="text-center p-8 bg-white rounded shadow hover:shadow-lg transition-transform transform hover:-translate-y-2 hover:scale-105 cursor-pointer">
+                <div class="text-3xl text-gray-700 font-semibold mb-2">1M+</div>
+                <p>Books Delivered</p>
+            </div>
+        </section>
 
-    <section class="content-section">
-        <div class="section-text">
-            <h2>Community Impact</h2>
-            <p>Through our literacy programs and community partnerships, we've:</p>
-            <ul style="list-style: none; margin: 1.5rem 0;">
-                <li>Established 50+ school libraries</li>
-                <li>Trained 1,000+ educators</li>
-                <li>Donated 250,000+ books</li>
-                <li>Hosted 500+ author events</li>
+        <section class="flex flex-col md:flex-row gap-12 px-[5%] py-16 items-center opacity-0 translate-y-8 transition-all duration-700 content-section">
+            <div class="flex-1 min-w-[300px] overflow-hidden rounded">
+                <img src="img/booksfactory.jpg" alt="Our History" class="w-full h-[400px] object-cover hover:scale-105 transition-transform">
+            </div>
+            <div class="flex-1 min-w-[300px]">
+                <h2 class="text-2xl text-gray-700 mb-6">Our Literary Journey</h2>
+                <p class="text-lg text-gray-700 mb-6 leading-relaxed">Established in 2010, Bookshelf has grown from a cozy neighborhood bookstore into a vibrant literary hub cherished by readers near and far. What began as a modest space for book lovers has evolved into a dynamic community destination that celebrates the written word in all its forms.
+Today, our curated collections span 25 diverse genres, offering everything from timeless literary classics and groundbreaking nonfiction to contemporary bestsellers and hidden indie gems. Whether you're seeking thought-provoking memoirs, immersive fantasy, or cutting-edge social commentary, you'll find something to inspire and delight on our shelves.</p>
+                <button class="bg-gray-700 text-white px-6 py-3 rounded hover:bg-gray-300 hover:text-gray-700 shadow transition-transform transform hover:-translate-y-0.5" onclick="window.location.href='product.html'">Explore Collection</button>
+            </div>
+        </section>
+
+        <section class="flex flex-col-reverse md:flex-row gap-12 px-[5%] py-16 items-center opacity-0 translate-y-8 transition-all duration-700 content-section">
+    <div class="flex-1 min-w-[300px]">
+        <h2 class="text-2xl text-gray-700 mb-6">Community Impact</h2>
+        <p class="text-lg text-gray-700 mb-4 leading-relaxed">
+        Through our literacy programs and community partnerships, we've made meaningful strides in promoting access to books and education. Our initiatives aim to create lasting change by empowering individuals and enriching communities.
+         </p>
+        <ul class="list-none mb-6 text-lg text-[#2C3E50] space-y-2">
+        <li>Established 50+ school libraries in underserved areas</li>
+        <li>Trained 1,000+ educators to foster effective literacy practices</li>
+        <li>Donated 250,000+ books to schools, shelters, and local programs</li>
+        <li>Hosted 500+ author events that connect writers with readers</li>
+        </ul>
+        <button class="bg-gray-700 text-white px-6 py-3 rounded hover:bg-gray-300 hover:text-gray-700 shadow transition-transform transform hover:-translate-y-0.5">
+        Support Us
+        </button>
+    </div>
+
+            <div class="flex-1 min-w-[300px] overflow-hidden rounded">
+                <img src="img/read.jpg" alt="Community Impact" class="w-full h-[400px] object-cover hover:scale-105 transition-transform">
+            </div>
+        </section>
+
+ <section class="bg-gray-50 px-[5%] py-16">
+    <h2 class="text-center text-3xl font-semibold font-heading mb-12 text-gray-800">Leadership Team</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
+      
+      <div class="bg-white p-6 text-center border border-gray-200 rounded-xl shadow-md hover:scale-[1.03] hover:shadow-2xl transition-all duration-300">
+        <img src="img/teampng1.jpg" alt="Haitam Agnao" class="w-full h-[200px] object-cover mb-4 rounded-lg grayscale hover:grayscale-0 hover:scale-[1.02] transition-all duration-300 cursor-pointer"
+        onclick="openModal('Haitam Agnao', 'Backend Developer', ['Node.js (Expert)', 'PostgreSQL (Advanced)', 'Docker (Advanced)', 'System Design (Guru)', 'GraphQL (Strong)', 'CI/CD Automation', 'Microservices Architecture'])">
+        <h3 class="text-xl font-semibold">Haitam Agnao</h3>
+        <p class="text-gray-600">Backend Developer</p>
+      </div>
+
+      <div class="bg-white p-6 text-center border border-gray-200 rounded-xl shadow-md hover:scale-[1.03] hover:shadow-2xl transition-all duration-300">
+        <img src="img/teampng2.jpg" alt="Charaf eddine bourrich" class="w-full h-[200px] object-cover mb-4 rounded-lg grayscale hover:grayscale-0 hover:scale-[1.02] transition-all duration-300 cursor-pointer"
+        onclick="openModal('Charaf eddine bourrich', 'Frontend Developer', ['HTML5', 'CSS3', 'Responsive Layouts', 'Basic Git usage'])">
+        <h3 class="text-xl font-semibold">Charaf eddine bourrich</h3>
+        <p class="text-gray-600">Frontend Developer</p>
+      </div>
+
+      <div class="bg-white p-6 text-center border border-gray-200 rounded-xl shadow-md hover:scale-[1.03] hover:shadow-2xl transition-all duration-300">
+        <img src="img/teampng3.jpg" alt="Amine Johri" class="w-full h-[200px] object-cover mb-4 rounded-lg grayscale hover:grayscale-0 hover:scale-[1.02] transition-all duration-300 cursor-pointer"
+        onclick="openModal('Amine Johri', 'Frontend Developer', ['HTML5', 'CSS3', 'Responsive Layouts', 'Basic Git usage'])">
+        <h3 class="text-xl font-semibold">Amine Johri</h3>
+        <p class="text-gray-600">Frontend Developer</p>
+      </div>
+
+      <div class="bg-white p-6 text-center border border-gray-200 rounded-xl shadow-md hover:scale-[1.03] hover:shadow-2xl transition-all duration-300">
+        <img src="img/teampng4.jpg" alt="Anas mouchahid" class="w-full h-[200px] object-cover mb-4 rounded-lg grayscale hover:grayscale-0 hover:scale-[1.02] transition-all duration-300 cursor-pointer"
+        onclick="openModal('Anas mouchahid', 'Designer', ['Adobe XD', 'Figma', 'Visual Identity', 'Typography', 'UX Strategy'])">
+        <h3 class="text-xl font-semibold">Anas mouchahid</h3>
+        <p class="text-gray-600">Designer</p>
+      </div>
+
+      <div class="bg-white p-6 text-center border border-gray-200 rounded-xl shadow-md hover:scale-[1.03] hover:shadow-2xl transition-all duration-300">
+        <img src="img/teampng5.jpg" alt="Abderrahim Jlil" class="w-full h-[200px] object-cover mb-4 rounded-lg grayscale hover:grayscale-0 hover:scale-[1.02] transition-all duration-300 cursor-pointer"
+        onclick="openModal('Abderrahim Jlil', 'Frontend Developer', ['HTML5', 'CSS3', 'Responsive Layouts', 'Basic Git usage'])">
+        <h3 class="text-xl font-semibold">Abderrahim Jlil</h3>
+        <p class="text-gray-600">Frontend Developer</p>
+      </div>
+
+    </div>
+  </section>
+  <div id="portfolioModal" class="fixed inset-0 bg-black bg-opacity-50 hidden justify-center items-center z-50">
+    <div class="bg-white rounded-lg max-w-md w-full p-6 shadow-lg relative">
+      <button class="absolute top-3 right-4 text-gray-500 text-xl" onclick="closeModal()">&times;</button>
+      <h2 id="modalName" class="text-xl font-bold mb-2"></h2>
+      <p id="modalRole" class="text-sm text-gray-600 mb-4"></p>
+      <ul id="modalSkills" class="list-disc pl-5 text-gray-700 space-y-1"></ul>
+    </div>
+  </div>
+  </section>
+        <footer class="bg-[#2e3e52] text-white py-10 mt-auto">
+        <div class="max-w-7xl mx-auto px-6 flex flex-wrap justify-between items-start gap-8">
+            <div>
+                <img src="img/Frame 3.png" alt="Bookshelf Logo" class="w-[120px] mb-2 bg-white p-1 rounded">
+                <div class="text-xs mt-1 tracking-wider">ESCAPE INTO STORIES</div>
+              </div>
+
+        <div class="flex flex-wrap gap-12 flex-grow justify-evenly">
+            <div>
+            <h4 class="text-sm font-bold uppercase border-b-2 border-white pb-1 mb-3">Publishers</h4>
+            <ul class="space-y-1 text-sm">
+                <li><a href="#" class="hover:underline">Bestsellers</a></li>
+                <li><a href="#" class="hover:underline">Interviews</a></li>
+                <li><a href="#" class="hover:underline">Authors Story</a></li>
+                <li><a href="#" class="hover:underline">Book Fairs</a></li>
+                <li><a href="#" class="hover:underline">Help (FAQ)</a></li>
             </ul>
-            <button class="btn">Support Us</button>
+            </div>
+            <div>
+            <h4 class="text-sm font-bold uppercase border-b-2 border-white pb-1 mb-3">Get Help</h4>
+            <ul class="space-y-1 text-sm">
+                <li><a href="#" class="hover:underline">Shipping</a></li>
+                <li><a href="#" class="hover:underline">Returns</a></li>
+                <li><a href="#" class="hover:underline">Order Status</a></li>
+                <li><a href="#" class="hover:underline">Payment Options</a></li>
+            </ul>
+            </div>
+            <div>
+            <h4 class="text-sm font-bold uppercase border-b-2 border-white pb-1 mb-3">Online Shop</h4>
+            <ul class="space-y-1 text-sm">
+                <li><a href="#" class="hover:underline">Books</a></li>
+                <li><a href="#" class="hover:underline">Ebooks</a></li>
+                <li><a href="#" class="hover:underline">Magazines</a></li>
+                <li><a href="#" class="hover:underline">Newspapers</a></li>
+            </ul>
+            </div>
         </div>
-        <div class="section-img">
-            <img src="img/read.jpg" alt="Community Impact">
+
+        <div class="text-sm flex flex-col items-end md:items-start md:text-left">
+            <div class="flex space-x-3 mb-2">
+            <a href="#"><img src="img/icons8-facebook-48.png" alt="Facebook" class="w-[25px]"></a>
+            <a href="#"><img src="img/icons8-twitter-50.png" alt="Twitter" class="w-[25px]"></a>
+            <a href="#"><img src="img/icons8-instagram-48.png" alt="Instagram" class="w-[25px]"></a>
+            <a href="#"><img src="img/icons8-linkedin-50.png" alt="LinkedIn" class="w-[25px]"></a>
+            </div>
+            <div class="text-gray-300">© 2025 BOOKSHELF, ALL RIGHTS RESERVED</div>
         </div>
-    </section>
+        </div>
+    </footer>
 
-    <section class="team">
-        <h2 style="text-align: center; margin-bottom: 2rem;">Leadership Team</h2>
-        <div class="team-grid">
-            <div class="team-member">
-                <img src="ceo.jpg" alt="CEO">
-                <h3>Haitam Agnao</h3>
-                <p>Backend Developer</p>
-            </div>
-            <div class="team-member">
-                <img src="cfo.jpg" alt="CFO">
-                <h3>Charaf eddine bourrich</h3>
-                <p>Frontend Developer</p>
-            </div>
-            <div class="team-member">
-                <img src="cto.jpg" alt="CTO">
-                <h3>Amine Johri</h3>
-                <p>Frontend Developer</p>
-            </div>
-            <div class="team-member">
-                <img src="editor.jpg" alt="Editor">
-                <h3>Anas mouchahid</h3>
-                <p>Frontend Developer</p>
-            </div>
-            <div class="team-member">
-                <img src="editor.jpg" alt="Editor">
-                <h3>Abderrahim Jlil</h3>
-                <p>Frontend Developer</p>
-            </div>            
-    </section>
-
-    <script>
-        window.addEventListener('scroll', () => {
-            const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
-            const scrolled = (window.scrollY / scrollHeight) * 100;
-            document.querySelector('.scroll-progress').style.width = scrolled + '%';
-        });
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
+        <script>
+            window.addEventListener('scroll', () => {
+                const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+                const scrolled = (window.scrollY / scrollHeight) * 100;
+                document.getElementById('scroll-progress').style.width = scrolled + '%';
             });
-        }, { threshold: 0.1 });
 
-        document.querySelectorAll('.content-section').forEach(section => {
-            observer.observe(section);
-        });
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('opacity-100', 'translate-y-0');
+                    }
+                });
+            }, { threshold: 0.1 });
 
-        const menuToggle = document.querySelector('.menu-toggle');
-        const navLinks = document.querySelector('.nav-links');
-
-        menuToggle.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-        });
-
-        document.addEventListener('click', (e) => {
-            if (!menuToggle.contains(e.target) && !navLinks.contains(e.target)) {
-                navLinks.classList.remove('active');
-            }
-        });
-
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
+            document.querySelectorAll('.content-section').forEach(section => {
+                observer.observe(section);
             });
-        });
+            const toggleBtn = document.getElementById('menu-toggle');
+  const mobileMenu = document.getElementById('mobile-menu');
 
-        window.addEventListener('scroll', () => {
-            const scrolled = window.scrollY;
-            document.querySelector('.hero').style.backgroundPositionY = `${scrolled * 0.5}px`;
-        });
+  toggleBtn.addEventListener('click', () => {
+    mobileMenu.classList.toggle('hidden');
+  });
+  function openModal(name, role, skills) {
+      document.getElementById('modalName').textContent = name;
+      document.getElementById('modalRole').textContent = role;
+      const skillsList = document.getElementById('modalSkills');
+      skillsList.innerHTML = '';
+      skills.forEach(skill => {
+        const li = document.createElement('li');
+        li.textContent = skill;
+        skillsList.appendChild(li);
+      });
+      document.getElementById('portfolioModal').classList.remove('hidden');
+      document.getElementById('portfolioModal').classList.add('flex');
+    }
 
-        document.querySelectorAll('img').forEach(img => {
-            const loader = document.createElement('div');
-            loader.className = 'image-loader';
-            img.parentNode.insertBefore(loader, img);
-            
-            img.onload = () => {
-                loader.style.display = 'none';
-            };
-        });
-    </script>
-</body>
-</html>
+    function closeModal() {
+      document.getElementById('portfolioModal').classList.add('hidden');
+      document.getElementById('portfolioModal').classList.remove('flex');
+    }
+
+    window.addEventListener('scroll', () => {
+      const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const scrolled = (window.scrollY / scrollHeight) * 100;
+      document.getElementById('scroll-progress').style.width = scrolled + '%';
+    });
+        </script>
+    </body>
+    </html>

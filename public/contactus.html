@@ -1,115 +1,308 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="contactus.css">
-    <title>Document</title>
-</head>
-<header class="header">
-    FREE SHIPPING FOR ORDERS OVER $50
-</header>
-<body>
-<nav class="navbar">
-    <a href="#" class="logo">
-        <img src="img/logo (2).png" alt="Bookshelf">
-    </a>
-    <ul>
-        <li><a href="main.html">Home</a></li>
-        <li><a href="blog.html">Blog</a></li>
-        <li><a href="product.html">Shop</a></li>
-        <li><a href="contactus.html" class="active">Contact</a></li>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact Us - Bookshelf</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;700&display=swap" rel="stylesheet">
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        fontFamily: {
+          heading: ['"Cormorant Garamond"', 'serif'],
+          body: ['"Cormorant Garamond"', 'sans-serif'],
+        }
+      }
+    }
+  }
+  
+</script>
 
+
+</head>
+<body class="min-h-screen flex flex-col font-body bg-white text-gray-800">
+
+<nav class="bg-white px-6 py-3 relative z-50">
+  <div class="max-w-7xl mx-auto flex items-center justify-between">
+    <div class="flex items-center space-x-3">
+      <img src="img/Frame 3.png" alt="Bookshelf Logo" class="h-10">
+    </div>
+
+    <!-- Hamburger (mobile only) -->
+    <button id="menu-toggle" class="md:hidden text-gray-800 focus:outline-none">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2"
+           viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M4 6h16M4 12h16M4 18h16" />
+      </svg>
+    </button>
+
+    <div class="hidden md:absolute md:left-1/2 md:transform md:-translate-x-1/2 md:flex">
+<ul class="flex space-x-6 text-gray-800 text-lg font-medium">
+  <li><a href="main.html" class="hover:text-[#1d2a3d]">Home</a></li>
+  <li><a href="shop.html" class="hover:text-[#1d2a3d]">Shop</a></li>
+  <li><a href="contact.html" class="text-[#1d2a3d] font-bold border-b-2 border-[#1d2a3d] pb-1">Contact Us</a></li>
+  <li><a href="orders.html" class="hover:text-[#1d2a3d]">Orders</a></li>
+</ul>
+    </div>
+  </div>
+
+  <div id="mobile-menu" class="md:hidden hidden mt-4 px-6">
+    <ul class="flex flex-col space-y-4 text-gray-800 text-base font-medium">
+      <li><a href="#" class="hover:text-[#1d2a3d]">Blogs</a></li>
+      <li><a href="#" class="hover:text-[#1d2a3d]">Events</a></li>
+      <li><a href="#" class="hover:text-[#1d2a3d]">Shop</a></li>
+      <li><a href="#" class="hover:text-[#1d2a3d]">About Us</a></li>
     </ul>
-    <div class="nav-icons">
-        <a href="carte page.html"><img src="img/cart-icon.png" alt="Cart"></a>
-    </div>
+  </div>
 </nav>
-<iframe 
-    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3304.9289042888927!2d-118.25315368478228!3d34.04799608060459!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80c2cbb7c60430f7%3A0x468c7e0415c8b33f!2sLos%20Angeles%20City%20Hall!5e0!3m2!1sen!2sus!4v1615564102397!5m2!1sen!2sus" 
-    width="600" 
-    height="450" 
-    style="border:0;" 
-    allowfullscreen="" 
+
+
+  <!-- Map -->
+<section class="my-12 px-6">
+  <iframe 
+    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3304.9289042888927!2d-118.25315368478228!3d34.04799608060459!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80c2cbb7c60430f7%3A0x468c7e0415c8b33f!2sLos%20Angeles%20City%20Hall!5e0!3m2!1sen!2sus!4v1615564102397!5m2!1sen!2sus"
+    class="w-full h-[400px] border-0 rounded-lg shadow-lg"
+    allowfullscreen=""
     loading="lazy">
-</iframe>
-<section id="contact">
-    <address>
-      <h1>Bookstore Central</h1><br>
-      123 Book Lane, Fiction City, FS 10001<br>
-      Phone: (555) 010-1010<br>
-      Email: <a href="mailto:bookshelf@gmail.com">bookshelf@gmail.com</a>
+  </iframe>
+</section>
+
+
+  <!-- Address Cards -->
+<section class="py-16 px-6 max-w-7xl mx-auto">
+  <h2 class="text-3xl font-heading font-semibold text-center mb-12">Visit Our Locations</h2>
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 justify-items-center">
+
+<address class="not-italic w-[260px] bg-white border border-gray-200 rounded-xl overflow-hidden text-sm leading-6 transition-all duration-300 hover:scale-[1.03] hover:shadow-2xl shadow-md">
+      <div class="relative">
+        <img src="img/bookstorefront (1).jpg" alt="Bookstore Central" class="w-full h-40 object-cover">
+      </div>
+      <div class="p-5">
+        <h3 class="text-xl font-heading font-semibold mb-1">Bookstore Central</h3>
+        <p class="text-gray-700">123 Book Lane<br>Fiction City, FS 10001</p>
+        <p class="mt-2 text-gray-600">Phone: (555) 010-1010</p>
+        <p>Email: <a href="mailto:bookshelf@gmail.com" class="text-blue-600 hover:underline">bookshelf@gmail.com</a></p>
+      </div>
     </address>
-    <address>
-      <h1>Bookstore 1</h1><br>
-      456 Novel Road, Storyville, SV 20002<br>
-      Phone: (555) 020-2020<br>
-      Email: <a href="mailto:bookshelf@gmail.com">bookshelf@gmail.com</a>
+
+<address class="not-italic w-[260px] bg-white border border-gray-200 rounded-xl overflow-hidden text-sm leading-6 transition-all duration-300 hover:scale-[1.03] hover:shadow-2xl shadow-md">
+      <div class="relative">
+        <img src="img/bookstorefront (2).jpg" alt="Bookstore 1" class="w-full h-40 object-cover">
+      </div>
+      <div class="p-5">
+        <h3 class="text-xl font-heading font-semibold mb-1">Bookstore 1</h3>
+        <p class="text-gray-700">456 Novel Road<br>Storyville, SV 20002</p>
+        <p class="mt-2 text-gray-600">Phone: (555) 020-2020</p>
+        <p>Email: <a href="mailto:bookshelf@gmail.com" class="text-blue-600 hover:underline">bookshelf@gmail.com</a></p>
+      </div>
     </address>
-    <address>
-      <h1>Bookstore 2</h1><br>
-      789 Chapter Ave, Readertown, RT 30003<br>
-      Phone: (555) 030-3030<br>
-      Email: <a href="mailto:bookshelf@gmail.com">bookshelf@gmail.com</a>
+
+<address class="not-italic w-[260px] bg-white border border-gray-200 rounded-xl overflow-hidden text-sm leading-6 transition-all duration-300 hover:scale-[1.03] hover:shadow-2xl shadow-md">
+      <div class="relative">
+        <img src="img/bookstorefront (3).jpg" alt="Bookstore 2" class="w-full h-40 object-cover">
+      </div>
+      <div class="p-5">
+        <h3 class="text-xl font-heading font-semibold mb-1">Bookstore 2</h3>
+        <p class="text-gray-700">789 Chapter Ave<br>Readertown, RT 30003</p>
+        <p class="mt-2 text-gray-600">Phone: (555) 030-3030</p>
+        <p>Email: <a href="mailto:bookshelf@gmail.com" class="text-blue-600 hover:underline">bookshelf@gmail.com</a></p>
+      </div>
     </address>
-    <address>
-      <H1>Publisher</H1><br>
-      101 Library Blvd, Publish City, PC 40004<br>
-      Phone: (555) 040-4040<br>
-      Email: <a href="mailto:bookshelf@gmail.com">bookshelf@gmail.com</a>
+
+<address class="not-italic w-[260px] bg-white border border-gray-200 rounded-xl overflow-hidden text-sm leading-6 transition-all duration-300 hover:scale-[1.03] hover:shadow-2xl shadow-md">
+      <div class="relative">
+        <img src="img/bookstorefront (4).jpg" alt="Publisher Office" class="w-full h-40 object-cover">
+      </div>
+      <div class="p-5">
+        <h3 class="text-xl font-heading font-semibold mb-1">Publisher</h3>
+        <p class="text-gray-700">101 Library Blvd<br>Publish City, PC 40004</p>
+        <p class="mt-2 text-gray-600">Phone: (555) 040-4040</p>
+        <p>Email: <a href="mailto:bookshelf@gmail.com" class="text-blue-600 hover:underline">bookshelf@gmail.com</a></p>
+      </div>
     </address>
-  </section>
-  <div class="franchise">
-    <img src="img/home-2-client-1.png" alt="BOOKLOGO">
-    <img src="img/home-2-client-2.png" alt="Make Dream">
-    <img src="img/home-2-client-3.png" alt="likeRead">
-    <img src="img/home-2-client-4.png" alt="Pocket book">
-    <img src="img/home-2-client-5.png" alt="booky">
-    <img src="img/home-2-client-6.png" alt="royalbooks">
- </div>
-</body>
-<footer class="footer">
-    <div class="container">
-        <div class="row">
-            <div class="footer-col">
-                <h4>Publishers</h4>
-                <ul>
-                    <li><a href="#">Bestsellers</a></li>
-                    <li><a href="#">Interviews</a></li>
-                    <li><a href="#">Authors story</a></li>
-                    <li><a href="#">Book Fairs</a></li>
-                    <li><a href="#">Help (FAQ)</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h4>Get help</h4>
-                <ul>
-                    <li><a href="#">Shipping</a></li>
-                    <li><a href="#">Returns</a></li>
-                    <li><a href="#">Order Status</a></li>
-                    <li><a href="#">Payment Options</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h4>Online Shop</h4>
-                <ul>
-                    <li><a href="#">Books</a></li>
-                    <li><a href="#">Ebooks</a></li>
-                    <li><a href="#">Magazines</a></li>
-                    <li><a href="#">Newspapers</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h4>Follow Us</h4>
-                <div class="social-links">
-                    <a href="#"><img src="img/icons8-facebook-48.png" alt="Facebook"></a>
-                    <a href="#"><img src="img/icons8-twitter-50.png" alt="Twitter"></a>
-                    <a href="#"><img src="img/icons8-instagram-48.png" alt="Instagram"></a>
-                    <a href="#"><img src="img/icons8-linkedin-50.png" alt="LinkedIn"></a>
-                </div>
-            </div>
-        </div>
+
+  </div>
+</section>
+
+<section class="bg-gray-50 py-16 px-6">
+  <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-16 items-center">
+    
+    <div class="flex justify-center md:justify-end">
+      <img src="img/aboutleft.png" alt="Quote about Reading" 
+           class="rounded-lg shadow-md w-full max-w-md h-auto object-contain">
     </div>
-    <p>© 2025 BOOKSHELF, ALL RIGHTS RESERVED</p>
-</footer>    
+
+<div>
+  <div class="bg-white rounded-lg p-8 border border-gray-200 transition-all duration-300 shadow-sm hover:shadow-lg hover:-translate-y-1">
+    <h2 class="text-2xl font-heading font-semibold mb-6 text-left">Send Us a Message</h2>
+    <form action="https://formsubmit.co/bookshelf20242025@gmail.com" method="POST" class="grid grid-cols-1 gap-6">
+      
+      <input type="text" name="_honey" style="display:none">
+      
+      <input type="hidden" name="_captcha" value="false">
+      
+      <input type="hidden" name="_next" value="https://yourwebsite.com/thank-you.html">
+
+      <!-- Input Fields -->
+      <input type="text" name="name" placeholder="Your Full Name" class="border border-gray-300 rounded p-3" required />
+      <input type="email" name="email" placeholder="Your Email Address" class="border border-gray-300 rounded p-3" required />
+      <input type="text" name="subject" placeholder="Subject" class="border border-gray-300 rounded p-3" required />
+      <input type="text" name="order_number" placeholder="Order Number (optional)" class="border border-gray-300 rounded p-3" />
+      <textarea name="message" rows="5" placeholder="Your Message" class="border border-gray-300 rounded p-3" required></textarea>
+
+      <!-- Submit Button -->
+      <button
+        type="submit"
+        class="relative group px-4 py-3 rounded-md text-white text-sm uppercase font-semibold tracking-wide z-20 overflow-hidden
+               border border-[#2C3E50] bg-[#2C3E50] transition-all duration-700 ease-in-out
+               hover:text-[#2C3E50] hover:border-gray-400 shadow-[0_0_10px_rgba(29,42,61,0.2)] hover:shadow-[0_0_20px_rgba(29,42,61,0.4)]
+               active:translate-y-1 active:shadow-[0_0_6px_rgba(29,42,61,0.4)] active:scale-[0.98]
+               after:absolute after:bottom-0 after:left-3 after:w-1 after:h-1 after:rounded-md after:bg-gray-400 after:-z-10
+               after:translate-y-full after:scale-100 hover:after:scale-[300] after:transition-all after:duration-700">
+        <span class="relative z-10">Send Message</span>
+      </button>
+    </form>
+  </div>
+</div>
+</section>
+  <!-- Partner Logos -->
+  <section class="flex flex-wrap justify-center items-center gap-16 py-10 px-6">
+    <img src="img/home-2-client-1.png" alt="BOOKLOGO" class="h-16 object-contain">
+    <img src="img/home-2-client-2.png" alt="Make Dream" class="h-16 object-contain">
+    <img src="img/home-2-client-3.png" alt="likeRead" class="h-16 object-contain">
+    <img src="img/home-2-client-4.png" alt="Pocket book" class="h-16 object-contain">
+    <img src="img/home-2-client-5.png" alt="booky" class="h-16 object-contain">
+    <img src="img/home-2-client-6.png" alt="royalbooks" class="h-16 object-contain">
+  </section>
+
+
+<!-- FAQ Section -->
+<section class="bg-white py-16 px-6">
+  <div class="max-w-3xl mx-auto">
+    <h2 class="text-3xl font-heading font-semibold text-center mb-12">Frequently Asked Questions</h2>
+    <div class="space-y-4" id="faq-list">
+
+      <!-- FAQ Item -->
+      <div class="faq-item border-b border-gray-200 pb-4 cursor-pointer">
+        <h3 class="faq-question text-lg font-medium text-[#2c1810] py-2">How do I create an account?</h3>
+        <div class="faq-answer hidden text-sm text-gray-700 pl-2">
+          <p>Creating an account is simple. Just click on the <strong>Sign Up</strong> or <strong>Register</strong> button at the top of the page. Fill out your name, email, and password, then submit the form.</p>
+          <p class="mt-2">You’ll receive a confirmation email—follow the link to activate your account. Once you're in, you can start browsing, shopping, or participating in book exchanges!</p>
+        </div>
+      </div>
+
+      <!-- FAQ Item -->
+      <div class="faq-item border-b border-gray-200 pb-4 cursor-pointer">
+        <h3 class="faq-question text-lg font-medium text-[#2c1810] py-2">How does the book exchange work?</h3>
+        <div class="faq-answer hidden text-sm text-gray-700 pl-2">
+          <p>Our book exchange program is a community-driven initiative where members can trade gently-used books with one another. After registering, you can list books you'd like to give away. When another member claims one, you earn a credit. You can then use that credit to request a book you want.</p>
+          <p class="mt-2">Each book exchanged is tracked via your account dashboard. You’ll receive shipping instructions via email. We encourage sending books within 3–5 business days to keep the experience smooth and engaging for everyone.</p>
+        </div>
+      </div>
+
+      <!-- FAQ Item -->
+      <div class="faq-item border-b border-gray-200 pb-4 cursor-pointer">
+        <h3 class="faq-question text-lg font-medium text-[#2c1810] py-2">What payment methods do you accept?</h3>
+        <div class="faq-answer hidden text-sm text-gray-700 pl-2">
+          <p>We accept Visa, Mastercard, American Express, Discover, PayPal, and Apple Pay for online transactions. In-store payments can be made using cash, debit cards, or any contactless payment method.</p>
+          <p class="mt-2">All transactions are secured through encrypted gateways to ensure your data and purchases are protected at all times.</p>
+        </div>
+      </div>
+
+      <!-- FAQ Item -->
+      <div class="faq-item border-b border-gray-200 pb-4 cursor-pointer">
+        <h3 class="faq-question text-lg font-medium text-[#2c1810] py-2">Can I return a purchased book?</h3>
+        <div class="faq-answer hidden text-sm text-gray-700 pl-2">
+          <p>Absolutely! We offer a 30-day return policy on all physical books that are in their original condition. Simply bring the book and your receipt to our store or contact customer support for mail-in returns.</p>
+          <p class="mt-2">E-books and digital purchases are non-refundable unless there’s a technical issue with your download. Reach out and we’ll help resolve it.</p>
+        </div>
+      </div>
+
+      <!-- FAQ Item -->
+      <div class="faq-item border-b border-gray-200 pb-4 cursor-pointer">
+        <h3 class="faq-question text-lg font-medium text-[#2c1810] py-2">How do I participate in author events?</h3>
+        <div class="faq-answer hidden text-sm text-gray-700 pl-2">
+          <p>Visit our <a href="/events" class="text-blue-600 underline">Events page</a> to browse upcoming author signings, virtual Q&As, and exclusive readings. Each event listing will indicate whether registration is required.</p>
+          <p class="mt-2">For popular events, we recommend signing up early. Members may get priority access and occasional event discounts.</p>
+        </div>
+      </div>
+
+      <!-- FAQ Item -->
+      <div class="faq-item border-b border-gray-200 pb-4 cursor-pointer">
+        <h3 class="faq-question text-lg font-medium text-[#2c1810] py-2">What condition should exchange books be in?</h3>
+        <div class="faq-answer hidden text-sm text-gray-700 pl-2">
+          <p>Books submitted for exchange should be in good condition. That means: no torn or missing pages, no excessive writing or highlighting, and clean covers/bindings.</p>
+          <p class="mt-2">We strive to maintain a high-quality collection, so damaged or heavily worn books will not be accepted. When in doubt, ask yourself if you'd enjoy receiving it!</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+  <!-- Footer -->
+  <footer class="bg-[#2e3e52] text-white py-10 mt-auto">
+    <div class="max-w-7xl mx-auto px-6 flex flex-wrap justify-between items-start gap-8">
+      <div class="flex flex-col">
+        <img src="img/Frame 3.png" alt="Bookshelf Logo" class="w-[120px] mb-2 bg-white p-1 rounded">
+        <div class="text-xs tracking-wide mt-1">ESCAPE INTO STORIES</div>
+      </div>
+
+      <div class="flex flex-wrap gap-12 flex-grow justify-evenly">
+        <div>
+          <h4 class="text-sm font-bold uppercase border-b-2 border-white pb-1 mb-3">Publishers</h4>
+          <ul class="space-y-1 text-sm">
+            <li><a href="#" class="hover:underline">Bestsellers</a></li>
+            <li><a href="#" class="hover:underline">Interviews</a></li>
+            <li><a href="#" class="hover:underline">Authors Story</a></li>
+            <li><a href="#" class="hover:underline">Book Fairs</a></li>
+            <li><a href="#" class="hover:underline">Help (FAQ)</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-sm font-bold uppercase border-b-2 border-white pb-1 mb-3">Get Help</h4>
+          <ul class="space-y-1 text-sm">
+            <li><a href="#" class="hover:underline">Shipping</a></li>
+            <li><a href="#" class="hover:underline">Returns</a></li>
+            <li><a href="#" class="hover:underline">Order Status</a></li>
+            <li><a href="#" class="hover:underline">Payment Options</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-sm font-bold uppercase border-b-2 border-white pb-1 mb-3">Online Shop</h4>
+          <ul class="space-y-1 text-sm">
+            <li><a href="#" class="hover:underline">Books</a></li>
+            <li><a href="#" class="hover:underline">Ebooks</a></li>
+            <li><a href="#" class="hover:underline">Magazines</a></li>
+            <li><a href="#" class="hover:underline">Newspapers</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="text-sm flex flex-col items-end md:items-start md:text-left">
+        <div class="flex space-x-3 mb-2">
+          <a href="#"><img src="img/icons8-facebook-48.png" alt="Facebook" class="w-[25px]"></a>
+          <a href="#"><img src="img/icons8-twitter-50.png" alt="Twitter" class="w-[25px]"></a>
+          <a href="#"><img src="img/icons8-instagram-48.png" alt="Instagram" class="w-[25px]"></a>
+          <a href="#"><img src="img/icons8-linkedin-50.png" alt="LinkedIn" class="w-[25px]"></a>
+        </div>
+        <div class="text-gray-300">© 2025 BOOKSHELF, ALL RIGHTS RESERVED</div>
+      </div>
+    </div>
+  </footer>
+<script>    const toggleBtn = document.getElementById('menu-toggle');
+  const mobileMenu = document.getElementById('mobile-menu');
+
+  toggleBtn.addEventListener('click', () => {
+    mobileMenu.classList.toggle('hidden');
+  });
+    document.querySelectorAll('.faq-question').forEach(question => {
+    question.addEventListener('click', () => {
+      const answer = question.nextElementSibling;
+      answer.classList.toggle('hidden');
+    });
+  });</script>
+</body>
 </html>

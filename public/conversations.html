@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Book Conversations</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Cormorant', sans-serif;
+      background-color: #fdfcf9;
+    }
+  </style>
+</head>
+<body class="text-gray-800 flex flex-col min-h-screen">
+
+  <nav class="bg-white px-6 py-3 flex justify-between items-center border-b border-gray-200">
+    <div class="flex items-center space-x-3">
+      <img src="img/Frame 3.png" alt="Bookshelf Logo" class="h-10">
+    </div>
+    <ul class="absolute left-1/2 transform -translate-x-1/2 flex space-x-6 text-gray-800 text-lg font-medium">
+      <li><a href="main.html" class="hover:text-[#1d2a3d]">Home</a></li>
+      <li><a href="proposals.html" class="hover:text-[#1d2a3d]">Proposals</a></li>
+      <li><a href="conversations.html" class="font-bold border-b-2 border-[#1d2a3d] pb-1">Conversations </a></li>
+      <li><a href="exchange.html" class="hover:text-[#1d2a3d]">Exchange</a></li>
+    </ul>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="container mx-auto px-6 py-10 grow">
+    <h2 class="text-2xl font-bold text-[#2C3E50] mb-4">📖 Your Active Book Conversations</h2>
+    <input type="text" id="search" placeholder="Search by title or user..." class="w-full p-3 mb-6 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-[#2C3E50]">
+
+    <div id="conversations" class="grid gap-6"></div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-[#2e3e52] text-white py-10">
+    <div class="max-w-7xl mx-auto px-6 flex flex-wrap justify-between gap-8">
+      <div class="flex flex-col">
+        <div class="text-2xl font-bold">BOOK<span class="text-gray-400">SHELF</span></div>
+        <div class="text-xs tracking-wide mt-1">ESCAPE INTO STORIES</div>
+      </div>
+
+      <div class="flex flex-wrap gap-12 flex-grow justify-evenly">
+        <div>
+          <h4 class="text-sm font-bold uppercase border-b-2 border-white pb-1 mb-3">Publishers</h4>
+          <ul class="space-y-1 text-sm">
+            <li><a href="#" class="hover:underline">Best Seller</a></li>
+            <li><a href="#" class="hover:underline">Interviews</a></li>
+            <li><a href="#" class="hover:underline">Authors Stories</a></li>
+            <li><a href="#" class="hover:underline">Book Fires</a></li>
+            <li><a href="#" class="hover:underline">Help (FAQ)</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-sm font-bold uppercase border-b-2 border-white pb-1 mb-3">Get Help</h4>
+          <ul class="space-y-1 text-sm">
+            <li><a href="#" class="hover:underline">Shipping</a></li>
+            <li><a href="#" class="hover:underline">Return</a></li>
+            <li><a href="#" class="hover:underline">Order Status</a></li>
+            <li><a href="#" class="hover:underline">Book Fires</a></li>
+            <li><a href="#" class="hover:underline">Payment Options</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-sm font-bold uppercase border-b-2 border-white pb-1 mb-3">Online Shops</h4>
+          <ul class="space-y-1 text-sm">
+            <li><a href="#" class="hover:underline">Books</a></li>
+            <li><a href="#" class="hover:underline">E-Books</a></li>
+            <li><a href="#" class="hover:underline">Magazine</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="text-sm flex flex-col items-end">
+        <div class="flex space-x-3 mb-2">
+          <a href="#"><img src="img/icons8-instagram-48.png" alt="Instagram" class="w-[25px]"></a>
+          <a href="#"><img src="img/icons8-facebook-48.png" alt="Facebook" class="w-[25px]"></a>
+          <a href="#"><img src="img/icons8-twitter-50.png" alt="Twitter" class="w-[25px]"></a>
+        </div>
+        <div>© 2025 BOOKSHELF, ALL RIGHTS RESERVED</div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    let conversations = [];
+
+    async function loadChats() {
+      const res = await fetch('/api/chat/conversations', {
+        headers: { Authorization: `Bearer ${getCookie('token')}` }
+      });
+
+      conversations = await res.json();
+      renderChats(conversations);
+    }
+
+    function renderChats(data) {
+      const container = document.getElementById('conversations');
+
+      if (!data.length) {
+        container.innerHTML = '<p class="text-gray-600">No active conversations yet.</p>';
+        return;
+      }
+
+      const grouped = {};
+      data.forEach(c => {
+        const key = `${c.role}-${c.target_title}-${c.other_user}`;
+        if (!grouped[key] || new Date(c.created_at) > new Date(grouped[key].created_at)) {
+          grouped[key] = c;
+        }
+      });
+
+      const uniqueChats = Object.values(grouped);
+
+      container.innerHTML = uniqueChats.map(c => `
+        <div class="flex items-center justify-between p-6 bg-white rounded-xl shadow-md border border-gray-200 hover:shadow-lg transition transform hover:-translate-y-1">
+          <div class="flex items-start gap-4">
+            <div class="w-12 h-12 rounded-full bg-[#2C3E50] text-white flex items-center justify-center font-bold text-lg">
+              ${c.other_user[0]?.toUpperCase() || "?"}
+            </div>
+            <div>
+              <h3 class="text-lg font-semibold text-[#2C3E50]">${c.target_title}</h3>
+              <p class="text-sm text-gray-600 mt-1"><span class="font-medium">Offered:</span> ${c.offer_title}</p>
+              <p class="text-sm text-gray-600"><span class="font-medium">With:</span> ${c.other_user}</p>
+              <p class="text-sm text-gray-500 italic mt-1">${c.reason}</p>
+            </div>
+          </div>
+          <div class="flex flex-col items-end gap-2">
+            <span class="text-xs text-gray-400">📅 ${new Date(c.created_at).toLocaleDateString()}</span>
+            <button onclick="window.location.href='/chat.html?proposalId=${c.id}'" class="bg-[#2C3E50] text-white px-4 py-2 rounded hover:bg-[#1B2A38] transition text-sm">Continue Chat</button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function getCookie(name) {
+      const value = `; ${document.cookie}`;
+      const parts = value.split(`; ${name}=`);
+      if (parts.length === 2) return parts.pop().split(';').shift();
+    }
+
+    document.getElementById('search').addEventListener('input', (e) => {
+      const keyword = e.target.value.toLowerCase();
+      const filtered = conversations.filter(c =>
+        c.target_title.toLowerCase().includes(keyword) ||
+        c.other_user.toLowerCase().includes(keyword)
+      );
+      renderChats(filtered);
+    });
+
+    loadChats();
+  </script>
+</body>
+</html>
