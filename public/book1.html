@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Book Title - Bookshelf</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
@@ -12,11 +13,11 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Cormorant', serif;
-}
+    font-family: "Cormorant Garamond", serif; }
+    
 body {
-  font-family: 'Inter', sans-serif;
-  background-color: white;
+  font-family: "Cormorant Garamond", serif; 
+    background-color: white;
   color: #333;
 }
 
@@ -28,7 +29,7 @@ h1, h2, h3, .book-title, .review-title {
   display: grid;
   grid-template-columns: auto 1fr auto;
   align-items: center;
-  padding: 12px 40px;
+  padding: 15px 40px;
   background-color: white;
 }
     .navbar-logo {
@@ -38,7 +39,7 @@ h1, h2, h3, .book-title, .review-title {
 
     .navbar-logo img {
       height: 40px;
-      margin-right: 10px;
+      margin-left: 20px;
     }
 
 .navbar-menu {
@@ -54,6 +55,8 @@ h1, h2, h3, .book-title, .review-title {
   display: flex;
   gap: 25px;
   align-items: center;
+  margin-right: 15px;
+  margin-top: 10px;
 }
 
     .navbar-menu a {
@@ -104,7 +107,7 @@ h1, h2, h3, .book-title, .review-title {
   border-radius: 8px;
   text-decoration: none;
   font-weight: bold;
-  font-family: 'Cormorant', serif;
+  font-family: "Cormorant Garamond", serif; 
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
@@ -136,11 +139,12 @@ footer.footer {
 
 .footer-logo .logo-text {
   font-size: 24px;
-  font-weight: 700;
+  font-weight: 300;
 }
 
 .footer-logo .logo-text .light {
   color: #b0b8c1;
+  font-size: 15px;
 }
 
 .footer-logo .tagline {
@@ -523,16 +527,18 @@ footer.footer {
     text-align: center;
     position: relative;
     overflow: hidden;
+    border-radius: 25px;
   }
 .book-card div:last-child {
-  color: #2C3E50; /* matches theme and improves visibility */
+  color: #2C3E50; 
   font-weight: 600;
 }
   .book-card img {
     width: 100%;
-    height: auto;
+    height: 400px;
     border-radius: 4px;
     transition: transform 0.3s ease, filter 0.3s ease;
+    border-radius: 35px;
   }
 
   .book-card:hover img {
@@ -669,7 +675,7 @@ footer.footer {
   background-color: #f1f1f1;
   padding: 20px;
   border-radius: 12px;
-  font-family: 'Inter', sans-serif;
+  font-family: "Cormorant Garamond", serif; 
   box-shadow: 0 2px 8px rgba(0,0,0,0.06);
 }
 
@@ -761,7 +767,103 @@ footer.footer {
     transform: translateY(0);
   }
 }
+.footer {
+    background-color: #2e3e52;
+    color: white;
+    padding: 40px 0;
+  }
 
+  .footer .wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 40px;
+  }
+
+  .footer-left {
+    flex: 0 0 200px;
+  }
+
+  .footer-logo .logo-text {
+    font-size: 24px;
+    font-weight: 700;
+  }
+
+  .footer-logo .logo-text .light {
+    color: #b0b8c1;
+  }
+
+  .footer-logo .tagline {
+    font-size: 12px;
+    margin-top: 4px;
+    letter-spacing: 1px;
+  }
+
+  .footer-center {
+    flex: 1 1 auto;
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    gap: 40px;
+  }
+
+  .footer-column {
+    min-width: 140px;
+  }
+
+  .footer-column h4 {
+    font-weight: 700;
+    font-size: 14px;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+    border-bottom: 2px solid white;
+    display: inline-block;
+    padding-bottom: 4px;
+  }
+
+  .footer-column a {
+    display: block;
+    color: white;
+    text-decoration: none;
+    margin-bottom: 6px;
+    font-size: 13px;
+  }
+
+  .footer-right {
+    flex: 0 0 200px;
+    text-align: right;
+    font-size: 12px;
+  }
+
+  .footer-socials {
+    margin-bottom: 10px;
+  }
+
+  .footer-socials img {
+    width: 35px;
+    height: 35px;
+    margin-left: 10px;
+    vertical-align: middle;
+  }
+
+  @media (max-width: 768px) {
+    .footer .wrapper {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .footer-center {
+      justify-content: flex-start;
+    }
+
+    .footer-right {
+      text-align: left;
+    }
+  }
     </style>
 </head>
 <body>
@@ -777,10 +879,10 @@ footer.footer {
     </div>
   <div class="navbar-buttons">
   <a href="wishlist.html">
-    <img src="img/wishlist-icon.png" alt="Wishlist" style="height: 28px;">
+    <img src="img/wishlist-icon.png" alt="Wishlist" style="height: 26px;">
   </a>
   <a href="carte page.html">
-    <img src="img/cart-icon.png" alt="Cart" style="height: 28px;">
+    <img src="img/cart-icon.png" alt="Cart" style="height: 26px;">
   </a>
 </div>
 </div>
@@ -879,103 +981,95 @@ footer.footer {
   <h2 style="font-size: 1.8em; margin-bottom: 30px; font-weight: bold; color: #2C3E50; text-align: center;">Related products</h2>
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 50px;">
 
-    <!-- The Silent Patient -->
+    <!-- Moby-Dick -->
     <div class="book-card">
-      <a href="book1.html?id=9">
-        <img src="img/thesilentpatient.jpg" alt="The Silent Patient">
+      <a href="book1.html?id=7">
+        <img src="img/mobydickblog.jpg" alt="Moby-Dick">
       </a>
       <div style="margin-top: 10px;">
-        <div style="font-weight: 600;">The Silent Patient</div>
-        <div style="color: #888; font-size: 14px;">$14.99</div>
+        <div style="font-weight: 600;">Moby-Dick</div>
+        <div style="color: #888; font-size: 14px;">$17.99</div>
       </div>
     </div>
 
-    <!-- The Catcher in the Rye -->
+    <!-- The Power of Now  -->
     <div class="book-card">
-      <a href="book1.html?id=8">
-        <img src="img/thecatcherintherye.jpg" alt="The Catcher in the Rye">
+      <a href="book1.html?id=49">
+        <img src="img/thepowerofnow.jpg" alt="The Power of Now">
       </a>
       <div style="margin-top: 10px;">
-        <div style="font-weight: 600;">The Catcher in the Rye</div>
-        <div style="color: #888; font-size: 14px;">$12.99</div>
+        <div style="font-weight: 600;">The Power of Now</div>
+        <div style="color: #888; font-size: 14px;">$13.99</div>
       </div>
     </div>
 
-    <!-- Dune -->
+    <!-- The Road -->
     <div class="book-card">
-      <a href="book1.html?id=10">
-        <img src="img/dune.jpg" alt="Dune">
+      <a href="book1.html?id=18">
+        <img src="img/theroad.jpg" alt="The Road">
       </a>
       <div style="margin-top: 10px;">
-        <div style="font-weight: 600;">DUNE</div>
-        <div style="color: #888; font-size: 14px;">$18.99</div>
+        <div style="font-weight: 600;">The Road</div>
+        <div style="color: #888; font-size: 14px;">$16.50</div>
       </div>
     </div>
-
-    <!-- 1984 -->
-    <div class="book-card">
-      <a href="book1.html?id=2">
-        <img src="img/1984.webp" alt="1984">
-      </a>
-      <div style="margin-top: 10px;">
-        <div style="font-weight: 600;">1984</div>
-        <div style="color: #888; font-size: 14px;">$22.99</div>
-      </div>
-    </div>
-          <!-- it ends with us -->
+          <!--The Secret Garden -->
                <div class="book-card">
-            <a href="book1.html?id=49">
-              <img src="img/itsendswithus.jpg" alt="it ends with us ">
+            <a href="book1.html?id=21">
+              <img src="img/The Secret Garden.jpg" alt="The Secret Garden">
             </a>
             <div style="margin-top: 10px;">
-              <div style="font-weight: 600;">It ends with us </div>
-              <div style="color: #888; font-size: 14px;">$14.99</div>
+              <div style="font-weight: 600;">The Secret Garden</div>
+              <div style="color: #888; font-size: 14px;">$17.99</div>
             </div>
           </div>
   </div>
 </section>
     </main>
- <footer class="footer">
-  <div class="footer-left">
-    <div class="footer-logo">
-      <div class="logo-text">BOOK<span class="light">SHELF</span></div>
-      <div class="tagline">ESCAPE INTO STORIES</div>
-    </div>
-  </div>
-
-  <div class="footer-center">
-    <div class="footer-column">
-      <h4>PUBLISHERS</h4>
-      <a href="#">Best Seller</a>
-      <a href="#">Interviews</a>
-      <a href="#">Authors Stories</a>
-      <a href="#">Book Fires</a>
-      <a href="#">Help (FAQ)</a>
-    </div>
-    <div class="footer-column">
-      <h4>GET HELP</h4>
-      <a href="#">Shipping</a>
-      <a href="#">Return</a>
-      <a href="#">Order Status</a>
-      <a href="#">Book Fires</a>
-      <a href="#">Payment Options</a>
-    </div>
-    <div class="footer-column">
-      <h4>ONLINE SHOPS</h4>
-      <a href="#">Books</a>
-      <a href="#">E-Books</a>
-      <a href="#">Magazine</a>
-    </div>
-  </div>
-  <div class="footer-right">
-    <div class="footer-socials">
-      <img src="img/icons8-instagram-48.png" alt="Instagram">
-      <img src="img/icons8-facebook-48.png" alt="Facebook">
-      <img src="img/icons8-twitter-50.png" alt="Twitter">
-    </div>
-    <div class="copyright">© 2025 BOOKSHELF, ALL RIGHTS RESERVED</div>
-  </div>
-</footer>
+    <footer class="footer">
+      <div class="wrapper">
+        <div class="footer-left">
+          <div class="footer-logo">
+            <div class="logo-text">BOOK<span class="light">SHELF</span></div>
+            <div class="tagline">ESCAPE INTO STORIES</div>
+          </div>
+        </div>
+  
+        <div class="footer-center">
+          <div class="footer-column">
+            <h4>PUBLISHERS</h4>
+            <a href="#">Best Seller</a>
+            <a href="#">Interviews</a>
+            <a href="#">Authors Stories</a>
+            <a href="#">Book Fires</a>
+            <a href="#">Help (FAQ)</a>
+          </div>
+          <div class="footer-column">
+            <h4>GET HELP</h4>
+            <a href="#">Shipping</a>
+            <a href="#">Return</a>
+            <a href="#">Order Status</a>
+            <a href="#">Book Fires</a>
+            <a href="#">Payment Options</a>
+          </div>
+          <div class="footer-column">
+            <h4>ONLINE SHOPS</h4>
+            <a href="#">Books</a>
+            <a href="#">E-Books</a>
+            <a href="#">Magazine</a>
+          </div>
+        </div>
+  
+        <div class="footer-right">
+          <div class="footer-socials">
+            <img src="img/icons8-instagram-48.png" alt="Instagram">
+            <img src="img/icons8-facebook-48.png" alt="Facebook">
+            <img src="img/icons8-twitter-50.png" alt="Twitter">
+          </div>
+          <div class="copyright">© 2025 BOOKSHELF, ALL RIGHTS RESERVED</div>
+        </div>
+      </div>
+    </footer>
 <script>
   let userId = null;
 
@@ -1217,19 +1311,22 @@ new Chart(ctx, {
 
 // Star click logic
 document.querySelectorAll(".rating-group .star").forEach(star => {
-star.addEventListener("click", function () {
-  const value = this.getAttribute("data-value");
-  document.getElementById("reviewStars").value = value;
+  star.addEventListener("click", function () {
+    const value = this.getAttribute("data-value");
+    document.getElementById("reviewStars").value = value;  // Update the hidden input field
 
-  document.querySelectorAll(".rating-group .star").forEach(s => s.classList.remove("selected"));
-  this.classList.add("selected");
-  let prev = this.previousElementSibling;
-  while (prev) {
-    prev.classList.add("selected");
-    prev = prev.previousElementSibling;
-  }
+    // Remove 'selected' class from all stars
+    document.querySelectorAll(".rating-group .star").forEach(s => s.classList.remove("selected"));
+
+    // Add 'selected' class to all stars up to and including the clicked star
+    let next = this;
+    while (next) {
+      next.classList.add("selected");
+      next = next.nextElementSibling;  // Move to the next star
+    }
+  });
 });
-});
+
 
 // Review submission logic
 document.getElementById("reviewForm").addEventListener("submit", async function (e) {

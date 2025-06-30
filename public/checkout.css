@@ -5,7 +5,7 @@
 }
 
 body {
-  font-family: 'Poppins', sans-serif;
+  font-family: "Cormorant Garamond", serif; 
   background-color: #f8f8f8;
   color: #333;
   display: flex;
@@ -17,25 +17,25 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 12px 40px;
-  background-color: #f9f9f9;
-  border-bottom: 1px solid #ddd;
-  font-family: 'Cormorant', serif;
+  padding: 15px 40px;
+  background-color: white;
+  font-family: "Cormorant Garamond", serif; 
 }
 
 .navbar-logo {
   display: flex;
   align-items: center;
+  padding-left: 20px;
+
 }
 
 .navbar-logo img {
   height: 40px;
-  margin-right: 10px;
+  margin-left: 20px;
 }
 
 nav {
   display: flex;
-  gap: 25px;
   font-size: 18px;
 }
 
@@ -66,7 +66,7 @@ nav a.active::after {
   font-weight: bold;
   cursor: pointer;
   background: none;
-  font-family: 'Cormorant', serif;
+  font-family: "Cormorant Garamond", serif; 
 }
 
 .btn.login {
@@ -217,7 +217,7 @@ nav a.active::after {
   background-color: #2e3e52;
   color: white;
   padding: 40px 0;
-  font-family: 'Cormorant', serif;
+  font-family: "Cormorant Garamond", serif; 
 }
 
 .footer .wrapper {
@@ -242,6 +242,7 @@ nav a.active::after {
 
 .footer-logo .logo-text .light {
   color: #b0b8c1;
+  font-size: 15px;
 }
 
 .footer-logo .tagline {
@@ -290,7 +291,8 @@ nav a.active::after {
   margin-bottom: 10px;
 }
 .footer-socials img {
-  width: 25px;
+  width: 35px;
+  height: 35px;
   margin-left: 10px;
   vertical-align: middle;
 }

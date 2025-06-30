@@ -5,11 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Order History</title>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     body {
-      font-family: 'Cormorant', serif;
+      font-family: "Cormorant Garamond", serif;
       background-size: 200% 200%;
       animation: bgFlow 20s ease infinite;
     }
@@ -22,11 +23,11 @@
 </head>
 <body class="p-6 text-[#2C3E50]">
 
-  <nav class="flex items-center h-16 relative mb-6">
+  <nav class="flex items-center h-8 relative mb-6">
     <div class="flex-1">
-      <img src="img/Frame 3.png" alt="Bookshelf Logo" class="h-10">
+      <img src="img/Frame 3.png" alt="Bookshelf Logo" class="h-10 ml-8">
     </div>
-    <ul class="flex gap-6 list-none absolute left-1/2 transform -translate-x-1/2 text-lg">
+    <ul class="flex gap-8 list-none absolute left-1/2 transform -translate-x-1/2 text-lg">
       <li><a href="main.html" class="hover:font-bold hover:text-[#2e3d59]">Home</a></li>
       <li><a href="product.html" class="hover:font-bold hover:text-[#2e3d59]">Shop</a></li>
       <li><a href="wishlist.html" class="hover:font-bold hover:text-[#2e3d59]">Wishlist</a></li>
@@ -34,9 +35,9 @@
     </ul>
   </nav>
 
-<section class="w-screen h-[60vh] bg-cover bg-center flex items-center justify-center -mx-6" style="background-image: url('img/orderbanner69\ \(1\).png');">
+<section class="w-screen h-[50vh] bg-cover bg-center flex items-center justify-center -mx-6" style="background-image: url('img/orderbannerfinal\ \(3\).jpg');">
 </section>
-  <main class="max-w-4xl mx-auto p-8 bg-white rounded-2xl shadow-lg mt-5">
+  <main class="max-w-4xl mx-auto p-8 bg-white rounded-2xl mt-5">
 
     <div id="adminActions" class="mb-6 text-right hidden">
       <button onclick="deleteAllUnconfirmed()" class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 text-sm">

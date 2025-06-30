@@ -210,7 +210,7 @@
         const bookCard = document.createElement('div');
         bookCard.className = 'p-4 bg-white rounded shadow flex gap-4';
         bookCard.innerHTML = `
-          ${book.image_url ? `<img src="${book.image_url}" alt="${book.title}" class="w-24 h-32 object-cover rounded border">` : ''}
+          ${book.image_url ? `<img src="${book.image_url}" alt="${book.title}" class="w-48 h-64 object-cover rounded border">` : ''}
           <div>
             <h3 class="text-lg font-semibold text-blue-900">${book.title}</h3>
             <p class="text-sm text-gray-600">Type: ${book.type}</p>
@@ -260,7 +260,7 @@
         const bookCard = document.createElement('div');
         bookCard.className = 'p-4 bg-white rounded shadow flex gap-4';
         bookCard.innerHTML = `
-          ${book.image_url ? `<img src="${book.image_url}" alt="${book.title}" class="w-24 h-32 object-cover rounded border">` : ''}
+          ${book.image_url ? `<img src="${book.image_url}" alt="${book.title}" class="w-48 h-64 object-cover rounded border">` : ''}
           <div>
             <h3 class="text-lg font-semibold text-blue-900">${book.title}</h3>
             <p class="text-sm text-gray-600">Type: ${book.type}</p>

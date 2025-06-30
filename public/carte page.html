@@ -6,29 +6,32 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&display=swap" rel="stylesheet">
   <style>
     body {
-      font-family: 'Cormorant', serif;
+      font-family: "Cormorant Garamond", serif; 
     }
   </style>
 </head>
 <body class="flex flex-col min-h-screen">
 
-<header class="flex items-center justify-between px-6 py-4 bg-white-100  relative z-10">
+<header class="flex items-center justify-between px-4 py-4 bg-white-100 relative z-10">
   <div class="w-1/3 flex items-center justify-start">
-    <img src="img/Frame 3.png" alt="Logo" class="h-10">
+    <img src="img/Frame 3.png" alt="Logo" class="h-10 ml-[20px]">
   </div>
 
-  <nav class="w-1/3 hidden md:flex justify-center gap-6 text-lg">
-    <a href="main.html" class="text-gray-800 hover:text-black">Home</a>
-    <a href="shop.html" class="text-gray-800 hover:text-black relative after:content-[''] after:absolute after:h-0.5 after:w-full after:bg-black after:left-0 after:-bottom-1">Shop</a>
-    <a href="wishlist.html" class="text-gray-800 hover:text-black">Wishlist</a>
-    <a href="order.html" class="text-gray-800 hover:text-black">Orders</a>
+  <nav class="w-1/3 hidden md:flex justify-center gap-8 text-lg">
+    <a href="main.html" class="text-[#2C3E50] hover:text-[#2C3E50] font-light">Home</a>
+    <a href="shop.html" class="text-[#2C3E50] hover:text-[#2C3E50] relative after:content-[''] after:absolute after:h-0.5 after:w-full after:bg-black after:left-0 after:-bottom-1 font-medium">Shop</a>
+    <a href="wishlist.html" class="text-[#2C3E50] hover:text-[#2C3E50] font-light">Wishlist</a>
+    <a href="order.html" class="text-[#2C3E50] hover:text-[#2C3E50] font-light">Orders</a>
+    
   </nav>
+  
 
   <div class="w-1/3 hidden md:flex justify-end">
     <a href="wishlist.html" class="flex items-center gap-1 text-gray-800 font-semibold">
-      <img src="img/wishlist-icon.png" alt="Wishlist Icon" class="w-4 h-4">
+      <img src="img/wishlist-icon.png" alt="Wishlist Icon" class="w-6 h-6 mr-[20px]">
     </a>
   </div>
 
@@ -48,11 +51,11 @@
 
     <div class="cart-items space-y-4"></div>
 
-    <button onclick="window.location.href='product.html'" class="return-button bg-[#2C3E50] hover:bg-[#1c2833] text-white px-6 py-3 rounded mt-12 uppercase font-bold">
+    <button onclick="window.location.href='product.html'" class="return-button bg-[#2C3E50] hover:bg-[#1c2833] text-white px-6 py-3 rounded mt-12">
       Return to Shop
     </button>
 
-    <button onclick="checkCartBeforeCheckout()" class="checkout-button bg-[#2C3E50] hover:bg-[#1c2833] text-white px-6 py-3 rounded mt-5 font-bold">
+    <button onclick="checkCartBeforeCheckout()" class="checkout-button bg-[#2C3E50] hover:bg-[#1c2833] text-white px-6 py-3 rounded mt-5">
       Proceed to Checkout
     </button>
   </main>
@@ -60,11 +63,13 @@
   <footer class="bg-[#2C3E50] text-white py-10">
     <div class="max-w-7xl mx-auto px-4 flex flex-wrap justify-between gap-8">
       <div>
-        <img src="img/Frame 3.png" alt="Bookshelf Logo" class="w-[120px] mb-2 bg-white p-1 rounded">
+        <div class="text-[24px] font-bold">
+          BOOK<span class="text-[#b0b8c1] text-[15px]">SHELF</span>
+        </div>
         <div class="text-xs mt-1 tracking-wider">ESCAPE INTO STORIES</div>
       </div>
 
-      <div class="flex flex-wrap gap-10">
+      <div class="flex flex-wrap gap-[7rem]">
         <div>
           <h4 class="font-bold text-sm border-b-2 border-white inline-block pb-1 uppercase">Publishers</h4>
           <ul class="mt-2 text-sm space-y-1">
@@ -97,9 +102,9 @@
 
       <div class="text-sm text-right">
         <div class="flex justify-end gap-3 mb-2">
-        <img src="img/icons8-instagram-48.png" alt="Instagram" class="w-[25px]">
-        <img src="img/icons8-facebook-48.png" alt="Facebook" class="w-[25px]">
-        <img src="img/icons8-twitter-50.png" alt="Twitter" class="w-[25px]">
+        <img src="img/icons8-instagram-48.png" alt="Instagram" class="w-[35px] h-[35px]">
+        <img src="img/icons8-facebook-48.png" alt="Facebook" class="w-[35px] h-[35px]">
+        <img src="img/icons8-twitter-50.png" alt="Twitter" class="w-[35px] h-[35px]">
         </div>
         <p>© 2025 BOOKSHELF, ALL RIGHTS RESERVED</p>
       </div>
@@ -134,7 +139,7 @@
             totalPrice += item.price * item.quantity;
 
             const cartItemElement = document.createElement('div');
-            cartItemElement.className = 'cart-item flex flex-wrap md:flex-nowrap items-center justify-between gap-4 bg-gray-100 p-4 rounded shadow';
+            cartItemElement.className = 'cart-item flex flex-wrap md:flex-nowrap items-center justify-between gap-4 p-4 rounded shadow';
             cartItemElement.innerHTML = `
               <img src="${item.image}" alt="${item.productName}" class="w-20 h-28 object-cover rounded">
               <span class="flex-1 text-left font-semibold">${item.productName}</span>

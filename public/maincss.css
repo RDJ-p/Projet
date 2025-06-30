@@ -7,7 +7,7 @@
 }
 
 body {
-  font-family: "Montserrat", sans-serif;
+  font-family: "Cormorant Garamond", serif;
   background-color: #fff;
 }
 
@@ -324,6 +324,7 @@ a{
   text-align: center;
   margin: 9px 0;
    margin-left: 2rem;
+   font-size: 16px;
 }
 
 #Services {
@@ -581,7 +582,7 @@ a{
 
 .blog-text .item img {
   width: 100%;
-  height: auto;
+  height: 265px;
   border-radius: 10px;
   margin-bottom: 1rem;
 }
@@ -732,6 +733,7 @@ a{
 
     .footer-logo .logo-text .light {
       color: #b0b8c1;
+      font-size: 15px;
     }
 
     .footer-logo .tagline {
@@ -781,8 +783,8 @@ a{
     }
 
     .footer-socials img {
-  width: 25px;
-  height: 25px; 
+  width: 35px;
+  height: 35px; 
   margin-left: 10px;
   vertical-align: middle;
 }
@@ -1165,7 +1167,7 @@ a{
 .nav-links {
   display: flex;
   gap: 30px;
-margin-left: 40px;
+margin-left: 50px;
 }
 
 .auth-buttons {
@@ -1261,7 +1263,9 @@ margin-left: 40px;
   content: " ▼";
   font-size: 0.7em;
 }
-
+.username-display{
+  margin-right: 15px;
+}
 .dropdown-content {
   display: none;
   position: absolute;
@@ -1315,10 +1319,10 @@ margin-left: 40px;
 }
 
 button {
-  font-family: 'Cormorant', serif;
+  font-family: "Cormorant Garamond", serif;
 }
 button {
-  font-family: 'Cormorant', serif;
+  font-family: "Cormorant Garamond", serif;
   transition: all 0.3s ease;
 }
 

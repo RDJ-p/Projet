@@ -3,11 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title>AI Book Recommendation</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="csssss.css">
     <style>
         body {
-            font-family: 'Cormorant', serif;
             background-color: #f5f5f5;
             padding: 40px;
             text-align: center;
@@ -16,7 +15,6 @@
             background: white;
             padding: 30px;
             border-radius: 15px;
-            max-width: 500px;
             margin: auto;
             box-shadow: 0 0 15px rgba(0,0,0,0.1);
         }
@@ -38,10 +36,10 @@
             cursor: pointer;
             border-radius: 8px;
         }
-  .result {
+        .result {
     margin-top: 40px;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 24px;
     justify-content: center;
     align-items: stretch;
@@ -65,9 +63,10 @@
 
 .book-card img {
     width: 100%;
-    height: 200px;
+    height: 400px;
     object-fit: cover;
     background: #f0f0f0;
+    max-width: 350px;
 }
 
 .book-card-content {
@@ -76,12 +75,13 @@
     flex-direction: column;
     gap: 10px;
     flex-grow: 1;
+    max-width: 350px;
 }
 
 .book-title {
     font-size: 17px;
     font-weight: 600;
-    color: #222;
+    color: #2C3E50;
     line-height: 1.3;
 }
 
@@ -103,15 +103,14 @@
 
 .book-price {
     font-size: 16px;
-    font-weight: bold;
-    color: #1a73e8;
+    color: #2C3E50;
     margin-top: 4px;
 }
 
 .book-card a {
     margin-top: auto;
     display: inline-block;
-    background: #1a73e8;
+    background: #2C3E50;
     color: white;
     padding: 10px 14px;
     border-radius: 8px;
@@ -122,7 +121,103 @@
 }
 
 .book-card a:hover {
-    background: #0d56c1;
+    background: #2C3E50;
+}
+.book-card img {
+    width: 100%;
+    object-fit: cover;
+    background: #f0f0f0;
+}
+
+.book-card-content {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex-grow: 1;
+}
+
+.book-title {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.book-author {
+    font-size: 14px;
+    color: #555;
+}
+
+.book-price {
+    font-size: 16px;
+    color: #111;
+    font-weight: 500;
+}
+.book-card a {
+    margin-top: auto;
+    display: inline-block;
+    color: white;
+    padding: 10px 0;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 14px;
+    text-align: center;
+    transition: background 0.3s ease;
+}
+
+.book-card a:hover {
+    background: #254ba7;
+}
+.book-card img {
+    transition: transform 0.3s ease;
+}
+
+.book-card:hover img {
+    transform: scale(1.05);
+}
+.book-card {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.5s ease forwards;
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+.recommend-container input,
+.recommend-container select {
+    width: 80%; 
+    max-width: 400px; 
+    margin: 10px auto;
+    display: block; 
+    padding: 8px 12px; 
+    font-size: 15px; 
+    border: 1px solid #ccc;
+    border-radius: 6px; 
+}
+
+.recommend-container button {
+    width: fit-content; 
+    margin: 20px auto 0 auto;
+    display: block;
+}
+.result {
+    margin-top: 40px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 24px;
+    justify-content: center;
+    align-items: stretch;
+    max-width: 900px;     
+    margin-left: auto;     
+    margin-right: auto;   
+}
+.book-card {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
     </style>
@@ -130,7 +225,7 @@
 <body>
 
     <div class="recommend-container">
-        <h2>📚 Get a Book Recommendation</h2>
+        <h2> Get a Book Recommendation</h2>
         <input type="text" id="authorInput" placeholder="Enter preferred author (optional)">
         <input type="number" id="priceInput" placeholder="Enter your max price (e.g. 30)">
         <select id="categorySelect">

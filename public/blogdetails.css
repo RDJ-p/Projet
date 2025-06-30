@@ -8,8 +8,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Cormorant', serif;
-}
+    font-family: "Cormorant Garamond", serif; }
 
 body {
     background: white;
@@ -29,7 +28,6 @@ body {
 
 .nav-container {
     max-width: 1200px;
-    margin: 0 auto;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -44,7 +42,7 @@ body {
 
 .review-container {
     max-width: 800px;
-    margin: 4rem auto;
+    margin: 1rem auto;
     padding: 0 2rem;
 }
 
@@ -71,7 +69,6 @@ body {
 }
 
 .stat-item {
-    background: var(--light-grey);
     padding: 1.5rem;
     border-radius: 8px;
     text-align: center;

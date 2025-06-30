@@ -160,8 +160,8 @@ const authController = {
             host: 'sandbox.smtp.mailtrap.io',
             port: 2525,
             auth: {
-                user: '010cd747abe60d',
-                pass: '8a838f20ed6406'
+                user: 'f782a827399204',
+                pass: '5d60f15ff4f61e'
             }
         });
 
@@ -248,8 +248,8 @@ const authController = {
             host: 'sandbox.smtp.mailtrap.io',
             port: 2525,
             auth: {
-                user: '010cd747abe60d',
-                pass: '8a838f20ed6406'
+                user: 'f782a827399204',
+                pass: '5d60f15ff4f61e'
             }
         });
 
@@ -294,6 +294,11 @@ resetPassword: async (req, res) => {
             return res.status(400).json({ success: false, error: 'Invalid or expired token' });
         }
 
+        const isSamePassword = await bcrypt.compare(newPassword, user.password);
+        if (isSamePassword) {
+            return res.status(400).json({ success: false, error: 'New password cannot be the same as the current password' });
+        }
+
         const hashedPassword = await bcrypt.hash(newPassword, 10);
 
         await pool.query(
@@ -308,6 +313,7 @@ resetPassword: async (req, res) => {
         res.status(500).json({ success: false, error: 'Internal server error' });
     }
 },
+
 
 
     changePassword: async (req, res) => {

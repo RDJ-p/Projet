@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (data.success) {
         resetMessage.textContent = '✅ Password reset successful! Redirecting...';
         resetMessage.style.color = 'green';
-        setTimeout(() => window.location.href = '/auth/login', 2000);
+        setTimeout(() => window.location.href = '/Login page.html', 2000);
       } else {
         resetMessage.textContent = '❌ ' + (data.error || 'Error resetting password.');
         resetMessage.style.color = 'red';

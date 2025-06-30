@@ -2,7 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Cormorant', serif;
+  font-family: "EB Garamond", serif;
 }
 body{
   background-color: white;
@@ -41,22 +41,22 @@ body{
   text-decoration: none;
   color: #2C3E50;
   font-size: 1rem;
-  font-weight: 600;
+  font-weight: 400;
   padding: 8px 12px;
   transition: color 0.3s;
 }
 .nav-icons {
   display: flex;
   align-items: center;
-  gap: 35px;
-  padding: 20px 20px;
+  gap: 30px;
+  padding: 10px 15px;
   
 }
 #search-box {
 padding: 6px 10px;
 border: 1px solid #ccc;
 border-radius: 4px;
-font-family: 'Cormorant', serif;
+font-family: "EB Garamond", serif;
 }
 
 .container1 {
@@ -76,7 +76,7 @@ font-family: 'Cormorant', serif;
 .content {
   flex: 1;
   min-width: 0; 
-  color: #2C3E50;
+  color:#2C3E50
 }
 
 .sidebar h3 {
@@ -124,12 +124,12 @@ input[type="range"]:active {
 
 #sortPrice {
   width: 100%;
-  padding: 10px 30px;
+  padding: 12px 30px;
   background-color: white;
   border: 1px solid #ccc;
   border-radius: 6px;
   font-size: 1rem;
-  font-family: 'Cormorant', serif;
+  font-family: "EB Garamond", serif;
   color: #2C3E50;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
   transition: all 0.2s ease;
@@ -247,7 +247,7 @@ align-items: center;
 justify-content: space-between;
 padding: 15px 40px;
 background-color: white;
-font-family: 'Cormorant', serif;
+font-family: "EB Garamond", serif;
 }
 
 .navbar-logo {
@@ -258,6 +258,7 @@ z-index: 2;
 
 .navbar-logo img {
 height: 40px;
+margin-left: 20px;
 }
 
 .navbar-links {
@@ -273,11 +274,12 @@ margin: 0;
 
 .navbar-links li a {
 text-decoration: none;
-color: #333;
+color: #2C3E50;
 font-size: 18px;
 position: relative;
 padding: 5px;
-font-family: 'Cormorant', serif;
+font-weight: 500;
+font-family: "EB Garamond", serif;
 }
 
 .navbar-links li a.active::after {
@@ -287,7 +289,7 @@ bottom: -3px;
 left: 0;
 width: 100%;
 height: 2px;
-background-color: #333;
+background-color: #2C3E50;
 }
 
 
@@ -390,6 +392,7 @@ opacity: 0.7;
   font-weight: bold;
   color: black;
   margin-top: 10px;
+  
 }
 
 @media (max-width: 480px) {
@@ -529,6 +532,7 @@ h3 {
 .book-front h2 {
   font-size: 1.4rem;
   margin: 4px 0; 
+  font-weight: 400;
 }
 
 .book-front p {
@@ -549,15 +553,17 @@ h3 {
   align-items: center;
   text-align: center;
   padding: 10px;
-  gap: 6px; /* keeps small, consistent spacing between elements */
+  gap: 6px; 
 }
 
 .book-front img {
-  height: 400px; /* increase from 350px */
+  height: 550px; 
   width: 100%;
   object-fit: cover;
   margin-bottom: 10px;
    max-width: 100%;
+   border-radius: 25px;
+
 
 }
 
@@ -635,11 +641,12 @@ h3 {
 
   .footer-logo .logo-text {
     font-size: 24px;
-    font-weight: 700;
+    font-weight: 500;
   }
 
   .footer-logo .logo-text .light {
     color: #b0b8c1;
+    font-size: 15px;
   }
 
   .footer-logo .tagline {
@@ -689,7 +696,8 @@ h3 {
   }
 
   .footer-socials img {
-    width: 25px;
+    width: 35px;
+    height: 35px;
     margin-left: 10px;
     vertical-align: middle;
   }
@@ -722,7 +730,7 @@ h3 {
   cursor: not-allowed;
 }
 .navbar ul li a.active {
-  font-weight: bold;
+  font-weight: 700;
   color: #2C3E50;  
 }
 /* From Uiverse.io by Nawsome */ 
@@ -1068,7 +1076,7 @@ min-width: 150px;
 .search-area {
 display: flex;
 flex-direction: column;
-margin-top: 6px; /* align with filter items */
+margin-top: 20px; /* align with filter items */
 min-width: 200px;
 }
 

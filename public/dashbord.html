@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard | Bookshelf</title>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://kit.fontawesome.com/YOUR_KIT_ID.js" crossorigin="anonymous"></script>
     <style>
@@ -18,7 +19,7 @@
 
 body {
   margin: 0;
-  font-family: 'Cormorant', serif;
+  font-family: "Cormorant Garamond", serif; 
   background: white; 
   color: var(--accent-light);
   line-height: 1.6;
@@ -406,7 +407,7 @@ header {
     color: var(--accent-light);
     border: 1px solid var(--border-grey);
     border-radius: 6px;
-    font-family: 'Cormorant', serif;
+    font-family: "Cormorant Garamond", serif; 
     font-size: 1rem;
     font-weight: 600;
     cursor: pointer;
@@ -531,9 +532,9 @@ header {
     </div>
     <nav class="navbar-center">
       <a href="main.html">Home</a>
-      <a href="contactus.html">Contact Us</a>
       <a href="dashbord.html" class="active">Dashboard</a>
-      <a href="About us.html">About Us</a>
+      <a href="product.html">Shop</a>
+      <a href="About us.html">Orders</a>
     </nav>
   </div>
 </header>
@@ -913,7 +914,15 @@ async function handlePasswordChange(e) {
 
 async function loadWishlist() {
   try {
-    const res = await fetch('/api/wishlist?userId=1', { credentials: 'include' });
+    const userRes = await fetch('/api/user', { credentials: 'include' });
+    const userData = await userRes.json();
+
+    if (!userData.success || !userData.id) {
+      document.getElementById('wishlistItems').innerHTML = '<p>Please log in to view your wishlist.</p>';
+      return;
+    }
+
+    const res = await fetch(`/api/wishlist?userId=${userData.id}`, { credentials: 'include' });
     const books = await res.json();
     const container = document.getElementById('wishlistItems');
     container.innerHTML = '';
@@ -932,8 +941,10 @@ async function loadWishlist() {
     `).join('');
   } catch (err) {
     document.getElementById('wishlistItems').innerHTML = '<p>Error loading wishlist.</p>';
+    console.error(err);
   }
 }
+
 
 document.getElementById('editBtn').addEventListener('click', function () {
   const inputs = document.querySelectorAll('#personalInfoForm input');

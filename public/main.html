@@ -7,6 +7,7 @@
  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.ripples/0.5.3/jquery.ripples.min.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@300;400;500;600;700&display=swap" rel="stylesheet">  
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="maincss.css" />
   <title>Bookshelf</title>
 </head>
@@ -22,7 +23,7 @@
     <div class="nav-links">
       <a href="main.html" class="active">Home</a>
       <a href="product.html">Shop</a>
-      <a href="About us.html">About us</a>
+      <a href="contactus.html">Contact us</a>
       <a href="exchange.html">Exchange</a>
       <a href="blog.html">Our Blog</a>
     </div>
@@ -44,10 +45,10 @@
             <span class="typed-text"></span><span class="cursor">|</span>
             </h3>
             <p>Books are time machines, portals, and windows to wisdom. From epic tales to thought-provoking essays, every book has a story to tell.</p>
-            <button class="discover-btn">
+            <button class="discover-btn" onclick="window.location.href='About us.html'">
               DISCOVER MORE
               <img src="img/flowbite_arrow-up-outline.png" alt="arrow" />
-            </button>
+            </button>            
           </div>
           <img src="img/Group 8.png" class="home-img" alt="Home Illustration" />
         </div>
@@ -61,7 +62,7 @@
         <h2>Best Seller</h2>
         <hr>
       </div>
-      <button class="discover-btn">
+      <button class="discover-btn" onclick="window.location.href='product.html'">
         DISCOVER MORE
         <img src="img/flowbite_arrow-up-outline.png" alt="arrow" />
       </button>
@@ -105,9 +106,9 @@
           <span class="price">30,00$</span>
         </div>
 
-        <div class="images" data-id="43">
+        <div class="images" data-id="52">
           <img src="img/a-man-called-ove-9781476738024_hr.jpg" class="img4" alt="design4">
-          <h3>Fredrik Backman</h3>
+          <h3>FREDRIK BACKMAN</h3>
           <h4>A MAN CALLED OVE</h4>
           <div class="stars">
             <i class="fas fa-star"></i><i class="fas fa-star"></i>
@@ -117,12 +118,11 @@
           <span class="price">30,00$</span>
         </div>
         
-        <!-- Add more .images blocks here as needed -->
          
-        <div class="images" data-id="52">
+        <div class="images" data-id="43">
           <img src="img/beforewewere.jpg" class="img4" alt="Before We Were Strangers">
-          <h3>Renée Carlino</h3>
-          <h4>BEFORE WE WERE STRANGERS</h4>
+          <h3>RENEE CARLINO</h3>
+          <h4>BEFORE WE WERE</h4>
           <div class="stars">
             <i class="fas fa-star"></i><i class="fas fa-star"></i>
             <i class="fas fa-star"></i><i class="fas fa-star"></i>
@@ -133,8 +133,8 @@
 
           <div class="images" data-id="70">
           <img src="img/teaspoonearthandsea.png" class="img4" alt="design4">
-          <h3>DINA NAYERI</h3>
-          <h4>A TEASPOON OF EARTH & SEA</h4>
+          <h3>Dina Nayeri</h3>
+          <h4>A TEASPOON OF EARTH</h4>
           <div class="stars">
             <i class="fas fa-star"></i><i class="fas fa-star"></i>
             <i class="fas fa-star"></i><i class="fas fa-star"></i>
@@ -159,8 +159,8 @@
         to enjoy your books.
       </p>
       <div class="button-group">
-        <button class="shop-button">SHOP</button>
-        <button class="about-button">ABOUT US</button>
+        <button class="shop-button" onclick="window.location.href='product.html'">SHOP</button>
+        <button class="about-button" onclick="window.location.href='About us.html'">ABOUT US</button>
       </div>
     </div>
   </div>
@@ -187,22 +187,22 @@
 
         <div class="items">
           <div class="image-item">
-            <img src="img/haruki.jpg" class="img" alt="Haruki Murakami">
+            <img src="img/harukisketch.jpg" class="img" alt="Haruki Murakami">
             <h3>Haruki Murakami</h3>
              <p>Master of surreal storytelling and modern existentialism. Famous for "Kafka on the Shore" and "1Q84."</p>  
           </div>
           <div class="image-item">
-            <img src="img/mostafa.jpg" class="img" alt="Mostafa Mahmoud">
+            <img src="img/mmblackandwhite.jpg" class="img" alt="Mostafa Mahmoud">
             <h3>Mostafa Mahmoud</h3>
              <p>A deep thinker blending science, philosophy, and spirituality. His works like "Dialogue with an Atheist" continue to inspire readers worldwide.</p>  
           </div>
           <div class="image-item">
-            <img src="img/chimanda.jpg" class="img" alt="Chimamanda Ngozi Adichie">
+            <img src="img/chimanblackandwhite.png" class="img" alt="Chimamanda Ngozi Adichie">
             <h3>Chimamanda Ngozi Adichie</h3>
              <p>A powerful voice in contemporary literature, known for "Half of a Yellow Sun" and "Americanah," exploring identity</p>  
           </div>
           <div class="image-item">
-            <img src="img/atwood.jpg" class="img" alt="Margaret Atwood">
+            <img src="img/margblackandwhite.jpg" class="img" alt="Margaret Atwood">
             <h3>Margaret Atwood</h3>
              <p>Renowned for dystopian and feminist literature, with books like "The Handmaid’s Tale" and "The Testaments."</p>  
           </div>
@@ -320,25 +320,25 @@
         <h2>Latest from Our Blog</h2>
         <hr>
       </div>
-      <button class="discover-btn">
+      <button class="discover-btn" onclick="window.location.href='blog.html'">
         DISCOVER MORE
-        <img src="img/flowbite_arrow-up-outline.png" class="arrow" alt="arrow" />
+        <img src="img/flowbite_arrow-up-outline.png" alt="arrow" />
       </button>
     </div>
 
     <div class="blog-text">
       <a href="blog.html" class="item">
-        <img src="img/Rectangle 6.png" alt="Latest one">
+        <img src="img/small4.jpg" alt="Latest one">
         <h3>The Power of Perspective</h3>
         <p>In The Midnight Library, Matt Haig takes readers on a poignant journey between life and death.</p>
       </a>
       <a href="blog.html" class="item">
-        <img src="img/Rectangle 6.png" alt="Latest two">
+        <img src="img/small (1).jpg" alt="Latest two">
         <h3>Breaking the Silence</h3>
         <p>Kristin Hannah’s The Nightingale is a stirring tribute to the resilience of women during World War II.</p>
       </a>
       <a href="blog.html" class="item">
-        <img src="img/Rectangle 6.png" alt="Latest three">
+        <img src="img/small (2).jpg" alt="Latest three">
         <h3>The Quiet Genius of A Man Called Ove</h3>
         <p>Fredrik Backman’s A Man Called Ove is a masterclass in character-driven storytelling.</p>
       </a>
@@ -351,7 +351,7 @@
     <div class="wrapper">
       <div class="footer-left">
         <div class="footer-logo">
-        <div class="logo-text">BOOK<span class="light">SHELF</span></div>
+          <div class="logo-text">BOOK<span class="light">SHELF</span></div>
           <div class="tagline">ESCAPE INTO STORIES</div>
         </div>
       </div>
@@ -396,21 +396,20 @@
   const scrollContent = scrollContainer.querySelector('.scroll-track');
 
   let scrollAmount = 0;
-  let speed = 0.5; // pixels per frame
+  let speed = 0.5; 
   let animationFrame;
 
   function autoScroll() {
     scrollAmount += speed;
     if (scrollAmount >= scrollContent.scrollWidth - scrollContainer.clientWidth) {
-      scrollAmount = 0; // reset to loop
+      scrollAmount = 0; 
     }
     scrollContainer.scrollLeft = scrollAmount;
     animationFrame = requestAnimationFrame(autoScroll);
   }
 
-  autoScroll(); // start
+  autoScroll(); 
 
-  // Optional: pause on hover
   scrollContainer.addEventListener('mouseenter', () => cancelAnimationFrame(animationFrame));
   scrollContainer.addEventListener('mouseleave', () => autoScroll());
 
@@ -541,15 +540,15 @@ document.addEventListener('click', (e) => {
   $(document).ready(function() {
     $('.ripple-section').ripples({
       resolution: 512,
-      dropRadius: 20, // controls ripple size
-      perturbance: 0.04 // controls ripple intensity
+      dropRadius: 20, 
+      perturbance: 0.04 
     });
   });
    setInterval(() => {
     const $el = $('.ripple-section');
     const x = Math.random() * $el.outerWidth();
     const y = Math.random() * $el.outerHeight();
-    $el.ripples('drop', x, y, 20, 0.04); // radius and strength
+    $el.ripples('drop', x, y, 20, 0.04); 
   }, 2000);
 </script>
 </body>
